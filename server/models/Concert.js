@@ -22,6 +22,12 @@ const concertSchema = new Schema(
         },
         time: {
             type: Number
+        },
+        venue: {
+            type: String
+        },
+        address: {
+            type: String
         }
     }
 );
