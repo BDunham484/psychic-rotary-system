@@ -1,6 +1,11 @@
+//import the Schema constructor and the model function from Mongoose
 const { Schema, model } = require('mongoose');
+//import bcrypt package for password encryption
 const bcrypt = require('bcrypt');
+//import the Concert model
+const Concert = require('./Concert');
 
+//create the schema for the model using the Schema constructo and outline the fields
 const userSchema = new Schema(
     {
         username: {
@@ -20,10 +25,10 @@ const userSchema = new Schema(
             required: true,
             minlength: 5
         },
-        friends: [
+        concerts: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'Concert'
             }
         ]
     },
@@ -50,8 +55,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 //get total count of friends on retrieval
-userSchema.virtual('friendCount').get(function () {
-    return this.friends.length;
+userSchema.virtual('concertCount').get(function () {
+    return this.concerts.length;
 });
 
 //create the User model using the userSchema
