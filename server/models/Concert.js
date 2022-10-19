@@ -28,6 +28,15 @@ const concertSchema = new Schema(
         },
         address: {
             type: String
+        },
+        city: {
+            type: String
+        },
+        state: {
+            type: String
+        },
+        zip: {
+            type: Number
         }
     }
 );

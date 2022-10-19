@@ -1,9 +1,12 @@
+const { User, Concert } = require('../models');
+
 const resolvers = {
     Query: {
-        helloWorld: () => {
-            return 'Hello World!';
+        concerts: async () => {
+            return Concert.find().sort({ date: -1 });
         }
     }
 };
+
 
 module.exports = resolvers;
