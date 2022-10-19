@@ -42,7 +42,7 @@ const concertSchema = new Schema(
 );
 
 //create the Concert model using the concertSchema
-const User = model('Concert', concertSchema);
+const Concert = model('Concert', concertSchema);
 
 //export the Concert model
 module.exports = Concert;

@@ -2,8 +2,26 @@ const { User, Concert } = require('../models');
 
 const resolvers = {
     Query: {
-        concerts: async () => {
-            return Concert.find().sort({ date: -1 });
+        //get all users
+        users: async () => {
+            return User.find()
+                .select('-__v -password')
+                .populate('concerts');
+        },
+        //get user by username
+        user: async (parent, { username }) => {
+            return User.findOne({ username })
+            .select('-__v -password')
+            .populate('concerts');
+        },
+        //get all concerts by username.  If no username, get all concerts
+        concerts: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Concert.find(params).sort({ date: -1 });
+        },
+        //get a concert by ID
+        concert: async (parent, { _id }) => {
+            return Concert.findOne({ _id });
         }
     }
 };
