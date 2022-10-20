@@ -1,4 +1,6 @@
-const { User, Concert } = require('../models');
+// const { User, Concert } = require('../models');
+const User = require('../models/User');
+const Concert = require('../models/Concert');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -59,6 +61,28 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
+        },
+        addConcert: async (parent, { event }) => {      
+            console.log(event);
+            const concert = await Concert.create({ event });
+            
+            return concert;
+        },
+        addConcertToUser: async (parent, { _id }, context) => {
+            console.log(_id);
+            console.log(context.user)
+            if (context.user) {
+                const concert = await Concert.findOne({ _id: _id });
+
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { concerts: concert }},
+                    { new: true }
+                );
+                console.log(concert);
+                return user;
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };
