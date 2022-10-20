@@ -6,14 +6,17 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 //import database connection to MongoDB via Mongoose
 const db = require('./config/connection');
-const { type } = require('os');
+// const { type } = require('os');
+//import Auth middleware
+const { authMiddleware } = require('./utils/auth');
 
 //set environment variable
 const PORT = process.env.PORT || 3001;
 //create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: authMiddleware
 });
 //instantiate the server
 const app = express();
