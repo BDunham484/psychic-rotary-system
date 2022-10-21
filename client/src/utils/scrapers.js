@@ -1,10 +1,13 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from "axios";
+import cheerio from "cheerio";
+// const axios = require('axios');
+// const cheerio = require('cheerio');
+
 
 const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
 
 
-
+export function getTodaysEvents() {
     axios(url)
         .then(response => {
             const html = response.data
@@ -26,4 +29,6 @@ const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
             console.log(events);
             return events;
         }).catch(err => console.log(err));
+}
+    
 
