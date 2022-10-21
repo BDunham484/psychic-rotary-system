@@ -10,6 +10,11 @@ const db = require('./config/connection');
 //import Auth middleware
 const { authMiddleware } = require('./utils/auth');
 
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
+
 //set environment variable
 const PORT = process.env.PORT || 3001;
 //create a new Apollo server and pass in our schema data
@@ -25,6 +30,30 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 //parse incoming JSON data
 app.use(express.json());
+
+axios(url)
+        .then(response => {
+            const html = response.data
+            const $ = cheerio.load(html)
+            const events = [];
+            $('.list-item', html).each(function() {
+                const artists = $(this).find('h2').text()
+                const description = $(this).find('.description').text()
+                const dateTime = $(this).find('.date-time').text()
+                const venue = $(this).find('.venue').text()
+                events.push({
+                    artists,
+                    description,
+                    dateTime,
+                    venue
+                })
+            })
+            console.log('events scraper!!!!!');
+            console.log(events);
+            return events;
+        }).catch(err => console.log(err));
+
+
 
 //create a new instance of an Apollo server with the GraphQl schema
 const startApolloServer = async (typeDefs, resolvers) => {
