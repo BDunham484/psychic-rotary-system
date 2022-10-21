@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Concert = require('../models/Concert');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { getArtists } = require('../utils/scraper');
 
 const resolvers = {
     Query: {
@@ -37,6 +38,17 @@ const resolvers = {
         //get a concert by ID
         concert: async (parent, { _id }) => {
             return Concert.findOne({ _id });
+        },
+        getArtists: async () => {
+            const artists = getArtists();
+            const lucky = Concert.find(artists);
+            console.log('getArtists!!!');
+            console.log(artists);
+            console.log(lucky)
+            return {
+                lucky,
+                artists
+            }
         }
     },
     Mutation: {
@@ -62,7 +74,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addConcert: async (parent, { event }) => {      
+        addConcert: async (parent, { event }) => {
             console.log(event);
             const concert = await Concert.create({ event });
             

@@ -8,6 +8,9 @@ const concertSchema = new Schema(
             type: Date,
             // required: true
         },
+        artists: {
+            type: [String]
+        },
         event: {
             type: String
         },

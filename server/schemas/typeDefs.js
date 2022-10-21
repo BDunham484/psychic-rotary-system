@@ -14,6 +14,7 @@ const typeDefs = gql`
     type Concert {
         _id: ID
         date: String
+        artists: [String]
         event: String
         headliner: String
         support: String
@@ -32,6 +33,7 @@ const typeDefs = gql`
         user(username: String!): User
         concerts(username: String): [Concert]
         concert(_id: ID!): Concert
+        getArtists: Concert
     }
 
     type Mutation {
