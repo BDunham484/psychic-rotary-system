@@ -1,17 +1,10 @@
-import './App.css';
-// import { useEffect } from "react";
-import Home from './components/Home';
-// import { getTodaysEvents } from './utils/scrapers';
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
 
 
-function App() {
 
-  const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
-
-  // useEffect(() => {
     axios(url)
         .then(response => {
             const html = response.data
@@ -33,13 +26,4 @@ function App() {
             console.log(events);
             return events;
         }).catch(err => console.log(err));
-  // })
 
-  return (
-    <div>
-      <Home></Home>
-    </div>
-  );
-}
-
-export default App;
