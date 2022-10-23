@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect } from "react";
+// import { useQuery } from '@apollo/client';
 import Home from './components/Home';
 import { getTodaysEvents } from './utils/scrapers';
-// const axios = require('axios');
 // import axios from "axios";
 // const cheerio = require('cheerio');
 
@@ -35,15 +35,18 @@ function App() {
   //           return events;
   //       }).catch(err => console.log(err));
   // // })
-
+  const { loading, data: myData } = getTodaysEvents();
   useEffect(() => {
-    const events = getTodaysEvents();
-    console.log(events);
+    if(!loading) {
+      console.log('myData!!!!!!!!!!');
+      console.log(myData);
+    }
   })
 
   return (
     <div>
       <Home></Home>
+      
     </div>
   );
 }

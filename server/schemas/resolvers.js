@@ -40,13 +40,13 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         getArtists: async () => {
-            const artists = getArtists();
-            const lucky = Concert.find(artists);
+            const artists = await getArtists();
+            // const lucky = Concert.find(artists);
             console.log('getArtists!!!');
             console.log(artists);
-            console.log(lucky)
+            // console.log(lucky)
             return {
-                lucky,
+                // lucky,
                 artists
             }
         }
