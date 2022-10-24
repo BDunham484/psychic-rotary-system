@@ -3,7 +3,9 @@ const User = require('../models/User');
 const Concert = require('../models/Concert');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { getArtists } = require('../utils/scraper');
+// const { getArtists } = require('../utils/scraper');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 const resolvers = {
     Query: {
@@ -31,7 +33,7 @@ const resolvers = {
             .populate('concerts');
         },
         //get all concerts by username.  If no username, get all concerts
-        concerts: async (parent, { username }) => {
+        userConcerts: async (parent, { username }) => {
             const params = username ? { username } : {};
             return Concert.find(params).sort({ date: -1 });
         },
@@ -39,15 +41,29 @@ const resolvers = {
         concert: async (parent, { _id }) => {
             return Concert.findOne({ _id });
         },
-        getArtists: async () => {
-            const artists = await getArtists();
-            // const lucky = Concert.find(artists);
-            console.log('getArtists!!!');
-            console.log(artists);
-            // console.log(lucky)
-            return {
-                // lucky,
-                artists
+        concerts: async () => {
+            const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
+            try{
+                const { data } = await axios.get(url);
+                const $ = cheerio.load(data);
+                const events = [];
+                $('.list-item', data).each(function() {
+                    const artists = $(this).find('h2').text()
+                    const description = $(this).find('.description').text()
+                    const dateTime = $(this).find('.date-time').text()
+                    const venue = $(this).find('.venue').text()
+                    events.push({
+                        artists,
+                        description,
+                        dateTime,
+                        venue
+                    })
+                })
+                console.log('events scraper!!!!!');
+                console.log(events);
+                return events;
+            } catch (err) {
+                console.error(err);
             }
         }
     },

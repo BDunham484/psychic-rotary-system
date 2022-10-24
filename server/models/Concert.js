@@ -4,42 +4,17 @@ const { Schema, model } = require('mongoose');
 //create the schema for the model using the Schema constructor and outline the fields
 const concertSchema = new Schema(
     {
-        date: {
-            type: Date,
-            // required: true
-        },
         artists: {
-            type: [String]
-        },
-        event: {
             type: String
         },
-        headliner: {
+        description: {
             type: String
         },
-        support: {
+        dateTime: {
             type: String
-        },
-        price: {
-            type: Number
-        },
-        time: {
-            type: Number
         },
         venue: {
             type: String
-        },
-        address: {
-            type: String
-        },
-        city: {
-            type: String
-        },
-        state: {
-            type: String
-        },
-        zip: {
-            type: Number
         }
     }
 );

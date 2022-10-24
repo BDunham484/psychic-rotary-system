@@ -13,27 +13,19 @@ const typeDefs = gql`
 
     type Concert {
         _id: ID
-        date: String
-        artists: [String]
-        event: String
-        headliner: String
-        support: String
-        price: Int
-        time: Int
+        artists: String
+        description: String
+        dateTime: String
         venue: String
-        address: String
-        city: String
-        state: String
-        zip: Int
     }
 
     type Query {
         me: User
         users: [User]
         user(username: String!): User
-        concerts(username: String): [Concert]
+        userConcerts(username: String): [Concert]
         concert(_id: ID!): Concert
-        getArtists: Concert
+        concerts: [Concert]
     }
 
     type Mutation {
