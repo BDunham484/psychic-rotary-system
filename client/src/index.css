@@ -11,6 +11,7 @@
 
 html,
 body {
+  min-height: 100%;
   overflow-x: hidden;
 }
 
@@ -26,3 +27,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
 }
+
+/* HEADER / NAVBAR STYLES START */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh 0 1vh 10vw;
+  font-family: 'Montserrat', sans-serif;
+  z-index: 9999;
+  position: fixed;
+  width: 100vw;
+  height: 12vh;
+  opacity: .90;
+  background-color: #383737;
+}
+
+/* header h1 {
+  font-size: 22px;
+} */
+
+header h1 a {
+  text-decoration: none;
+  color: antiquewhite;
+}
+
+/* HEADER / NAV STYLES END */
+
+.page-wrapper {
+  padding-top: 14vh;
+}
+
+/* HOME STYLES START */
+main {
+  width: 100vw;
+  min-height: 92vh;
+}
+
+/* FOOTER STYLES START */
+footer {
+  height: 8vh;
+  background-color: #383737;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
