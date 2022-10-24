@@ -65,6 +65,14 @@ main {
   min-height: 92vh;
 }
 
+.events {
+  margin-bottom: 2vh;
+}
+
+.todays-date {
+  margin: 4vh 0;
+}
+
 /* FOOTER STYLES START */
 footer {
   height: 8vh;
