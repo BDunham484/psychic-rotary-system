@@ -42,7 +42,14 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         concerts: async () => {
-            const url = 'https://www.austinchronicle.com/events/music/2022-10-21/'
+            const date = new Date().toDateString();
+            const day = date.slice(8, 10);
+            const month = (new Date().getMonth()) + 1;
+            const year = new Date().getFullYear();
+            console.log(year + '-' + month + '-' + day)
+
+            // const url = 'https://www.austinchronicle.com/events/music/2022-10-23/'
+            const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
             try{
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
@@ -59,8 +66,8 @@ const resolvers = {
                         venue
                     })
                 })
-                console.log('events scraper!!!!!');
-                console.log(events);
+                // console.log('events scraper!!!!!');
+                // console.log(events);
                 return events;
             } catch (err) {
                 console.error(err);

@@ -6,7 +6,6 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 //import database connection to MongoDB via Mongoose
 const db = require('./config/connection');
-// const { type } = require('os');
 //import Auth middleware
 const { authMiddleware } = require('./utils/auth');
 
