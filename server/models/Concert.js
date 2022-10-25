@@ -18,6 +18,9 @@ const concertSchema = new Schema(
         },
         venue: {
             type: String
+        },
+        address: {
+            type: String
         }
     }
 );

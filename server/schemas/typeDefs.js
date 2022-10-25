@@ -18,6 +18,7 @@ const typeDefs = gql`
         description: String
         dateTime: String
         venue: String
+        address: String
     }
 
     type Query {

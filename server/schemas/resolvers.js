@@ -70,34 +70,34 @@ const resolvers = {
                 })
                 // console.log('events scraper!!!!!');
                 // console.log(events);
-                var venueDetails = [];
-                const map = events.map((event, index) => {
+                // const addresses = []
+        
+                const newEventsArr = events.map((event, index) => {
                     if (index !== 0) {
                         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
                     // console.log(eventUrl);
-                    axios(eventUrl)
+                    var help = axios(eventUrl)
                         .then(response => {
                             const html = response.data
                             const $ = cheerio.load(html)
                             
                             $('.venue-details', html).each(function() {
-                                const address = $(this).text();
-                                // console.log(address);
-                                venueDetails.push({
-                                    address
-                                })
+                                var address = $(this).text();
+                                event["address"] = address
+                                // console.log(event);
                             })
-                            console.log('VENUE DETAILS!!!!');
-                            console.log(venueDetails)
+                            // console.log(event);
+                            return event;
                         })
+                        .catch(err => console.log(err));
+                        
                     }
-                }, venueDetails)
-                // const values = Array.from(map.values());
-                // console.log(map);
-                // console.log('events scraper!!!!!');
+                    // console.log(help);
+                    return event;
+                }, events)
                 // console.log(events);
-                // console.log('VENUE DETAILS!!!!');
-                // console.log(venueDetails)
+                // console.log(newEventsArr);
+                // console.log(addresses);
                 return events;
             } catch (err) {
                 console.error(err);
