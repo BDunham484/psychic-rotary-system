@@ -53,14 +53,16 @@ const resolvers = {
             try{
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
-                const events = [];
+                var events = [];
                 $('.list-item', data).each(function() {
                     const artists = $(this).find('h2').text()
+                    const artistsLink = $(this).find('a').attr('href');
                     const description = $(this).find('.description').text()
                     const dateTime = $(this).find('.date-time').text()
                     const venue = $(this).find('.venue').text()
                     events.push({
                         artists,
+                        artistsLink,
                         description,
                         dateTime,
                         venue
@@ -68,6 +70,34 @@ const resolvers = {
                 })
                 // console.log('events scraper!!!!!');
                 // console.log(events);
+                var venueDetails = [];
+                const map = events.map((event, index) => {
+                    if (index !== 0) {
+                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+                    // console.log(eventUrl);
+                    axios(eventUrl)
+                        .then(response => {
+                            const html = response.data
+                            const $ = cheerio.load(html)
+                            
+                            $('.venue-details', html).each(function() {
+                                const address = $(this).text();
+                                // console.log(address);
+                                venueDetails.push({
+                                    address
+                                })
+                            })
+                            console.log('VENUE DETAILS!!!!');
+                            console.log(venueDetails)
+                        })
+                    }
+                }, venueDetails)
+                // const values = Array.from(map.values());
+                // console.log(map);
+                // console.log('events scraper!!!!!');
+                // console.log(events);
+                // console.log('VENUE DETAILS!!!!');
+                // console.log(venueDetails)
                 return events;
             } catch (err) {
                 console.error(err);

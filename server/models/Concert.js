@@ -7,6 +7,9 @@ const concertSchema = new Schema(
         artists: {
             type: String
         },
+        artistsLink: {
+            type: String
+        },
         description: {
             type: String
         },

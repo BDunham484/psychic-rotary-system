@@ -7,19 +7,27 @@ const Home = () => {
     const { loading, data } = useQuery(GET_TODAYS_CONCERTS);
 
     const concerts = data?.concerts || [];
-    console.log('HOME CONCERTS!!!!!!!!!');
+    // console.log('HOME CONCERTS!!!!!!!!!');
     // console.log(concerts[1].dateTime)
-    const date = concerts[1].dateTime;
-    console.log(date);
+    // if (concerts.length) {
+        // const date = concerts[1].dateTime;
+        // console.log(date);
+    // }
+    
 
     return (
         <div className="page-wrapper">
-            <h1 className='todays-date'>{date}</h1>
+            
             <div>
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
-                    <TodaysConcerts concerts={concerts}/>
+                    <>
+                        {/* <h1 className='todays-date'>{date}</h1> */}
+                        <TodaysConcerts concerts={concerts} date={concerts[1].dateTime}/>
+                    </>
+                    
+                    
                 )}
             </div>
         </div>

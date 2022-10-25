@@ -14,6 +14,7 @@ const typeDefs = gql`
     type Concert {
         _id: ID
         artists: String
+        artistsLink: String
         description: String
         dateTime: String
         venue: String

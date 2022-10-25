@@ -5,7 +5,7 @@ const Header = () => {
         <header>
             <h1>
                 <a href="/">
-                    NBX
+                    NZBX
                 </a>
             </h1>
         </header>  
