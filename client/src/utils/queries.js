@@ -7,6 +7,10 @@ export const GET_TODAYS_CONCERTS = gql`
             description
             dateTime
             venue
+            address
+            website
+            email
+            ticketLink
         }
     }
 `;

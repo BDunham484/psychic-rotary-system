@@ -3,18 +3,22 @@ const ConcertList = ({ concerts, date}) => {
         return <h3>No Concerts Today</h3>;
     }
 
-    
+    console.log(concerts);  
     return (
         <div>
             <h3 className="todays-date">{date}</h3>
             <div>
                 {concerts &&
-                    concerts.map(concert => (          
+                    concerts.map(concert => (        
                         <div key={concert._id}  className="events">                   
-                            <p>{concert.artists}</p>
-                            <p>{concert.description}</p>
-                            <p>{concert.venue}</p>
-                            <p>{concert.dateTime}</p>
+                            <p>ARTIST:  {concert.artists}</p>
+                            <p>DESCRIPTION:  {concert.description}</p>
+                            <p>VENUE:  {concert.venue}</p>
+                            <p>DATE/TIME:  {concert.dateTime}</p>
+                            <p>ADDRESS:  {concert.address}</p>
+                            <p>WEBSITE:  {concert.website}</p>
+                            <p>EMAIL:  {concert.email}</p>
+                            <p>TICKETLINK:  {concert.ticketLink}</p>
                         </div>
                     ))}
             </div>

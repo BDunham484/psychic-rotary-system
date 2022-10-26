@@ -24,7 +24,7 @@ const Home = () => {
                 ) : (
                     <>
                         {/* <h1 className='todays-date'>{date}</h1> */}
-                        <TodaysConcerts concerts={concerts} date={concerts[1].dateTime}/>
+                        <TodaysConcerts concerts={concerts} date={concerts[2].dateTime}/>
                     </>
                     
                     

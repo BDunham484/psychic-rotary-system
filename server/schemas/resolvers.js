@@ -12,10 +12,10 @@ const resolvers = {
         //get the current logged-in User
         me: async (parent, args, context) => {
             if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id})
+                const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate('concerts');
-            
+
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
@@ -29,8 +29,8 @@ const resolvers = {
         //get user by username
         user: async (parent, { username }) => {
             return User.findOne({ username })
-            .select('-__v -password')
-            .populate('concerts');
+                .select('-__v -password')
+                .populate('concerts');
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
@@ -48,13 +48,31 @@ const resolvers = {
             const year = new Date().getFullYear();
             console.log(year + '-' + month + '-' + day)
 
-            // const url = 'https://www.austinchronicle.com/events/music/2022-10-23/'
             const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
-            try{
+            try {
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
                 var events = [];
-                $('.list-item', data).each(function() {
+                // const { data } = await axios.get(url);
+                // let $ = cheerio.load(data);
+                // let butt$ = cheerio.load($('.head-space').data);
+                // console.log(butt$);
+                // var events = [];
+                // $('.list-item', data).each(function () {
+                //     const artists = $(this).find('h2').text()
+                //     const artistsLink = $(this).find('a').attr('href');
+                //     const description = $(this).find('.description').text()
+                //     const dateTime = $(this).find('.date-time').text()
+                //     const venue = $(this).find('.venue').text()
+                //     events.push({
+                //         artists,
+                //         artistsLink,
+                //         description,
+                //         dateTime,
+                //         venue
+                //     })
+                // })
+                $('ul:eq(1) .list-item', data).each(function () {
                     const artists = $(this).find('h2').text()
                     const artistsLink = $(this).find('a').attr('href');
                     const description = $(this).find('.description').text()
@@ -68,36 +86,35 @@ const resolvers = {
                         venue
                     })
                 })
-                // console.log('events scraper!!!!!');
-                // console.log(events);
-                // const addresses = []
-        
-                const newEventsArr = events.map((event, index) => {
-                    if (index !== 0) {
+
+                const newEventsArr = await Promise.all(events.map((event) => {
                         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-                    // console.log(eventUrl);
-                    var help = axios(eventUrl)
-                        .then(response => {
-                            const html = response.data
-                            const $ = cheerio.load(html)
-                            
-                            $('.venue-details', html).each(function() {
+                        
+                        let guessing = async () => {
+                            var { data } = await axios.get(eventUrl)
+                            var $ = cheerio.load(data);
+
+                            $('.venue-details:eq(0)', data).each(function () {
                                 var address = $(this).text();
                                 event["address"] = address
-                                // console.log(event);
+                                return event;
                             })
-                            // console.log(event);
+                            $('.venue-details:eq(1)', data).each(function () {
+                                var website = $(this).find('a').attr('href');
+                                var email = $(this).find('b:eq(1)').text()
+                                event["website"] = website
+                                event["email"] = email
+                                return event;
+                            })
+                            $('.ticket-link', data).each(function () {
+                                var ticketLink = $(this).attr('href')
+                                event["ticketLink"] = ticketLink
+                                return event;
+                            })
                             return event;
-                        })
-                        .catch(err => console.log(err));
-                        
-                    }
-                    // console.log(help);
-                    return event;
-                }, events)
-                // console.log(events);
-                // console.log(newEventsArr);
-                // console.log(addresses);
+                        }
+                        return guessing();
+                }, events))
                 return events;
             } catch (err) {
                 console.error(err);
@@ -130,7 +147,7 @@ const resolvers = {
         addConcert: async (parent, { event }) => {
             console.log(event);
             const concert = await Concert.create({ event });
-            
+
             return concert;
         },
         addConcertToUser: async (parent, { _id }, context) => {
@@ -141,7 +158,7 @@ const resolvers = {
 
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { concerts: concert }},
+                    { $push: { concerts: concert } },
                     { new: true }
                 );
                 console.log(concert);

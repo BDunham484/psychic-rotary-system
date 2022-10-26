@@ -21,6 +21,15 @@ const concertSchema = new Schema(
         },
         address: {
             type: String
+        },
+        website: {
+            type: String
+        },
+        email: {
+            type: String
+        },
+        ticketLink: {
+            String
         }
     }
 );

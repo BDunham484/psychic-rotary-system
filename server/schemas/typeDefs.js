@@ -19,6 +19,9 @@ const typeDefs = gql`
         dateTime: String
         venue: String
         address: String
+        website: String
+        email: String
+        ticketLink: String
     }
 
     type Query {
