@@ -1,5 +1,7 @@
+// import { useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import { GET_TODAYS_CONCERTS } from '../utils/queries';
+import { getTodaysDate } from '../utils/helpers';
 import TodaysConcerts from '../components/TodaysConcerts';
 
 const Home = () => {
@@ -7,27 +9,23 @@ const Home = () => {
     const { loading, data } = useQuery(GET_TODAYS_CONCERTS);
 
     const concerts = data?.concerts || [];
-    // console.log('HOME CONCERTS!!!!!!!!!');
-    // console.log(concerts[1].dateTime)
-    // if (concerts.length) {
-        // const date = concerts[1].dateTime;
-        // console.log(date);
-    // }
-    
+    //get todays date with imported helper function
+    var date = getTodaysDate();
+
 
     return (
         <div className="page-wrapper">
-            
+
             <div>
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
                     <>
                         {/* <h1 className='todays-date'>{date}</h1> */}
-                        <TodaysConcerts concerts={concerts} date={concerts[2].dateTime}/>
+                        <TodaysConcerts concerts={concerts} date={date} />
                     </>
-                    
-                    
+
+
                 )}
             </div>
         </div>

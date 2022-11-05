@@ -16,9 +16,9 @@ const ConcertList = ({ concerts, date}) => {
                             <p>VENUE:  {concert.venue}</p>
                             <p>DATE/TIME:  {concert.dateTime}</p>
                             <p>ADDRESS:  {concert.address}</p>
-                            <p>WEBSITE:  {concert.website}</p>
+                            <p>WEBSITE:  <a href={concert.website} alt="venue website">{concert.venue}</a></p>
                             <p>EMAIL:  {concert.email}</p>
-                            <p>TICKETLINK:  {concert.ticketLink}</p>
+                            <p>TICKETLINK:  <a href={concert.ticketLink} alt="ticket link">{concert.ticketLink}</a></p>
                         </div>
                     ))}
             </div>

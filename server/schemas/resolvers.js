@@ -53,26 +53,8 @@ const resolvers = {
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
                 var events = [];
-                // const { data } = await axios.get(url);
-                // let $ = cheerio.load(data);
-                // let butt$ = cheerio.load($('.head-space').data);
-                // console.log(butt$);
-                // var events = [];
-                // $('.list-item', data).each(function () {
-                //     const artists = $(this).find('h2').text()
-                //     const artistsLink = $(this).find('a').attr('href');
-                //     const description = $(this).find('.description').text()
-                //     const dateTime = $(this).find('.date-time').text()
-                //     const venue = $(this).find('.venue').text()
-                //     events.push({
-                //         artists,
-                //         artistsLink,
-                //         description,
-                //         dateTime,
-                //         venue
-                //     })
-                // })
-                $('ul:eq(1) .list-item', data).each(function () {
+                
+                $('ul:eq(2) .list-item', data).each(function () {
                     const artists = $(this).find('h2').text()
                     const artistsLink = $(this).find('a').attr('href');
                     const description = $(this).find('.description').text()
@@ -90,7 +72,7 @@ const resolvers = {
                 const newEventsArr = await Promise.all(events.map((event) => {
                         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
                         
-                        let guessing = async () => {
+                        let moreEventDetails = async () => {
                             var { data } = await axios.get(eventUrl)
                             var $ = cheerio.load(data);
 
@@ -113,7 +95,7 @@ const resolvers = {
                             })
                             return event;
                         }
-                        return guessing();
+                        return moreEventDetails();
                 }, events))
                 return events;
             } catch (err) {
