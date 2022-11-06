@@ -6,8 +6,11 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 //import database connection to MongoDB via Mongoose
 const db = require('./config/connection');
+const path = require('path');
 //import Auth middleware
 const { authMiddleware } = require('./utils/auth');
+
+
 
 //set environment variable
 const PORT = process.env.PORT || 3001;
@@ -30,6 +33,14 @@ const startApolloServer = async (typeDefs, resolvers) => {
     await server.start();
     //integrate our Apollo server with the Express application as middleware
     server.applyMiddleware({ app });
+    // Serve up static assets
+    if (process.env.NODE_ENV === 'production') {
+        app.use(express.static(path.join(__dirname, '../client/build')));
+    }
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
 
     //establish connection to server via the listen() method
     db.once('open', () => {
