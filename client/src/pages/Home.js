@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+
 import { useQuery } from '@apollo/client';
 import { GET_TODAYS_CONCERTS } from '../utils/queries';
 import { getTodaysDate } from '../utils/helpers';

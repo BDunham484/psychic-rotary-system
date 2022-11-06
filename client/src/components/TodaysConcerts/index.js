@@ -1,6 +1,6 @@
 const ConcertList = ({ concerts, date}) => {
     if (!concerts.length) {
-        return <h3>No Concerts Today</h3>;
+        return <h3>No Concerts Yet. Try reloading the page.</h3>;
     }
 
     console.log(concerts);  
@@ -10,7 +10,7 @@ const ConcertList = ({ concerts, date}) => {
             <div>
                 {concerts &&
                     concerts.map(concert => (        
-                        <div key={concert._id}  className="events">                   
+                        <div key={concert.artists}  className="events">                   
                             <p>ARTIST:  {concert.artists}</p>
                             <p>DESCRIPTION:  {concert.description}</p>
                             <p>VENUE:  {concert.venue}</p>
