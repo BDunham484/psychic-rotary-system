@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Show from './pages/Show';
 import Profile from './pages/Profile';
+import NoMatch from './pages/NoMatch';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -24,45 +25,43 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Router>
+      <Router>
+        <div>
           <div>
-          <Header>
-            <div>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home />}
-                />
-                <Route
-                  path="/login"
-                  element={<Login />}
-                />
-                <Route
-                  path="/signup"
-                  element={<Signup />}
-                />
-                <Route
-                  path="/profile"
-                  element={<Profile />}
-                />
-                <Route
-                  path="/show"
-                  element={<Show />}
-                />
-              </Routes>
-            </div>
-          </Header>
+            <Header />
+              <main>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<Home />}
+                  />
+                  <Route
+                    path="/login"
+                    element={<Login />}
+                  />
+                  <Route
+                    path="/signup"
+                    element={<Signup />}
+                  />
+                  <Route
+                    path="/profile"
+                    element={<Profile />}
+                  />
+                  <Route
+                    path="/show"
+                    element={<Show />}
+                  />
+                  <Route
+                    path="*"
+                    element={<NoMatch />}
+                  />
+                </Routes>
+              </main>
           </div>
-        </Router>
-        
-        <main>
-          <Home></Home>
-        </main>
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </Router>
     </ApolloProvider>
-
   );
 }
 

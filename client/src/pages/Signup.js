@@ -1,8 +1,8 @@
 const Signup = () => {
     return (
-        <>
-        SIGNUP
-        </>
+        <div className='page-wrapper'>
+            Signup
+        </div>
     )
 }
 

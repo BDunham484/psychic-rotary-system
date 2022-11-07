@@ -1,8 +1,8 @@
 const Login = () => {
     return (
-        <>
-        LOGIN
-        </>
+        <div className='page-wrapper'>
+            Login
+        </div>
     )
 }
 

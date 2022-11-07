@@ -1,8 +1,8 @@
 const Show = () => {
     return (
-        <>
-        SHOW
-        </>
+        <div className='page-wrapper'>
+            Show
+        </div>
     )
 }
 

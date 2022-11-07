@@ -1,8 +1,8 @@
 const Profile = () => {
     return (
-        <>
-        PROFILE
-        </>
+        <div className='page-wrapper'>
+            Profile
+        </div>
     )
 }
 
