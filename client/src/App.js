@@ -47,10 +47,9 @@ function App() {
                     path="/profile"
                     element={<Profile />}
                   />
-                  <Route
-                    path="/show/:artists"
-                    element={<Show />}
-                  />
+                  <Route path="/show"/>
+                    <Route path=":artists" element={<Show />} />
+                    <Route path="" element={<Show />} />
                   <Route
                     path="*"
                     element={<NoMatch />}
