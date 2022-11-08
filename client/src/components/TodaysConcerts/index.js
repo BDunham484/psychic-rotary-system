@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ConcertList = ({ concerts, date}) => {
     if (!concerts.length) {
         return <h3>No Concerts Yet. Try reloading the page.</h3>;
@@ -10,8 +12,10 @@ const ConcertList = ({ concerts, date}) => {
             <div>
                 {concerts &&
                     concerts.map(concert => (        
-                        <div key={concert.artists}  className="events">                   
-                            <p>ARTIST:  {concert.artists}</p>
+                        <div key={concert.artists}  className="events">
+                            <Link to={`/show/${concert.artists}`}>
+                                <p>ARTIST:  {concert.artists}</p>
+                            </Link>
                             <p>DESCRIPTION:  {concert.description}</p>
                             <p>VENUE:  {concert.venue}</p>
                             <p>DATE/TIME:  {concert.dateTime}</p>

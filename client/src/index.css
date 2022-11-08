@@ -28,6 +28,11 @@ code {
       monospace;
 }
 
+a {
+  color: antiquewhite;
+  text-decoration: none;
+}
+
 /* HEADER / NAVBAR STYLES START */
 
 header {

@@ -48,7 +48,7 @@ function App() {
                     element={<Profile />}
                   />
                   <Route
-                    path="/show"
+                    path="/show/:artists"
                     element={<Show />}
                   />
                   <Route
