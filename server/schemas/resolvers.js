@@ -54,7 +54,7 @@ const resolvers = {
                 const $ = cheerio.load(data);
                 var events = [];
                 
-                $('ul:eq(2) .list-item', data).each(function () {
+                $('ul:eq(-1) .list-item', data).each(function () {
                     const artists = $(this).find('h2').text()
                     const artistsLink = $(this).find('a').attr('href');
                     const description = $(this).find('.description').text()
