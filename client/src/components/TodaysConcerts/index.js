@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ConcertList = ({ concerts, date }) => {
     if (!concerts.length) {
-        return <h3>No Concerts Yet. Try reloading the page.</h3>;
+        return <h3>An error occurred. Try reloading the page.</h3>;
     }
     // const test = concerts[0].artists;
     // const test2 = test.split(' ');
@@ -19,7 +19,9 @@ const ConcertList = ({ concerts, date }) => {
                     concerts.map(concert => (
 
                         <div key={concert.artists} className="events">
-                            <Link to={`/show/${concert.artists}`}>
+                            <Link to={`/show/${concert.artists}`}
+                                state={{concert}}
+                            >
                                 <p>ARTIST:  {concert.artists}</p>
                             </Link>
                             <p>DESCRIPTION:  {concert.description}</p>
