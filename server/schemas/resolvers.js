@@ -41,6 +41,7 @@ const resolvers = {
         concert: async (parent, { _id }) => {
             return Concert.findOne({ _id });
         },
+        //scrape all concerts for the day
         concerts: async () => {
             const date = new Date().toDateString();
             const day = date.slice(8, 10);
@@ -132,21 +133,38 @@ const resolvers = {
 
             return concert;
         },
-        addConcertToUser: async (parent, { _id }, context) => {
-            console.log(_id);
-            console.log(context.user)
+        addConcertToUser: async (parent, args, context) => {
+            // console.log(args);
+            // console.log(context.user)
             if (context.user) {
-                const concert = await Concert.findOne({ _id: _id });
-
+                const concert = await Concert.create({ ...args });
+                
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { concerts: concert } },
+                    { $push: { concerts: concert._id } },
                     { new: true }
                 );
-                console.log(concert);
+                console.log(concert._id);
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');
+        },
+        deleteConcertFromUser: async (parent, { concertId }, context) => {
+            if (context.user) {
+                
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { concerts: concertId } },
+                    { new: true }
+                );
+
+                await Concert.findByIdAndDelete(
+                    { _id: concertId }
+                    
+                )
+        
+                return user;
+            }
         }
     }
 };

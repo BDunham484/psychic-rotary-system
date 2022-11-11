@@ -16,9 +16,9 @@ const ConcertList = ({ concerts, date }) => {
             <h3 className="todays-date">{date}</h3>
             <div>
                 {concerts &&
-                    concerts.map(concert => (
+                    concerts.map((concert, index) => (
 
-                        <div key={concert.artists} className="events">
+                        <div key={index} className="events">
                             <Link to={`/show/${concert.artists}`}
                                 state={{concert}}
                             >

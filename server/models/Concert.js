@@ -29,7 +29,7 @@ const concertSchema = new Schema(
             type: String
         },
         ticketLink: {
-            String
+            type: String
         }
     }
 );
