@@ -4,8 +4,11 @@ import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 
 const Home = () => {
+  const test = 'testy mctesterson and the testes'
   //use useQuery hook to make query request
-  const { loading, data } = useQuery(GET_TODAYS_CONCERTS);
+  const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
+    variables: { test }
+  });
 
   const concerts = data?.concerts || [];
   //get todays date with imported helper function

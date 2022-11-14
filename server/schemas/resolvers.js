@@ -42,7 +42,8 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         //scrape all concerts for the day
-        concerts: async () => {
+        concerts: async (test) => {
+            console.log(test);
             const date = new Date().toDateString();
             const day = date.slice(8, 10);
             const month = (new Date().getMonth()) + 1;
