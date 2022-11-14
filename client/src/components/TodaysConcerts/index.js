@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const ConcertList = ({ concerts, today }) => {
     const [date, setDate] = useState(today)
-    console.log(setDate)
 
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;

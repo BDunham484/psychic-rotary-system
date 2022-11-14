@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_TODAYS_CONCERTS = gql`
-    query concerts {
-        concerts {
+    query concerts($test: String) {
+        concerts(test: $test) {
             artists
             description
             dateTime
