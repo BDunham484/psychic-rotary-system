@@ -159,8 +159,7 @@ const resolvers = {
                 );
 
                 await Concert.findByIdAndDelete(
-                    { _id: concertId }
-                    
+                    { _id: concertId }   
                 )
         
                 return user;

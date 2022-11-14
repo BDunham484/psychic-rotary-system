@@ -9,7 +9,8 @@ const Home = () => {
 
   const concerts = data?.concerts || [];
   //get todays date with imported helper function
-  var date = getTodaysDate();
+  var today = getTodaysDate();
+  
 
   return (
     <div className="page-wrapper">
@@ -19,7 +20,7 @@ const Home = () => {
         ) : (
           <>
             {/* <h1 className='todays-date'>{date}</h1> */}
-            <TodaysConcerts concerts={concerts} date={date} />
+            <TodaysConcerts concerts={concerts} today={today} />
           </>
         )}
       </div>

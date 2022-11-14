@@ -11,3 +11,4 @@ export const getTodaysDate = () => {
     const date = new Date().toDateString();
     return date;
 }
+

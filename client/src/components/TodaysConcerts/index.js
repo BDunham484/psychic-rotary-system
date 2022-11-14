@@ -1,19 +1,37 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ConcertList = ({ concerts, date }) => {
+const ConcertList = ({ concerts, today }) => {
+    const [date, setDate] = useState(today)
+    console.log(setDate)
+
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
     }
-    // const test = concerts[0].artists;
-    // const test2 = test.split(' ');
-    // const test3 = test2.join('%20');
-    
-    // console.log('test: ' + test);
-    // console.log('test2: ' + test2);
-    // console.log('test3: ' + test3);
+
+    //sets the date to the next day
+    const nextDay = (date) => {
+        const next = new Date(date);
+        next.setDate(next.getDate() + 1)
+        const theNextDay = next.toDateString();
+        console.log("nextDay: " + theNextDay);
+        setDate(theNextDay);    
+    }
+
+    const dayBefore = (date) => {
+        const before = new Date(date);
+        before.setDate(before.getDate() - 1)
+        const theLastDay = before.toDateString();
+        console.log("dayBefore: " + theLastDay);
+        setDate(theLastDay);    
+    }
+
+
     return (
         <div>
             <h3 className="todays-date">{date}</h3>
+            <button onClick={() => dayBefore(date)}>The Day Before</button>
+            <button onClick={() => nextDay(date)}>The Next Day</button>
             <div>
                 {concerts &&
                     concerts.map((concert, index) => (
