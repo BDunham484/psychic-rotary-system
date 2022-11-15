@@ -11,6 +11,7 @@
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=plastic&logo=node.js&logoColor=white)
 ![NPM](https://img.shields.io/badge/-npm-%23323330?style=plastic&logo=npm&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=plastic&logo=react&logoColor=%2361DAFB)
+![ReactRouter](https://img.shields.io/badge/react%20router-%2320232a.svg?style=plastic&logo=react%20router&logoColor=#CA4245)
 ![JSX](https://img.shields.io/badge/JSX-F9DC3e.svg?style=plastic&logo=react&logoColor=purple)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=plastic&logo=mongodb&logoColor=white)
 ![Mongoose](https://img.shields.io/badge/6.5.4-Mongoose-%23800000?style=plastic)
