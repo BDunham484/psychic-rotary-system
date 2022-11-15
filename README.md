@@ -23,7 +23,7 @@
 
 ## Description
 
-A Single Page React App that scrapes local concert listings from free to use information websites and displays them depeneding on the day selected.  Currently under development
+A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected.  Currently under development.
 
 ## Local Development
 
