@@ -42,9 +42,9 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         //scrape all concerts for the day
-        concerts: async (parent, { test }) => {
-            console.log(test);
-            const date = new Date().toDateString();
+        concerts: async (parent, { date }) => {
+            console.log(date);
+            // const date = new Date().toDateString();
             const day = date.slice(8, 10);
             const month = (new Date().getMonth()) + 1;
             const year = new Date().getFullYear();
@@ -55,21 +55,39 @@ const resolvers = {
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
                 var events = [];
-                
-                $('ul:eq(-1) .list-item', data).each(function () {
-                    const artists = $(this).find('h2').text()
-                    const artistsLink = $(this).find('a').attr('href');
-                    const description = $(this).find('.description').text()
-                    const dateTime = $(this).find('.date-time').text()
-                    const venue = $(this).find('.venue').text()
-                    events.push({
-                        artists,
-                        artistsLink,
-                        description,
-                        dateTime,
-                        venue
+                console.log($('ul:eq(-1)').length)
+                if ($('ul:eq(-1)').length === 0) {
+                    $('ul:eq(0) .list-item', data).each(function () {
+                        const artists = $(this).find('h2').text()
+                        const artistsLink = $(this).find('a').attr('href');
+                        const description = $(this).find('.description').text()
+                        const dateTime = $(this).find('.date-time').text()
+                        const venue = $(this).find('.venue').text()
+                        events.push({
+                            artists,
+                            artistsLink,
+                            description,
+                            dateTime,
+                            venue
+                        })
                     })
-                })
+                } else {
+                    $('ul:eq(-1) .list-item', data).each(function () {
+                        const artists = $(this).find('h2').text()
+                        const artistsLink = $(this).find('a').attr('href');
+                        const description = $(this).find('.description').text()
+                        const dateTime = $(this).find('.date-time').text()
+                        const venue = $(this).find('.venue').text()
+                        events.push({
+                            artists,
+                            artistsLink,
+                            description,
+                            dateTime,
+                            venue
+                        })
+                    })
+                }
+                
 
                 const newEventsArr = await Promise.all(events.map((event) => {
                         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
