@@ -15,6 +15,23 @@ export const GET_TODAYS_CONCERTS = gql`
     }
 `;
 
+export const QUERY_USER_CONCERTS = gql`
+    query userConcerts($username: String) {
+        userConcerts(username: $usernmae) {
+            _id
+            artists
+            artistsLink
+            description
+            dateTime
+            venue
+            address
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+
 export const QUERY_USER = gql`
     query user($username: String!) {
         user(username: $username) {
