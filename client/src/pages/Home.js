@@ -7,28 +7,27 @@ import TodaysConcerts from "../components/TodaysConcerts";
 const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
+  //set initial state useing today's date
   const [date, setDate] = useState(today)
-  console.log("date: " + date);
-  //use useQuery hook to make query request
+
+  //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
     variables: { date: date }
   });
-
+  //assign data to variable if present
   const concerts = data?.concerts || [];
-  
+  //function that gets the next day
   const nextDay = (date) => {
     const next = new Date(date);
-    next.setDate(next.getDate() + 1)
+    next.setDate(next.getDate() + 1);
     const theNextDay = next.toDateString();
-    console.log("nextDay: " + theNextDay);
     setDate(theNextDay);
 }
-
+//function that gets the previous day
 const dayBefore = (date) => {
     const before = new Date(date);
-    before.setDate(before.getDate() - 1)
+    before.setDate(before.getDate() - 1);
     const theLastDay = before.toDateString();
-    console.log("dayBefore: " + theLastDay);
     setDate(theLastDay);
 }
   
@@ -46,7 +45,6 @@ const dayBefore = (date) => {
           <div>Loading...</div>
         ) : (
           <>
-            {/* <h1 className='todays-date'>{date}</h1> */}
             <TodaysConcerts concerts={concerts} />
           </>
         )}

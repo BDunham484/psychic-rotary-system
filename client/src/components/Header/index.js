@@ -6,9 +6,23 @@ const Header = () => {
       <Link to="/">
         <h1>NZBX</h1>
       </Link>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Signup</Link>
-      <Link to="/profile">Profile</Link>
+      <nav id="navigation">
+        <ul>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup">Signup</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+        </ul>
+
+
+
+      </nav>
+
     </header>
   );
 };
