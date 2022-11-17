@@ -8,6 +8,7 @@ const Profile = () => {
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { username: userParam}
     });
+    
 
     const user = data?.user || {};
     console.log(user);
