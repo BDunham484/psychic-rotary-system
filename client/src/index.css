@@ -71,12 +71,34 @@ header nav ul li a {
 
 /* HEADER / NAV STYLES END */
 
+.wrapper {
+  display: flex;
+  
+}
+
 .page-wrapper {
+  width: 100vh;
   padding-top: 14vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.page-wrapper-logged-in {
+  width: 80vh;
+  padding-top: 14vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: grey;
+}
+
+.logged-in-home {
+  width: 20vh;
+  padding-top: 14vh;
+  color: grey;
 }
 
 /* HOME STYLES START */

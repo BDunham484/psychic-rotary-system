@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_TODAYS_CONCERTS } from "../utils/queries";
+import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC } from "../utils/queries";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
+import Auth from '../utils/auth';
 
 const Home = () => {
   //get today's date with imported helper function
@@ -14,6 +15,9 @@ const Home = () => {
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
     variables: { date: date }
   });
+
+  const { data: userData } = useQuery(QUERY_ME_BASIC);
+  console.log(userData);
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
@@ -22,34 +26,46 @@ const Home = () => {
     next.setDate(next.getDate() + 1);
     const theNextDay = next.toDateString();
     setDate(theNextDay);
-}
-//function that gets the previous day
-const dayBefore = (date) => {
+  }
+  //function that gets the previous day
+  const dayBefore = (date) => {
     const before = new Date(date);
     before.setDate(before.getDate() - 1);
     const theLastDay = before.toDateString();
     setDate(theLastDay);
-}
-  
+  }
+
+  const loggedIn = Auth.loggedIn();
+
 
   return (
-    <div className="page-wrapper">
-      <div>
-      <h3 className="todays-date">{date}</h3>
-            <button onClick={() => dayBefore(date)}>The Day Before</button>
-            <button onClick={() => nextDay(date)}>The Next Day</button>
+    <div className="wrapper">
+      <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}>
+        <div>
+          <h3 className="todays-date">{date}</h3>
+          <button onClick={() => dayBefore(date)}>The Day Before</button>
+          <button onClick={() => nextDay(date)}>The Next Day</button>
+        </div>
+
+        <div>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              <TodaysConcerts concerts={concerts} />
+            </>
+          )}
+        </div>
       </div>
-      
-      <div>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <TodaysConcerts concerts={concerts} />
-          </>
-        )}
-      </div>
+      {loggedIn && userData ? (
+        <div className="logged-in-home">
+          USERNAME: {userData.me.username}
+          {/* CONCERT-COUNT: {userData.me.concertCount}
+          CONCERTS: {userData.me.concerts} */}
+        </div>
+      ) : null}
     </div>
+
   );
 };
 
