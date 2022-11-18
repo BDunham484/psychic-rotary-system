@@ -73,6 +73,10 @@ header nav ul li a {
 
 .page-wrapper {
   padding-top: 14vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* HOME STYLES START */
