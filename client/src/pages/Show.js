@@ -1,6 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_CONCERT_TO_USER } from "../utils/mutations";
+// import Auth from '../utils/auth';
 
 const Show = () => {
     const { artists } = useParams();
@@ -12,15 +13,17 @@ const Show = () => {
 
     const [addConcert, { error }] = useMutation(ADD_CONCERT_TO_USER);
 
-    const addConcertToUser = async () => {
-        console.log("add concert to user");
+    const addConcertToUser = async (concert) => {
+        console.log("CONCERT!!!!!!!!!!");
+        console.log({concert});
         try {
             const { data } = await addConcert({
-                variables: { ...concert }
+                variables: { artists: concert.artists }
             });
+            console.log("DATA!!!!!!");
             console.log(data);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -41,9 +44,10 @@ const Show = () => {
             <h3>EMAIL: {concert.email}</h3>
             <h3>TICKETLINK: {concert.ticketLink}</h3>
             <div>
-                <button onClick={addConcertToUser}>Add to Profile</button>
+                <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
                 <button onClick={deleteConcertFromUser}>Delete from Profile</button>
             </div>
+            {error && <div>An error occurred</div>}
         </div>
 
 

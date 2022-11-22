@@ -153,8 +153,8 @@ const resolvers = {
             return concert;
         },
         addConcertToUser: async (parent, args, context) => {
-            // console.log(args);
-            // console.log(context.user)
+            console.log(args);
+            console.log(context.user)
             if (context.user) {
                 const concert = await Concert.create({ ...args });
                 
