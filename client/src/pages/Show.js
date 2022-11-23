@@ -17,11 +17,9 @@ const Show = () => {
         console.log("CONCERT!!!!!!!!!!");
         console.log({ ...concert });
         try {
-            const { data } = await addConcert({
+            await addConcert({
                 variables: { ...concert }
             });
-            console.log("DATA!!!!!!");
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
