@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 
 const Profile = () => {
     const { username: userParam } = useParams();
@@ -10,7 +11,10 @@ const Profile = () => {
     });
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
-    console.log(user);
+    //navigate to personal profile page if username is the logged-in user's
+    if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+        return <Navigate to="/profile" />;
+    }
 
     if (loading) {
         return <div>Loading...</div>
