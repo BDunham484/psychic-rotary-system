@@ -5,12 +5,12 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 const Profile = () => {
     const { username: userParam } = useParams();
 
-    const { loading, data } = useQuery(QUERY_USER, {
+    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
         variables: { username: userParam}
     });
     
 
-    const user = data?.user || {};
+    const user = data?.me || data?.user || {};
     console.log(user);
 
     if (loading) {
