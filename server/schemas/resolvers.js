@@ -153,7 +153,6 @@ const resolvers = {
             return concert;
         },
         addConcertToUser: async (parent, args, context) => {
-        // addConcertToUser: async (parent, args) => {
             console.log(args);
             console.log(context.user)
             if (context.user) {
