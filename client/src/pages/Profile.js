@@ -20,9 +20,18 @@ const Profile = () => {
         return <div>Loading...</div>
     }
 
+    if (!user?.username) {
+        return (
+            <h4>
+                You need to be logged in to see this page. Login or Signup above!
+            </h4>
+        );
+    }
+
     return (
         <div className='page-wrapper'>
-            <h2>Viewing {user.username}'s profile.</h2>
+            <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
+            <h3>{user.username}</h3>
             <p>Concert Count: {user.concertCount}</p>
             <div>
                 {user.concerts.map((concert, index) => (
