@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
+import Auth from '../../utils/auth';
 // import { getTodaysDate } from "../../utils/helpers";
 
 const ConcertList = ({ concerts }) => {
@@ -32,7 +33,7 @@ const ConcertList = ({ concerts }) => {
     //     console.log("dayBefore: " + theLastDay);
     //     setDate(theLastDay);
     // }
-
+    const loggedIn = Auth.loggedIn();
 
     return (
         <div>
@@ -56,6 +57,11 @@ const ConcertList = ({ concerts }) => {
                             <p>WEBSITE:  <a href={concert.website} alt="venue website">{concert.venue}</a></p>
                             <p>EMAIL:  {concert.email}</p>
                             <p>TICKETLINK:  <a href={concert.ticketLink} alt="ticket link">{concert.ticketLink}</a></p>
+                            {/* {loggedIn &&
+                                <div>
+                                    <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
+                                    <button onClick={deleteConcertFromUser}>Delete from Profile</button>
+                                </div>} */}
                         </div>
                     ))}
             </div>

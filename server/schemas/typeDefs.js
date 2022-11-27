@@ -8,7 +8,9 @@ const typeDefs = gql`
         username: String
         email: String
         concertCount: Int
+        friendCount: Int
         concerts: [Concert]
+        friends: [User]
     }
 
     type Concert {
@@ -37,6 +39,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addConcert(event: String): Concert
+        addFriend(friendId: ID!): User
         addConcertToUser(artists: String, description: String, venue: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
         deleteConcertFromUser(concertId: ID): User
     }

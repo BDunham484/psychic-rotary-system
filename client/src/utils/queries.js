@@ -51,6 +51,11 @@ export const QUERY_USER = gql`
                 email
                 ticketLink
             }
+            friendCount
+            friends {
+                _id
+                username
+            }
         }
     }
 `;
@@ -74,6 +79,11 @@ export const QUERY_ME = gql`
                 email
                 ticketLink
             }
+            frinedCount
+            friends {
+                _id
+                username
+            }
         }
     }
 `;
@@ -88,6 +98,11 @@ export const QUERY_ME_BASIC = gql`
             concerts {
                 _id
                 artists
+            }
+            friendCount
+            friends {
+                _id
+                username
             }
         }
     }

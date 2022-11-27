@@ -30,6 +30,12 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Concert'
             }
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
         ]
     },
     {
@@ -54,9 +60,14 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-//get total count of friends on retrieval
+//get total count of concerts on retrieval
 userSchema.virtual('concertCount').get(function () {
     return this.concerts.length;
+});
+
+//get total count of friends on retrieval
+userSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
 });
 
 //create the User model using the userSchema

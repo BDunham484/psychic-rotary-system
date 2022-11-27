@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+
 //establish link to GraphQL server
 const httpLink = createHttpLink({
   uri: '/graphql',
