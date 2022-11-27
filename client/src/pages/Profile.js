@@ -11,6 +11,7 @@ const Profile = () => {
     });
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
+    console.log(user);
     //navigate to personal profile page if username is the logged-in user's
     if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
         return <Navigate to="/profile" />;
@@ -32,6 +33,14 @@ const Profile = () => {
         <div className='page-wrapper'>
             <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
             <h3>{user.username}</h3>
+            <p>Friend Count : {user.friendCount}</p>
+            <div>
+                {user.friends.map((friend, index) => (
+                    <div key={index} className="events">
+                        <div>Username: {friend.username}</div>
+                    </div>
+                ))}
+            </div>
             <p>Concert Count: {user.concertCount}</p>
             <div>
                 {user.concerts.map((concert, index) => (
@@ -49,6 +58,7 @@ const Profile = () => {
                     </div>
                 ))}
             </div>
+            
         </div>
     )
 }

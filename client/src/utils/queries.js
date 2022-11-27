@@ -79,7 +79,7 @@ export const QUERY_ME = gql`
                 email
                 ticketLink
             }
-            frinedCount
+            friendCount
             friends {
                 _id
                 username

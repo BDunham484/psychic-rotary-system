@@ -33,3 +33,22 @@ export const ADD_CONCERT_TO_USER = gql`
         }
     }
 `;
+
+export const ADD_FRIEND = gql`
+    mutation addFriend($id: ID!) {
+        addFriend(friendId: $id) {
+            _id
+            username
+            concertCount
+            concerts {
+                _id
+                artists
+            }
+            friendCount
+            friends {
+                _id
+                username
+            }
+        }
+    }
+`
