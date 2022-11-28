@@ -61,7 +61,7 @@ const Home = () => {
         <div className="logged-in-home">
           USERNAME: {userData.me.username}
           CONCERT-COUNT: {userData.me.concertCount}
-          CONCERTS: {userData.me.concerts[0].artists}
+          {/* CONCERTS: {userData.me.concerts[0].artists} */}
         </div>
       ) : null}
     </div>

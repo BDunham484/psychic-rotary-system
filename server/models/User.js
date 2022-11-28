@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 //import the Concert model
 const Concert = require('./Concert');
 
-//create the schema for the model using the Schema constructo and outline the fields
+//create the schema for the model using the Schema constructor and outline the fields
 const userSchema = new Schema(
     {
         username: {
