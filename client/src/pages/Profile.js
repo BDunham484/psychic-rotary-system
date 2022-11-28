@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
@@ -52,11 +53,12 @@ const Profile = () => {
             </button>
             }
             
-            <p>Friend Count : {user.friendCount}</p>
+            <div>Friend Count : {user.friendCount}</div>
+            <div>Friends:</div>
             <div>
                 {user.friends.map((friend, index) => (
-                    <div key={index} className="events">
-                        <div>Username: {friend.username}</div>
+                    <div key={index}>
+                        <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
                     </div>
                 ))}
             </div>

@@ -20,8 +20,8 @@ const Show = () => {
             await addConcert({
                 variables: { ...concert }
             });
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            console.error(e);
         }
     };
 

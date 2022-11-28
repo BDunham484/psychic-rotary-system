@@ -14,7 +14,8 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('concerts');
+                    .populate('concerts')
+                    .populate('friends')
 
                 return userData;
             }
@@ -24,13 +25,15 @@ const resolvers = {
         users: async () => {
             return User.find()
                 .select('-__v -password')
-                .populate('concerts');
+                .populate('concerts')
+                .populate('friends')
         },
         //get user by username
         user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select('-__v -password')
-                .populate('concerts');
+                .populate('concerts')
+                .populate('friends')
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
@@ -173,7 +176,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $push: { concerts: concert._id } },
                     { new: true }
-                );
+                ).populate('concerts');
                 console.log(concert._id);
                 return user;
             }
