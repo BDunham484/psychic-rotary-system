@@ -90,35 +90,35 @@ const resolvers = {
                         })
                     })
                 }
-                
+
 
                 const newEventsArr = await Promise.all(events.map((event) => {
-                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-                        
-                        let moreEventDetails = async () => {
-                            var { data } = await axios.get(eventUrl)
-                            var $ = cheerio.load(data);
+                    const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
 
-                            $('.venue-details:eq(0)', data).each(function () {
-                                var address = $(this).text();
-                                event["address"] = address
-                                return event;
-                            })
-                            $('.venue-details:eq(1)', data).each(function () {
-                                var website = $(this).find('a').attr('href');
-                                var email = $(this).find('b:eq(1)').text()
-                                event["website"] = website
-                                event["email"] = email
-                                return event;
-                            })
-                            $('.ticket-link', data).each(function () {
-                                var ticketLink = $(this).attr('href')
-                                event["ticketLink"] = ticketLink
-                                return event;
-                            })
+                    let moreEventDetails = async () => {
+                        var { data } = await axios.get(eventUrl)
+                        var $ = cheerio.load(data);
+
+                        $('.venue-details:eq(0)', data).each(function () {
+                            var address = $(this).text();
+                            event["address"] = address
                             return event;
-                        }
-                        return moreEventDetails();
+                        })
+                        $('.venue-details:eq(1)', data).each(function () {
+                            var website = $(this).find('a').attr('href');
+                            var email = $(this).find('b:eq(1)').text()
+                            event["website"] = website
+                            event["email"] = email
+                            return event;
+                        })
+                        $('.ticket-link', data).each(function () {
+                            var ticketLink = $(this).attr('href')
+                            event["ticketLink"] = ticketLink
+                            return event;
+                        })
+                        return event;
+                    }
+                    return moreEventDetails();
                 }, events))
                 return events;
             } catch (err) {
@@ -158,8 +158,19 @@ const resolvers = {
         addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id},
-                    { $addToSet: { friends: friendId }},
+                    { _id: context.user._id },
+                    { $addToSet: { friends: friendId } },
+                    { new: true }
+                ).populate('friends');
+                return updatedUser;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        addFriendByUsername: async (parent, { username }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { username: username },
+                    { $addToSet: { friends: username } },
                     { new: true }
                 ).populate('friends');
                 return updatedUser;
@@ -171,7 +182,7 @@ const resolvers = {
             console.log(context.user)
             if (context.user) {
                 const concert = await Concert.create({ ...args });
-                
+
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { concerts: concert._id } },
@@ -185,7 +196,7 @@ const resolvers = {
         deleteConcertFromUser: async (parent, { concertId }, context) => {
             console.log("DELETE CONCERT FROM USER HAS BEEN CALLED!!!!!!!!!!!")
             if (context.user) {
-                
+
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { concerts: concertId } },
@@ -193,9 +204,9 @@ const resolvers = {
                 ).populate('concerts')
 
                 await Concert.findByIdAndDelete(
-                    { _id: concertId }   
+                    { _id: concertId }
                 )
-        
+
                 return user;
             }
         }

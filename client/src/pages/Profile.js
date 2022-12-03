@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -6,6 +7,8 @@ import { ADD_FRIEND, DELETE_CONCERT_FROM_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Profile = () => {
+    const [text, setText] = useState('');
+    const [btnDisabled, setBtnDisabled] = useState(true);
     //destructure mutation function 
     const [addFriend] = useMutation(ADD_FRIEND);
     const { username: userParam } = useParams();
@@ -13,6 +16,7 @@ const Profile = () => {
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
         variables: { username: userParam }
     });
+
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
     // console.log(user);
@@ -26,6 +30,36 @@ const Profile = () => {
             console.error(e);
         }
     };
+    const handleTextChange = (e) => {
+        if (text === '') {
+            setBtnDisabled(true)
+        } else {
+            setBtnDisabled(false)
+        }
+        setText(e.target.value)
+    }
+    //query user if use inputs text value in 'add friend' input
+    const userdata = useQuery(QUERY_USER, {
+        variables: { username: text }
+    })
+    const userId = userdata?.data?.user?._id || {};
+    console.log(text)
+    console.log(userId)
+
+    //onClick handler to add a friend by user input
+    const handleSubmit = async (e, userId) => {
+        e.preventDefault()
+        if (userId.length > 0) {
+            try {
+                await addFriend({
+                    variables: { id: userId }
+                });
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        
+    }
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
     //function to delete concert from user
@@ -33,13 +67,14 @@ const Profile = () => {
         console.log("delete concert from user");
         console.log(id);
         try {
-            await deleteConcert({ 
-                variables: { concertId: id}
+            await deleteConcert({
+                variables: { concertId: id }
             });
         } catch (e) {
             console.error(e);
         }
     }
+
     //navigate to personal profile page if username is the logged-in user's
     if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
         return <Navigate to="/profile" />;
@@ -66,6 +101,20 @@ const Profile = () => {
                     Add Friend
                 </button>
             }
+            {!userParam &&
+                <form onSubmit={() => { handleSubmit(userId) }}>
+                    <div>
+                        <input
+                            onChange={handleTextChange}
+                            type="text"
+                            placeholder="Add Friend"
+                            value={text}
+                        />
+                        <button type="submit" disabled={btnDisabled}>Add Friend</button>
+                    </div>
+                </form>
+            }
+
 
             <div>Friend Count : {user.friendCount}</div>
             <div>Friends:</div>

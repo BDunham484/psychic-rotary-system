@@ -40,6 +40,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addConcert(event: String): Concert
         addFriend(friendId: ID!): User
+        addFriendByUsername(username: String!): User
         addConcertToUser(artists: String, description: String, venue: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
         deleteConcertFromUser(concertId: ID!): User
     }
