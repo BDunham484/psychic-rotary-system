@@ -4,6 +4,7 @@ import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC } from "../utils/queries";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 import Auth from '../utils/auth';
+import Spinner from '../components/shared/Spinner';
 
 const Home = () => {
   //get today's date with imported helper function
@@ -49,7 +50,7 @@ const Home = () => {
 
         <div>
           {loading ? (
-            <div>Loading...</div>
+            <Spinner />
           ) : (
             <>
               <TodaysConcerts concerts={concerts} />
