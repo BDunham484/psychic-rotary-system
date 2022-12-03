@@ -34,6 +34,20 @@ export const ADD_CONCERT_TO_USER = gql`
     }
 `;
 
+export const DELETE_CONCERT_FROM_USER = gql`
+    mutation deleteConcertFromUser($concertId: ID!) {
+        deleteConcertFromUser(concertId: $concertId) {
+            _id
+            username
+            email
+            concertCount
+            concerts {
+                _id
+            }
+        }
+    }
+`;
+
 export const ADD_FRIEND = gql`
     mutation addFriend($id: ID!) {
         addFriend(friendId: $id) {

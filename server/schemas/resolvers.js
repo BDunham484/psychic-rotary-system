@@ -183,13 +183,14 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         deleteConcertFromUser: async (parent, { concertId }, context) => {
+            console.log("DELETE CONCERT FROM USER HAS BEEN CALLED!!!!!!!!!!!")
             if (context.user) {
                 
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { concerts: concertId } },
                     { new: true }
-                );
+                ).populate('concerts')
 
                 await Concert.findByIdAndDelete(
                     { _id: concertId }   

@@ -11,6 +11,8 @@ const Show = () => {
     const { concert } = location.state
 
     const [addConcert, { error }] = useMutation(ADD_CONCERT_TO_USER);
+
+    // const [deleteConcert, { deleteError }] = useMutation(DELETE_CONCERT_FROM_USER);
     
 
     const addConcertToUser = async (concert) => {
@@ -25,8 +27,18 @@ const Show = () => {
         }
     };
 
-    const deleteConcertFromUser = () => {
+    const deleteConcertFromUser = async () => {
         console.log("delete concert from user");
+        
+        // try {
+        //     await deleteConcert({
+        //         variables: {
+
+        //         } 
+        //     });
+        // } catch (e) {
+        //     console.error(e);
+        // }
     }
 
     const loggedIn = Auth.loggedIn();
@@ -50,6 +62,7 @@ const Show = () => {
                 <button onClick={deleteConcertFromUser}>Delete from Profile</button>
             </div>}
             {error && <div>An error occurred</div>}
+            {/* {deleteError && <div>An error occurred</div>} */}
         </div>
 
 
