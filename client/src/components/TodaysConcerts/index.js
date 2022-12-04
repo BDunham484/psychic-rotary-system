@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
-import Auth from '../../utils/auth';
+// import Auth from '../../utils/auth';
 // import { getTodaysDate } from "../../utils/helpers";
 
 const ConcertList = ({ concerts }) => {
@@ -33,7 +33,7 @@ const ConcertList = ({ concerts }) => {
     //     console.log("dayBefore: " + theLastDay);
     //     setDate(theLastDay);
     // }
-    const loggedIn = Auth.loggedIn();
+    // const loggedIn = Auth.loggedIn();
 
     return (
         <div>

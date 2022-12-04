@@ -156,6 +156,8 @@ const resolvers = {
             return concert;
         },
         addFriend: async (parent, { friendId }, context) => {
+            console.log("FRIEND ID!!")
+            console.log(friendId)
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },

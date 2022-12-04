@@ -42,23 +42,23 @@ const Profile = () => {
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
-    const userId = userdata?.data?.user?._id || {};
-    console.log(text)
-    console.log(userId)
+    const userId = userdata?.data?.user?._id || '';
+    console.log("USERNAME: " + text)
+    console.log("USER ID: " + userId)
 
-    //onClick handler to add a friend by user input
-    const handleSubmit = async (e, userId) => {
-        e.preventDefault()
-        if (userId.length > 0) {
-            try {
-                await addFriend({
-                    variables: { id: userId }
-                });
-            } catch (e) {
-                console.error(e)
-            }
+    //onSubmit handler to add a friend by user input
+    const handleSubmit = async (friendId, event) => {
+        // event.preventDefault();
+        console.log("EVENT: " + event)
+        console.log("ID: " + friendId)
+
+        try {
+            await addFriend({
+                variables: { id: friendId }
+            });
+        } catch (error) {
+            console.log(error)
         }
-        
     }
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -102,7 +102,7 @@ const Profile = () => {
                 </button>
             }
             {!userParam &&
-                <form onSubmit={() => { handleSubmit(userId) }}>
+                <form onSubmit={() => {handleSubmit(userId)}}>
                     <div>
                         <input
                             onChange={handleTextChange}
