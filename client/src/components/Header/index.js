@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
+import { CubeAlt } from '@styled-icons/boxicons-regular';
+
 
 const Header = () => {
   const logout = event => {
@@ -11,7 +13,10 @@ const Header = () => {
   return (
     <header>
       <Link to="/">
+        <div className="display-flex title-wrapper">
         <h1>NBX</h1>
+        <CubeAlt id="cube-icon"/>
+        </div>
       </Link>
       <nav id="navigation">
         {Auth.loggedIn() ? (

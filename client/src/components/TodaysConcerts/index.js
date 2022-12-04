@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 // import Auth from '../../utils/auth';
 // import { getTodaysDate } from "../../utils/helpers";
+import ShowCard from "../ShowCard";
 
 const ConcertList = ({ concerts }) => {
     // console.log(getTodaysDate);
@@ -36,7 +37,7 @@ const ConcertList = ({ concerts }) => {
     // const loggedIn = Auth.loggedIn();
 
     return (
-        <div>
+        <ShowCard>
             {/* <h3 className="todays-date">{date}</h3>
             <button onClick={() => dayBefore(date)}>The Day Before</button>
             <button onClick={() => nextDay(date)}>The Next Day</button> */}
@@ -65,7 +66,7 @@ const ConcertList = ({ concerts }) => {
                         </div>
                     ))}
             </div>
-        </div>
+        </ShowCard>
     )
 }
 

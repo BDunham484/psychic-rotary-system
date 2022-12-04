@@ -3,8 +3,9 @@ import { useQuery } from "@apollo/client";
 import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC } from "../utils/queries";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 import Spinner from '../components/shared/Spinner';
+import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 
 const Home = () => {
   //get today's date with imported helper function
@@ -44,9 +45,11 @@ const Home = () => {
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className={`page-wrapper`}>
         <div>
-          <h3 className="todays-date">{date}</h3>
-          <button onClick={() => dayBefore(date)}>The Day Before</button>
-          <button onClick={() => nextDay(date)}>The Next Day</button>
+          <span className="display-flex todays-date">
+            <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
+            <h3>{date}</h3>
+            <RightArrow className="arrows" onClick={() => nextDay(date)} />
+          </span>
         </div>
 
         <div>
