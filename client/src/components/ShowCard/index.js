@@ -1,6 +1,6 @@
 
 
-const ShowCard = (children) => {
+const ShowCard = ({ children }) => {
     return (
         <div className="show-card">
             {children}

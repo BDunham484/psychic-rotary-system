@@ -37,36 +37,44 @@ const ConcertList = ({ concerts }) => {
     // const loggedIn = Auth.loggedIn();
 
     return (
-        <ShowCard>
+        <>
             {/* <h3 className="todays-date">{date}</h3>
             <button onClick={() => dayBefore(date)}>The Day Before</button>
             <button onClick={() => nextDay(date)}>The Next Day</button> */}
-            <div>
+            {/* <div> */}
                 {concerts &&
                     concerts.map((concert, index) => (
+                        <ShowCard>
+                            <div key={index} className="events">
+                                <ul>
+                                    <li id="artists-link">
+                                        <Link to={`/show/${concert.artists}`}
+                                            state={{ concert }}
+                                        >
+                                            {concert.artists}
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        at {concert.venue} |
+                                    </li>
+                                    <li>
+                                        {concert.dateTime}
+                                    </li>
+                                </ul>
 
-                        <div key={index} className="events">
-                            <Link to={`/show/${concert.artists}`}
-                                state={{ concert }}
-                            >
-                                <p>ARTIST:  {concert.artists}</p>
-                            </Link>
-                            <p>DESCRIPTION:  {concert.description}</p>
-                            <p>VENUE:  {concert.venue}</p>
-                            <p>DATE/TIME:  {concert.dateTime}</p>
-                            <p>ADDRESS:  {concert.address}</p>
-                            <p>WEBSITE:  <a href={concert.website} alt="venue website">{concert.venue}</a></p>
-                            <p>EMAIL:  {concert.email}</p>
-                            <p>TICKETLINK:  <a href={concert.ticketLink} alt="ticket link">{concert.ticketLink}</a></p>
-                            {/* {loggedIn &&
+
+
+                                {/* {loggedIn &&
                                 <div>
                                     <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
                                     <button onClick={deleteConcertFromUser}>Delete from Profile</button>
                                 </div>} */}
-                        </div>
+                            </div>
+                        </ShowCard>
+
                     ))}
-            </div>
-        </ShowCard>
+            {/* </div> */}
+        </>
     )
 }
 

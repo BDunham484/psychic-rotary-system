@@ -12,12 +12,15 @@ const Header = () => {
 
   return (
     <header>
-      <Link to="/">
+      
         <div className="display-flex title-wrapper">
+        <Link to="/">
         <h1>NBX</h1>
+        </Link>
         <CubeAlt id="cube-icon"/>
+        
         </div>
-      </Link>
+      
       <nav id="navigation">
         {Auth.loggedIn() ? (
           <ul>

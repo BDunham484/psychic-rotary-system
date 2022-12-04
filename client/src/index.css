@@ -10,6 +10,7 @@
 }
 
 :root {
+  --background: #000;
   --dark: #525050;
   --darker: #383737;
   --darkest: #202020;
@@ -101,21 +102,21 @@ header nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: var(--background);
 }
 
 .page-wrapper {
-  width: 90vw;
+  width: 100vw;
   min-height: 100vh;
   padding-top: 14vh;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  background-color: #000;
+  background-color: var(--background);
 }
 
-.page-wrapper-logged-in {
+/* .page-wrapper-logged-in {
   width: 80vh;
   padding-top: 14vh;
   display: flex;
@@ -123,13 +124,13 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: grey;
-}
+} */
 
-.logged-in-home {
+/* .logged-in-home {
   width: 20vh;
   padding-top: 14vh;
   color: grey;
-}
+} */
 
 /* HOME STYLES START */
 main {
@@ -152,6 +153,36 @@ main {
 
 .arrows:hover {
   cursor: pointer;
+}
+
+/* SHOWCARD COMPONET STYLES START */
+.show-card {
+  background-color: var(--darkest);
+  margin-bottom: 4vh;
+  border-radius: 10px;
+  border: 1px solid #386472;
+}
+
+.show-card div ul {
+  display: flex;
+  justify-content:start;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 3vh 0;
+  width: 90vw;
+}
+
+.show-card div ul li {
+  /* background-color: var(--dark); */
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+#artists-link {
+  padding-left: 30px;
+  /* font-size: 25px; */
+  font-weight: bold;
 }
 
 /* FOOTER STYLES START */
