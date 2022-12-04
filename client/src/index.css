@@ -46,12 +46,19 @@ header {
   width: 100vw;
   height: 12vh;
   opacity: .90;
-  background-color: #383737;
+  /* background-color: #383737; */
+  background-color: #525050;
+
 }
 
-header h1 a {
-  text-decoration: none;
-  color: antiquewhite;
+header h1 {
+  /* font-family: 'Zen Dots', cursive; */
+  /* font-family: 'Orbitron', sans-serif; */
+  /* font-family: 'Audiowide', cursive; */
+  /* font-family: 'Krona One', sans-serif; */
+  font-family: 'Kodchasan', sans-serif;
+  letter-spacing: 5px;
+  font-weight: 100;
 }
 
 header nav ul {
@@ -65,24 +72,28 @@ header nav ul {
 }
 
 header nav ul li a {
+  /* font-family: 'Bungee Hairline', cursive; */
   letter-spacing: 3px;
-  /* text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
 /* HEADER / NAV STYLES END */
 
 .wrapper {
   display: flex;
-  
+  justify-content: center;
+  align-items: center;
+  background-color: #383737;
 }
 
 .page-wrapper {
-  width: 100vh;
+  width: 90vw;
+  min-height: 100vh;
   padding-top: 14vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* background-color: #525050; */
 }
 
 .page-wrapper-logged-in {

@@ -36,12 +36,13 @@ const Home = () => {
     setDate(theLastDay);
   }
 
-  const loggedIn = Auth.loggedIn();
+  // const loggedIn = Auth.loggedIn();
 
 
   return (
     <div className="wrapper">
-      <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}>
+      {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
+      <div className={`page-wrapper`}>
         <div>
           <h3 className="todays-date">{date}</h3>
           <button onClick={() => dayBefore(date)}>The Day Before</button>
@@ -58,13 +59,13 @@ const Home = () => {
           )}
         </div>
       </div>
-      {loggedIn && userData ? (
+      {/* {loggedIn && userData ? (
         <div className="logged-in-home">
           USERNAME: {userData.me.username}
           CONCERT-COUNT: {userData.me.concertCount}
-          {/* CONCERTS: {userData.me.concerts[0].artists} */}
+          CONCERTS: {userData.me.concerts[0].artists}
         </div>
-      ) : null}
+      ) : null} */}
     </div>
 
   );

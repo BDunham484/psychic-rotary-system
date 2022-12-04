@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header>
       <Link to="/">
-        <h1>NZBX</h1>
+        <h1>NBX</h1>
       </Link>
       <nav id="navigation">
         {Auth.loggedIn() ? (
