@@ -30,12 +30,13 @@ A Single Page React App that scrapes local concert listings from free to use inf
 
 * Currently under development.  Mainly focused on functionality at the moment. UX/UI is on the back burner for now. 
 * The homepage loads all of the local concert listings for that day.
-* You can change dates by selecting 'the day before' or 'the next day' buttons.  Will be replaced by icons at some point.
+* You can change dates by selecting the appropriate arrow icon.
 * Once signed up/logged in the Nav bar customizes to Logged In user.
 * You can save concerts to your profile on the individual concert page.  Icons will be added to homepage as well. 
 * Currently focused on adding the ability to add friends.  
 * An 'add friend' button has been added to other users profiles.  
-* Next will be an input form to allow manual addition of friends by user.
+* A form which allows user input to search/add a friend has been added to the profile
+* Updating styles a bit to make it more user friendly
 
 ![nbx](./client/assets/images/home-screenshot.png)
 
