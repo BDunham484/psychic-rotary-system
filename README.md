@@ -22,7 +22,7 @@
 ![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white?style=plastic)
 ![Cheerio](https://img.shields.io/badge/1.0.0/rc.12-cheerio-F9DC3e?style=plastic)
 
-![nbx](./assets/images/loading-screenshot.png)
+![nbx](./client/assets/images/loading-screenshot.png)
 
 ## Description
 
@@ -36,6 +36,8 @@ A Single Page React App that scrapes local concert listings from free to use inf
 * Currently focused on adding the ability to add friends.  
 * An 'add friend' button has been added to other users profiles.  
 * Next will be an input form to allow manual addition of friends by user.
+
+![nbx](./client/assets/images/home-screenshot.png)
 
 
 
