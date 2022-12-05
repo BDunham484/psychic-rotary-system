@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import Auth from '../../utils/auth';
 // import { getTodaysDate } from "../../utils/helpers";
 import ShowCard from "../ShowCard";
-import { timex } from '../../utils/regex';
+// import { timex } from '../../utils/regex';
 
 const ConcertList = ({ concerts }) => {
     // console.log(getTodaysDate);
@@ -36,16 +36,16 @@ const ConcertList = ({ concerts }) => {
     //     setDate(theLastDay);
     // }
     // const loggedIn = Auth.loggedIn();
-    const checkForTime = dateTime => {
-        var arr = dateTime.split(',');
-        console.log(arr);
-        var doorTime = [];
-        arr.map((element) => {
-            doorTime.push(element.match(timex));
-            console.log(doorTime);
-            return doorTime;
-        })
-    }
+    // const checkForTime = dateTime => {
+    //     var arr = dateTime.split(',');
+    //     console.log(arr);
+    //     var doorTime = [];
+    //     arr.map((element) => {
+    //         doorTime.push(element.match(timex));
+    //         console.log(doorTime);
+    //         return doorTime;
+    //     })
+    // }
 
     return (
         <>
