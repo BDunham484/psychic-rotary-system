@@ -22,6 +22,8 @@
 ![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white?style=plastic)
 ![Cheerio](https://img.shields.io/badge/1.0.0/rc.12-cheerio-F9DC3e?style=plastic)
 
+![nbx](./assets/images/loading-screenshot.png)
+
 ## Description
 
 A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected.  
