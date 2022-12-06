@@ -165,25 +165,14 @@ main {
   border: 1px solid #386472;
 }
 
-.show-card div ul {
-  display: flex;
-  justify-content:start;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 3vh 0;
+#show-details {
+  padding: 3vh 0 3vh 30px;
   width: 90vw;
-}
-
-.show-card div ul li {
-  /* background-color: var(--dark); */
-  padding-left: 10px;
   font-size: 20px;
 }
 
 #artists-link {
-  padding-left: 30px;
-  /* font-size: 25px; */
+  font-size: 22px;
   font-weight: bold;
 }
 

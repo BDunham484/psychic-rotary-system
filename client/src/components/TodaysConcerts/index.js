@@ -57,25 +57,8 @@ const ConcertList = ({ concerts }) => {
                     concerts.map((concert, index) => (
                         <ShowCard>
                             <div key={index} className="events">
-                                <ul>
-                                    <li id="artists-link">
-                                        <Link to={`/show/${concert.artists}`}
-                                            state={{ concert }}
-                                        >
-                                            {concert.artists}
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        at {concert.venue} |
-                                    </li>
-                                    <li>
-                                        {/* onChange={() => checkForTime(concert.dateTime)} */}
-                                        {concert.dateTime}
-                                    </li>
-                                </ul>
-
-
-
+                                <p id="show-details"><span id="artists-link">{concert.artists}</span> <span> at {concert.venue} | {concert.dateTime}</span></p>
+                                
                                 {/* {loggedIn &&
                                 <div>
                                     <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
