@@ -49,10 +49,6 @@ const ConcertList = ({ concerts }) => {
 
     return (
         <>
-            {/* <h3 className="todays-date">{date}</h3>
-            <button onClick={() => dayBefore(date)}>The Day Before</button>
-            <button onClick={() => nextDay(date)}>The Next Day</button> */}
-            {/* <div> */}
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={index}>
@@ -69,11 +65,9 @@ const ConcertList = ({ concerts }) => {
                                     <button onClick={deleteConcertFromUser}>Delete from Profile</button>
                                 </div>} */}
                     </ShowCard>
-
                 ))}
-            {/* </div> */}
         </>
     )
-}
+};
 
 export default ConcertList;

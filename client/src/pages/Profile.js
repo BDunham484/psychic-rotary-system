@@ -43,8 +43,12 @@ const Profile = () => {
         variables: { username: text }
     })
     const userId = userdata?.data?.user?._id || '';
-    console.log("USERNAME: " + text)
-    console.log("USER ID: " + userId)
+
+    if (userId) {
+        console.log("USERNAME: " + text)
+        console.log("USER ID: " + userId)
+    }
+    
 
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendId, event) => {

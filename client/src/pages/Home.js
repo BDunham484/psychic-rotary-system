@@ -19,7 +19,11 @@ const Home = () => {
   });
 
   const { data: userData } = useQuery(QUERY_ME_BASIC);
-  console.log(userData);
+
+  if (userData) {
+    console.log(userData)
+  }
+  
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
