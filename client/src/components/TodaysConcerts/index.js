@@ -53,21 +53,24 @@ const ConcertList = ({ concerts }) => {
             <button onClick={() => dayBefore(date)}>The Day Before</button>
             <button onClick={() => nextDay(date)}>The Next Day</button> */}
             {/* <div> */}
-                {concerts &&
-                    concerts.map((concert, index) => (
-                        <ShowCard>
-                            <div key={index} className="events">
-                                <p id="show-details"><span id="artists-link">{concert.artists}</span> <span> at {concert.venue} | {concert.dateTime}</span></p>
-                                
-                                {/* {loggedIn &&
+            {concerts &&
+                concerts.map((concert, index) => (
+                    <ShowCard key={index}>
+                        <p id="showcard-data">
+                            <Link to={`/show/${concert.artists}`} state={{concert}}>
+                                <span id="artists-link">{concert.artists} </span>
+                            </Link>
+                            at {concert.venue} | {concert.dateTime}
+                        </p>
+
+                        {/* {loggedIn &&
                                 <div>
                                     <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
                                     <button onClick={deleteConcertFromUser}>Delete from Profile</button>
                                 </div>} */}
-                            </div>
-                        </ShowCard>
+                    </ShowCard>
 
-                    ))}
+                ))}
             {/* </div> */}
         </>
     )
