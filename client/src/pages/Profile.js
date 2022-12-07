@@ -10,7 +10,7 @@ const Profile = () => {
     const [text, setText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
     //destructure mutation function 
-    const [addFriend] = useMutation(ADD_FRIEND);
+    const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const { username: userParam } = useParams();
     //query that checks param value then conditionally runs query based on result
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -60,8 +60,8 @@ const Profile = () => {
             await addFriend({
                 variables: { id: friendId }
             });
-        } catch (error) {
-            console.log(error)
+        } catch (e) {
+            console.error(e)
         }
     }
     //delete saved concert
@@ -118,6 +118,7 @@ const Profile = () => {
                     </div>
                 </form>
             }
+            {err && <div>An Error has occurred.</div>}
 
 
             <div>Friend Count : {user.friendCount}</div>

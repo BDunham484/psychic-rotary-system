@@ -14,7 +14,8 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('concerts');
+                    .populate('concerts')
+                    .populate('friends');
 
                 return userData;
             }
@@ -24,13 +25,15 @@ const resolvers = {
         users: async () => {
             return User.find()
                 .select('-__v -password')
-                .populate('concerts');
+                .populate('concerts')
+                .populate('friends');
         },
         //get user by username
         user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select('-__v -password')
-                .populate('concerts');
+                .populate('concerts')
+                .populate('friends');
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
@@ -151,6 +154,17 @@ const resolvers = {
             const concert = await Concert.create({ event });
 
             return concert;
+        },
+        addFriend: async (parent, { friendId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { friends: friendId }},
+                    { new: true }
+                ).populate('friends');
+                return updatedUser;
+            }
+            throw new AuthenticationError('Youj need to be logged in!');
         },
         addConcertToUser: async (parent, args, context) => {
             console.log(args);
