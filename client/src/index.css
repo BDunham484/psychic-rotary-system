@@ -148,10 +148,16 @@ main {
   margin-bottom: 2vh;
 }
 
-.todays-date {
+.date-wrapper {
   width: 400px;
   margin-bottom: 4vh;
   font-family: var(--h1-font);
+}
+
+#date {
+  font-family: var(--h1-font);
+  letter-spacing: 3px;
+  font-weight: 700;
 }
 
 .arrows {
