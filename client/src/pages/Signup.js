@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from '../utils/auth';
+import FormCard from "../components/shared/FormCard";
 
 const Signup = () => {
     const [formState, setFormState] = useState({ username: '', email: '', password: '' });
@@ -25,7 +26,7 @@ const Signup = () => {
             const { data } = await addUser({
                 variables: { ...formState }
             });
-            
+
             Auth.login(data.addUser.token);
         } catch (e) {
             console.error(e);
@@ -33,35 +34,48 @@ const Signup = () => {
     };
 
     return (
-        <div className='page-wrapper'>
-            <form onSubmit={handleFormSubmit}>
-                <input
-                placeholder='Your username'
-                name='username'
-                type='username'
-                id='username'
-                value={formState.username}
-                onChange={handleChange}
-                />
-                <input
-                placeholder='Your email'
-                name='email'
-                type='email'
-                id='email'
-                value={formState.email}
-                onChange={handleChange}
-                />
-                <input 
-                placeholder='******'
-                name='password'
-                type='password'
-                id='password'
-                value={formState.password}
-                onChange={handleChange}
-                />
-                <button type='submit'>Submit</button>
-            </form>
-            {error && <div>Sign up failed</div>}
+        <div className='login-page-wrapper'>
+            <FormCard>
+                <form onSubmit={handleFormSubmit}>
+                    <p>Sign Up</p>
+                    <div>
+                        <label htmlFor="username">Username</label>
+                        <input
+                            placeholder='Your username'
+                            name='username'
+                            type='username'
+                            id='username'
+                            value={formState.username}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <input
+                            placeholder='Your email'
+                            name='email'
+                            type='email'
+                            id='email'
+                            value={formState.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            placeholder='********'
+                            name='password'
+                            type='password'
+                            id='password'
+                            value={formState.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button type='submit'>Submit</button>
+                </form>
+                {error && <div>Sign up failed</div>}
+            </FormCard>
+
         </div>
     )
 }

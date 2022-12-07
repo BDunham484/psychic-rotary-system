@@ -19,7 +19,11 @@ const Home = () => {
   });
 
   const { data: userData } = useQuery(QUERY_ME_BASIC);
-  console.log(userData);
+
+  if (userData) {
+    console.log(userData)
+  }
+  
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
@@ -43,7 +47,7 @@ const Home = () => {
   return (
     <div className="wrapper">
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
-      <div className={`page-wrapper`}>
+      <div className={`home-page-wrapper`}>
         <div>
           <span className="display-flex todays-date">
             <LeftArrow className="arrows" onClick={() => dayBefore(date)} />

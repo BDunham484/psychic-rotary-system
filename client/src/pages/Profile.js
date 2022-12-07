@@ -43,8 +43,12 @@ const Profile = () => {
         variables: { username: text }
     })
     const userId = userdata?.data?.user?._id || '';
-    console.log("USERNAME: " + text)
-    console.log("USER ID: " + userId)
+
+    if (userId) {
+        console.log("USERNAME: " + text)
+        console.log("USER ID: " + userId)
+    }
+    
 
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendId, event) => {
@@ -93,7 +97,7 @@ const Profile = () => {
     }
 
     return (
-        <div className='page-wrapper'>
+        <div className='home-page-wrapper'>
             <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
             <h3>{user.username}</h3>
             {userParam &&

@@ -6,6 +6,6 @@ const ShowCard = ({ children }) => {
             {children}
         </div>
     )
-}
+};
 
 export default ShowCard

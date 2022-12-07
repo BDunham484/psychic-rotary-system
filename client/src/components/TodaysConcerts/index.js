@@ -49,45 +49,25 @@ const ConcertList = ({ concerts }) => {
 
     return (
         <>
-            {/* <h3 className="todays-date">{date}</h3>
-            <button onClick={() => dayBefore(date)}>The Day Before</button>
-            <button onClick={() => nextDay(date)}>The Next Day</button> */}
-            {/* <div> */}
-                {concerts &&
-                    concerts.map((concert, index) => (
-                        <ShowCard>
-                            <div key={index} className="events">
-                                <ul>
-                                    <li id="artists-link">
-                                        <Link to={`/show/${concert.artists}`}
-                                            state={{ concert }}
-                                        >
-                                            {concert.artists}
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        at {concert.venue} |
-                                    </li>
-                                    <li>
-                                        {/* onChange={() => checkForTime(concert.dateTime)} */}
-                                        {concert.dateTime}
-                                    </li>
-                                </ul>
+            {concerts &&
+                concerts.map((concert, index) => (
+                    <ShowCard key={index}>
+                        <p id="showcard-data">
+                            <Link to={`/show/${concert.artists}`} state={{concert}}>
+                                <span id="artists-link">{concert.artists} </span>
+                            </Link>
+                            at {concert.venue} | {concert.dateTime}
+                        </p>
 
-
-
-                                {/* {loggedIn &&
+                        {/* {loggedIn &&
                                 <div>
                                     <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
                                     <button onClick={deleteConcertFromUser}>Delete from Profile</button>
                                 </div>} */}
-                            </div>
-                        </ShowCard>
-
-                    ))}
-            {/* </div> */}
+                    </ShowCard>
+                ))}
         </>
     )
-}
+};
 
 export default ConcertList;

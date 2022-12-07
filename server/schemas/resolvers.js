@@ -14,8 +14,7 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('concerts')
-                    .populate('friends')
+                    .populate('concerts');
 
                 return userData;
             }
@@ -25,15 +24,13 @@ const resolvers = {
         users: async () => {
             return User.find()
                 .select('-__v -password')
-                .populate('concerts')
-                .populate('friends')
+                .populate('concerts');
         },
         //get user by username
         user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select('-__v -password')
-                .populate('concerts')
-                .populate('friends')
+                .populate('concerts');
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
@@ -90,35 +87,35 @@ const resolvers = {
                         })
                     })
                 }
-
+                
 
                 const newEventsArr = await Promise.all(events.map((event) => {
-                    const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+                        
+                        let moreEventDetails = async () => {
+                            var { data } = await axios.get(eventUrl)
+                            var $ = cheerio.load(data);
 
-                    let moreEventDetails = async () => {
-                        var { data } = await axios.get(eventUrl)
-                        var $ = cheerio.load(data);
-
-                        $('.venue-details:eq(0)', data).each(function () {
-                            var address = $(this).text();
-                            event["address"] = address
+                            $('.venue-details:eq(0)', data).each(function () {
+                                var address = $(this).text();
+                                event["address"] = address
+                                return event;
+                            })
+                            $('.venue-details:eq(1)', data).each(function () {
+                                var website = $(this).find('a').attr('href');
+                                var email = $(this).find('b:eq(1)').text()
+                                event["website"] = website
+                                event["email"] = email
+                                return event;
+                            })
+                            $('.ticket-link', data).each(function () {
+                                var ticketLink = $(this).attr('href')
+                                event["ticketLink"] = ticketLink
+                                return event;
+                            })
                             return event;
-                        })
-                        $('.venue-details:eq(1)', data).each(function () {
-                            var website = $(this).find('a').attr('href');
-                            var email = $(this).find('b:eq(1)').text()
-                            event["website"] = website
-                            event["email"] = email
-                            return event;
-                        })
-                        $('.ticket-link', data).each(function () {
-                            var ticketLink = $(this).attr('href')
-                            event["ticketLink"] = ticketLink
-                            return event;
-                        })
-                        return event;
-                    }
-                    return moreEventDetails();
+                        }
+                        return moreEventDetails();
                 }, events))
                 return events;
             } catch (err) {
@@ -129,7 +126,7 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, args) => {
             const user = await User.create(args);
-            const token = signToken(User);
+            const token = signToken(user);
 
             return { token, user };
         },
@@ -155,60 +152,35 @@ const resolvers = {
 
             return concert;
         },
-        addFriend: async (parent, { friendId }, context) => {
-            console.log("FRIEND ID!!")
-            console.log(friendId)
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { friends: friendId } },
-                    { new: true }
-                ).populate('friends');
-                return updatedUser;
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        },
-        addFriendByUsername: async (parent, { username }, context) => {
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { username: username },
-                    { $addToSet: { friends: username } },
-                    { new: true }
-                ).populate('friends');
-                return updatedUser;
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        },
         addConcertToUser: async (parent, args, context) => {
             console.log(args);
             console.log(context.user)
             if (context.user) {
                 const concert = await Concert.create({ ...args });
-
+                
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { concerts: concert._id } },
                     { new: true }
-                ).populate('concerts');
+                );
                 console.log(concert._id);
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
         deleteConcertFromUser: async (parent, { concertId }, context) => {
-            console.log("DELETE CONCERT FROM USER HAS BEEN CALLED!!!!!!!!!!!")
             if (context.user) {
-
+                
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { concerts: concertId } },
                     { new: true }
-                ).populate('concerts')
+                );
 
                 await Concert.findByIdAndDelete(
-                    { _id: concertId }
+                    { _id: concertId }   
                 )
-
+        
                 return user;
             }
         }
