@@ -112,7 +112,7 @@ header nav ul li a {
   min-height: 100vh;
   padding-top: 14vh;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
