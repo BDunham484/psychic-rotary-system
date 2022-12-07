@@ -97,7 +97,7 @@ const Profile = () => {
     }
 
     return (
-        <div className='page-wrapper'>
+        <div className='home-page-wrapper'>
             <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
             <h3>{user.username}</h3>
             {userParam &&

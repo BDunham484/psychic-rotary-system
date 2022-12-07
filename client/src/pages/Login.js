@@ -62,7 +62,6 @@ const Login = () => {
                             onChange={handleChange}
                         />
                     </div>
-
                     <button type='submit'>Submit</button>
                     {error && <div>Login Failed</div>}
                 </form>
