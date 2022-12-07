@@ -49,9 +49,9 @@ const Home = () => {
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className={`home-page-wrapper`}>
         <div>
-          <span className="display-flex todays-date">
+          <span className="display-flex date-wrapper">
             <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
-            <h3>{date}</h3>
+            <h3 id="date">{date}</h3>
             <RightArrow className="arrows" onClick={() => nextDay(date)} />
           </span>
         </div>

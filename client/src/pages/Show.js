@@ -45,7 +45,7 @@ const Show = () => {
 
 
     return (
-        <div className='page-wrapper'>
+        <div className='home-page-wrapper'>
             <h2>
                 ARTIST: {concert.artists}
             </h2>

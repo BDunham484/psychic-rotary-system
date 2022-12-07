@@ -15,6 +15,9 @@
   --darker: #383737;
   --darkest: #202020;
   --main-text: #EEE3D0;
+  --button: #386472;
+  --primary-font: 'Kodchasan', sans-serif;
+  --secondary-font: 'Bungee Hairline', cursive;
 }
 
 html,
@@ -145,9 +148,16 @@ main {
   margin-bottom: 2vh;
 }
 
-.todays-date {
+.date-wrapper {
   width: 400px;
   margin-bottom: 4vh;
+  font-family: var(--primary-font);
+}
+
+#date {
+  font-family: var(--primary-font);
+  letter-spacing: 3px;
+  font-weight: 700;
 }
 
 .arrows {
@@ -203,22 +213,46 @@ main {
 
 .form-card p {
   margin-top: 4vh;
+  font-family: var(--primary-font);
+  font-size: 25px;
+  letter-spacing: 5px;
 }
 
 .form-card div {
   width: 75%;
   display: flex;
   flex-direction: column;
-  margin: 4vh 6vh 0 6vh;
+  margin: 2vh 8vh 0 8vh;
+}
+
+.form-card label {
+  font-family: var(--secondary-font);
+  letter-spacing: 3px;
+  font-weight: bold;
 }
 
 .form-card input {
   width: 100%;
+  border-radius: 8px;
+  padding: 5px 0 5px 5px;
 }
 
 .form-card button {
   margin: 4vh 0;
+  padding: 3px 0;
   width: 75%;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size:20px;
+}
+
+.form-card button:hover {
+  cursor: pointer;
 }
 
 
