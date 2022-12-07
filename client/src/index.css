@@ -15,6 +15,9 @@
   --darker: #383737;
   --darkest: #202020;
   --main-text: #EEE3D0;
+  --button: #386472;
+  --h1-font: 'Kodchasan', sans-serif;
+  --h2-fonts: 'Bungee Hairline', cursive;
 }
 
 html,
@@ -214,11 +217,21 @@ main {
 
 .form-card input {
   width: 100%;
+  border-radius: 8px;
+  padding: 5px 0 5px 5px;
 }
 
 .form-card button {
   margin: 4vh 0;
+  padding: 5px 0;
   width: 75%;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--h2-font);
+  letter-spacing: 3px;
+  font-size: 16px;
 }
 
 
