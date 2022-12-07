@@ -16,8 +16,8 @@
   --darkest: #202020;
   --main-text: #EEE3D0;
   --button: #386472;
-  --h1-font: 'Kodchasan', sans-serif;
-  --h2-font: 'Bungee Hairline', cursive;
+  --primary-font: 'Kodchasan', sans-serif;
+  --secondary-font: 'Bungee Hairline', cursive;
 }
 
 html,
@@ -151,11 +151,11 @@ main {
 .date-wrapper {
   width: 400px;
   margin-bottom: 4vh;
-  font-family: var(--h1-font);
+  font-family: var(--primary-font);
 }
 
 #date {
-  font-family: var(--h1-font);
+  font-family: var(--primary-font);
   letter-spacing: 3px;
   font-weight: 700;
 }
@@ -213,7 +213,7 @@ main {
 
 .form-card p {
   margin-top: 4vh;
-  font-family: var(--h1-font);
+  font-family: var(--primary-font);
   font-size: 25px;
   letter-spacing: 5px;
 }
@@ -226,7 +226,7 @@ main {
 }
 
 .form-card label {
-  font-family: var(--h2-font);
+  font-family: var(--secondary-font);
   letter-spacing: 3px;
   font-weight: bold;
 }
@@ -245,7 +245,7 @@ main {
   border: none;
   border-radius: 10px;
   color: var(--main-text);
-  font-family: var(--h2-font);
+  font-family: var(--secondary-font);
   font-weight: bold;
   letter-spacing: 3px;
   font-size:20px;
