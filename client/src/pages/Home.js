@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div className="wrapper">
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
-      <div className={`page-wrapper`}>
+      <div className={`home-page-wrapper`}>
         <div>
           <span className="display-flex todays-date">
             <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
