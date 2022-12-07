@@ -17,7 +17,7 @@
   --main-text: #EEE3D0;
   --button: #386472;
   --h1-font: 'Kodchasan', sans-serif;
-  --h2-fonts: 'Bungee Hairline', cursive;
+  --h2-font: 'Bungee Hairline', cursive;
 }
 
 html,
@@ -151,6 +151,7 @@ main {
 .todays-date {
   width: 400px;
   margin-bottom: 4vh;
+  font-family: var(--h1-font);
 }
 
 .arrows {
@@ -206,13 +207,22 @@ main {
 
 .form-card p {
   margin-top: 4vh;
+  font-family: var(--h1-font);
+  font-size: 25px;
+  letter-spacing: 5px;
 }
 
 .form-card div {
   width: 75%;
   display: flex;
   flex-direction: column;
-  margin: 4vh 6vh 0 6vh;
+  margin: 2vh 8vh 0 8vh;
+}
+
+.form-card label {
+  font-family: var(--h2-font);
+  letter-spacing: 3px;
+  font-weight: bold;
 }
 
 .form-card input {
@@ -223,15 +233,20 @@ main {
 
 .form-card button {
   margin: 4vh 0;
-  padding: 5px 0;
+  padding: 3px 0;
   width: 75%;
   background-color: var(--button);
   border: none;
   border-radius: 10px;
   color: var(--main-text);
   font-family: var(--h2-font);
+  font-weight: bold;
   letter-spacing: 3px;
-  font-size: 16px;
+  font-size:20px;
+}
+
+.form-card button:hover {
+  cursor: pointer;
 }
 
 
