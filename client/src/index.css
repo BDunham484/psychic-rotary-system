@@ -281,16 +281,28 @@ main {
   min-height: 80vh;
 }
 
+.profile-concerts-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
 #profile-showcard-data {
   padding: 3vh 0 3vh 30px;
   width: 90vw;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 #profile-showcard-data button {
   margin-top: 2vh;
   padding: 3px 0;
-  width: 12vw;
+  width: 150px;
   background-color: var(--button);
   border: none;
   border-radius: 10px;

@@ -101,8 +101,11 @@ const Profile = () => {
         <div className='profile-page-wrapper'>
 
             <div className="profile-concerts-card">
-                <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
-                <p>Concert Count: {user.concertCount}</p>
+                <div className="profile-concerts-card-header">
+                    <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
+                    <p>Concerts: {user.concertCount}</p>
+                </div>
+
                 {error && <div>An error occurred</div>}
                 {user.concerts &&
                     user.concerts.map((concert, index) => (
@@ -112,7 +115,7 @@ const Profile = () => {
                                 <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
-                                at {concert.venue}
+                                {concert.venue}
                                 <div>
                                     <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
                                 </div>
