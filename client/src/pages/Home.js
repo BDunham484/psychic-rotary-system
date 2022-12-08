@@ -55,8 +55,6 @@ const Home = () => {
         </span>
       </div>
       <div className={`home-page-wrapper`}>
-
-
         <div>
           {loading ? (
             <Spinner />

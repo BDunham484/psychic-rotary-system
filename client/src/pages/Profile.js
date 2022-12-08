@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { ADD_FRIEND, DELETE_CONCERT_FROM_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import ShowCard from "../components/ShowCard";
 
 const Profile = () => {
     const [text, setText] = useState('');
@@ -48,7 +49,7 @@ const Profile = () => {
         console.log("USERNAME: " + text)
         console.log("USER ID: " + userId)
     }
-    
+
 
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendId, event) => {
@@ -97,59 +98,76 @@ const Profile = () => {
     }
 
     return (
-        <div className='home-page-wrapper'>
-            <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
-            <h3>{user.username}</h3>
-            {userParam &&
-                <button onClick={handleClick}>
-                    Add Friend
-                </button>
-            }
-            {!userParam &&
-                <form onSubmit={() => {handleSubmit(userId)}}>
-                    <div>
-                        <input
-                            onChange={handleTextChange}
-                            type="text"
-                            placeholder="Add Friend"
-                            value={text}
-                        />
-                        <button type="submit" disabled={btnDisabled}>Add Friend</button>
-                    </div>
-                </form>
-            }
-            {err && <div>An Error has occurred.</div>}
+        <div className='profile-page-wrapper'>
 
+            <div className="profile-concerts-card">
+                <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</h2>
+                <p>Concert Count: {user.concertCount}</p>
+                {error && <div>An error occurred</div>}
+                {user.concerts &&
+                    user.concerts.map((concert, index) => (
+                        <ShowCard key={index}>
+                            <p id="profile-showcard-data">
+                                <Link to={`/show/${concert.artists}`} state={{ concert }}>
+                                    <span id="artists-link">{concert.artists} </span>
+                                </Link>
+                                at {concert.venue} | {concert.dateTime}
+                            </p>
+                        </ShowCard>
+                    ))}
 
-            <div>Friend Count : {user.friendCount}</div>
-            <div>Friends:</div>
-            <div>
-                {user.friends.map((friend, index) => (
-                    <div key={index}>
-                        <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                    </div>
-                ))}
-            </div>
-            <p>Concert Count: {user.concertCount}</p>
-            {error && <div>An error occurred</div>}
-            <div>
-                {user.concerts.map((concert, index) => (
-                    <div key={index} className="events">
-                        <div>Date: {concert.dateTime}</div>
-                        <div>
-                            Artist: {concert.artists}
+                {/* <div>
+                    {user.concerts.map((concert, index) => (
+                        <div key={index} className="events">
+                            <div>Date: {concert.dateTime}</div>
+                            <div>
+                                Artist: {concert.artists}
+                            </div>
+                            <div>Venue: {concert.venue}</div>
+                            <div>Address: {concert.address}</div>
+                            <div>Website: {concert.website}</div>
+                            <div>Email: {concert.email}</div>
+                            <div>Ticket Link: {concert.ticketLink}</div>
+                            <div>Artists Link: {concert.artistsLink}</div>
+                            <div>Concert ID: {concert._id}</div>
+                            <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
                         </div>
-                        <div>Venue: {concert.venue}</div>
-                        <div>Address: {concert.address}</div>
-                        <div>Website: {concert.website}</div>
-                        <div>Email: {concert.email}</div>
-                        <div>Ticket Link: {concert.ticketLink}</div>
-                        <div>Artists Link: {concert.artistsLink}</div>
-                        <div>Concert ID: {concert._id}</div>
-                        <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
-                    </div>
-                ))}
+                    ))}
+                </div> */}
             </div>
+            <div className="profile-friends-card">
+                {!userParam &&
+                    <form onSubmit={() => { handleSubmit(userId) }}>
+                        <div>
+                            <input
+                                onChange={handleTextChange}
+                                type="text"
+                                placeholder="Add Friend"
+                                value={text}
+                            />
+                            <button type="submit" disabled={btnDisabled}>Add Friend</button>
+                        </div>
+                    </form>
+                }
+                {err && <div>An Error has occurred.</div>}
+                <div>Friend Count : {user.friendCount}</div>
+                <div>Friends:</div>
+                <div>
+                    {user.friends.map((friend, index) => (
+                        <div key={index}>
+                            <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
+                        </div>
+                    ))}
+                </div>
+
+                {userParam &&
+                    <button onClick={handleClick}>
+                        Add Friend
+                    </button>
+                }
+
+            </div>
+
 
         </div>
     )
