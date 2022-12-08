@@ -37,7 +37,7 @@ const Signup = () => {
         <div className='login-page-wrapper'>
             <FormCard>
                 <form onSubmit={handleFormSubmit}>
-                    <p>Sign Up</p>
+                    <p>SIGN UP</p>
                     <div>
                         <label htmlFor="username">Username</label>
                         <input

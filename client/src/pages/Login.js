@@ -39,7 +39,7 @@ const Login = () => {
         <div className='login-page-wrapper'>
             <FormCard>
                 <form onSubmit={handleFormSubmit}>
-                    <p>Login</p>
+                    <p>LOGIN</p>
                     <div>
                         <label htmlFor="email">Email</label>
                         <input
