@@ -1,4 +1,4 @@
-# <h1 align="center">psychic-rotary-system<br>(rando working title)</h1>
+# <h1 align="center">NOISEBOX</h1>
 
 <h2 align="center">🎸🎹Local Concert Listing React App🎹🎸</h2>
 
