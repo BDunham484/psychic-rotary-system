@@ -107,12 +107,17 @@ const Profile = () => {
                 {user.concerts &&
                     user.concerts.map((concert, index) => (
                         <ShowCard key={index}>
-                            <p id="profile-showcard-data">
+                            <div id="profile-showcard-data">
+                                <div>{concert.dateTime}</div>
                                 <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
-                                at {concert.venue} | {concert.dateTime}
-                            </p>
+                                at {concert.venue}
+                                <div>
+                                    <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
+                                </div>
+
+                            </div>
                         </ShowCard>
                     ))}
 

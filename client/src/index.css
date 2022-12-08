@@ -275,7 +275,8 @@ main {
 }
 
 .profile-concerts-card {
-  background-color: var(--darker);
+  margin-top: 12vh;
+  /* background-color: var(--darker); */
   width: 60vw;
   min-height: 80vh;
 }
@@ -283,7 +284,21 @@ main {
 #profile-showcard-data {
   padding: 3vh 0 3vh 30px;
   width: 90vw;
-  font-size: 20px;
+  font-size: 16px;
+}
+
+#profile-showcard-data button {
+  margin-top: 2vh;
+  padding: 3px 0;
+  width: 12vw;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size:20px;
 }
 
 .profile-friends-card {
