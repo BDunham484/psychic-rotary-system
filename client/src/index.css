@@ -107,15 +107,24 @@ header nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: var(--background);
+}
+
+.utility-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  margin-top: 12vh;
 }
 
 .home-page-wrapper {
   width: 100vw;
-  min-height: 100vh;
-  padding-top: 14vh;
+  min-height: 80vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
@@ -150,7 +159,7 @@ main {
 
 .date-wrapper {
   width: 400px;
-  margin-bottom: 4vh;
+  /* margin: 2vh 0; */
   font-family: var(--primary-font);
 }
 
@@ -253,6 +262,107 @@ main {
 
 .form-card button:hover {
   cursor: pointer;
+}
+
+/* PROFILE STYLES START */
+.profile-page-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: var(--background);
+}
+
+.profile-concerts-card {
+  margin-top: 14vh;
+  /* background-color: var(--darker); */
+  width: 60vw;
+  min-height: 80vh;
+}
+
+.profile-concerts-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+#profile-showcard-data {
+  padding: 3vh 0 3vh 30px;
+  width: 90%;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#profile-showcard-data button {
+  margin-top: 2vh;
+  width: 150px;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size:16px;
+}
+
+#profile-showcard-data button:hover {
+  cursor: pointer;
+}
+
+.profile-friends-card {
+  /* background-color: var(--darkest); */
+  margin-top: 14vh;
+  width: 30vw;
+  min-height: 80vh;
+}
+
+.profile-friends-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-friends-card form {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-friends-card form div {
+  /* background-color: var(--darker); */
+  width: 65%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-friends-card form div input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 5px 0 5px 5px;
+  margin-top: 4vh;
+}
+
+.profile-friends-card form div button {
+  width: 100%;
+  margin: 4vh 0;
+  padding: 3px 0;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size:20px;
 }
 
 

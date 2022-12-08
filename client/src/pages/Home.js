@@ -23,7 +23,7 @@ const Home = () => {
   if (userData) {
     console.log(userData)
   }
-  
+
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
@@ -47,15 +47,14 @@ const Home = () => {
   return (
     <div className="wrapper">
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
+      <div className="utility-bar">
+        <span className="display-flex date-wrapper">
+          <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
+          <h3 id="date">{date}</h3>
+          <RightArrow className="arrows" onClick={() => nextDay(date)} />
+        </span>
+      </div>
       <div className={`home-page-wrapper`}>
-        <div>
-          <span className="display-flex date-wrapper">
-            <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
-            <h3 id="date">{date}</h3>
-            <RightArrow className="arrows" onClick={() => nextDay(date)} />
-          </span>
-        </div>
-
         <div>
           {loading ? (
             <Spinner />
