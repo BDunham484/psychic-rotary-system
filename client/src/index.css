@@ -107,13 +107,23 @@ header nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: var(--background);
+}
+
+.utility-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin-top: 12vh;
+  /* background-color: var(--dark); */
 }
 
 .home-page-wrapper {
   width: 100vw;
   min-height: 100vh;
-  padding-top: 14vh;
+  padding-top: 4vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -150,7 +160,7 @@ main {
 
 .date-wrapper {
   width: 400px;
-  margin-bottom: 4vh;
+  margin: 2vh 0;
   font-family: var(--primary-font);
 }
 
