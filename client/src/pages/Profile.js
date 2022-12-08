@@ -144,8 +144,12 @@ const Profile = () => {
                 </div> */}
             </div>
             <div className="profile-friends-card">
+                <div className="profile-friends-card-header">
+                    <h2>Friends</h2>
+                    <div>Total : {user.friendCount}</div>
+                </div>
                 {!userParam &&
-                    <form onSubmit={() => { handleSubmit(userId) }}>
+                    <form className="form-card" onSubmit={() => { handleSubmit(userId) }}>
                         <div>
                             <input
                                 onChange={handleTextChange}
@@ -153,12 +157,14 @@ const Profile = () => {
                                 placeholder="Add Friend"
                                 value={text}
                             />
+                        </div>
+                        <div>
                             <button type="submit" disabled={btnDisabled}>Add Friend</button>
                         </div>
                     </form>
                 }
                 {err && <div>An Error has occurred.</div>}
-                <div>Friend Count : {user.friendCount}</div>
+
                 <div>Friends:</div>
                 <div>
                     {user.friends.map((friend, index) => (
