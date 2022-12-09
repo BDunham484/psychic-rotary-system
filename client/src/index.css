@@ -325,7 +325,7 @@ main {
 
 .profile-friends-card-header {
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start;
   align-items: center;
 }
 
@@ -363,6 +363,24 @@ main {
   font-weight: bold;
   letter-spacing: 3px;
   font-size:20px;
+}
+
+.profile-friends-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2vh;
+}
+
+.friend-list-container {
+  background-color: var(--darker);
+  margin: 2vh 0;
+  border-radius: 10px;
+}
+
+.names {
+  margin: 2vh;
+  background-color: var(--darkest);
 }
 
 

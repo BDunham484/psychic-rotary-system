@@ -145,9 +145,13 @@ const Profile = () => {
             </div>
             <div className="profile-friends-card">
                 <div className="profile-friends-card-header">
-                    <h2>Friends</h2>
-                    <div>Total : {user.friendCount}</div>
+                    <h2>Add Friends</h2>
                 </div>
+                {userParam &&
+                    <button onClick={handleClick}>
+                        Add Friend
+                    </button>
+                }
                 {!userParam &&
                     <form className="form-card" onSubmit={() => { handleSubmit(userId) }}>
                         <div>
@@ -165,20 +169,21 @@ const Profile = () => {
                 }
                 {err && <div>An Error has occurred.</div>}
 
-                <div>Friends:</div>
-                <div>
-                    {user.friends.map((friend, index) => (
-                        <div key={index}>
-                            <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                        </div>
-                    ))}
+                <div className="profile-friends-list-header">
+                    <h2>Friends</h2>
+                    <div>Total : {user.friendCount}</div>
+                </div>
+                <div className="friend-list-container">
+                    <div>
+                        {user.friends.map((friend, index) => (
+                            <div key={index} className="names">
+                                <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {userParam &&
-                    <button onClick={handleClick}>
-                        Add Friend
-                    </button>
-                }
+
 
             </div>
 
