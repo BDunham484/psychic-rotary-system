@@ -369,18 +369,22 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2vh;
+  margin: 2vh 0;
 }
 
 .friend-list-container {
   background-color: var(--darker);
-  margin: 2vh 0;
+  /* margin: 2vh 0; */
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .names {
-  margin: 2vh;
-  background-color: var(--darkest);
+  margin: 1vh 2vh 1vh 2vh;
+  padding: 1vh 0 1vh 2vh;
+  /* background-color: var(--darkest); */
+  border-bottom: 1px solid var(--darkest);
 }
 
 
