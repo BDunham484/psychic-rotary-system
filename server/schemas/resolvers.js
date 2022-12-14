@@ -140,7 +140,7 @@ const resolvers = {
                 return theNextDay;
             }
             let arrayDate = date;
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < 2; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
@@ -220,25 +220,12 @@ const resolvers = {
                         }
                         return moreEventDetails();
                     }, events))
-                    // concertData.push(events);
-                    // console.log(concertData);
-                    // console.log('EVENTS!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                    // console.log(events);
-                    // return events;
-                    // return concertData;
                 } catch (err) {
                     console.error(err);
                 }
-                // console.log(concertData);
-                // return concertData;
-                // console.log('EVENTSEVENTSEVENTSEVENTS');
-                // console.log(events);
+                //end first try/catch
                 concertData.push(events);
-                // console.log(concertData);
-                // return concertData;
             }))
-            // ^^^right here
-
             console.log(concertData);
             return concertData;
         }
