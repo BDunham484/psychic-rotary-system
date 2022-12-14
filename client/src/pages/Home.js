@@ -10,8 +10,30 @@ import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
+  //delcare empty array for dates
+  const dateArr = [];
+
+  dateArr.push(today);
+  const fillDateArr = (date) => {
+      const next = new Date(date);
+      next.setDate(next.getDate() + 1);
+      const theNextDay = next.toDateString();
+      console.log('THENEXTDAY')
+      console.log(theNextDay);
+      return theNextDay;
+  }
+
   //set initial state useing today's date
   const [date, setDate] = useState(today)
+
+  let arrayDate = date;
+  for (let i = 0; i < 3; i++) {
+    let nextDate = fillDateArr(arrayDate);
+    dateArr.push(nextDate);
+    console.log(dateArr);
+    arrayDate = nextDate;
+  }
+  
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
