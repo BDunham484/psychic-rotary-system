@@ -90,35 +90,35 @@ const resolvers = {
                         })
                     })
                 }
-                
+
 
                 const newEventsArr = await Promise.all(events.map((event) => {
-                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-                        
-                        let moreEventDetails = async () => {
-                            var { data } = await axios.get(eventUrl)
-                            var $ = cheerio.load(data);
+                    const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
 
-                            $('.venue-details:eq(0)', data).each(function () {
-                                var address = $(this).text();
-                                event["address"] = address
-                                return event;
-                            })
-                            $('.venue-details:eq(1)', data).each(function () {
-                                var website = $(this).find('a').attr('href');
-                                var email = $(this).find('b:eq(1)').text()
-                                event["website"] = website
-                                event["email"] = email
-                                return event;
-                            })
-                            $('.ticket-link', data).each(function () {
-                                var ticketLink = $(this).attr('href')
-                                event["ticketLink"] = ticketLink
-                                return event;
-                            })
+                    let moreEventDetails = async () => {
+                        var { data } = await axios.get(eventUrl)
+                        var $ = cheerio.load(data);
+
+                        $('.venue-details:eq(0)', data).each(function () {
+                            var address = $(this).text();
+                            event["address"] = address
                             return event;
-                        }
-                        return moreEventDetails();
+                        })
+                        $('.venue-details:eq(1)', data).each(function () {
+                            var website = $(this).find('a').attr('href');
+                            var email = $(this).find('b:eq(1)').text()
+                            event["website"] = website
+                            event["email"] = email
+                            return event;
+                        })
+                        $('.ticket-link', data).each(function () {
+                            var ticketLink = $(this).attr('href')
+                            event["ticketLink"] = ticketLink
+                            return event;
+                        })
+                        return event;
+                    }
+                    return moreEventDetails();
                 }, events))
                 return events;
             } catch (err) {
@@ -128,54 +128,71 @@ const resolvers = {
         //scrape all concerts for the day
         concertsForDatabase: async (parent, { date }) => {
             console.log(date);
-            // const date = new Date().toDateString();
-            const day = date.slice(8, 10);
-            const month = (new Date().getMonth()) + 1;
-            const year = new Date().getFullYear();
-            console.log(year + '-' + month + '-' + day)
+            //delcare empty array for dates
+            const dateArr = [];
+            //push todays date into dateArr
+            dateArr.push(date);
+            const nextDay = (date) => {
+                const next = new Date(date);
+                next.setDate(next.getDate() + 1);
+                const theNextDay = next.toDateString();
+                return theNextDay;
+            }
+            let arrayDate = date;
+            for (let i = 0; i < 3; i++) {
+                let nextDate = nextDay(arrayDate);
+                dateArr.push(nextDate);
+                arrayDate = nextDate;
+            }
+            await Promise.all(dateArr.map(async (date, index) => {
+                console.log("DATE: " + date)
+                const day = date.slice(8, 10);
+                const month = (new Date().getMonth()) + 1;
+                const year = new Date().getFullYear();
+                console.log(year + '-' + month + '-' + day)
 
-            const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
-            try {
-                const { data } = await axios.get(url);
-                const $ = cheerio.load(data);
-                var events = [];
-                console.log($('ul:eq(-1)').length)
-                if ($('ul:eq(-1)').length === 0) {
-                    $('ul:eq(0) .list-item', data).each(function () {
-                        const artists = $(this).find('h2').text()
-                        const artistsLink = $(this).find('a').attr('href');
-                        const description = $(this).find('.description').text()
-                        const dateTime = $(this).find('.date-time').text()
-                        const venue = $(this).find('.venue').text()
-                        events.push({
-                            artists,
-                            artistsLink,
-                            description,
-                            dateTime,
-                            venue
+                const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
+                try {
+                    const { data } = await axios.get(url);
+                    const $ = cheerio.load(data);
+                    var events = [];
+                    console.log($('ul:eq(-1)').length)
+                    if ($('ul:eq(-1)').length === 0) {
+                        $('ul:eq(0) .list-item', data).each(function () {
+                            const artists = $(this).find('h2').text()
+                            const artistsLink = $(this).find('a').attr('href');
+                            const description = $(this).find('.description').text()
+                            const dateTime = $(this).find('.date-time').text()
+                            const venue = $(this).find('.venue').text()
+                            events.push({
+                                artists,
+                                artistsLink,
+                                description,
+                                dateTime,
+                                venue
+                            })
                         })
-                    })
-                } else {
-                    $('ul:eq(-1) .list-item', data).each(function () {
-                        const artists = $(this).find('h2').text()
-                        const artistsLink = $(this).find('a').attr('href');
-                        const description = $(this).find('.description').text()
-                        const dateTime = $(this).find('.date-time').text()
-                        const venue = $(this).find('.venue').text()
-                        events.push({
-                            artists,
-                            artistsLink,
-                            description,
-                            dateTime,
-                            venue
+                    } else {
+                        $('ul:eq(-1) .list-item', data).each(function () {
+                            const artists = $(this).find('h2').text()
+                            const artistsLink = $(this).find('a').attr('href');
+                            const description = $(this).find('.description').text()
+                            const dateTime = $(this).find('.date-time').text()
+                            const venue = $(this).find('.venue').text()
+                            events.push({
+                                artists,
+                                artistsLink,
+                                description,
+                                dateTime,
+                                venue
+                            })
                         })
-                    })
-                }
-                
+                    }
 
-                const newEventsArr = await Promise.all(events.map((event) => {
+
+                    const newEventsArr = await Promise.all(events.map((event) => {
                         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-                        
+
                         let moreEventDetails = async () => {
                             var { data } = await axios.get(eventUrl)
                             var $ = cheerio.load(data);
@@ -200,11 +217,89 @@ const resolvers = {
                             return event;
                         }
                         return moreEventDetails();
-                }, events))
-                return events;
-            } catch (err) {
-                console.error(err);
-            }
+                    }, events))
+                    return events;
+                } catch (err) {
+                    console.error(err);
+                }
+            }))
+            // const date = new Date().toDateString();
+            // const day = date.slice(8, 10);
+            // const month = (new Date().getMonth()) + 1;
+            // const year = new Date().getFullYear();
+            // console.log(year + '-' + month + '-' + day)
+
+            // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
+            // try {
+            //     const { data } = await axios.get(url);
+            //     const $ = cheerio.load(data);
+            //     var events = [];
+            //     console.log($('ul:eq(-1)').length)
+            //     if ($('ul:eq(-1)').length === 0) {
+            //         $('ul:eq(0) .list-item', data).each(function () {
+            //             const artists = $(this).find('h2').text()
+            //             const artistsLink = $(this).find('a').attr('href');
+            //             const description = $(this).find('.description').text()
+            //             const dateTime = $(this).find('.date-time').text()
+            //             const venue = $(this).find('.venue').text()
+            //             events.push({
+            //                 artists,
+            //                 artistsLink,
+            //                 description,
+            //                 dateTime,
+            //                 venue
+            //             })
+            //         })
+            //     } else {
+            //         $('ul:eq(-1) .list-item', data).each(function () {
+            //             const artists = $(this).find('h2').text()
+            //             const artistsLink = $(this).find('a').attr('href');
+            //             const description = $(this).find('.description').text()
+            //             const dateTime = $(this).find('.date-time').text()
+            //             const venue = $(this).find('.venue').text()
+            //             events.push({
+            //                 artists,
+            //                 artistsLink,
+            //                 description,
+            //                 dateTime,
+            //                 venue
+            //             })
+            //         })
+            //     }
+
+
+            //     const newEventsArr = await Promise.all(events.map((event) => {
+            //         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+
+            //         let moreEventDetails = async () => {
+            //             var { data } = await axios.get(eventUrl)
+            //             var $ = cheerio.load(data);
+
+            //             $('.venue-details:eq(0)', data).each(function () {
+            //                 var address = $(this).text();
+            //                 event["address"] = address
+            //                 return event;
+            //             })
+            //             $('.venue-details:eq(1)', data).each(function () {
+            //                 var website = $(this).find('a').attr('href');
+            //                 var email = $(this).find('b:eq(1)').text()
+            //                 event["website"] = website
+            //                 event["email"] = email
+            //                 return event;
+            //             })
+            //             $('.ticket-link', data).each(function () {
+            //                 var ticketLink = $(this).attr('href')
+            //                 event["ticketLink"] = ticketLink
+            //                 return event;
+            //             })
+            //             return event;
+            //         }
+            //         return moreEventDetails();
+            //     }, events))
+            //     return events;
+            // } catch (err) {
+            //     console.error(err);
+            // }
         }
     },
     Mutation: {
@@ -240,7 +335,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { friends: friendId }},
+                    { $addToSet: { friends: friendId } },
                     { new: true }
                 ).populate('friends');
                 return updatedUser;
@@ -252,7 +347,7 @@ const resolvers = {
             console.log(context.user)
             if (context.user) {
                 const concert = await Concert.create({ ...args });
-                
+
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { concerts: concert._id } },
@@ -265,7 +360,7 @@ const resolvers = {
         },
         deleteConcertFromUser: async (parent, { concertId }, context) => {
             if (context.user) {
-                
+
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $pull: { concerts: concertId } },
@@ -273,9 +368,9 @@ const resolvers = {
                 );
 
                 await Concert.findByIdAndDelete(
-                    { _id: concertId }   
+                    { _id: concertId }
                 )
-        
+
                 return user;
             }
         }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC } from "../utils/queries";
+import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE } from "../utils/queries";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 // import Auth from '../utils/auth';
@@ -10,27 +10,32 @@ import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
-  //delcare empty array for dates
-  const dateArr = [];
+  // //delcare empty array for dates
+  // const dateArr = [];
 
-  dateArr.push(today);
-  const nextDay = (date) => {
-      const next = new Date(date);
-      next.setDate(next.getDate() + 1);
-      const theNextDay = next.toDateString();
-      return theNextDay;
-  }
+  // dateArr.push(today);
+  // const nextDay = (date) => {
+  //     const next = new Date(date);
+  //     next.setDate(next.getDate() + 1);
+  //     const theNextDay = next.toDateString();
+  //     return theNextDay;
+  // }
 
   //set initial state useing today's date
   const [date, setDate] = useState(today)
 
-  let arrayDate = date;
-  for (let i = 0; i < 3; i++) {
-    let nextDate = nextDay(arrayDate);
-    dateArr.push(nextDate);
-    arrayDate = nextDate;
-  }
-  
+  // let arrayDate = date;
+  // for (let i = 0; i < 3; i++) {
+  //   let nextDate = nextDay(arrayDate);
+  //   dateArr.push(nextDate);
+  //   arrayDate = nextDate;
+  // }
+
+  const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
+    variables: { date: date }
+  })
+console.log(concertData)
+
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
