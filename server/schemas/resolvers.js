@@ -146,7 +146,7 @@ const resolvers = {
                 arrayDate = nextDate;
             }
             const concertData = [];
-            dateArr.map(async(date, index) => {
+            await Promise.all(dateArr.map(async(date, index) => {
                 console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
@@ -224,90 +224,23 @@ const resolvers = {
                     // console.log(concertData);
                     // console.log('EVENTS!!!!!!!!!!!!!!!!!!!!!!!!!!');
                     // console.log(events);
-                    return events;
+                    // return events;
+                    // return concertData;
                 } catch (err) {
                     console.error(err);
                 }
-                console.log(events);
-            })
+                // console.log(concertData);
+                // return concertData;
+                // console.log('EVENTSEVENTSEVENTSEVENTS');
+                // console.log(events);
+                concertData.push(events);
+                // console.log(concertData);
+                // return concertData;
+            }))
             // ^^^right here
-            // const date = new Date().toDateString();
-            // const day = date.slice(8, 10);
-            // const month = (new Date().getMonth()) + 1;
-            // const year = new Date().getFullYear();
-            // console.log(year + '-' + month + '-' + day)
 
-            // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
-            // try {
-            //     const { data } = await axios.get(url);
-            //     const $ = cheerio.load(data);
-            //     var events = [];
-            //     console.log($('ul:eq(-1)').length)
-            //     if ($('ul:eq(-1)').length === 0) {
-            //         $('ul:eq(0) .list-item', data).each(function () {
-            //             const artists = $(this).find('h2').text()
-            //             const artistsLink = $(this).find('a').attr('href');
-            //             const description = $(this).find('.description').text()
-            //             const dateTime = $(this).find('.date-time').text()
-            //             const venue = $(this).find('.venue').text()
-            //             events.push({
-            //                 artists,
-            //                 artistsLink,
-            //                 description,
-            //                 dateTime,
-            //                 venue
-            //             })
-            //         })
-            //     } else {
-            //         $('ul:eq(-1) .list-item', data).each(function () {
-            //             const artists = $(this).find('h2').text()
-            //             const artistsLink = $(this).find('a').attr('href');
-            //             const description = $(this).find('.description').text()
-            //             const dateTime = $(this).find('.date-time').text()
-            //             const venue = $(this).find('.venue').text()
-            //             events.push({
-            //                 artists,
-            //                 artistsLink,
-            //                 description,
-            //                 dateTime,
-            //                 venue
-            //             })
-            //         })
-            //     }
-
-
-            //     const newEventsArr = await Promise.all(events.map((event) => {
-            //         const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-
-            //         let moreEventDetails = async () => {
-            //             var { data } = await axios.get(eventUrl)
-            //             var $ = cheerio.load(data);
-
-            //             $('.venue-details:eq(0)', data).each(function () {
-            //                 var address = $(this).text();
-            //                 event["address"] = address
-            //                 return event;
-            //             })
-            //             $('.venue-details:eq(1)', data).each(function () {
-            //                 var website = $(this).find('a').attr('href');
-            //                 var email = $(this).find('b:eq(1)').text()
-            //                 event["website"] = website
-            //                 event["email"] = email
-            //                 return event;
-            //             })
-            //             $('.ticket-link', data).each(function () {
-            //                 var ticketLink = $(this).attr('href')
-            //                 event["ticketLink"] = ticketLink
-            //                 return event;
-            //             })
-            //             return event;
-            //         }
-            //         return moreEventDetails();
-            //     }, events))
-            //     return events;
-            // } catch (err) {
-            //     console.error(err);
-            // }
+            console.log(concertData);
+            return concertData;
         }
     },
     Mutation: {

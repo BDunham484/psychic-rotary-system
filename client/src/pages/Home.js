@@ -35,7 +35,7 @@ const Home = () => {
     variables: { date: date }
   })
   console.log(concertData);
-const concertDataArr = concertData || [];
+const concertDataArr = concertData?.concertsForDatabase || [];
 console.log('CONCERTDATAARR!!!!!!');
 console.log(concertDataArr);
 
