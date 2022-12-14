@@ -34,7 +34,10 @@ const Home = () => {
   const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
     variables: { date: date }
   })
-console.log(concertData)
+  console.log(concertData);
+const concertDataArr = concertData || [];
+console.log('CONCERTDATAARR!!!!!!');
+console.log(concertDataArr);
 
 
   //use useQuery hook to make query request with dynamic date

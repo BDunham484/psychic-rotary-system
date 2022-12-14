@@ -127,6 +127,7 @@ const resolvers = {
         },
         //scrape all concerts for the day
         concertsForDatabase: async (parent, { date }) => {
+            console.log('DATE!!!!!!!!!!');
             console.log(date);
             //delcare empty array for dates
             const dateArr = [];
@@ -144,7 +145,8 @@ const resolvers = {
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
             }
-            await Promise.all(dateArr.map(async (date, index) => {
+            const concertData = [];
+            dateArr.map(async(date, index) => {
                 console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
@@ -218,11 +220,17 @@ const resolvers = {
                         }
                         return moreEventDetails();
                     }, events))
+                    // concertData.push(events);
+                    // console.log(concertData);
+                    // console.log('EVENTS!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                    // console.log(events);
                     return events;
                 } catch (err) {
                     console.error(err);
                 }
-            }))
+                console.log(events);
+            })
+            // ^^^right here
             // const date = new Date().toDateString();
             // const day = date.slice(8, 10);
             // const month = (new Date().getMonth()) + 1;
