@@ -14,12 +14,10 @@ const Home = () => {
   const dateArr = [];
 
   dateArr.push(today);
-  const fillDateArr = (date) => {
+  const nextDay = (date) => {
       const next = new Date(date);
       next.setDate(next.getDate() + 1);
       const theNextDay = next.toDateString();
-      console.log('THENEXTDAY')
-      console.log(theNextDay);
       return theNextDay;
   }
 
@@ -28,9 +26,8 @@ const Home = () => {
 
   let arrayDate = date;
   for (let i = 0; i < 3; i++) {
-    let nextDate = fillDateArr(arrayDate);
+    let nextDate = nextDay(arrayDate);
     dateArr.push(nextDate);
-    console.log(dateArr);
     arrayDate = nextDate;
   }
   
@@ -49,14 +46,14 @@ const Home = () => {
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
-  const nextDay = (date) => {
+  const nextDayButton = (date) => {
     const next = new Date(date);
     next.setDate(next.getDate() + 1);
     const theNextDay = next.toDateString();
     setDate(theNextDay);
   }
   //function that gets the previous day
-  const dayBefore = (date) => {
+  const dayBeforeButton = (date) => {
     const before = new Date(date);
     before.setDate(before.getDate() - 1);
     const theLastDay = before.toDateString();
@@ -71,9 +68,9 @@ const Home = () => {
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className="utility-bar">
         <span className="display-flex date-wrapper">
-          <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
+          <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
           <h3 id="date">{date}</h3>
-          <RightArrow className="arrows" onClick={() => nextDay(date)} />
+          <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>
       </div>
       <div className={`home-page-wrapper`}>
