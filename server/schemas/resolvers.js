@@ -140,7 +140,7 @@ const resolvers = {
                 return theNextDay;
             }
             let arrayDate = date;
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 11; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
