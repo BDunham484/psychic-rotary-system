@@ -140,7 +140,7 @@ const resolvers = {
                 return theNextDay;
             }
             let arrayDate = date;
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 3; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
@@ -156,10 +156,9 @@ const resolvers = {
                 // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
                 const urlArr = [
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
                 ];
                 await Promise.all(urlArr.map(async (url, index) => {
-                    // urlArr.map(async(url, index) => {
                     try {
                         const { data } = await axios.get(url);
                         const $ = cheerio.load(data);
