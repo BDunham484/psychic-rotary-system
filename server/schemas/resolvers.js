@@ -146,87 +146,93 @@ const resolvers = {
                 arrayDate = nextDate;
             }
             const concertData = [];
-            await Promise.all(dateArr.map(async(date, index) => {
+            await Promise.all(dateArr.map(async (date, index) => {
+                // dateArr.map(async(date, index) => {
                 console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
                 const year = new Date().getFullYear();
                 console.log(year + '-' + month + '-' + day)
-
-                const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
-                try {
-                    const { data } = await axios.get(url);
-                    const $ = cheerio.load(data);
-                    var events = [];
-                    console.log($('ul:eq(-1)').length)
-                    if ($('ul:eq(-1)').length === 0) {
-                        $('ul:eq(0) .list-item', data).each(function () {
-                            const artists = $(this).find('h2').text()
-                            const artistsLink = $(this).find('a').attr('href');
-                            const description = $(this).find('.description').text()
-                            const dateTime = $(this).find('.date-time').text()
-                            const venue = $(this).find('.venue').text()
-                            events.push({
-                                artists,
-                                artistsLink,
-                                description,
-                                dateTime,
-                                venue
+                // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
+                const urlArr = [
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
+                ];
+                await Promise.all(urlArr.map(async (url, index) => {
+                    // urlArr.map(async(url, index) => {
+                    try {
+                        const { data } = await axios.get(url);
+                        const $ = cheerio.load(data);
+                        var events = [];
+                        console.log($('ul:eq(-1)').length)
+                        if ($('ul:eq(-1)').length === 0) {
+                            $('ul:eq(0) .list-item', data).each(function () {
+                                const artists = $(this).find('h2').text()
+                                const artistsLink = $(this).find('a').attr('href');
+                                const description = $(this).find('.description').text()
+                                const dateTime = $(this).find('.date-time').text()
+                                const venue = $(this).find('.venue').text()
+                                events.push({
+                                    artists,
+                                    artistsLink,
+                                    description,
+                                    dateTime,
+                                    venue
+                                })
                             })
-                        })
-                    } else {
-                        $('ul:eq(-1) .list-item', data).each(function () {
-                            const artists = $(this).find('h2').text()
-                            const artistsLink = $(this).find('a').attr('href');
-                            const description = $(this).find('.description').text()
-                            const dateTime = $(this).find('.date-time').text()
-                            const venue = $(this).find('.venue').text()
-                            events.push({
-                                artists,
-                                artistsLink,
-                                description,
-                                dateTime,
-                                venue
+                        } else {
+                            $('ul:eq(-1) .list-item', data).each(function () {
+                                const artists = $(this).find('h2').text()
+                                const artistsLink = $(this).find('a').attr('href');
+                                const description = $(this).find('.description').text()
+                                const dateTime = $(this).find('.date-time').text()
+                                const venue = $(this).find('.venue').text()
+                                events.push({
+                                    artists,
+                                    artistsLink,
+                                    description,
+                                    dateTime,
+                                    venue
+                                })
                             })
-                        })
-                    }
-
-
-                    const newEventsArr = await Promise.all(events.map((event) => {
-                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-
-                        let moreEventDetails = async () => {
-                            var { data } = await axios.get(eventUrl)
-                            var $ = cheerio.load(data);
-
-                            $('.venue-details:eq(0)', data).each(function () {
-                                var address = $(this).text();
-                                event["address"] = address
-                                return event;
-                            })
-                            $('.venue-details:eq(1)', data).each(function () {
-                                var website = $(this).find('a').attr('href');
-                                var email = $(this).find('b:eq(1)').text()
-                                event["website"] = website
-                                event["email"] = email
-                                return event;
-                            })
-                            $('.ticket-link', data).each(function () {
-                                var ticketLink = $(this).attr('href')
-                                event["ticketLink"] = ticketLink
-                                return event;
-                            })
-                            return event;
                         }
-                        return moreEventDetails();
-                    }, events))
-                } catch (err) {
-                    console.error(err);
-                }
-                //end first try/catch
-                concertData.push(events);
+
+
+                        const newEventsArr = await Promise.all(events.map((event) => {
+                            const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+
+                            let moreEventDetails = async () => {
+                                var { data } = await axios.get(eventUrl)
+                                var $ = cheerio.load(data);
+
+                                $('.venue-details:eq(0)', data).each(function () {
+                                    var address = $(this).text();
+                                    event["address"] = address
+                                    return event;
+                                })
+                                $('.venue-details:eq(1)', data).each(function () {
+                                    var website = $(this).find('a').attr('href');
+                                    var email = $(this).find('b:eq(1)').text()
+                                    event["website"] = website
+                                    event["email"] = email
+                                    return event;
+                                })
+                                $('.ticket-link', data).each(function () {
+                                    var ticketLink = $(this).attr('href')
+                                    event["ticketLink"] = ticketLink
+                                    return event;
+                                })
+                                return event;
+                            }
+                            return moreEventDetails();
+                        }, events))
+                    } catch (err) {
+                        console.error(err);
+                    }
+                    concertData.push(events);
+                }))
+                // ^^^^^URLARR PROMISE END
             }))
-            console.log(concertData);
             return concertData;
         }
     },
