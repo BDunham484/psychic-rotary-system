@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC } from "../utils/queries";
+import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE } from "../utils/queries";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 // import Auth from '../utils/auth';
@@ -10,8 +10,18 @@ import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
+
   //set initial state useing today's date
   const [date, setDate] = useState(today)
+
+  const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
+    variables: { date: date }
+  })
+
+  const concertDataArr = concertData?.concertsForDatabase || [];
+  console.log('CONCERTDATAARR!!!!!!');
+  console.log(concertDataArr);
+
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
@@ -27,14 +37,14 @@ const Home = () => {
   //assign data to variable if present
   const concerts = data?.concerts || [];
   //function that gets the next day
-  const nextDay = (date) => {
+  const nextDayButton = (date) => {
     const next = new Date(date);
     next.setDate(next.getDate() + 1);
     const theNextDay = next.toDateString();
     setDate(theNextDay);
   }
   //function that gets the previous day
-  const dayBefore = (date) => {
+  const dayBeforeButton = (date) => {
     const before = new Date(date);
     before.setDate(before.getDate() - 1);
     const theLastDay = before.toDateString();
@@ -49,9 +59,9 @@ const Home = () => {
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className="utility-bar">
         <span className="display-flex date-wrapper">
-          <LeftArrow className="arrows" onClick={() => dayBefore(date)} />
+          <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
           <h3 id="date">{date}</h3>
-          <RightArrow className="arrows" onClick={() => nextDay(date)} />
+          <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>
       </div>
       <div className={`home-page-wrapper`}>

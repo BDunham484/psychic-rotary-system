@@ -13,6 +13,9 @@ const concertSchema = new Schema(
         description: {
             type: String
         },
+        date: {
+            type: String
+        },
         dateTime: {
             type: String
         },
