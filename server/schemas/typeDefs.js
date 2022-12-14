@@ -18,6 +18,7 @@ const typeDefs = gql`
         artists: String
         artistsLink: String
         description: String
+        date: String
         dateTime: String
         venue: String
         address: String
@@ -39,6 +40,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addConcert(event: String): Concert
+        addConcertsToDatabase(date: String!): Concert
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
         addConcertToUser(artists: String, description: String, venue: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User

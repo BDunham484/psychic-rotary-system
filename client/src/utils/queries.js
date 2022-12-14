@@ -5,6 +5,22 @@ export const GET_TODAYS_CONCERTS = gql`
         concerts(date: $date) {
             artists
             description
+            date
+            dateTime
+            venue
+            address
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+
+export const GET_CONCERTS_FOR_DATABASE = gql`
+    query concertsForDatabase($date: String) {
+        concertsForDatabase(date: $date) {
+            artists
+            date
             dateTime
             venue
             address
