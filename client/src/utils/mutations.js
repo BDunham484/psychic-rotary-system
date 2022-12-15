@@ -24,6 +24,23 @@ export const ADD_USER = gql`
     }
 `;
 
+export const ADD_CONCERT = gql`
+    mutation addConcert($artists: String, $venue: String, $date: String, $dateTime: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
+        addConcert(artists: $artists, venue: $venue, date: $date, dateTime: $dateTime, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
+            _id
+            artists
+            venue
+            date
+            dateTime
+            address
+            website
+            email
+            ticketLink
+            artistsLink
+        }
+    }
+`;
+
 export const ADD_CONCERT_TO_USER = gql`
     mutation addConcertToUser($artists: String, $description: String, $venue: String, $dateTime: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
         addConcertToUser(artists: $artists, description: $description, venue: $venue, dateTime: $dateTime, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
