@@ -133,13 +133,16 @@ const resolvers = {
             const dateArr = [];
             //push todays date into dateArr
             dateArr.push(date);
+            //function to get the next day based on the date passed in to it
             const nextDay = (date) => {
                 const next = new Date(date);
                 next.setDate(next.getDate() + 1);
                 const theNextDay = next.toDateString();
                 return theNextDay;
             }
+            //save date to another variable for for loop
             let arrayDate = date;
+            //for loop that continously gets upcoming dates and pushes them to array
             for (let i = 0; i < 3; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
@@ -148,7 +151,7 @@ const resolvers = {
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
                 // dateArr.map(async(date, index) => {
-                console.log("DATE: " + date)
+                // console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
                 const year = new Date().getFullYear();
@@ -175,6 +178,7 @@ const resolvers = {
                                     artists,
                                     artistsLink,
                                     description,
+                                    date,
                                     dateTime,
                                     venue
                                 })
@@ -190,6 +194,7 @@ const resolvers = {
                                     artists,
                                     artistsLink,
                                     description,
+                                    date,
                                     dateTime,
                                     venue
                                 })
@@ -258,10 +263,10 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addConcert: async (parent, { event }) => {
-            console.log(event);
-            const concert = await Concert.create({ event });
-
+        addConcert: async (parent, { ...data }) => {
+            const concert = await Concert.create({ ...data })
+                .select(-__v);
+            
             return concert;
         },
         addFriend: async (parent, { friendId }, context) => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE } from "../utils/queries";
+import { ADD_CONCERT } from "../utils/mutations";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 // import Auth from '../utils/auth';
@@ -21,6 +22,28 @@ const Home = () => {
   const concertDataArr = concertData?.concertsForDatabase || [];
   console.log('CONCERTDATAARR!!!!!!');
   console.log(concertDataArr);
+
+  const [ addConcert ] = useMutation(ADD_CONCERT)
+  
+  
+    let booger = concertDataArr[0][0];
+    // let booger = {};
+    console.log(booger);
+    
+    let testFunc = async (data) => {
+      console.log('FUNCEVENT!!!!!!');
+      console.log(data);
+      try {
+        await addConcert({
+          variables: { ...data }
+        })
+      } catch(e) {
+        console.error(e);
+      }
+    }
+  
+  
+
 
 
   //use useQuery hook to make query request with dynamic date
@@ -63,6 +86,7 @@ const Home = () => {
           <h3 id="date">{date}</h3>
           <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>
+        <button onClick={() => testFunc(booger)}>ADD_CONCERT_TEST</button>
       </div>
       <div className={`home-page-wrapper`}>
         <div>
