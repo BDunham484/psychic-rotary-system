@@ -44,6 +44,12 @@ const resolvers = {
         concert: async (parent, { _id }) => {
             return Concert.findOne({ _id });
         },
+        //get all concerts in database
+        concertsFromDb: async () => {
+            const concerts = await Concert.find()
+
+            return concerts
+        },
         //scrape all concerts for the day
         concerts: async (parent, { date }) => {
             console.log(date);
@@ -311,6 +317,18 @@ const resolvers = {
 
                 return user;
             }
+        },
+        deleteConcert: async (parent, { id }) => {
+            const concert = await Concert.deleteOne({ id });
+            return concert;
+        },
+        deleteConcerts: async (parent, { concertId }) => {
+            console.log('IDIDIDIDIDIDDI');
+            console.log(concertId);
+            const concerts = await Concert.deleteMany({ 
+                _id: {$in: concertId}
+            });
+            return concerts
         }
     }
 };

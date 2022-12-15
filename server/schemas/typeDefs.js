@@ -34,6 +34,7 @@ const typeDefs = gql`
         userConcerts(username: String): [Concert]
         concert(_id: ID!): Concert
         concerts(date: String): [Concert]
+        concertsFromDb: [Concert]
         concertsForDatabase(date: String): [[Concert]]
     }
 
@@ -45,6 +46,8 @@ const typeDefs = gql`
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
         addConcertToUser(artists: String, description: String, venue: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
+        deleteConcert(concertId: ID!): Concert
+        deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User
     }
 
