@@ -276,29 +276,36 @@ const resolvers = {
         addConcert: async (parent, { ...data }) => {
             await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
                 if (err) return handleError(err);
-
-                const update = {
-                    artists: custom.artists,
-                    venue: custom.venue,
-                    date: custom.date,
-                    dateTime: custom.dateTime,
-                    address: custom.address,
-                    website: custom.website,
-                    email: custom.email,
-                    ticketLink: custom.ticketLink,
-                }
-
-                if (custom) {
-                    const updatedConcert = await Concert.findOneAndUpdate({ 'customId': custom.customId, ...update })
-                    console.log('UPDATEDCONCERT');
-                    console.log(updatedConcert);
-                    return updatedConcert;
-                } else {
-                    const concert = await Concert.create({ ...custom })
-                        .select(-__v);
-                    // console.log(concert);
-                    return concert;
-                }
+                console.log('CUSTOM');
+                console.log(custom);
+                // if (custom) {
+                //     const filter = {
+                //         customId: data.customId
+                //     }
+                //     const update = {
+                //         artists: custom.artists,
+                //         venue: custom.venue,
+                //         date: custom.date,
+                //         dateTime: custom.dateTime,
+                //         address: custom.address,
+                //         website: custom.website,
+                //         email: custom.email,
+                //         ticketLink: custom.ticketLink,
+                //     }
+                //     const updatedConcert = await Concert.findOneAndUpdate({ filter, ...update })
+                //     console.log('DATA.CUSTOMID');
+                //     console.log(data.customId)
+                //     console.log('UPDATE');
+                //     console.log(update)
+                //     console.log('UPDATEDCONCERT');
+                //     console.log(updatedConcert);
+                //     return updatedConcert;
+                // } else {
+                //     const concert = await Concert.create({ ...data })
+                //         // .select(-__v);
+                //     console.log(concert);
+                //     return concert;
+                // }
             })
 
         },
