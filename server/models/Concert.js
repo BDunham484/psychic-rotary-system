@@ -4,6 +4,10 @@ const { Schema, model } = require('mongoose');
 //create the schema for the model using the Schema constructor and outline the fields
 const concertSchema = new Schema(
     {
+        customId: {
+            type: String,
+            unique: true
+        },
         artists: {
             type: String
         },

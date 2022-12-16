@@ -42,8 +42,6 @@ const Home = () => {
       }
     }
   
-  
-
 
 
   //use useQuery hook to make query request with dynamic date

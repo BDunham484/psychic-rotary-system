@@ -180,7 +180,9 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
+                                const customId = artists.split(/[,\s]+/).join("") + dateTime.split(/[,\s]+/).join("") + venue.split(/[,\s]+/).join("")
                                 events.push({
+                                    customId,
                                     artists,
                                     artistsLink,
                                     description,
@@ -196,7 +198,9 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
+                                const customId = artists.split(/[,\s]+/).join("") + dateTime.split(/[,\s]+/).join("") + venue.split(/[,\s]+/).join("")
                                 events.push({
+                                    customId,
                                     artists,
                                     artistsLink,
                                     description,
@@ -270,9 +274,10 @@ const resolvers = {
             return { token, user };
         },
         addConcert: async (parent, { ...data }) => {
+            console.log(data);
             const concert = await Concert.create({ ...data })
                 .select(-__v);
-            
+            console.log(concert);
             return concert;
         },
         addFriend: async (parent, { friendId }, context) => {
