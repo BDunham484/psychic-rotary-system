@@ -180,7 +180,7 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
-                                const customId = artists.split(/[,\s]+/).join("") + dateTime.split(/[,\s]+/).join("") + venue.split(/[,\s]+/).join("")
+                                const customId = artists.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
                                 events.push({
                                     customId,
                                     artists,
@@ -198,7 +198,7 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
-                                const customId = artists.split(/[,\s]+/).join("") + dateTime.split(/[,\s]+/).join("") + venue.split(/[,\s]+/).join("")
+                                const customId = artists.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
                                 events.push({
                                     customId,
                                     artists,
@@ -274,11 +274,33 @@ const resolvers = {
             return { token, user };
         },
         addConcert: async (parent, { ...data }) => {
-            console.log(data);
-            const concert = await Concert.create({ ...data })
-                .select(-__v);
-            console.log(concert);
-            return concert;
+            await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
+                if (err) return handleError(err);
+
+                const update = {
+                    artists: custom.artists,
+                    venue: custom.venue,
+                    date: custom.date,
+                    dateTime: custom.dateTime,
+                    address: custom.address,
+                    website: custom.website,
+                    email: custom.email,
+                    ticketLink: custom.ticketLink,
+                }
+
+                if (custom) {
+                    const updatedConcert = await Concert.findOneAndUpdate({ 'customId': custom.customId, ...update })
+                    console.log('UPDATEDCONCERT');
+                    console.log(updatedConcert);
+                    return updatedConcert;
+                } else {
+                    const concert = await Concert.create({ ...custom })
+                        .select(-__v);
+                    // console.log(concert);
+                    return concert;
+                }
+            })
+
         },
         addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
@@ -330,8 +352,8 @@ const resolvers = {
         deleteConcerts: async (parent, { concertId }) => {
             console.log('IDIDIDIDIDIDDI');
             console.log(concertId);
-            const concerts = await Concert.deleteMany({ 
-                _id: {$in: concertId}
+            const concerts = await Concert.deleteMany({
+                _id: { $in: concertId }
             });
             return concerts
         }
