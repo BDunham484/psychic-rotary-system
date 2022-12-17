@@ -20,7 +20,7 @@ const typeDefs = gql`
         artistsLink: String
         description: String
         date: String
-        dateTime: String
+        times: String
         venue: String
         address: String
         website: String
@@ -42,11 +42,11 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addConcert(customId: String, artists: String, venue: String, date: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): Concert
-        addConcertsToDatabase(customId: String, artists: String, venue: String, date: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): [Concert]
+        addConcert(customId: String, artists: String, venue: String, date: String, times: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): Concert
+        addConcertsToDatabase(customId: String, artists: String, venue: String, date: String, times: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): [Concert]
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
-        addConcertToUser(customId: String, artists: String, description: String, venue: String, dateTime: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
+        addConcertToUser(customId: String, artists: String, description: String, venue: String, times: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User

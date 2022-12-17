@@ -6,7 +6,7 @@ export const GET_TODAYS_CONCERTS = gql`
             artists
             description
             date
-            dateTime
+            times
             venue
             address
             website
@@ -22,7 +22,7 @@ export const GET_CONCERTS_FOR_DATABASE = gql`
             customId
             artists
             date
-            dateTime
+            times
             venue
             address
             website
@@ -39,7 +39,7 @@ export const QUERY_USER_CONCERTS = gql`
             artists
             artistsLink
             description
-            dateTime
+            times
             venue
             address
             website
@@ -61,7 +61,7 @@ export const QUERY_USER = gql`
                 artists
                 artistsLink
                 description
-                dateTime
+                times
                 venue
                 address
                 website
@@ -89,7 +89,7 @@ export const QUERY_ME = gql`
                 artists
                 artistsLink
                 description
-                dateTime
+                times
                 venue
                 address
                 website

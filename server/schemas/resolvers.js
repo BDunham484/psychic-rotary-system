@@ -182,13 +182,22 @@ const resolvers = {
                                 const venue = $(this).find('.venue').text()
                                 const headliner = artists.split(',')[0];
                                 const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                                const timeArr = dateTime.split(",")
+                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                                let times
+                                timeArr.map((time) => {
+                                    if (timex.test(time)) {
+                                        times = time;
+                                        return times;
+                                    }
+                                })
                                 events.push({
                                     customId,
                                     artists,
                                     artistsLink,
                                     description,
                                     date,
-                                    dateTime,
+                                    times,
                                     venue
                                 })
                             })
@@ -201,13 +210,22 @@ const resolvers = {
                                 const venue = $(this).find('.venue').text()
                                 const headliner = artists.split(',')[0];
                                 const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                                const timeArr = dateTime.split(",")
+                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                                let times
+                                timeArr.map((time) => {
+                                    if (timex.test(time)) {
+                                        times = time;
+                                        return times;
+                                    }
+                                })
                                 events.push({
                                     customId,
                                     artists,
                                     artistsLink,
                                     description,
                                     date,
-                                    dateTime,
+                                    times,
                                     venue
                                 })
                             })

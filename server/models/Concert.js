@@ -20,7 +20,7 @@ const concertSchema = new Schema(
         date: {
             type: String
         },
-        dateTime: {
+        times: {
             type: String
         },
         venue: {
