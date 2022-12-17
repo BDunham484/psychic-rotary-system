@@ -25,7 +25,22 @@ const Home = () => {
 
   const [ addConcert ] = useMutation(ADD_CONCERT)
   
-  
+  const dbConcertUpdater = async  (arr) => {
+    await Promise.all(arr.map(async(dailyArr) => {
+      await Promise.all(dailyArr.map(async(concert) => {
+        try {
+        await addConcert({
+          variables: { ...concert }
+        })
+      } catch(e) {
+        console.error(e)
+      }
+      }))
+      
+    }))
+  }
+
+
     // let booger = concertDataArr[0][4];
     let booger = {};
     console.log(booger);
