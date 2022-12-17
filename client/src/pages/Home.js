@@ -26,8 +26,8 @@ const Home = () => {
   const [ addConcert ] = useMutation(ADD_CONCERT)
   
   
-    let booger = concertDataArr[0][0];
-    // let booger = {};
+    // let booger = concertDataArr[0][4];
+    let booger = {};
     console.log(booger);
     
     let testFunc = async (data) => {
