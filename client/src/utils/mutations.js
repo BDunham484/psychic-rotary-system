@@ -25,13 +25,13 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_CONCERT = gql`
-    mutation addConcert($artists: String, $venue: String, $date: String, $dateTime: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
-        addConcert(artists: $artists, venue: $venue, date: $date, dateTime: $dateTime, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
+    mutation addConcert($customId: String, $artists: String, $venue: String, $date: String, $times: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
+        addConcert(customId: $customId, artists: $artists, venue: $venue, date: $date, times: $times, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
             _id
             artists
             venue
             date
-            dateTime
+            times
             address
             website
             email
@@ -42,8 +42,8 @@ export const ADD_CONCERT = gql`
 `;
 
 export const ADD_CONCERT_TO_USER = gql`
-    mutation addConcertToUser($artists: String, $description: String, $venue: String, $dateTime: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
-        addConcertToUser(artists: $artists, description: $description, venue: $venue, dateTime: $dateTime, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
+    mutation addConcertToUser($artists: String, $description: String, $venue: String, $times: String, $address: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
+        addConcertToUser(artists: $artists, description: $description, venue: $venue, times: $times, address: $address, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
             concerts {
                 _id
             }

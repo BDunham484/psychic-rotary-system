@@ -180,12 +180,24 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
+                                const headliner = artists.split(',')[0];
+                                const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                                const timeArr = dateTime.split(",")
+                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                                let times
+                                timeArr.map((time) => {
+                                    if (timex.test(time)) {
+                                        times = time;
+                                        return times;
+                                    }
+                                })
                                 events.push({
+                                    customId,
                                     artists,
                                     artistsLink,
                                     description,
                                     date,
-                                    dateTime,
+                                    times,
                                     venue
                                 })
                             })
@@ -196,17 +208,28 @@ const resolvers = {
                                 const description = $(this).find('.description').text()
                                 const dateTime = $(this).find('.date-time').text()
                                 const venue = $(this).find('.venue').text()
+                                const headliner = artists.split(',')[0];
+                                const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                                const timeArr = dateTime.split(",")
+                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                                let times
+                                timeArr.map((time) => {
+                                    if (timex.test(time)) {
+                                        times = time;
+                                        return times;
+                                    }
+                                })
                                 events.push({
+                                    customId,
                                     artists,
                                     artistsLink,
                                     description,
                                     date,
-                                    dateTime,
+                                    times,
                                     venue
                                 })
                             })
                         }
-
 
                         const newEventsArr = await Promise.all(events.map((event) => {
                             const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
@@ -270,10 +293,39 @@ const resolvers = {
             return { token, user };
         },
         addConcert: async (parent, { ...data }) => {
-            const concert = await Concert.create({ ...data })
-                .select(-__v);
-            
-            return concert;
+            await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
+                if (err) return handleError(err);
+
+                if (custom) {
+                    const savedConcertId = {
+                        _id: custom._id
+                    }
+                    const update = {
+                        artists: data.artists,
+                        venue: data.venue,
+                        date: data.date,
+                        dateTime: data.dateTime,
+                        address: data.address,
+                        website: data.website,
+                        email: data.email,
+                        ticketLink: data.ticketLink,
+                    }
+                    const updatedConcert = await Concert.findByIdAndUpdate(
+                        savedConcertId,
+                        update,
+                        { new: true }
+                    )
+                    console.log('UPDATEDCONCERT');
+                    console.log(updatedConcert);
+                    return updatedConcert;
+                } else {
+                    const concert = await Concert.create({ ...data })
+                    // .select(-__v);
+                    console.log('SAVEDCONCERT');
+                    console.log(concert);
+                    return concert;
+                }
+            })
         },
         addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
@@ -325,13 +377,12 @@ const resolvers = {
         deleteConcerts: async (parent, { concertId }) => {
             console.log('IDIDIDIDIDIDDI');
             console.log(concertId);
-            const concerts = await Concert.deleteMany({ 
-                _id: {$in: concertId}
+            const concerts = await Concert.deleteMany({
+                _id: { $in: concertId }
             });
             return concerts
         }
     }
 };
-
 
 module.exports = resolvers;
