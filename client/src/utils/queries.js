@@ -124,3 +124,21 @@ export const QUERY_ME_BASIC = gql`
         }
     }
 `;
+
+export const GET_YESTERDAYS_CONCERTS = gql`
+    query getYesterdaysConcerts($date: String!) {
+        getYesterdaysConcerts(date: $date) {
+            _id
+            customId
+            artists
+            address
+            venue
+            date
+            times
+            email
+            website
+            ticketLink
+            artistsLink
+        }
+    }
+`;

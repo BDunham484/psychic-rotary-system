@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE } from "../utils/queries";
+import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE, GET_YESTERDAYS_CONCERTS } from "../utils/queries";
 import { ADD_CONCERT } from "../utils/mutations";
 import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
@@ -43,7 +43,20 @@ const Home = () => {
       
     }))
   }
+  const yesterdaysDate = "Fri Dec 16 2022"
 
+  const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
+    variables: { date: yesterdaysDate }
+  })
+  console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
+
+  const yesterdaysDatesArr = [];
+
+  const deleteYesterdaysConcerts = () => {
+    for (let i = 0; i <= yesterdaysConcertData.length; i++) {
+      yesterdaysDatesArr.push(yesterdaysConcertData[i]._id)
+    }
+  }
 
     // let booger = concertDataArr[0][4];
     // let booger = {};
@@ -98,6 +111,7 @@ const Home = () => {
     <div className="wrapper">
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className="utility-bar">
+        <button onClick={() => deleteYesterdaysConcerts(yesterdaysDatesArr)}>DELETE_YESTERDAYS_CONCERTS</button>
         <span className="display-flex date-wrapper">
           <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
           <h3 id="date">{date}</h3>

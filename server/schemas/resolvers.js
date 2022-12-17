@@ -52,19 +52,16 @@ const resolvers = {
         },
         //scrape all concerts for the day
         concerts: async (parent, { date }) => {
-            console.log(date);
             // const date = new Date().toDateString();
             const day = date.slice(8, 10);
             const month = (new Date().getMonth()) + 1;
             const year = new Date().getFullYear();
-            console.log(year + '-' + month + '-' + day)
 
             const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
             try {
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
                 var events = [];
-                console.log($('ul:eq(-1)').length)
                 if ($('ul:eq(-1)').length === 0) {
                     $('ul:eq(0) .list-item', data).each(function () {
                         const artists = $(this).find('h2').text()
@@ -133,8 +130,6 @@ const resolvers = {
         },
         //scrape all concerts for the day
         concertsForDatabase: async (parent, { date }) => {
-            console.log('DATE!!!!!!!!!!');
-            console.log(date);
             //delcare empty array for dates
             const dateArr = [];
             //push todays date into dateArr
@@ -161,6 +156,7 @@ const resolvers = {
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
                 const year = new Date().getFullYear();
+                console.log('CONCERTSFORDATABASE-DATES');
                 console.log(year + '-' + month + '-' + day)
                 // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
                 const urlArr = [
@@ -172,7 +168,6 @@ const resolvers = {
                         const { data } = await axios.get(url);
                         const $ = cheerio.load(data);
                         var events = [];
-                        console.log($('ul:eq(-1)').length)
                         if ($('ul:eq(-1)').length === 0) {
                             $('ul:eq(0) .list-item', data).each(function () {
                                 const artists = $(this).find('h2').text()
@@ -267,6 +262,13 @@ const resolvers = {
                 // ^^^^^URLARR PROMISE END
             }))
             return concertData;
+        },
+        getYesterdaysConcerts: async (parent, { date }) => {
+            console.log(date);
+            const yesterdaysConcerts = await Concert.find({ date: date })
+                .exec();
+
+            return yesterdaysConcerts;
         }
     },
     Mutation: {
