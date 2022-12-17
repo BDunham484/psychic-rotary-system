@@ -149,7 +149,7 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 1; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;

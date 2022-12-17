@@ -27,7 +27,11 @@ const Home = () => {
   
   const dbConcertUpdater = async  (arr) => {
     await Promise.all(arr.map(async(dailyArr) => {
+      console.log('DAILYARR');
+      console.log(dailyArr);
       await Promise.all(dailyArr.map(async(concert) => {
+        console.log('CONCERT WITHIN UPDATER MAP');
+        console.log(concert);
         try {
         await addConcert({
           variables: { ...concert }
@@ -42,20 +46,20 @@ const Home = () => {
 
 
     // let booger = concertDataArr[0][4];
-    let booger = {};
-    console.log(booger);
+    // let booger = {};
+    // console.log(booger);
     
-    let testFunc = async (data) => {
-      console.log('FUNCEVENT!!!!!!');
-      console.log(data);
-      try {
-        await addConcert({
-          variables: { ...data }
-        })
-      } catch(e) {
-        console.error(e);
-      }
-    }
+    // let testFunc = async (data) => {
+    //   console.log('FUNCEVENT!!!!!!');
+    //   console.log(data);
+    //   try {
+    //     await addConcert({
+    //       variables: { ...data }
+    //     })
+    //   } catch(e) {
+    //     console.error(e);
+    //   }
+    // }
   
 
 
@@ -99,7 +103,7 @@ const Home = () => {
           <h3 id="date">{date}</h3>
           <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>
-        <button onClick={() => testFunc(booger)}>ADD_CONCERT_TEST</button>
+        <button onClick={() => dbConcertUpdater(concertDataArr)}>ADD_CONCERT_TEST</button>
       </div>
       <div className={`home-page-wrapper`}>
         <div>
