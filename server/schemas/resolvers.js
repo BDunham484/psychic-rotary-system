@@ -231,7 +231,6 @@ const resolvers = {
                             })
                         }
 
-
                         const newEventsArr = await Promise.all(events.map((event) => {
                             const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
 
@@ -327,7 +326,6 @@ const resolvers = {
                     return concert;
                 }
             })
-
         },
         addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
@@ -386,6 +384,5 @@ const resolvers = {
         }
     }
 };
-
 
 module.exports = resolvers;
