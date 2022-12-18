@@ -11,7 +11,7 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 
 
-require('./utils/cron')
+// require('./utils/cron')
 
 
 

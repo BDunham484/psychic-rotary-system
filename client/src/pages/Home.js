@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_TODAYS_CONCERTS, QUERY_ME_BASIC, GET_CONCERTS_FOR_DATABASE, GET_YESTERDAYS_CONCERTS } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
@@ -27,28 +27,37 @@ const Home = () => {
   
   const dbConcertUpdater = async  (arr) => {
     await Promise.all(arr.map(async(dailyArr) => {
-      console.log('DAILYARR');
-      console.log(dailyArr);
+      // console.log('DAILYARR');
+      // console.log(dailyArr);
       await Promise.all(dailyArr.map(async(concert) => {
-        console.log('CONCERT WITHIN UPDATER MAP');
-        console.log(concert);
+        // console.log('CONCERT WITHIN UPDATER MAP');
+        // console.log(concert);
         try {
         await addConcert({
           variables: { ...concert }
         })
       } catch(e) {
         console.error(e)
-      }
-      }))
-      
-    }))
-  }
+      };
+      }));
+    }));
+  };
   const [ deleteConcerts ] = useMutation(DELETE_CONCERTS);
 
-  const yesterdaysDate = "Fri Dec 16 2022"
+  const getYesterdaysDate = (date) => {
+    const before = new Date(date);
+    before.setDate(before.getDate() -1);
+    const yesterday = before.toDateString();
+    console.log('YESTERDAY: ' + yesterday);
+    return yesterday;
+  }
+
+  // const yesterdaysDate = "Fri Dec 16 2022"
+  const yesterday = getYesterdaysDate(date);
+
 
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
-    variables: { date: yesterdaysDate }
+    variables: { date: yesterday }
   })
   // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
 
@@ -68,24 +77,19 @@ const Home = () => {
     }
     
   }
-
-    // let booger = concertDataArr[0][4];
-    // let booger = {};
-    // console.log(booger);
-    
-    // let testFunc = async (data) => {
-    //   console.log('FUNCEVENT!!!!!!');
-    //   console.log(data);
-    //   try {
-    //     await addConcert({
-    //       variables: { ...data }
-    //     })
-    //   } catch(e) {
-    //     console.error(e);
-    //   }
-    // }
   
+  // const delay = 10000;
+  const delay = (60000) * 10
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('DELAYED EFFECT RUNNING');
+      dbConcertUpdater(concertDataArr);
+      deleteYesterdaysConcerts(yesterday);
+    }, delay);
+
+    return () => clearInterval(interval);
+  },)
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
@@ -114,6 +118,8 @@ const Home = () => {
     const theLastDay = before.toDateString();
     setDate(theLastDay);
   }
+
+  
 
   // const loggedIn = Auth.loggedIn();
 
