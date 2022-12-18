@@ -23,10 +23,14 @@ const resolvers = {
         },
         //get all users
         users: async () => {
-            return User.find()
+            
+            const users =  User.find()
                 .select('-__v -password')
                 .populate('concerts')
                 .populate('friends');
+            
+            console.log(users);
+            return users
         },
         //get user by username
         user: async (parent, { username }) => {
