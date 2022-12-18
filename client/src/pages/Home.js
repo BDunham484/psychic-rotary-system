@@ -79,7 +79,7 @@ const Home = () => {
   }
   
   // const delay = 10000;
-  const delay = (60000) * 10
+  const delay = ((60000) * 60)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,13 +128,13 @@ const Home = () => {
     <div className="wrapper">
       {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className="utility-bar">
-        <button onClick={deleteYesterdaysConcerts}>DELETE_YESTERDAYS_CONCERTS</button>
+        {/* <button onClick={deleteYesterdaysConcerts}>DELETE_YESTERDAYS_CONCERTS</button> */}
         <span className="display-flex date-wrapper">
           <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
           <h3 id="date">{date}</h3>
           <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>
-        <button onClick={() => dbConcertUpdater(concertDataArr)}>ADD_CONCERT_TEST</button>
+        {/* <button onClick={() => dbConcertUpdater(concertDataArr)}>ADD_CONCERT_TEST</button> */}
       </div>
       <div className={`home-page-wrapper`}>
         <div>
