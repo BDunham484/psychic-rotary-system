@@ -271,20 +271,23 @@ module.exports = {
             }))
             // ^^^^^URLARR PROMISE END
         }))
-        await Promise.all(concertData.map(async (dailyArr) => {
-            console.log('DAILYARR');
-            console.log(dailyArr);
-            await Promise.all(dailyArr.map(async (concert) => {
-                console.log('CONCERT WITHI UPDATER MAP');
-                console.log(concert);
-                try {
-                    await addConcert({
-                        variables: { ...concert }
-                    })
-                } catch (e) {
-                    console.error(e)
-                }
+        console.log('CONCERT DATA SCRAPED');
+        if (concertData) {
+            await Promise.all(concertData.map(async (dailyArr) => {
+                // console.log('DAILYARR');
+                // console.log(dailyArr);
+                await Promise.all(dailyArr.map(async (concert) => {
+                    try {
+                        await addConcert({
+                            variables: { ...concert }
+                        })
+                    } catch (e) {
+                        console.error(e)
+                    }
+                }))
             }))
-        }))
+        }
+
+        console.log('SCRAPED DATA ADDED TO DATABASE');
     }
 }

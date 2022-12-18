@@ -1,3 +1,5 @@
+const { Concert } = require('../models');
+
 module.exports = {
     addConcert: async ({ ...data }) => {
         await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
@@ -23,13 +25,13 @@ module.exports = {
                     { new: true }
                 )
                 console.log('UPDATEDCONCERT');
-                console.log(updatedConcert);
+                // console.log(updatedConcert);
                 return updatedConcert;
             } else {
                 const concert = await Concert.create({ ...data })
                 // .select(-__v);
                 console.log('SAVEDCONCERT');
-                console.log(concert);
+                // console.log(concert);
                 return concert;
             }
         })
