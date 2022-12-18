@@ -377,7 +377,7 @@ const resolvers = {
             return concert;
         },
         deleteConcerts: async (parent, { concertId }) => {
-            console.log('IDIDIDIDIDIDDI');
+            console.log('IDIDIDIDIDIDD');
             console.log(concertId);
             const concerts = await Concert.deleteMany({
                 _id: { $in: concertId }

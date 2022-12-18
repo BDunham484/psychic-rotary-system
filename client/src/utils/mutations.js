@@ -82,4 +82,12 @@ export const ADD_FRIEND = gql`
             }
         }
     }
-`
+`;
+
+export const DELETE_CONCERTS = gql`
+    mutation deleteConcerts ($concertId: [ID]) {
+        deleteConcerts(concertId: $concertId) {
+            _id
+        }
+    }
+`;
