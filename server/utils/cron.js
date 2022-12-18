@@ -1,10 +1,12 @@
-// import cron from 'node-cron';
 const cron = require('node-cron');
-// import { users } from '../schemas/resolvers';
-const users = require('../schemas/resolvers')
+const { getTodaysDate, dbConcertUpdater } = require('./helpers');
+const { concertsForDatabase } = require('./scraper');
 
 
 cron.schedule('* * * * *', () => {
     console.log('CRON JOB IS RUNNING');
-    users();
+    const date = getTodaysDate();
+    console.log(date);
+    concertsForDatabase(date);
+    console.log(concertData);
 });
