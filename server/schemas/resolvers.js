@@ -136,6 +136,11 @@ const resolvers = {
                 console.error(err);
             }
         },
+        allConcerts: async () => {
+            const concerts = await Concert.find();
+
+            return concerts;
+        },
         //scrape all concerts for the day
         concertsForDatabase: async (parent, { date }) => {
             //delcare empty array for dates

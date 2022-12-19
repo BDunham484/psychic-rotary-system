@@ -207,6 +207,16 @@ main {
   cursor: pointer;
 }
 
+.minus-sign {
+  width: 50px;
+  color: #a23e25;
+  margin-left: 2vw;
+}
+
+.minus-sign:hover {
+  cursor: pointer;
+}
+
 #artists-link {
   font-size: 22px;
   font-weight: bold;

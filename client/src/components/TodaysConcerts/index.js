@@ -8,7 +8,7 @@ import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
 import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
 
 const ConcertList = ({ concerts }) => {
-    const [ plus, setPlus ] = useState(true);
+    const [button, setButton] = useState(true);
     // console.log(getTodaysDate);
     // var today = getTodaysDate();
     // const [date, setDate] = useState(today)
@@ -50,8 +50,9 @@ const ConcertList = ({ concerts }) => {
     //     })
     // }
     const togglePlus = (index) => {
-        
-        setPlus(current => !current)
+        console.log(index);
+
+        setButton(current => !current)
     }
 
     return (
@@ -59,14 +60,17 @@ const ConcertList = ({ concerts }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={index}>
-                        {plus === true ? (
-                            <PlusSquareFill className="plus-sign" onClick={() => togglePlus(index)}/>
+                        
+                        { button === true ? (
+                            <PlusSquareFill className="plus-sign" onClick={() => togglePlus(index)} />
                         ) : (
-                            <SquaredMinus className="plus-sign" onClick={() => togglePlus(index)}/>
+                            <SquaredMinus className="minus-sign" onClick={() => togglePlus(index)} />
                         )}
                         {/* <PlusSquareFill className="plus-sign" /> */}
+        
+
                         <p id="showcard-data">
-                            <Link to={`/show/${concert.artists}`} state={{concert}}>
+                            <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                 <span id="artists-link">{concert.artists} </span>
                             </Link>
                             at {concert.venue} | {concert.times}

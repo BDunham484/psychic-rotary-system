@@ -35,6 +35,7 @@ const typeDefs = gql`
         userConcerts(username: String): [Concert]
         concert(_id: ID!): Concert
         concerts(date: String): [Concert]
+        allConcerts: [Concert]
         concertsFromDb(date: String!): [Concert]
         concertsForDatabase(date: String): [[Concert]]
         getYesterdaysConcerts(date: String!): [Concert]
