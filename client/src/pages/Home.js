@@ -13,6 +13,7 @@ import TodaysConcerts from "../components/TodaysConcerts";
 import Spinner from '../components/shared/Spinner';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 
+
 const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
@@ -74,7 +75,6 @@ const Home = () => {
     } catch (e) {
       console.error(e)
     }
-
   }
 
   // const delay = 60000;
@@ -94,7 +94,7 @@ const Home = () => {
   const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
     variables: { date: date }
   });
-  
+
   const { data: userData } = useQuery(QUERY_ME_BASIC);
 
   if (userData) {
@@ -131,7 +131,13 @@ const Home = () => {
       <div className="utility-bar">
         {/* <button onClick={deleteYesterdaysConcerts}>DELETE_YESTERDAYS_CONCERTS</button> */}
         <span className="display-flex date-wrapper">
-          <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
+          {today === date ? (
+            <LeftArrow className="disabled-arrows" />
+          ) : (
+            <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
+          )}
+
+
           <h3 id="date">{date}</h3>
           <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
         </span>

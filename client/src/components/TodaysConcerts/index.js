@@ -1,11 +1,14 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import Auth from '../../utils/auth';
 // import { getTodaysDate } from "../../utils/helpers";
 import ShowCard from "../ShowCard";
 // import { timex } from '../../utils/regex';
+import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
+import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
 
 const ConcertList = ({ concerts }) => {
+    const [ plus, setPlus ] = useState(true);
     // console.log(getTodaysDate);
     // var today = getTodaysDate();
     // const [date, setDate] = useState(today)
@@ -46,12 +49,22 @@ const ConcertList = ({ concerts }) => {
     //         return doorTime;
     //     })
     // }
+    const togglePlus = (index) => {
+        
+        setPlus(current => !current)
+    }
 
     return (
         <>
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={index}>
+                        {plus === true ? (
+                            <PlusSquareFill className="plus-sign" onClick={() => togglePlus(index)}/>
+                        ) : (
+                            <SquaredMinus className="plus-sign" onClick={() => togglePlus(index)}/>
+                        )}
+                        {/* <PlusSquareFill className="plus-sign" /> */}
                         <p id="showcard-data">
                             <Link to={`/show/${concert.artists}`} state={{concert}}>
                                 <span id="artists-link">{concert.artists} </span>
