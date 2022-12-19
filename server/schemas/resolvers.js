@@ -49,9 +49,15 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         //get all concerts in database
-        concertsFromDb: async () => {
-            const concerts = await Concert.find()
-
+        concertsFromDb: async (parent, { date }) => {
+            console.log('INSIDE THE NEW RESOLVER')
+            console.log(date);
+            const concerts = await Concert.find({
+                date: date
+            })
+            .exec();
+            console.log('THE OTHER LOG FROM INSIDE THE RESOLVER');
+            console.log(concerts);
             return concerts
         },
         //scrape all concerts for the day
