@@ -56,7 +56,7 @@ const ConcertList = ({ concerts }) => {
                             <Link to={`/show/${concert.artists}`} state={{concert}}>
                                 <span id="artists-link">{concert.artists} </span>
                             </Link>
-                            at {concert.venue} | {concert.dateTime}
+                            at {concert.venue} | {concert.times}
                         </p>
 
                         {/* {loggedIn &&

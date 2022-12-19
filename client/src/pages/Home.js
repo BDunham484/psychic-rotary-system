@@ -21,22 +21,18 @@ const Home = () => {
   const [date, setDate] = useState(today)
 
   const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
-    variables: { date: date }
+    variables: { date: today }
   })
 
   const concertDataArr = concertData?.concertsForDatabase || [];
-  console.log('CONCERTDATAARR!!!!!!');
+  console.log('SCRAPER QUERY BY DATE');
   console.log(concertDataArr);
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
   const dbConcertUpdater = async (arr) => {
     await Promise.all(arr.map(async (dailyArr) => {
-      // console.log('DAILYARR');
-      // console.log(dailyArr);
       await Promise.all(dailyArr.map(async (concert) => {
-        // console.log('CONCERT WITHIN UPDATER MAP');
-        // console.log(concert);
         try {
           await addConcert({
             variables: { ...concert }
@@ -53,13 +49,10 @@ const Home = () => {
     const before = new Date(date);
     before.setDate(before.getDate() - 1);
     const yesterday = before.toDateString();
-    console.log('YESTERDAY: ' + yesterday);
     return yesterday;
   }
 
-  // const yesterdaysDate = "Fri Dec 16 2022"
   const yesterday = getYesterdaysDate(date);
-
 
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
     variables: { date: yesterday }
@@ -72,6 +65,7 @@ const Home = () => {
     for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
       yesterdaysDatesArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
     }
+    console.log('YESTERDAYS DATES TO BE DELETED');
     console.log(yesterdaysDatesArr);
     try {
       await deleteConcerts({
@@ -83,8 +77,8 @@ const Home = () => {
 
   }
 
-  // const delay = 10000;
-  const delay = ((60000) * 60)
+  // const delay = 60000;
+  const delay = (60000 * 60)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -100,8 +94,7 @@ const Home = () => {
   const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
     variables: { date: date }
   });
-  console.log('DATA')
-  console.log(data);
+  
   const { data: userData } = useQuery(QUERY_ME_BASIC);
 
   if (userData) {
@@ -110,7 +103,7 @@ const Home = () => {
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
-  console.log('CONCERTS');
+  console.log('CONCERT DATA FROM DB BY DATE');
   console.log(concerts);
   //function that gets the next day
   const nextDayButton = (date) => {

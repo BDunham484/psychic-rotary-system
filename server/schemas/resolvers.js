@@ -50,14 +50,12 @@ const resolvers = {
         },
         //get all concerts in database
         concertsFromDb: async (parent, { date }) => {
-            console.log('INSIDE THE NEW RESOLVER')
-            console.log(date);
             const concerts = await Concert.find({
                 date: date
             })
+            .sort({ venue: 'asc'})
             .exec();
-            console.log('THE OTHER LOG FROM INSIDE THE RESOLVER');
-            console.log(concerts);
+
             return concerts
         },
         //scrape all concerts for the day
@@ -154,21 +152,18 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 1; i++) {
+            for (let i = 0; i < 12; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
             }
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
-                // dateArr.map(async(date, index) => {
-                // console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
                 const year = new Date().getFullYear();
                 console.log('CONCERTSFORDATABASE-DATES');
                 console.log(year + '-' + month + '-' + day)
-                // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
                 const urlArr = [
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
@@ -274,7 +269,7 @@ const resolvers = {
             return concertData;
         },
         getYesterdaysConcerts: async (parent, { date }) => {
-            console.log(date);
+            console.log('GETYESTERDAYSCONCERTS HAS RUN');
             const yesterdaysConcerts = await Concert.find({ date: date })
                 .exec();
 

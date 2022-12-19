@@ -15,7 +15,7 @@ const Header = () => {
       
         <div className="display-flex title-wrapper">
         <Link to="/">
-        <h1>NBX</h1>
+        <h1>NOISEBX</h1>
         </Link>
         <CubeAlt id="cube-icon"/>
         
