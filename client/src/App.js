@@ -14,6 +14,7 @@ import { ConcertProvider } from './utils/GlobalState';
 
 
 
+
 //establish link to GraphQL server
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -37,6 +38,8 @@ const client = new ApolloClient({
 })
 
 function App() {
+
+
 
   return (
     <ApolloProvider client={client}>

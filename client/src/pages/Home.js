@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   QUERY_ME_BASIC,
-  GET_CONCERTS_FOR_DATABASE,
-  GET_YESTERDAYS_CONCERTS,
+  // GET_CONCERTS_FOR_DATABASE,
+  // GET_YESTERDAYS_CONCERTS,
   GET_CONCERTS_BY_DATE
 } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
@@ -44,38 +44,39 @@ const Home = () => {
       }));
     }));
   };
-  const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
-  const getYesterdaysDate = (date) => {
-    const before = new Date(date);
-    before.setDate(before.getDate() - 1);
-    const yesterday = before.toDateString();
-    return yesterday;
-  }
+  // const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
-  const yesterday = getYesterdaysDate(date);
+  // const getYesterdaysDate = (date) => {
+  //   const before = new Date(date);
+  //   before.setDate(before.getDate() - 1);
+  //   const yesterday = before.toDateString();
+  //   return yesterday;
+  // }
 
-  const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
-    variables: { date: yesterday }
-  })
-  // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
+  // const yesterday = getYesterdaysDate(date);
 
-  const yesterdaysDatesArr = [];
+  // const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
+  //   variables: { date: yesterday }
+  // })
+  // // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
 
-  const deleteYesterdaysConcerts = async () => {
-    for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
-      yesterdaysDatesArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
-    }
-    console.log('YESTERDAYS DATES TO BE DELETED');
-    console.log(yesterdaysDatesArr);
-    try {
-      await deleteConcerts({
-        variables: { concertId: yesterdaysDatesArr }
-      })
-    } catch (e) {
-      console.error(e)
-    }
-  }
+  // const yesterdaysDatesArr = [];
+
+  // const deleteYesterdaysConcerts = async () => {
+  //   for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
+  //     yesterdaysDatesArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
+  //   }
+  //   console.log('YESTERDAYS DATES TO BE DELETED');
+  //   console.log(yesterdaysDatesArr);
+  //   try {
+  //     await deleteConcerts({
+  //       variables: { concertId: yesterdaysDatesArr }
+  //     })
+  //   } catch (e) {
+  //     console.error(e)
+  //   }
+  // }
 
   // const delay = 60000;
   const delay = (60000 * 60)

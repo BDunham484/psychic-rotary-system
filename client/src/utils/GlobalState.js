@@ -22,27 +22,18 @@ const ConcertProvider = ({ children }) => {
     const [austinChronicleScrape, setAustinChroicleScrape] = useState([[]]);
 
     useEffect(() => {
-        if (concertData) {
-            const concertDataArr = concertData.concertsForDatabase
-            console.log('STATE-CONCERTDATAARR')
-            console.log(concertDataArr)
-            setAustinChroicleScrape(concertDataArr)
-            console.log('SCRAPE');
-            console.log(austinChronicleScrape);
-        }
+        // if (concertData) {
+        //     const concertDataArr = concertData.concertsForDatabase
+        //     console.log('SCRAPE-CONCERTDATAARR')
+        //     console.log(concertDataArr);
+        //     setAustinChroicleScrape(concertDataArr)
+        //     console.log('SCRAPE AND SET STATE');
+        //     console.log(austinChronicleScrape);
+        // }
     }, [concertData, austinChronicleScrape])
-    // const concertDataArr = concertData?.concertsForDatabase || [];
-    // console.log('GLOBAL STATE SCRAPER');
-    // console.log(concertDataArr);
-
-
-    // console.log(austinChronicleScrape);
-
-    // setAustinChroicleScrape(concertDataArr);
-
-
 
     return <Provider value={{
+        today,
         austinChronicleScrape
     }}>
         {children}
