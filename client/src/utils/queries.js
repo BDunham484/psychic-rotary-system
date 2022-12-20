@@ -16,6 +16,23 @@ export const GET_TODAYS_CONCERTS = gql`
     }
 `;
 
+export const GET_CONCERTS_BY_DATE = gql`
+    query concertsFromDb($date: String!) {
+        concertsFromDb(date: $date) {
+            _id
+            artists
+            customId
+            date
+            times
+            venue
+            address
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+
 export const GET_CONCERTS_FOR_DATABASE = gql`
     query concertsForDatabase($date: String) {
         concertsForDatabase(date: $date) {
@@ -121,6 +138,24 @@ export const QUERY_ME_BASIC = gql`
                 _id
                 username
             }
+        }
+    }
+`;
+
+export const GET_YESTERDAYS_CONCERTS = gql`
+    query getYesterdaysConcerts($date: String!) {
+        getYesterdaysConcerts(date: $date) {
+            _id
+            customId
+            artists
+            address
+            venue
+            date
+            times
+            email
+            website
+            ticketLink
+            artistsLink
         }
     }
 `;

@@ -35,8 +35,10 @@ const typeDefs = gql`
         userConcerts(username: String): [Concert]
         concert(_id: ID!): Concert
         concerts(date: String): [Concert]
-        concertsFromDb: [Concert]
+        allConcerts: [Concert]
+        concertsFromDb(date: String!): [Concert]
         concertsForDatabase(date: String): [[Concert]]
+        getYesterdaysConcerts(date: String!): [Concert]
     }
 
     type Mutation {
@@ -46,7 +48,7 @@ const typeDefs = gql`
         addConcertsToDatabase(customId: String, artists: String, venue: String, date: String, times: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): [Concert]
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
-        addConcertToUser(customId: String, artists: String, description: String, venue: String, times: String, address: String, website: String, email: String, ticketLink: String, artistsLink: String): User
+        addConcertToUser(concertId: ID!): User
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User

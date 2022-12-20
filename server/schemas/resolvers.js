@@ -23,10 +23,14 @@ const resolvers = {
         },
         //get all users
         users: async () => {
-            return User.find()
+            
+            const users =  User.find()
                 .select('-__v -password')
                 .populate('concerts')
                 .populate('friends');
+            
+            console.log(users);
+            return users
         },
         //get user by username
         user: async (parent, { username }) => {
@@ -45,26 +49,27 @@ const resolvers = {
             return Concert.findOne({ _id });
         },
         //get all concerts in database
-        concertsFromDb: async () => {
-            const concerts = await Concert.find()
+        concertsFromDb: async (parent, { date }) => {
+            const concerts = await Concert.find({
+                date: date
+            })
+            .sort({ venue: 'asc'})
+            .exec();
 
             return concerts
         },
         //scrape all concerts for the day
         concerts: async (parent, { date }) => {
-            console.log(date);
             // const date = new Date().toDateString();
             const day = date.slice(8, 10);
             const month = (new Date().getMonth()) + 1;
             const year = new Date().getFullYear();
-            console.log(year + '-' + month + '-' + day)
 
             const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`
             try {
                 const { data } = await axios.get(url);
                 const $ = cheerio.load(data);
                 var events = [];
-                console.log($('ul:eq(-1)').length)
                 if ($('ul:eq(-1)').length === 0) {
                     $('ul:eq(0) .list-item', data).each(function () {
                         const artists = $(this).find('h2').text()
@@ -131,10 +136,13 @@ const resolvers = {
                 console.error(err);
             }
         },
+        allConcerts: async () => {
+            const concerts = await Concert.find();
+
+            return concerts;
+        },
         //scrape all concerts for the day
         concertsForDatabase: async (parent, { date }) => {
-            console.log('DATE!!!!!!!!!!');
-            console.log(date);
             //delcare empty array for dates
             const dateArr = [];
             //push todays date into dateArr
@@ -149,20 +157,18 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 15; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
             }
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
-                // dateArr.map(async(date, index) => {
-                // console.log("DATE: " + date)
                 const day = date.slice(8, 10);
                 const month = (new Date().getMonth()) + 1;
                 const year = new Date().getFullYear();
+                console.log('CONCERTSFORDATABASE-DATES');
                 console.log(year + '-' + month + '-' + day)
-                // const url = `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
                 const urlArr = [
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
@@ -172,7 +178,6 @@ const resolvers = {
                         const { data } = await axios.get(url);
                         const $ = cheerio.load(data);
                         var events = [];
-                        console.log($('ul:eq(-1)').length)
                         if ($('ul:eq(-1)').length === 0) {
                             $('ul:eq(0) .list-item', data).each(function () {
                                 const artists = $(this).find('h2').text()
@@ -267,6 +272,13 @@ const resolvers = {
                 // ^^^^^URLARR PROMISE END
             }))
             return concertData;
+        },
+        getYesterdaysConcerts: async (parent, { date }) => {
+            console.log('GETYESTERDAYSCONCERTS HAS RUN');
+            const yesterdaysConcerts = await Concert.find({ date: date })
+                .exec();
+
+            return yesterdaysConcerts;
         }
     },
     Mutation: {
@@ -338,18 +350,16 @@ const resolvers = {
             }
             throw new AuthenticationError('Youj need to be logged in!');
         },
-        addConcertToUser: async (parent, args, context) => {
-            console.log(args);
+        addConcertToUser: async (parent, { concertId }, context) => {
+            console.log(concertId);
             console.log(context.user)
             if (context.user) {
-                const concert = await Concert.create({ ...args });
-
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { concerts: concert._id } },
+                    { $addToSet: { concerts: concertId } },
                     { new: true }
-                );
-                console.log(concert._id);
+                ).populate('concerts');
+
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -363,10 +373,6 @@ const resolvers = {
                     { new: true }
                 );
 
-                await Concert.findByIdAndDelete(
-                    { _id: concertId }
-                )
-
                 return user;
             }
         },
@@ -375,7 +381,7 @@ const resolvers = {
             return concert;
         },
         deleteConcerts: async (parent, { concertId }) => {
-            console.log('IDIDIDIDIDIDDI');
+            console.log('IDIDIDIDIDIDD');
             console.log(concertId);
             const concerts = await Concert.deleteMany({
                 _id: { $in: concertId }

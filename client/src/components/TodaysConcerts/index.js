@@ -1,62 +1,31 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
-// import Auth from '../../utils/auth';
-// import { getTodaysDate } from "../../utils/helpers";
+import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
-// import { timex } from '../../utils/regex';
+import PlusButton from "../shared/PlusButton";
 
 const ConcertList = ({ concerts }) => {
-    // console.log(getTodaysDate);
-    // var today = getTodaysDate();
-    // const [date, setDate] = useState(today)
-
-    // //use useQuery hook to make query request
-    // const { loading, data } = useQuery(GET_TODAYS_CONCERTS, {
-    //     variables: { test }
-    // });
 
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
     }
 
-    //sets the date to the next day
-    // const nextDay = (date) => {
-    //     const next = new Date(date);
-    //     next.setDate(next.getDate() + 1)
-    //     const theNextDay = next.toDateString();
-    //     console.log("nextDay: " + theNextDay);
-    //     setDate(theNextDay);
-    // }
-
-    // const dayBefore = (date) => {
-    //     const before = new Date(date);
-    //     before.setDate(before.getDate() - 1)
-    //     const theLastDay = before.toDateString();
-    //     console.log("dayBefore: " + theLastDay);
-    //     setDate(theLastDay);
-    // }
-    // const loggedIn = Auth.loggedIn();
-    // const checkForTime = dateTime => {
-    //     var arr = dateTime.split(',');
-    //     console.log(arr);
-    //     var doorTime = [];
-    //     arr.map((element) => {
-    //         doorTime.push(element.match(timex));
-    //         console.log(doorTime);
-    //         return doorTime;
-    //     })
-    // }
+    const loggedIn = Auth.loggedIn();
 
     return (
         <>
             {concerts &&
                 concerts.map((concert, index) => (
-                    <ShowCard key={index}>
+                    <ShowCard key={concert._id}>
+                        {loggedIn &&
+                            <PlusButton concertId={concert._id} />
+                        }
+
+
                         <p id="showcard-data">
-                            <Link to={`/show/${concert.artists}`} state={{concert}}>
+                            <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                 <span id="artists-link">{concert.artists} </span>
                             </Link>
-                            at {concert.venue} | {concert.dateTime}
+                            at {concert.venue} | {concert.times}
                         </p>
 
                         {/* {loggedIn &&
