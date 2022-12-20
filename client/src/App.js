@@ -10,6 +10,7 @@ import NoMatch from './pages/NoMatch';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { ConcertProvider } from './utils/GlobalState';
 
 
 
@@ -39,10 +40,11 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
+      <ConcertProvider>
+        <Router>
           <div>
-            <Header />
+            <div>
+              <Header />
               <main>
                 <Routes>
                   <Route
@@ -68,10 +70,11 @@ function App() {
                   />
                 </Routes>
               </main>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
+        </Router>
+      </ConcertProvider>
     </ApolloProvider>
   );
 }

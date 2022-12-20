@@ -21,13 +21,13 @@ const Home = () => {
   //set initial state using today's date
   const [date, setDate] = useState(today)
 
-  const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
-    variables: { date: today }
-  })
+  // const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
+  //   variables: { date: today }
+  // })
 
-  const concertDataArr = concertData?.concertsForDatabase || [];
-  console.log('SCRAPER QUERY BY DATE');
-  console.log(concertDataArr);
+  // const concertDataArr = concertData?.concertsForDatabase || [];
+  // console.log('SCRAPER QUERY BY DATE');
+  // console.log(concertDataArr);
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
@@ -83,8 +83,8 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       console.log('DELAYED EFFECT RUNNING');
-      dbConcertUpdater(concertDataArr);
-      deleteYesterdaysConcerts(yesterday);
+      // dbConcertUpdater(concertDataArr);
+      // deleteYesterdaysConcerts(yesterday);
     }, delay);
 
     return () => clearInterval(interval);
@@ -103,8 +103,8 @@ const Home = () => {
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
-  console.log('CONCERT DATA FROM DB BY DATE');
-  console.log(concerts);
+  // console.log('CONCERT DATA FROM DB BY DATE');
+  // console.log(concerts);
   //function that gets the next day
   const nextDayButton = (date) => {
     const next = new Date(date);
