@@ -57,18 +57,10 @@ function App() {
                     path="/signup"
                     element={<Signup />}
                   />
-                  {/* <Route
-                    path="/profile"
-                    element={<Profile />}
-                  /> */}
                   <Route path="/profile">
                     <Route path=":username" element={<Profile />} />
                     <Route path="" element={<Profile />} />
                   </Route>
-                  {/* <Route path="/show">
-                    <Route path=":artists" element={<Show />} />
-                    <Route path="" element={<Show />} />
-                  </Route> */}
                   <Route path="/show/:artists" element={<Show />} />
                   <Route
                     path="*"
