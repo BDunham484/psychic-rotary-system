@@ -19,6 +19,7 @@ export const GET_TODAYS_CONCERTS = gql`
 export const GET_CONCERTS_BY_DATE = gql`
     query concertsFromDb($date: String!) {
         concertsFromDb(date: $date) {
+            _id
             artists
             customId
             date

@@ -18,7 +18,7 @@ const Home = () => {
   //get today's date with imported helper function
   var today = getTodaysDate();
 
-  //set initial state useing today's date
+  //set initial state using today's date
   const [date, setDate] = useState(today)
 
   const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {

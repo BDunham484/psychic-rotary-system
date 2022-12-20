@@ -201,6 +201,7 @@ main {
   width: 50px;
   color: var(--button);
   margin-left: 2vw;
+  visibility: visible;
 }
 
 .plus-sign:hover {
@@ -211,6 +212,7 @@ main {
   width: 50px;
   color: #a23e25;
   margin-left: 2vw;
+  /* visibility: hidden; */
 }
 
 .minus-sign:hover {
