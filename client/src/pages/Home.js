@@ -1,23 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   QUERY_ME_BASIC,
   // GET_CONCERTS_FOR_DATABASE,
-  // GET_YESTERDAYS_CONCERTS,
+  GET_YESTERDAYS_CONCERTS,
   GET_CONCERTS_BY_DATE
 } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
-import { getTodaysDate } from "../utils/helpers";
+// import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 // import Auth from '../utils/auth';
 import Spinner from '../components/shared/Spinner';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
+import { ConcertContext } from '../utils/GlobalState'
 
 
 const Home = () => {
-  //get today's date with imported helper function
-  var today = getTodaysDate();
-
+  const { today } = useContext(ConcertContext);
   //set initial state using today's date
   const [date, setDate] = useState(today)
 
@@ -45,38 +44,38 @@ const Home = () => {
     }));
   };
 
-  // const [deleteConcerts] = useMutation(DELETE_CONCERTS);
+  const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
-  // const getYesterdaysDate = (date) => {
-  //   const before = new Date(date);
-  //   before.setDate(before.getDate() - 1);
-  //   const yesterday = before.toDateString();
-  //   return yesterday;
-  // }
+  const getYesterdaysDate = (date) => {
+    const before = new Date(date);
+    before.setDate(before.getDate() - 1);
+    const yesterday = before.toDateString();
+    return yesterday;
+  }
 
-  // const yesterday = getYesterdaysDate(date);
+  const yesterday = getYesterdaysDate(date);
 
-  // const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
-  //   variables: { date: yesterday }
-  // })
-  // // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
+  const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
+    variables: { date: yesterday }
+  })
+  // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
 
-  // const yesterdaysDatesArr = [];
+  const yesterdaysDatesArr = [];
 
-  // const deleteYesterdaysConcerts = async () => {
-  //   for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
-  //     yesterdaysDatesArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
-  //   }
-  //   console.log('YESTERDAYS DATES TO BE DELETED');
-  //   console.log(yesterdaysDatesArr);
-  //   try {
-  //     await deleteConcerts({
-  //       variables: { concertId: yesterdaysDatesArr }
-  //     })
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
+  const deleteYesterdaysConcerts = async () => {
+    for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
+      yesterdaysDatesArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
+    }
+    console.log('YESTERDAYS DATES TO BE DELETED');
+    console.log(yesterdaysDatesArr);
+    try {
+      await deleteConcerts({
+        variables: { concertId: yesterdaysDatesArr }
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   // const delay = 60000;
   const delay = (60000 * 60)

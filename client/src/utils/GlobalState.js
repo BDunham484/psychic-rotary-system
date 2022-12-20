@@ -11,7 +11,7 @@ const { Provider } = ConcertContext;
 const ConcertProvider = ({ children }) => {
     //get today's date with imported helper function
     var today = getTodaysDate();
-    console.log(today);
+    console.log("TODAY: " + today);
     //set initial state using today's date
     // const [date, setDate] = useState(today)
 
@@ -22,14 +22,14 @@ const ConcertProvider = ({ children }) => {
     const [austinChronicleScrape, setAustinChroicleScrape] = useState([[]]);
 
     useEffect(() => {
-        // if (concertData) {
-        //     const concertDataArr = concertData.concertsForDatabase
-        //     console.log('SCRAPE-CONCERTDATAARR')
-        //     console.log(concertDataArr);
-        //     setAustinChroicleScrape(concertDataArr)
-        //     console.log('SCRAPE AND SET STATE');
-        //     console.log(austinChronicleScrape);
-        // }
+        if (concertData) {
+            // const concertDataArr = concertData.concertsForDatabase
+            // console.log('SCRAPE-CONCERTDATAARR')
+            // console.log(concertDataArr);
+            // setAustinChroicleScrape(concertDataArr)
+            // console.log('SCRAPE AND SET STATE');
+            // console.log(austinChronicleScrape);
+        }
     }, [concertData, austinChronicleScrape])
 
     return <Provider value={{
@@ -44,4 +44,4 @@ const useConcertContext = () => {
     return useContext(ConcertContext);
 };
 
-export { ConcertProvider, useConcertContext }
+export { ConcertProvider, useConcertContext, ConcertContext }
