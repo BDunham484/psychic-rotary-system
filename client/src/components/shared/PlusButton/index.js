@@ -9,7 +9,7 @@ const PlusButton = ({ concertId }) => {
 
 
     const handleClick = async (id) => {
-        console.log(id)
+        console.log(id + ' added to user profile');
         try {
             await addConcertToUser({
                 variables: { concertId: id }
