@@ -350,18 +350,16 @@ const resolvers = {
             }
             throw new AuthenticationError('Youj need to be logged in!');
         },
-        addConcertToUser: async (parent, args, context) => {
-            console.log(args);
+        addConcertToUser: async (parent, { concertId }, context) => {
+            console.log(concertId);
             console.log(context.user)
             if (context.user) {
-                const concert = await Concert.create({ ...args });
-
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { concerts: concert._id } },
+                    { $addToSet: { concerts: concertId } },
                     { new: true }
-                );
-                console.log(concert._id);
+                ).populate('concerts');
+
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -374,10 +372,6 @@ const resolvers = {
                     { $pull: { concerts: concertId } },
                     { new: true }
                 );
-
-                await Concert.findByIdAndDelete(
-                    { _id: concertId }
-                )
 
                 return user;
             }

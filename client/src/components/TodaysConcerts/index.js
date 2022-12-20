@@ -5,7 +5,6 @@ import PlusButton from "../shared/PlusButton";
 
 const ConcertList = ({ concerts }) => {
 
-
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
     }
