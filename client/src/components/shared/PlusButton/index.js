@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/client";
 import { ADD_CONCERT_TO_USER } from "../../../utils/mutations";
 
-import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 // import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
+// @styled-icons/boxicons-solid/MinusSquare
 
 const PlusButton = ({ concertId }) => {
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
@@ -21,7 +22,7 @@ const PlusButton = ({ concertId }) => {
 
     return (
         <>
-            <PlusSquareFill className="plus-sign" onClick={() => handleClick(concertId)} />
+            <SquaredPlus className="plus-sign" onClick={() => handleClick(concertId)} />
         </>
     )
 }
