@@ -1,32 +1,46 @@
+// import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
 import PlusButton from "../shared/PlusButton";
+import MinusButton from "../shared/MinusButton";
 
 const ConcertList = ({ concerts, user }) => {
+
+    const idCheck = (user, id) => {
+        if (user) {
+            console.log('USER');
+            const concertIds = user.me.concerts
+            const test = concertIds.map((ids) => {
+                if (Object.values(ids).includes(id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            if (test.includes(true)) {
+                console.log(true);
+                return true
+            } else {
+                console.log(false);
+                return false;
+            }
+        }
+    }
+
+    // useEffect(() => {
+    //     concerts.map((concert) => {
+    //         return idCheck(user, concert._id)
+    //     })
+    // })
 
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
     }
 
-    if (user) {
-        console.log('USER');
-        const concertIds = user.me.concerts
-        const test = concertIds.map((ids) => {
-            if (Object.values(ids).includes("639fb6f4d5c81b2d94265adc")) {
-                return true;
-            } else {
-                return false;
-            }
-        })
-        if (test.includes(true)) {
-            console.log(true);
-            return true
-        } else {
-            console.log(false);
-            return false;
-        }
-    }
+
+
+
 
     const loggedIn = Auth.loggedIn();
 
@@ -35,9 +49,13 @@ const ConcertList = ({ concerts, user }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={concert._id}>
-                        {loggedIn &&
+                        {/* {loggedIn && */}
+                        {idCheck(user, concert._id) ? (
+                            <MinusButton concertId={concert._id} />
+                        ) : (
                             <PlusButton concertId={concert._id} />
-                        }
+                        )}
+                        {/* } */}
 
 
                         <p id="showcard-data">
