@@ -16,7 +16,9 @@ import { ConcertContext } from '../utils/GlobalState'
 
 
 const Home = () => {
-  const { today } = useContext(ConcertContext);
+  const { today, austinScraper } = useContext(ConcertContext);
+  console.log('home scraper');
+  console.log(austinScraper)
   //set initial state using today's date
   const [date, setDate] = useState(today)
 

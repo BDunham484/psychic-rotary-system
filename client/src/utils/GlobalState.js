@@ -19,22 +19,22 @@ const ConcertProvider = ({ children }) => {
         variables: { date: today }
     })
 
-    const [austinChronicleScrape, setAustinChroicleScrape] = useState([[]]);
+    const [austinScraper, setAustinScraper] = useState([[]]);
 
     useEffect(() => {
         if (concertData) {
             // const concertDataArr = concertData.concertsForDatabase
             // console.log('SCRAPE-CONCERTDATAARR')
             // console.log(concertDataArr);
-            // setAustinChroicleScrape(concertDataArr)
+            // setAustinScraper(concertDataArr)
             // console.log('SCRAPE AND SET STATE');
-            // console.log(austinChronicleScrape);
+            // console.log(austinScraper);
         }
-    }, [concertData, austinChronicleScrape])
+    }, [concertData, austinScraper])
 
     return <Provider value={{
         today,
-        austinChronicleScrape
+        austinScraper
     }}>
         {children}
         </Provider>
