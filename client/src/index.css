@@ -197,6 +197,11 @@ main {
   font-size: 20px;
 }
 
+.show-wrapper {
+  width: 90vw;
+  height: 50vh;
+}
+
 .plus-sign {
   width: 50px;
   color: var(--button);
@@ -225,7 +230,7 @@ main {
 }
 
 /* LOGIN STYLES START */
-.login-page-wrapper {
+.container {
   width: 100vw;
   min-height: 100vh; 
   display: flex;

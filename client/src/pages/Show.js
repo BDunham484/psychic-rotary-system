@@ -2,13 +2,15 @@ import { useLocation } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_CONCERT_TO_USER } from "../utils/mutations";
 import Auth from '../utils/auth';
+import ShowCard from '../components/ShowCard';
 
 const Show = () => {
     // const { artists } = useParams();
 
     const location = useLocation();
-
+    
     const { concert } = location.state
+
 
     const [addConcert, { error }] = useMutation(ADD_CONCERT_TO_USER);
 
@@ -45,8 +47,10 @@ const Show = () => {
 
 
     return (
-        <div className='home-page-wrapper'>
-            <h2>
+        <div className='container'>
+            <ShowCard>
+                <div className="show-wrapper">
+                <h2>
                 ARTIST: {concert.artists}
             </h2>
             <h3>DESCRIPTION: {concert.description}</h3>
@@ -62,7 +66,10 @@ const Show = () => {
                 <button onClick={deleteConcertFromUser}>Delete from Profile</button>
             </div>}
             {error && <div>An error occurred</div>}
-            {/* {deleteError && <div>An error occurred</div>} */}
+                </div>
+            
+            </ShowCard>
+            
         </div>
 
 

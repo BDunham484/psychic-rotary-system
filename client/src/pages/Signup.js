@@ -34,7 +34,7 @@ const Signup = () => {
     };
 
     return (
-        <div className='login-page-wrapper'>
+        <div className='container'>
             <FormCard>
                 <form onSubmit={handleFormSubmit}>
                     <p>SIGN UP</p>

@@ -36,7 +36,7 @@ const Login = () => {
 
 
     return (
-        <div className='login-page-wrapper'>
+        <div className='container'>
             <FormCard>
                 <form onSubmit={handleFormSubmit}>
                     <p>LOGIN</p>
