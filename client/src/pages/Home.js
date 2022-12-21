@@ -149,7 +149,7 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
-              <TodaysConcerts concerts={concerts} />
+              <TodaysConcerts concerts={concerts} user={userData}/>
             </>
           )}
         </div>

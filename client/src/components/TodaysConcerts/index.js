@@ -3,10 +3,29 @@ import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
 import PlusButton from "../shared/PlusButton";
 
-const ConcertList = ({ concerts }) => {
+const ConcertList = ({ concerts, user }) => {
 
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
+    }
+
+    if (user) {
+        console.log('USER');
+        const concertIds = user.me.concerts
+        const test = concertIds.map((ids) => {
+            if (Object.values(ids).includes("639fb6f4d5c81b2d94265adc")) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        if (test.includes(true)) {
+            console.log(true);
+            return true
+        } else {
+            console.log(false);
+            return false;
+        }
     }
 
     const loggedIn = Auth.loggedIn();
