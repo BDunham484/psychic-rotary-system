@@ -17,11 +17,9 @@ const ConcertList = ({ concerts, user }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={concert._id}>
-
                         {loggedIn &&
                             <PlusMinus user={user} concertId={concert._id} />
                         }
-
                         <p id="showcard-data">
                             <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                 <span id="artists-link">{concert.artists} </span>

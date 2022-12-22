@@ -2,14 +2,13 @@ import PlusButton from "../PlusButton";
 import MinusButton from "../MinusButton";
 
 
-const PlusMinus = (user) => {
-
+const PlusMinus = ({ user, concertId }) => {
 
     const idCheck = (user, id) => {
-        if (user.user === undefined) {
+        if (user === undefined) {
             console.log('hang tight');
         } else {
-            const concertIds = user.user.me.concerts
+            const concertIds = user.me.concerts
             const test = concertIds.map((ids) => {
                 if (Object.values(ids).includes(id)) {
                     return true;
@@ -27,10 +26,10 @@ const PlusMinus = (user) => {
 
     return (
         <div>
-            {idCheck(user, user.concertId) ? (
-                <MinusButton concertId={user.concertId} />
+            {idCheck(user, concertId) ? (
+                <MinusButton concertId={concertId} />
             ) : (
-                <PlusButton concertId={user.concertId} />
+                <PlusButton concertId={concertId} />
             )}
         </div>
     )
