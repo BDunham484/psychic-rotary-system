@@ -192,9 +192,14 @@ main {
   align-items: center;
 }
 
-#showcard-data {
-  padding: 3vh 0 3vh 30px;
+#show-card-contents {
+  display: flex;
+  align-items: center;
   width: 90vw;
+}
+
+#show-card-data {
+  padding: 3vh 0 3vh 30px;
   font-size: 20px;
 }
 
