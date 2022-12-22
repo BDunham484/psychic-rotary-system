@@ -27,9 +27,12 @@ const Show = () => {
                     </h2>
                     <h3>at {concert.venue} | {concert.times}</h3>
                     <p>{concert.address}</p>
-                    <a href={concert.website}>{concert.website}</a>
-                    <p>{concert.email}</p>
-                    <a href={concert.ticketLink}>{concert.ticketLink}</a>
+                    <div className="show-links">
+                        <a href={concert.website}>{concert.website}</a>
+                        <a href={"mailto:" + concert.email}>{concert.email}</a>
+                        <a href={concert.ticketLink}>{concert.ticketLink}</a>
+                    </div>
+
                 </div>
             </ShowCard>
         </div>
