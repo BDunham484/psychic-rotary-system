@@ -4,10 +4,11 @@ import MinusButton from "../MinusButton";
 
 const PlusMinus = (user) => {
 
+
     const idCheck = (user, id) => {
-        if (user) {
-            console.log('USER');
-            console.log(user);
+        if (user.user === undefined) {
+            console.log('hang tight');
+        } else {
             const concertIds = user.user.me.concerts
             const test = concertIds.map((ids) => {
                 if (Object.values(ids).includes(id)) {
@@ -17,13 +18,11 @@ const PlusMinus = (user) => {
                 }
             })
             if (test.includes(true)) {
-                console.log(true);
                 return true
             } else {
-                console.log(false);
                 return false;
             }
-        }
+        } 
     }
 
     return (
