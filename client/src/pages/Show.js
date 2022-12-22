@@ -1,11 +1,10 @@
 import { useLocation } from "react-router-dom";
 import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard';
-import PlusButton from '../components/shared/PlusButton';
-import MinusButton from "../components/shared/MinusButton";
 import PlusMinus from "../components/shared/PlusMinus";
 
 const Show = () => {
+    
     const location = useLocation();
 
     const { concert } = location.state
