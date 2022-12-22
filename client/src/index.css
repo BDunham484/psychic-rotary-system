@@ -214,6 +214,7 @@ main {
 .show-wrapper {
   width: 90vw;
   height: 50vh;
+  padding: 3vh;
 }
 
 .plus-sign {

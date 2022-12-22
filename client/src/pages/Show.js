@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard';
 import PlusButton from '../components/shared/PlusButton';
 import MinusButton from "../components/shared/MinusButton";
+import PlusMinus from "../components/shared/PlusMinus";
 
 const Show = () => {
     const location = useLocation();
@@ -16,10 +17,7 @@ const Show = () => {
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
                 {loggedIn &&
-                    <div>
-                        <PlusButton concertId={concert._id} />
-                        <MinusButton concertId={concert._id} />
-                    </div>
+                    <PlusMinus concertId={concert._id} />
                 }
             </div>
             <ShowCard>
@@ -28,10 +26,10 @@ const Show = () => {
                         {concert.artists}
                     </h2>
                     <h3>at {concert.venue} | {concert.times}</h3>
-                    <h3>{concert.address}</h3>
-                    <h3>{concert.website}</h3>
-                    <h3>{concert.email}</h3>
-                    <h3>{concert.ticketLink}</h3>
+                    <p>{concert.address}</p>
+                    <a href={concert.website}>{concert.website}</a>
+                    <p>{concert.email}</p>
+                    <a href={concert.ticketLink}>{concert.ticketLink}</a>
                 </div>
             </ShowCard>
         </div>
