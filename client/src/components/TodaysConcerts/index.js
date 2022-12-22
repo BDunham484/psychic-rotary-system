@@ -29,9 +29,10 @@ const ConcertList = ({ concerts, user }) => {
     }
 
     // useEffect(() => {
-    //     concerts.map((concert) => {
-    //         return idCheck(user, concert._id)
-    //     })
+    //     // concerts.map((concert) => {
+    //     //     return idCheck(user, concert._id)
+    //     // })
+    //     idCheck(user, concerts._id);
     // })
 
     if (!concerts.length) {
