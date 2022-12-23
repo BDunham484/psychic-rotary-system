@@ -17,7 +17,7 @@ import { ConcertContext } from '../utils/GlobalState'
 
 
 const Home = () => {
-  const { today, date, setDate, austinScraper, userData } = useContext(ConcertContext);
+  const { today, date, setDate, austinScraper } = useContext(ConcertContext);
   console.log('home scraper');
   console.log(austinScraper)
 
@@ -154,7 +154,7 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
-              <TodaysConcerts concerts={concerts} user={userData}/>
+              <TodaysConcerts concerts={concerts} />
             </>
           )}
         </div>

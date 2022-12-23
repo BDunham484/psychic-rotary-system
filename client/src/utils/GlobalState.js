@@ -10,12 +10,18 @@ const ConcertContext = createContext();
 const { Provider } = ConcertContext;
 
 const ConcertProvider = ({ children }) => {
-    const { data: userData } = useQuery(QUERY_ME_BASIC);
+    const [user, setUser] = useState({});
 
-    if (userData) {
-        console.log(userData)
-    }
+    const { loading ,data: userData } = useQuery(QUERY_ME_BASIC);
 
+    useEffect (() => {
+        if (loading) {
+            console.log('USERDATA LOADING...');
+        } else {
+            setUser(userData);
+            console.log(user);
+        }
+    }, [loading, userData, user])
 
     //get today's date with imported helper function
     var today = getTodaysDate();
@@ -50,7 +56,8 @@ const ConcertProvider = ({ children }) => {
         date,
         setDate,
         austinScraper,
-        userData
+        user,
+        setUser
     }}>
         {children}
     </Provider>
