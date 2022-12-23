@@ -1,7 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
+// import { useState, useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
-  QUERY_ME_BASIC,
+  // QUERY_ME_BASIC,
   // GET_CONCERTS_FOR_DATABASE,
   GET_YESTERDAYS_CONCERTS,
   GET_CONCERTS_BY_DATE
@@ -16,11 +17,12 @@ import { ConcertContext } from '../utils/GlobalState'
 
 
 const Home = () => {
-  const { today, austinScraper } = useContext(ConcertContext);
+  const { today, date, setDate, austinScraper, userData } = useContext(ConcertContext);
   console.log('home scraper');
   console.log(austinScraper)
+
   //set initial state using today's date
-  const [date, setDate] = useState(today)
+  // const [date, setDate] = useState(today)
 
   // const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
   //   variables: { date: today }
@@ -98,11 +100,11 @@ const Home = () => {
     variables: { date: date }
   });
 
-  const { data: userData } = useQuery(QUERY_ME_BASIC);
+  // const { data: userData } = useQuery(QUERY_ME_BASIC);
 
-  if (userData) {
-    console.log(userData)
-  }
+  // if (userData) {
+  //   console.log(userData)
+  // }
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
@@ -157,15 +159,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      {/* {loggedIn && userData ? (
-        <div className="logged-in-home">
-          USERNAME: {userData.me.username}
-          CONCERT-COUNT: {userData.me.concertCount}
-          CONCERTS: {userData.me.concerts[0].artists}
-        </div>
-      ) : null} */}
     </div>
-
   );
 };
 
