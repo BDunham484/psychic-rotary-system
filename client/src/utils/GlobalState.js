@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {
-    GET_CONCERTS_FOR_DATABASE
+    AUSTIN_CONCERT_SCRAPER,
 } from './queries';
 import { getTodaysDate } from './helpers';
 
@@ -15,29 +15,36 @@ const ConcertProvider = ({ children }) => {
     //set initial state using today's date
     // const [date, setDate] = useState(today)
 
-    const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
+    
+    const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
         variables: { date: today }
     })
-
+    // console.log('CONCERTDATA-GLOBALSTATE')
+    // console.log(concertData)
     const [austinScraper, setAustinScraper] = useState([[]]);
+
+    const delay = 60000;
+    // const delay = (60000 * 60)
 
     useEffect(() => {
         if (concertData) {
-            // const concertDataArr = concertData.concertsForDatabase
-            // console.log('SCRAPE-CONCERTDATAARR')
-            // console.log(concertDataArr);
-            // setAustinScraper(concertDataArr)
-            // console.log('SCRAPE AND SET STATE');
-            // console.log(austinScraper);
+            const interval = setInterval(() => {
+                const concertDataArr = concertData.austinConcertScraper
+                setAustinScraper(concertDataArr)
+            }, delay);
+
+            return () => clearInterval(interval);
         }
+
     }, [concertData, austinScraper])
+
 
     return <Provider value={{
         today,
         austinScraper
     }}>
         {children}
-        </Provider>
+    </Provider>
 };
 
 const useConcertContext = () => {

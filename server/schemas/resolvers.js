@@ -142,7 +142,7 @@ const resolvers = {
             return concerts;
         },
         //scrape all concerts for the day
-        concertsForDatabase: async (parent, { date }) => {
+        austinConcertScraper: async (parent, { date }) => {
             //delcare empty array for dates
             const dateArr = [];
             //push todays date into dateArr

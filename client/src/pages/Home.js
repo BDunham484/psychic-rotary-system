@@ -22,10 +22,11 @@ const Home = () => {
   //set initial state using today's date
   const [date, setDate] = useState(today)
 
-  // const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
+  // const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
   //   variables: { date: today }
   // })
 
+  // const concertDataArr = austinScraper?.concertsForDatabase || [];
   // const concertDataArr = concertData?.concertsForDatabase || [];
   // console.log('SCRAPER QUERY BY DATE');
   // console.log(concertDataArr);
