@@ -33,9 +33,9 @@ export const GET_CONCERTS_BY_DATE = gql`
     }
 `;
 
-export const GET_CONCERTS_FOR_DATABASE = gql`
-    query concertsForDatabase($date: String) {
-        concertsForDatabase(date: $date) {
+export const AUSTIN_CONCERT_SCRAPER = gql`
+    query austinConcertScraper($date: String) {
+        austinConcertScraper(date: $date) {
             customId
             artists
             date
