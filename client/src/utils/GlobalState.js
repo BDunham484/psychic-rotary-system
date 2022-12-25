@@ -10,6 +10,7 @@ const ConcertContext = createContext();
 const { Provider } = ConcertContext;
 
 const ConcertProvider = ({ children }) => {
+    // USER STATE,QUERY AND USEEFFECT
     const [user, setUser] = useState({});
 
     const { loading ,data: userData } = useQuery(QUERY_ME_BASIC);
@@ -23,6 +24,8 @@ const ConcertProvider = ({ children }) => {
             console.log(user);
         }
     }, [loading, userData, user])
+    // STATE FOR CHECKING CONCERTIDS AGAINST USERS CONCERTS
+    const [userConcerts, setUserConcerts] = useState([]);
 
     //get today's date with imported helper function
     var today = getTodaysDate();
@@ -59,7 +62,9 @@ const ConcertProvider = ({ children }) => {
         setDate,
         austinScraper,
         user,
-        setUser
+        setUser,
+        userConcerts,
+        setUserConcerts
     }}>
         {children}
     </Provider>

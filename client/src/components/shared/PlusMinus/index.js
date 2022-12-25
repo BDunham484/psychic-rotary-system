@@ -1,18 +1,16 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import PlusButton from "../PlusButton";
 import MinusButton from "../MinusButton";
 import { ConcertContext } from '../../../utils/GlobalState';
 
-
 const PlusMinus = ({ concertId }) => {
 
-    const { user } = useContext(ConcertContext);
+    const { user, userConcerts, setUserConcerts } = useContext(ConcertContext);
 
     const idCheck = (user, id) => {
         if (Object.keys(user).length === 0) {
             console.log('hang tight');
         } else {
-            console.log('TTTTTTTTTEEEEEEEESSSSSSSSSSTTTTTTT');
             const concertIds = user.me.concerts
             const test = concertIds.map((ids) => {
                 if (Object.values(ids).includes(id)) {
@@ -29,19 +27,20 @@ const PlusMinus = ({ concertId }) => {
         }
     };
 
-
     const result = idCheck(user, concertId);
 
+    // TRY SETTING THIS AS GLOBAL STATE!!!!!!!!!!! AND PASSING IT TO THE BUTTONS/SETSTATE ONCLICK!!!!!!!
+    // const [test, setTest] = useState(result);
 
-
+    setUserConcerts(result);
 
     return (
 
         <div>
-            {result ? (
+            {userConcerts ? (
                 <MinusButton concertId={concertId} />
             ) : (
-                <PlusButton concertId={concertId} />
+                <PlusButton concertId={concertId} idCheck={idCheck} />
             )}
         </div>
     )
