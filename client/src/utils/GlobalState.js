@@ -19,6 +19,7 @@ const ConcertProvider = ({ children }) => {
             console.log('USERDATA LOADING...');
         } else {
             setUser(userData);
+            console.log('GLOBALSTATE USER')
             console.log(user);
         }
     }, [loading, userData, user])
@@ -32,7 +33,8 @@ const ConcertProvider = ({ children }) => {
     const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
         variables: { date: today }
     })
-
+    // console.log('SCRAPER RESULTS IN GLOBAL STATE')
+    // console.log(concertData);
     const [austinScraper, setAustinScraper] = useState([[]]);
 
     // const delay = 60000;

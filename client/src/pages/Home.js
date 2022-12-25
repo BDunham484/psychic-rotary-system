@@ -18,8 +18,8 @@ import { ConcertContext } from '../utils/GlobalState'
 
 const Home = () => {
   const { today, date, setDate, austinScraper } = useContext(ConcertContext);
-  console.log('home scraper');
-  console.log(austinScraper)
+  // console.log('AUSTIN SCRAPER RESULTS PASSED TO HOME.JS');
+  // console.log(austinScraper)
 
   //set initial state using today's date
   // const [date, setDate] = useState(today)
@@ -88,8 +88,8 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       console.log('DELAYED EFFECT RUNNING');
-      // dbConcertUpdater(concertDataArr);
-      // deleteYesterdaysConcerts(yesterday);
+      dbConcertUpdater(austinScraper);
+      deleteYesterdaysConcerts(yesterday);
     }, delay);
 
     return () => clearInterval(interval);

@@ -5,35 +5,40 @@ import { ConcertContext } from '../../../utils/GlobalState';
 
 
 const PlusMinus = ({ concertId }) => {
-// const PlusMinus = ({ user, concertId }) => {
 
     const { user } = useContext(ConcertContext);
-    // console.log('PLUSMINUS');
-    // console.log(user);
 
     const idCheck = (user, id) => {
-        if (user === undefined) {
+        if (Object.keys(user).length === 0) {
             console.log('hang tight');
         } else {
-            // const concertIds = user.me.concerts
-            // const test = concertIds.map((ids) => {
-            //     if (Object.values(ids).includes(id)) {
-            //         return true;
-            //     } else {
-            //         return false;
-            //     }
-            // })
-            // if (test.includes(true)) {
-            //     return true
-            // } else {
-            //     return false;
-            // }
-        } 
-    }
+            console.log('TTTTTTTTTEEEEEEEESSSSSSSSSSTTTTTTT');
+            const concertIds = user.me.concerts
+            const test = concertIds.map((ids) => {
+                if (Object.values(ids).includes(id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+            if (test.includes(true)) {
+                return true
+            } else {
+                return false;
+            }
+        }
+    };
+
+
+    const result = idCheck(user, concertId);
+
+
+
 
     return (
+
         <div>
-            {idCheck(user, concertId) ? (
+            {result ? (
                 <MinusButton concertId={concertId} />
             ) : (
                 <PlusButton concertId={concertId} />

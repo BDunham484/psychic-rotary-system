@@ -356,7 +356,8 @@ const resolvers = {
             if (context.user) {
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { concerts: concertId } },
+                    // { $addToSet: { concerts: concertId } },
+                    { $push: { concerts: concertId } },
                     { new: true }
                 ).populate('concerts');
 
@@ -381,7 +382,7 @@ const resolvers = {
             return concert;
         },
         deleteConcerts: async (parent, { concertId }) => {
-            console.log('IDIDIDIDIDIDD');
+            console.log('DELETED IDS');
             console.log(concertId);
             const concerts = await Concert.deleteMany({
                 _id: { $in: concertId }
