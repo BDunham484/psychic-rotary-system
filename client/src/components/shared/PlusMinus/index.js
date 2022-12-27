@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 // import PlusButton from "../PlusButton";
 // import MinusButton from "../MinusButton";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
