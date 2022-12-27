@@ -356,11 +356,11 @@ const resolvers = {
             if (context.user) {
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    // { $addToSet: { concerts: concertId } },
-                    { $push: { concerts: concertId } },
+                    { $addToSet: { concerts: concertId } },
+                    // { $push: { concerts: concertId } },
                     { new: true }
-                ).populate('concerts');
-
+                );
+                console.log('ADDED TO USER!!!!!!')
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');

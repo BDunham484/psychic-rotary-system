@@ -16,7 +16,7 @@ const PlusMinus = ({ concertId }) => {
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
     const [deleteConcertFromUser] = useMutation(DELETE_CONCERT_FROM_USER);
 
-    const handlePlusClick = async (id) => {
+    const handlePlusClick = async (user, id) => {
         console.log(id + ' has been added to user profile');
         try {
             await addConcertToUser({
@@ -25,7 +25,6 @@ const PlusMinus = ({ concertId }) => {
         } catch (e) {
             console.error(e)
         };
-        // window.location.reload();
     };
 
     const handleMinusClick = async (id) => {
@@ -52,15 +51,14 @@ const PlusMinus = ({ concertId }) => {
                 }
             })
             if (test.includes(true)) {
-                return true
+                return true;
             } else {
                 return false;
             }
         }
     };
 
-    const result = idCheck(user, concertId);
-
+    let result = idCheck(user, concertId);
 
     return (
 
@@ -75,7 +73,7 @@ const PlusMinus = ({ concertId }) => {
             {result ? (
                 <SquaredMinus className='minus-sign' onClick={() => handleMinusClick(concertId)}/>
             ) : (
-                <SquaredPlus className='plus-sign' onClick={() => handlePlusClick(concertId)}/>
+                <SquaredPlus className='plus-sign' onClick={() => handlePlusClick(user, concertId)}/>
             )}
         </div>
     )

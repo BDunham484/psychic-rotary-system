@@ -13,7 +13,9 @@ const ConcertProvider = ({ children }) => {
     // USER STATE,QUERY AND USEEFFECT
     const [user, setUser] = useState({});
 
-    const { loading ,data: userData } = useQuery(QUERY_ME_BASIC);
+    const { loading ,data: userData } = useQuery(QUERY_ME_BASIC, {
+        pollInterval: 250
+    });
 
     useEffect (() => {
         if (loading) {
@@ -24,8 +26,6 @@ const ConcertProvider = ({ children }) => {
             console.log(user);
         }
     }, [loading, userData, user])
-    // STATE FOR CHECKING CONCERTIDS AGAINST USERS CONCERTS
-    const [userConcerts, setUserConcerts] = useState([]);
 
     //get today's date with imported helper function
     var today = getTodaysDate();
@@ -62,9 +62,7 @@ const ConcertProvider = ({ children }) => {
         setDate,
         austinScraper,
         user,
-        setUser,
-        userConcerts,
-        setUserConcerts
+        setUser
     }}>
         {children}
     </Provider>
