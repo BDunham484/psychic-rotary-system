@@ -1,33 +1,37 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+// import { useState, useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
-  QUERY_ME_BASIC,
-  GET_CONCERTS_FOR_DATABASE,
+  // QUERY_ME_BASIC,
+  // GET_CONCERTS_FOR_DATABASE,
   GET_YESTERDAYS_CONCERTS,
   GET_CONCERTS_BY_DATE
 } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
-import { getTodaysDate } from "../utils/helpers";
+// import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
 // import Auth from '../utils/auth';
 import Spinner from '../components/shared/Spinner';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
+import { ConcertContext } from '../utils/GlobalState'
 
 
 const Home = () => {
-  //get today's date with imported helper function
-  var today = getTodaysDate();
+  const { today, date, setDate, austinScraper } = useContext(ConcertContext);
+  // console.log('AUSTIN SCRAPER RESULTS PASSED TO HOME.JS');
+  // console.log(austinScraper)
 
   //set initial state using today's date
-  const [date, setDate] = useState(today)
+  // const [date, setDate] = useState(today)
 
-  const { data: concertData } = useQuery(GET_CONCERTS_FOR_DATABASE, {
-    variables: { date: today }
-  })
+  // const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
+  //   variables: { date: today }
+  // })
 
-  const concertDataArr = concertData?.concertsForDatabase || [];
-  console.log('SCRAPER QUERY BY DATE');
-  console.log(concertDataArr);
+  // const concertDataArr = austinScraper?.concertsForDatabase || [];
+  // const concertDataArr = concertData?.concertsForDatabase || [];
+  // console.log('SCRAPER QUERY BY DATE');
+  // console.log(concertDataArr);
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
@@ -44,6 +48,7 @@ const Home = () => {
       }));
     }));
   };
+
   const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
   const getYesterdaysDate = (date) => {
@@ -83,7 +88,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       console.log('DELAYED EFFECT RUNNING');
-      dbConcertUpdater(concertDataArr);
+      dbConcertUpdater(austinScraper);
       deleteYesterdaysConcerts(yesterday);
     }, delay);
 
@@ -95,16 +100,16 @@ const Home = () => {
     variables: { date: date }
   });
 
-  const { data: userData } = useQuery(QUERY_ME_BASIC);
+  // const { data: userData } = useQuery(QUERY_ME_BASIC);
 
-  if (userData) {
-    console.log(userData)
-  }
+  // if (userData) {
+  //   console.log(userData)
+  // }
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
-  console.log('CONCERT DATA FROM DB BY DATE');
-  console.log(concerts);
+  // console.log('CONCERT DATA FROM DB BY DATE');
+  // console.log(concerts);
   //function that gets the next day
   const nextDayButton = (date) => {
     const next = new Date(date);
@@ -149,13 +154,12 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
-              <TodaysConcerts concerts={concerts} user={userData}/>
+              <TodaysConcerts concerts={concerts} />
             </>
           )}
         </div>
       </div>
     </div>
-
   );
 };
 

@@ -1,11 +1,14 @@
+import { useContext } from 'react';
 import PlusButton from "../PlusButton";
 import MinusButton from "../MinusButton";
+import { ConcertContext } from '../../../utils/GlobalState';
 
+const PlusMinus = ({ concertId }) => {
 
-const PlusMinus = ({ user, concertId }) => {
+    const { user } = useContext(ConcertContext);
 
     const idCheck = (user, id) => {
-        if (user === undefined) {
+        if (Object.keys(user).length === 0) {
             console.log('hang tight');
         } else {
             const concertIds = user.me.concerts
@@ -17,16 +20,19 @@ const PlusMinus = ({ user, concertId }) => {
                 }
             })
             if (test.includes(true)) {
-                return true
+                return true;
             } else {
                 return false;
             }
-        } 
-    }
+        }
+    };
+
+    let result = idCheck(user, concertId);
 
     return (
+
         <div>
-            {idCheck(user, concertId) ? (
+            {result ? (
                 <MinusButton concertId={concertId} />
             ) : (
                 <PlusButton concertId={concertId} />
