@@ -17,15 +17,17 @@ const ConcertList = ({ concerts }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <ShowCard key={concert._id}>
-                        {loggedIn &&
-                            <PlusMinus concertId={concert._id} />
-                        }
-                        <p id="showcard-data">
-                            <Link to={`/show/${concert.artists}`} state={{ concert }}>
-                                <span id="artists-link">{concert.artists} </span>
-                            </Link>
-                            at {concert.venue} | {concert.times}
-                        </p>
+                        <div id="show-card-contents">
+                            {loggedIn &&
+                                <PlusMinus concertId={concert._id} />
+                            }
+                            <p id="show-card-data">
+                                <Link to={`/show/${concert.artists}`} state={{ concert }}>
+                                    <span id="artists-link">{concert.artists} </span>
+                                </Link>
+                                at {concert.venue} | {concert.times}
+                            </p>
+                        </div>
                     </ShowCard>
                 ))}
         </>
