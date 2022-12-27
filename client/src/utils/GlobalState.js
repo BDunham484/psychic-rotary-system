@@ -28,8 +28,6 @@ const ConcertProvider = ({ children }) => {
             stopPolling()
         }
     }, [loading, userData, user, startPolling, stopPolling])
-    // STATE FOR CHECKING CONCERTIDS AGAINST USERS CONCERTS
-    const [userConcerts, setUserConcerts] = useState([]);
 
     //get today's date with imported helper function
     var today = getTodaysDate();
@@ -67,8 +65,6 @@ const ConcertProvider = ({ children }) => {
         austinScraper,
         user,
         setUser,
-        userConcerts,
-        setUserConcerts
     }}>
         {children}
     </Provider>
