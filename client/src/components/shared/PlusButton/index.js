@@ -1,15 +1,13 @@
 import { useMutation } from "@apollo/client";
 import { ADD_CONCERT_TO_USER } from "../../../utils/mutations";
-
-import { PlusSquareFill } from '@styled-icons/bootstrap/PlusSquareFill';
-// import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const PlusButton = ({ concertId }) => {
+
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
 
-
     const handleClick = async (id) => {
-        console.log(id + ' added to user profile');
+        console.log(id + ' has been added to user profile');
         try {
             await addConcertToUser({
                 variables: { concertId: id }
@@ -21,7 +19,7 @@ const PlusButton = ({ concertId }) => {
 
     return (
         <>
-            <PlusSquareFill className="plus-sign" onClick={() => handleClick(concertId)} />
+            <SquaredPlus className="plus-sign" onClick={() => handleClick(concertId)} />
         </>
     )
 }

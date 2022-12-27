@@ -142,7 +142,7 @@ const resolvers = {
             return concerts;
         },
         //scrape all concerts for the day
-        concertsForDatabase: async (parent, { date }) => {
+        austinConcertScraper: async (parent, { date }) => {
             //delcare empty array for dates
             const dateArr = [];
             //push todays date into dateArr
@@ -357,9 +357,10 @@ const resolvers = {
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { concerts: concertId } },
+                    // { $push: { concerts: concertId } },
                     { new: true }
-                ).populate('concerts');
-
+                );
+                console.log('ADDED TO USER!!!!!!')
                 return user;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -381,7 +382,7 @@ const resolvers = {
             return concert;
         },
         deleteConcerts: async (parent, { concertId }) => {
-            console.log('IDIDIDIDIDIDD');
+            console.log('DELETED IDS');
             console.log(concertId);
             const concerts = await Concert.deleteMany({
                 _id: { $in: concertId }

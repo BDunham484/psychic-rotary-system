@@ -10,6 +10,8 @@ import NoMatch from './pages/NoMatch';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { ConcertProvider } from './utils/GlobalState';
+
 
 
 
@@ -37,12 +39,15 @@ const client = new ApolloClient({
 
 function App() {
 
+
+
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
+      <ConcertProvider>
+        <Router>
           <div>
-            <Header />
+            <div>
+              <Header />
               <main>
                 <Routes>
                   <Route
@@ -57,18 +62,10 @@ function App() {
                     path="/signup"
                     element={<Signup />}
                   />
-                  {/* <Route
-                    path="/profile"
-                    element={<Profile />}
-                  /> */}
                   <Route path="/profile">
                     <Route path=":username" element={<Profile />} />
                     <Route path="" element={<Profile />} />
                   </Route>
-                  {/* <Route path="/show">
-                    <Route path=":artists" element={<Show />} />
-                    <Route path="" element={<Show />} />
-                  </Route> */}
                   <Route path="/show/:artists" element={<Show />} />
                   <Route
                     path="*"
@@ -76,10 +73,11 @@ function App() {
                   />
                 </Routes>
               </main>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
+        </Router>
+      </ConcertProvider>
     </ApolloProvider>
   );
 }

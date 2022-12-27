@@ -182,19 +182,33 @@ main {
   color: grey;
 }
 
-/* SHOWCARD COMPONENT STYLES START */
+/* SHOWCARD COMPONENT && SHOW PAGE STYLES START */
 .show-card {
   background-color: var(--darkest);
   margin-bottom: 4vh;
   border-radius: 10px;
   border: 1px solid #386472;
   display: flex;
+  align-items: center;
 }
 
 #showcard-data {
   padding: 3vh 0 3vh 30px;
   width: 90vw;
   font-size: 20px;
+}
+
+.show-header-wrapper {
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2vh;
+}
+
+.show-wrapper {
+  width: 90vw;
+  height: 50vh;
 }
 
 .plus-sign {
@@ -219,13 +233,14 @@ main {
   cursor: pointer;
 }
 
+
 #artists-link {
   font-size: 22px;
   font-weight: bold;
 }
 
 /* LOGIN STYLES START */
-.login-page-wrapper {
+.container {
   width: 100vw;
   min-height: 100vh; 
   display: flex;
@@ -414,6 +429,8 @@ main {
   /* background-color: var(--darkest); */
   border-bottom: 1px solid var(--darkest);
 }
+
+
 
 
 

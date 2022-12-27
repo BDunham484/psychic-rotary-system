@@ -1,7 +1,8 @@
+// import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
-import PlusButton from "../shared/PlusButton";
+import PlusMinus from "../shared/PlusMinus";
 
 const ConcertList = ({ concerts }) => {
 
@@ -17,22 +18,14 @@ const ConcertList = ({ concerts }) => {
                 concerts.map((concert, index) => (
                     <ShowCard key={concert._id}>
                         {loggedIn &&
-                            <PlusButton concertId={concert._id} />
+                            <PlusMinus concertId={concert._id} />
                         }
-
-
                         <p id="showcard-data">
                             <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                 <span id="artists-link">{concert.artists} </span>
                             </Link>
                             at {concert.venue} | {concert.times}
                         </p>
-
-                        {/* {loggedIn &&
-                                <div>
-                                    <button onClick={() => addConcertToUser(concert)}>Add to Profile</button>
-                                    <button onClick={deleteConcertFromUser}>Delete from Profile</button>
-                                </div>} */}
                     </ShowCard>
                 ))}
         </>
