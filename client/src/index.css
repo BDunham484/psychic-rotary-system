@@ -198,6 +198,10 @@ main {
   width: 90vw;
 }
 
+.testyclass {
+  background-color: var(--main-text);
+}
+
 #show-card-data {
   padding: 3vh 0 3vh 30px;
   font-size: 20px;
@@ -245,6 +249,12 @@ main {
 
 .minus-sign:hover {
   cursor: pointer;
+}
+
+#plus-sign-logged-out {
+  width: 50px;
+  color: var(--darker);
+  margin-left: 2vw;
 }
 
 

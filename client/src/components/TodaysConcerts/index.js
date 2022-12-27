@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
 import PlusMinus from "../shared/PlusMinus";
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const ConcertList = ({ concerts }) => {
 
@@ -18,9 +19,12 @@ const ConcertList = ({ concerts }) => {
                 concerts.map((concert, index) => (
                     <ShowCard key={concert._id}>
                         <div id="show-card-contents">
-                            {loggedIn &&
-                                <PlusMinus concertId={concert._id} />
-                            }
+                            <div>
+                                {loggedIn
+                                    ? <PlusMinus concertId={concert._id} />
+                                    : <SquaredPlus id="plus-sign-logged-out" />
+                                }
+                            </div>
                             <p id="show-card-data">
                                 <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                     <span id="artists-link">{concert.artists} </span>
