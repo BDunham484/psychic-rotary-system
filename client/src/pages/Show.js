@@ -16,7 +16,6 @@ const Show = () => {
         <div className='container'>
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
-                <ConcertRSVP />
                 {loggedIn &&
                     <PlusMinus concertId={concert._id} />
                 }
@@ -33,9 +32,9 @@ const Show = () => {
                         <a href={"mailto:" + concert.email}>{concert.email}</a>
                         <a href={concert.ticketLink}>{concert.ticketLink}</a>
                     </div>
-
                 </div>
             </ShowCard>
+            <ConcertRSVP />
         </div>
     );
 };

@@ -263,6 +263,13 @@ main {
   font-weight: bold;
 }
 
+/* RSVP STYLES START */
+
+.rsvp {
+  width: 50px;
+  color:#386472
+}
+
 /* LOGIN STYLES START */
 .container {
   width: 100vw;

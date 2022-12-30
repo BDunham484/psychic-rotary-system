@@ -1,9 +1,9 @@
-
+import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
 
 const index = () => {
     return (
         <div>
-            <p>Hello</p>
+            <CheckCircleFill className='rsvp'/>
         </div>
     )
 }
