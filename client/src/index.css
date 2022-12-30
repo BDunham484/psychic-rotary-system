@@ -265,9 +265,38 @@ main {
 
 /* RSVP STYLES START */
 
-.rsvp {
+.rsvp-container {
+  width: 90vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.rsvp-yes {
   width: 50px;
   color:#386472
+}
+
+.rsvp-yes:hover {
+  cursor: pointer;
+}
+
+.rsvp-no {
+  width: 50px;
+  color:#a23e25;
+}
+
+.rsvp-no:hover {
+  cursor: pointer;
+}
+
+.rsvp-maybe {
+  width: 50px;
+  /* color:#DFBB89; */
+  color: #DFDEC5;
+}
+
+.rsvp-maybe:hover {
+  cursor: pointer;
 }
 
 /* LOGIN STYLES START */

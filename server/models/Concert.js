@@ -59,17 +59,17 @@ const concertSchema = new Schema(
 );
 
 //get total count of yes rsvp's on retrieval
-userSchema.virtual('yesCount').get(function () {
+concertSchema.virtual('yesCount').get(function () {
     return this.yes.length;
 });
 
 //get total count of no rsvp's on retrieval
-userSchema.virtual('noCount').get(function () {
+concertSchema.virtual('noCount').get(function () {
     return this.no.length;
 });
 
 //get total count of maybe rsvp's on retrieval
-userSchema.virtual('maybeCount').get(function () {
+concertSchema.virtual('maybeCount').get(function () {
     return this.maybe.length;
 });
 

@@ -6,7 +6,7 @@ import { ConcertContext } from '../../../utils/GlobalState';
 const PlusMinus = ({ concertId }) => {
 
     const { user } = useContext(ConcertContext);
-
+    
     const idCheck = (user, id) => {
         if (Object.keys(user).length === 0) {
             console.log('hang tight');
