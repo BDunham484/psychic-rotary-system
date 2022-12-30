@@ -5,7 +5,7 @@ import PlusMinus from "../components/shared/PlusMinus";
 import ConcertRSVP from "../components/shared/ConcertRSVP";
 
 const Show = () => {
-    
+
     const location = useLocation();
 
     const { concert } = location.state
@@ -34,7 +34,10 @@ const Show = () => {
                     </div>
                 </div>
             </ShowCard>
-            <ConcertRSVP />
+            {loggedIn &&
+                <ConcertRSVP concertId={concert._id} />
+            }
+
         </div>
     );
 };
