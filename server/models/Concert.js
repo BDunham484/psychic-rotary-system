@@ -37,9 +37,41 @@ const concertSchema = new Schema(
         },
         ticketLink: {
             type: String
+        },
+        yes: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        no: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        maybe: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    },
+    {
+        toJSON: {
+            virtuals: true
         }
     }
 );
+
+//get total count of yes rsvp's on retrieval
+userSchema.virtual('yesCount').get(function () {
+    return this.yes.length;
+});
+
+//get total count of no rsvp's on retrieval
+userSchema.virtual('noCount').get(function () {
+    return this.no.length;
+});
+
+//get total count of maybe rsvp's on retrieval
+userSchema.virtual('maybeCount').get(function () {
+    return this.maybe.length;
+});
 
 //create the Concert model using the concertSchema
 const Concert = model('Concert', concertSchema);

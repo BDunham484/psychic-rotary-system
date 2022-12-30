@@ -26,6 +26,9 @@ const typeDefs = gql`
         website: String
         email: String
         ticketLink: String
+        yes: [User]
+        no: [User]
+        maybe: [User]
     }
 
     type Query {
