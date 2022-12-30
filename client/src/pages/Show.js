@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard';
 import PlusMinus from "../components/shared/PlusMinus";
+import ConcertRSVP from "../components/shared/ConcertRSVP";
 
 const Show = () => {
     
@@ -15,6 +16,7 @@ const Show = () => {
         <div className='container'>
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
+                <ConcertRSVP />
                 {loggedIn &&
                     <PlusMinus concertId={concert._id} />
                 }
