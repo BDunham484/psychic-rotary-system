@@ -159,3 +159,30 @@ export const GET_YESTERDAYS_CONCERTS = gql`
         }
     }
 `;
+
+export const GET_CONCERT_BY_ID = gql`
+    query concert($concertId: ID!) {
+        concert(concertId: $concertId) {
+            _id
+            customId
+            artists
+            artistsLink
+            date
+            times
+            venue
+            address
+            website
+            email
+            ticketLink
+            yes {
+                _id
+            }
+            no {
+                _id
+            }
+            maybe {
+                _id
+            }
+        }
+    }
+`;

@@ -36,7 +36,7 @@ const typeDefs = gql`
         users: [User]
         user(username: String!): User
         userConcerts(username: String): [Concert]
-        concert(_id: ID!): Concert
+        concert(concertId: ID!): Concert
         concerts(date: String): [Concert]
         allConcerts: [Concert]
         concertsFromDb(date: String!): [Concert]

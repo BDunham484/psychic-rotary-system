@@ -48,8 +48,8 @@ const resolvers = {
                 .populate('maybe');
         },
         //get a concert by ID
-        concert: async (parent, { _id }) => {
-            return Concert.findOne({ _id })
+        concert: async (parent, { concertId }) => {
+            return Concert.findOne({ concertId })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe');
