@@ -13,7 +13,7 @@ const ConcertRSVP = ({ concertId }) => {
 
     return (
         <div className='rsvp-container'>
-            <RsvpYes />
+            <RsvpYes concertId={concertId}/>
             <XCircleFill className='rsvp-no'/>
             <QuestionCircleFill className='rsvp-maybe' />
         </div>

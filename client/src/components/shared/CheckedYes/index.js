@@ -1,14 +1,20 @@
+import { useContext } from 'react';
+import { ConcertContext } from '../../../utils/GlobalState';
 import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
 
-const CheckedYes = () => {
+const CheckedYes = ({ concertId }) => {
 
-    const handleClick = () => {
-        console.log('CheckedYes click handler has been clicked')
+    const { user } = useContext(ConcertContext);
+    console.log('user within CheckedYes');
+    console.log(user);
+
+    const handleClick = (concertId) => {
+        console.log('CheckedYes click handler has been clicked: ' + concertId)
     }
 
     return (
         <>
-            <CheckCircleFill className='rsvp-yes' onClick={() => handleClick()} />
+            <CheckCircleFill className='rsvp-yes' onClick={() => handleClick(concertId)} />
         </>
     )
 }

@@ -399,6 +399,15 @@ const resolvers = {
                 _id: { $in: concertId }
             });
             return concerts
+        },
+        rsvpYes: async (parent, { concertId, userId }) => {
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $push: { yes: userId }},
+                { new: true }
+            );
+
+            return concert
         }
     }
 };

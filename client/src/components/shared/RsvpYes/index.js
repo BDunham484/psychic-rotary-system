@@ -1,9 +1,9 @@
 import CheckedYes from "../CheckedYes"
 
-const RsvpYes = () => {
+const RsvpYes = ({ concertId }) => {
     return (
         <div>
-            <CheckedYes />
+            <CheckedYes concertId={concertId}/>
         </div>
     )
 }
