@@ -93,7 +93,7 @@ export const DELETE_CONCERTS = gql`
 `;
 
 export const RSVP_YES = gql`
-    mutation rsvpYes ($concertId: ID!, $userId: ID) {
+    mutation rsvpYes ($concertId: ID!, $userId: ID!) {
         rsvpYes(concertId: $concertId, userId: $userId) {
             _id
             artists

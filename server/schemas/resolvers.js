@@ -401,9 +401,11 @@ const resolvers = {
             return concerts
         },
         rsvpYes: async (parent, { concertId, userId }) => {
+            console.log('RSVPYES');
+            console.log(concertId + ' and ' + userId);
             const concert = await Concert.findByIdAndUpdate(
                 { _id: concertId },
-                { $push: { yes: userId }},
+                { $addToSet: { yes: userId }},
                 { new: true }
             );
 

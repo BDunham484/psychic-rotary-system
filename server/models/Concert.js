@@ -38,18 +38,24 @@ const concertSchema = new Schema(
         ticketLink: {
             type: String
         },
-        yes: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        no: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        maybe: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+        yes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            }
+        ],
+        no: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            }
+        ],
+        maybe: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            }
+        ]
     },
     {
         toJSON: {
