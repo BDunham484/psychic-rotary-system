@@ -103,3 +103,15 @@ export const RSVP_YES = gql`
         }
     }
 `;
+
+export const CANCEL_RSVP_YES = gql`
+    mutation cancelRsvpYes ($concertId: ID!, $userId: ID!) {
+        cancelRsvpYes(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+        }
+    }
+`;

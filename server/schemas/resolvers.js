@@ -410,8 +410,18 @@ const resolvers = {
             );
 
             return concert
+        },
+        cancelRsvpYes: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPYES');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { yes: userId }},
+                { new: true }
+            );
+
+            return concert
         }
     }
 };
-
 module.exports = resolvers;
