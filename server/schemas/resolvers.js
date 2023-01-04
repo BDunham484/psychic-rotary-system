@@ -430,7 +430,7 @@ const resolvers = {
                 { $addToSet: { no: userId }},
                 { new: true }
             );
-
+            console.log(concert);
             return concert
         },
         cancelRsvpNo: async (parent, { concertId, userId }) => {
