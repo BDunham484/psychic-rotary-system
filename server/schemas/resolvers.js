@@ -421,7 +421,29 @@ const resolvers = {
             );
 
             return concert
-        }
+        },
+        rsvpNo: async (parent, { concertId, userId }) => {
+            console.log('RSVPNO');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $addToSet: { no: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
+        cancelRsvpNo: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPNO');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { no: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
     }
 };
 module.exports = resolvers;

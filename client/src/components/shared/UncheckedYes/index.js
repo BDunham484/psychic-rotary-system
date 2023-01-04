@@ -13,7 +13,7 @@ const UncheckedYes = ({ concertId }) => {
     const [cancelRsvpYes] = useMutation(CANCEL_RSVP_YES);
     //function that removes userId from concert's 'yes' field
     const handleClick = async (concertId, userId) => {
-        console.log('userId: ' + userId + ' cancel rsvp yes to concertId: ' + concertId);
+        console.log('userId: ' + userId + ' rsvp-ed yes to concertId: ' + concertId);
         try {
             await cancelRsvpYes({
                 variables: {

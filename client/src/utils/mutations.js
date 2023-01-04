@@ -115,3 +115,27 @@ export const CANCEL_RSVP_YES = gql`
         }
     }
 `;
+
+export const RSVP_NO = gql`
+    mutation rsvpNo ($concertId: ID!, $userId: ID!) {
+        rsvpNo(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+        }
+    }
+`;
+
+export const CANCEL_RSVP_NO = gql`
+    mutation cancelRsvpNo ($concertId: ID!, $userId: ID!) {
+        cancelRsvpNo(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+        }
+    }
+`;

@@ -57,6 +57,8 @@ const typeDefs = gql`
         deleteConcertFromUser(concertId: ID!): User
         rsvpYes(concertId: ID!, userId: ID!): Concert
         cancelRsvpYes(concertId: ID!, userId: ID!): Concert
+        rsvpNo(concertId: ID!, userId: ID!): Concert
+        cancelRsvpNo(concertId: ID!, userId: ID!): Concert
     }
 
     type Auth {

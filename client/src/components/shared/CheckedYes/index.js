@@ -13,7 +13,7 @@ const CheckedYes = ({ concertId }) => {
     const [rsvpYes] = useMutation(RSVP_YES);
     //function that adds (rsvp's) userId to concert's 'yes' field
     const handleClick = async (concertId, userId) => {
-        console.log('userId: ' + userId + ' rsvp-ed yes to concertId: ' + concertId);
+        console.log('userId: ' + userId + ' canceled rsvp yes to concertId: ' + concertId);
         try {
             await rsvpYes({
                 variables: { 
