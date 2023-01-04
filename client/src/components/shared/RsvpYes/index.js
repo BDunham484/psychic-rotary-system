@@ -9,7 +9,7 @@ const RsvpYes = ({ concertId }) => {
         variables: { concertId: concertId }
     });
 
-    const concertData = data || {};
+    const concertData = data?.concert?.yes || {};
 
     console.log('concert in rsvpyes');
     console.log(concertData);

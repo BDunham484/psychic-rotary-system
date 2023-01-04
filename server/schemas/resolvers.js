@@ -49,10 +49,10 @@ const resolvers = {
         },
         //get a concert by ID
         concert: async (parent, { concertId }) => {
-            return Concert.findOne({ concertId })
-                .populate('yes')
-                .populate('no')
-                .populate('maybe');
+            return Concert.findOne({ _id: concertId })
+                // .populate('yes')
+                // .populate('no')
+                // .populate('maybe');
         },
         //get all concerts in database
         concertsFromDb: async (parent, { date }) => {
