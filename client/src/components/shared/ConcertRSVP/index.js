@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ConcertContext } from '../../../utils/GlobalState';
 import RsvpYes from '../RsvpYes';
-import { XCircleFill } from '@styled-icons/bootstrap/XCircleFill';
+import RsvpNo from '../RsvpNo';
 import { QuestionCircleFill } from '@styled-icons/bootstrap/QuestionCircleFill';
 
 const ConcertRSVP = ({ concertId }) => {
@@ -14,7 +14,7 @@ const ConcertRSVP = ({ concertId }) => {
     return (
         <div className='rsvp-container'>
             <RsvpYes concertId={concertId}/>
-            <XCircleFill className='rsvp-no'/>
+            <RsvpNo concertId={concertId}/>
             <QuestionCircleFill className='rsvp-maybe' />
         </div>
     )
