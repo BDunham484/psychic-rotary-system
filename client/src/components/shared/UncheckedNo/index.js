@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useMutation } from '@apollo/client';
 import { ConcertContext } from '../../../utils/GlobalState';
 import { XCircle } from '@styled-icons/bootstrap/XCircle';
-import { CANCEL_RSVP_NO } from '../../../utils/mutations';
+import { RSVP_NO } from '../../../utils/mutations';
 
 const UncheckedNo = ({ concertId }) => {
     //import user query results from GlobalState
@@ -10,12 +10,12 @@ const UncheckedNo = ({ concertId }) => {
     //save user _id to variable: userId
     const userId = user?.me?._id || {};
     //call cancelRsvpYes mutation
-    const [cancelRsvpNo] = useMutation(CANCEL_RSVP_NO);
+    const [rsvpNo] = useMutation(RSVP_NO);
     //function that removes userId from concert's 'yes' field
     const handleClick = async (concertId, userId) => {
         console.log('userId: ' + userId + ' rsvp-ed yes to concertId: ' + concertId);
         try {
-            await cancelRsvpNo({
+            await rsvpNo({
                 variables: {
                     concertId: concertId,
                     userId: userId

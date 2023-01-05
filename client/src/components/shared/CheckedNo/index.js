@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useMutation } from '@apollo/client';
 import { ConcertContext } from '../../../utils/GlobalState';
 import { XCircleFill } from '@styled-icons/bootstrap/XCircleFill';
-import { RSVP_NO } from '../../../utils/mutations';
+import { CANCEL_RSVP_NO } from '../../../utils/mutations';
 
 const CheckedNo = ({ concertId }) => {
     //import user query results from GlobalState
@@ -10,12 +10,12 @@ const CheckedNo = ({ concertId }) => {
     //save user _id to variable: userId
     const userId = user?.me?._id || {};
     //call rsvpNo mutation
-    const [rsvpNo] = useMutation(RSVP_NO);
+    const [cancelRsvpNo] = useMutation(CANCEL_RSVP_NO);
     //function that adds (rsvp's) userId to concert's 'yes' field
     const handleClick = async (concertId, userId) => {
         console.log('userId: ' + userId + ' canceled rsvp no to concertId: ' + concertId);
         try {
-            await rsvpNo({
+            await cancelRsvpNo({
                 variables: { 
                     concertId: concertId,
                     userId: userId
