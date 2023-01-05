@@ -91,3 +91,75 @@ export const DELETE_CONCERTS = gql`
         }
     }
 `;
+
+export const RSVP_YES = gql`
+    mutation rsvpYes ($concertId: ID!, $userId: ID!) {
+        rsvpYes(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+        }
+    }
+`;
+
+export const CANCEL_RSVP_YES = gql`
+    mutation cancelRsvpYes ($concertId: ID!, $userId: ID!) {
+        cancelRsvpYes(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+        }
+    }
+`;
+
+export const RSVP_NO = gql`
+    mutation rsvpNo ($concertId: ID!, $userId: ID!) {
+        rsvpNo(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            no {
+                _id
+            }
+        }
+    }
+`;
+
+export const CANCEL_RSVP_NO = gql`
+    mutation cancelRsvpNo ($concertId: ID!, $userId: ID!) {
+        cancelRsvpNo(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            no {
+                _id
+            }
+        }
+    }
+`;
+
+export const RSVP_MAYBE = gql`
+    mutation rsvpMaybe ($concertId: ID!, $userId: ID!) {
+        rsvpMaybe(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            maybe {
+                _id
+            }
+        }
+    }
+`;
+
+export const CANCEL_RSVP_MAYBE = gql`
+    mutation cancelRsvpMaybe ($concertId: ID!, $userId: ID!) {
+        cancelRsvpMaybe(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            maybe {
+                _id
+            }
+        }
+    }
+`;

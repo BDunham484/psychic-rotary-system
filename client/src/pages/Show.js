@@ -2,9 +2,10 @@ import { useLocation } from "react-router-dom";
 import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard';
 import PlusMinus from "../components/shared/PlusMinus";
+import ConcertRSVP from "../components/shared/ConcertRSVP";
 
 const Show = () => {
-    
+
     const location = useLocation();
 
     const { concert } = location.state
@@ -31,9 +32,12 @@ const Show = () => {
                         <a href={"mailto:" + concert.email}>{concert.email}</a>
                         <a href={concert.ticketLink}>{concert.ticketLink}</a>
                     </div>
-
                 </div>
             </ShowCard>
+            {loggedIn &&
+                <ConcertRSVP concertId={concert._id} />
+            }
+
         </div>
     );
 };

@@ -23,12 +23,12 @@ const resolvers = {
         },
         //get all users
         users: async () => {
-            
-            const users =  User.find()
+
+            const users = User.find()
                 .select('-__v -password')
                 .populate('concerts')
                 .populate('friends');
-            
+
             console.log(users);
             return users
         },
@@ -42,19 +42,28 @@ const resolvers = {
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Concert.find(params).sort({ date: -1 });
+            return Concert.find(params).sort({ date: -1 })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe');
         },
         //get a concert by ID
-        concert: async (parent, { _id }) => {
-            return Concert.findOne({ _id });
+        concert: async (parent, { concertId }) => {
+            return Concert.findOne({ _id: concertId })
+                // .populate('yes')
+                // .populate('no')
+                // .populate('maybe');
         },
         //get all concerts in database
         concertsFromDb: async (parent, { date }) => {
             const concerts = await Concert.find({
                 date: date
             })
-            .sort({ venue: 'asc'})
-            .exec();
+                .sort({ venue: 'asc' })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe')
+                .exec();
 
             return concerts
         },
@@ -137,7 +146,10 @@ const resolvers = {
             }
         },
         allConcerts: async () => {
-            const concerts = await Concert.find();
+            const concerts = await Concert.find()
+                .populate('yes')
+                .populate('no')
+                .populate('maybe');
 
             return concerts;
         },
@@ -357,7 +369,6 @@ const resolvers = {
                 const user = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { concerts: concertId } },
-                    // { $push: { concerts: concertId } },
                     { new: true }
                 );
                 console.log('ADDED TO USER!!!!!!')
@@ -388,8 +399,73 @@ const resolvers = {
                 _id: { $in: concertId }
             });
             return concerts
-        }
+        },
+        rsvpYes: async (parent, { concertId, userId }) => {
+            console.log('RSVPYES');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $addToSet: { yes: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
+        cancelRsvpYes: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPYES');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { yes: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
+        rsvpNo: async (parent, { concertId, userId }) => {
+            console.log('RSVPNO');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $addToSet: { no: userId }},
+                { new: true }
+            );
+            
+            return concert
+        },
+        cancelRsvpNo: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPNO');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { no: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
+        rsvpMaybe: async (parent, { concertId, userId }) => {
+            console.log('RSVPMAYBE');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $addToSet: { maybe: userId }},
+                { new: true }
+            );
+            
+            return concert
+        },
+        cancelRsvpMaybe: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPMAYBE');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { maybe: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
     }
 };
-
 module.exports = resolvers;

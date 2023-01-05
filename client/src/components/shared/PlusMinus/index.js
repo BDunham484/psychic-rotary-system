@@ -4,10 +4,10 @@ import MinusButton from "../MinusButton";
 import { ConcertContext } from '../../../utils/GlobalState';
 
 const PlusMinus = ({ concertId }) => {
-
+    //import user query results from GlobalState
     const { user } = useContext(ConcertContext);
-
-    const idCheck = (user, id) => {
+    //function that returns true if a particular concertId is already listed in a User's concert field.
+    const concertIdCheck = (user, id) => {
         if (Object.keys(user).length === 0) {
             console.log('hang tight');
         } else {
@@ -27,12 +27,12 @@ const PlusMinus = ({ concertId }) => {
         }
     };
 
-    let result = idCheck(user, concertId);
+    let concertSavedToUser = concertIdCheck(user, concertId);
 
     return (
 
         <div>
-            {result ? (
+            {concertSavedToUser ? (
                 <MinusButton concertId={concertId} />
             ) : (
                 <PlusButton concertId={concertId} />

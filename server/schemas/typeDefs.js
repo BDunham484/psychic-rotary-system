@@ -26,6 +26,9 @@ const typeDefs = gql`
         website: String
         email: String
         ticketLink: String
+        yes: [User]
+        no: [User]
+        maybe: [User]
     }
 
     type Query {
@@ -33,7 +36,7 @@ const typeDefs = gql`
         users: [User]
         user(username: String!): User
         userConcerts(username: String): [Concert]
-        concert(_id: ID!): Concert
+        concert(concertId: ID!): Concert
         concerts(date: String): [Concert]
         allConcerts: [Concert]
         concertsFromDb(date: String!): [Concert]
@@ -52,6 +55,12 @@ const typeDefs = gql`
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User
+        rsvpYes(concertId: ID!, userId: ID!): Concert
+        cancelRsvpYes(concertId: ID!, userId: ID!): Concert
+        rsvpNo(concertId: ID!, userId: ID!): Concert
+        cancelRsvpNo(concertId: ID!, userId: ID!): Concert
+        rsvpMaybe(concertId: ID!, userId: ID!): Concert
+        cancelRsvpMaybe(concertId: ID!, userId: ID!): Concert
     }
 
     type Auth {

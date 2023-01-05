@@ -198,6 +198,10 @@ main {
   width: 90vw;
 }
 
+.testyclass {
+  background-color: var(--main-text);
+}
+
 #show-card-data {
   padding: 3vh 0 3vh 30px;
   font-size: 20px;
@@ -247,10 +251,52 @@ main {
   cursor: pointer;
 }
 
+#plus-sign-logged-out {
+  width: 50px;
+  color: var(--darker);
+  margin-left: 2vw;
+}
+
 
 #artists-link {
   font-size: 22px;
   font-weight: bold;
+}
+
+/* RSVP STYLES START */
+
+.rsvp-container {
+  width: 90vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.rsvp-yes {
+  width: 50px;
+  color:#386472
+}
+
+.rsvp-yes:hover {
+  cursor: pointer;
+}
+
+.rsvp-no {
+  width: 50px;
+  color:#a23e25;
+}
+
+.rsvp-no:hover {
+  cursor: pointer;
+}
+
+.rsvp-maybe {
+  width: 50px;
+  /* color:#DFBB89; */
+  color: #DFDEC5;
+}
+
+.rsvp-maybe:hover {
+  cursor: pointer;
 }
 
 /* LOGIN STYLES START */
