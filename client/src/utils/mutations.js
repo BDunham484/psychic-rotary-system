@@ -140,7 +140,7 @@ export const CANCEL_RSVP_NO = gql`
     }
 `;
 
-export const RSVP_Maybe = gql`
+export const RSVP_MAYBE = gql`
     mutation rsvpMaybe ($concertId: ID!, $userId: ID!) {
         rsvpMaybe(concertId: $concertId, userId: $userId) {
             _id
@@ -152,7 +152,7 @@ export const RSVP_Maybe = gql`
     }
 `;
 
-export const CANCEL_RSVP_Maybe = gql`
+export const CANCEL_RSVP_MAYBE = gql`
     mutation cancelRsvpMaybe ($concertId: ID!, $userId: ID!) {
         cancelRsvpMaybe(concertId: $concertId, userId: $userId) {
             _id
