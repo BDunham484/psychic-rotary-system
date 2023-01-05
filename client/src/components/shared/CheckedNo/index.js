@@ -27,7 +27,7 @@ const CheckedNo = ({ concertId }) => {
     }
     return (
         <div>
-            <XCircleFill className='rsvp-no'onClick={() => handleClick(concertId, userId)}/>
+            <XCircleFill className='rsvp-no' onClick={() => handleClick(concertId, userId)}/>
         </div>
     )
 }

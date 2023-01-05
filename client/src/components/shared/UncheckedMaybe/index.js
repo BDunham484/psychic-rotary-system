@@ -5,7 +5,7 @@ import { QuestionCircle } from '@styled-icons/bootstrap/QuestionCircle';
 import { RSVP_MAYBE } from '../../../utils/mutations';
 
 
-const UncheckedMaybe = (concertId) => {
+const UncheckedMaybe = ({ concertId }) => {
     //import user query results from GlobalState
     const { user } = useContext(ConcertContext);
     //save user _id to variable: userId
