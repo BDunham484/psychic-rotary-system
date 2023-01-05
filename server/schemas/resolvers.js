@@ -430,7 +430,7 @@ const resolvers = {
                 { $addToSet: { no: userId }},
                 { new: true }
             );
-            console.log(concert);
+            
             return concert
         },
         cancelRsvpNo: async (parent, { concertId, userId }) => {
@@ -439,6 +439,28 @@ const resolvers = {
             const concert = await Concert.findByIdAndUpdate(
                 { _id: concertId },
                 { $pull: { no: userId }},
+                { new: true }
+            );
+
+            return concert
+        },
+        rsvpMaybe: async (parent, { concertId, userId }) => {
+            console.log('RSVPMAYBE');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $addToSet: { maybe: userId }},
+                { new: true }
+            );
+            
+            return concert
+        },
+        cancelRsvpMaybe: async (parent, { concertId, userId }) => {
+            console.log('CANCELRSVPMAYBE');
+            console.log(concertId + ' and ' + userId);
+            const concert = await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { maybe: userId }},
                 { new: true }
             );
 

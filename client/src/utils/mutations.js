@@ -121,7 +121,7 @@ export const RSVP_NO = gql`
         rsvpNo(concertId: $concertId, userId: $userId) {
             _id
             artists
-            yes {
+            no {
                 _id
             }
         }
@@ -133,7 +133,31 @@ export const CANCEL_RSVP_NO = gql`
         cancelRsvpNo(concertId: $concertId, userId: $userId) {
             _id
             artists
-            yes {
+            no {
+                _id
+            }
+        }
+    }
+`;
+
+export const RSVP_Maybe = gql`
+    mutation rsvpMaybe ($concertId: ID!, $userId: ID!) {
+        rsvpMaybe(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            maybe {
+                _id
+            }
+        }
+    }
+`;
+
+export const CANCEL_RSVP_Maybe = gql`
+    mutation cancelRsvpMaybe ($concertId: ID!, $userId: ID!) {
+        cancelRsvpMaybe(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            maybe {
                 _id
             }
         }
