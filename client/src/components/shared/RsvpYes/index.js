@@ -37,13 +37,13 @@ const RsvpYes = ({ concertId }) => {
     };
     //save result of isCheckedYes as 'checked'
     const checked = isCheckedYes(yesData, userId);
-
+    
     return (
         <div>
             {checked ? (
-                <UncheckedYes concertId={concertId} />
-            ) : (
                 <CheckedYes concertId={concertId} />
+            ) : (
+                <UncheckedYes concertId={concertId} />
             )}
         </div>
     )

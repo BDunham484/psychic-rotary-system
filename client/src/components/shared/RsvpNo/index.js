@@ -44,7 +44,7 @@ const RsvpNo = ({ concertId }) => {
     };
     //save result of isCheckedNo as 'checked'
     const checked = isCheckedNo(noData, userId);
-    console.log('checked: ' + checked)
+    
     return (
         <div>
             {checked ? (
