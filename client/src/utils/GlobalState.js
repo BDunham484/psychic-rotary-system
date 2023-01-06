@@ -38,8 +38,8 @@ const ConcertProvider = ({ children }) => {
     const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
         variables: { date: today }
     })
-    // console.log('SCRAPER RESULTS IN GLOBAL STATE')
-    // console.log(concertData);
+    console.log('SCRAPER RESULTS IN GLOBAL STATE')
+    console.log(concertData);
     const [austinScraper, setAustinScraper] = useState([[]]);
 
     // const delay = 60000;
@@ -50,6 +50,7 @@ const ConcertProvider = ({ children }) => {
             const interval = setInterval(() => {
                 const concertDataArr = concertData.austinConcertScraper
                 setAustinScraper(concertDataArr)
+                // console.log(austinScraper);
             }, delay);
 
             return () => clearInterval(interval);

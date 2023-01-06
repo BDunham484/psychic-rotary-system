@@ -283,6 +283,8 @@ const resolvers = {
                 }))
                 // ^^^^^URLARR PROMISE END
             }))
+            // console.log('CONCERTDATA');
+            // console.log(concertData);
             return concertData;
         },
         getYesterdaysConcerts: async (parent, { date }) => {
@@ -408,6 +410,16 @@ const resolvers = {
                 { $addToSet: { yes: userId }},
                 { new: true }
             );
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { no: userId }},
+                { new: true }
+            )
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { maybe: userId }},
+                { new: true }
+            )
 
             return concert
         },
@@ -430,6 +442,16 @@ const resolvers = {
                 { $addToSet: { no: userId }},
                 { new: true }
             );
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { rsvpYes: userId }},
+                { new: true }
+            )
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { maybe: userId }},
+                { new: true }
+            )
             
             return concert
         },
@@ -452,6 +474,16 @@ const resolvers = {
                 { $addToSet: { maybe: userId }},
                 { new: true }
             );
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { yes: userId }},
+                { new: true }
+            )
+            await Concert.findByIdAndUpdate(
+                { _id: concertId },
+                { $pull: { no: userId }},
+                { new: true }
+            )
             
             return concert
         },
