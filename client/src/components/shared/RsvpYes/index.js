@@ -4,6 +4,7 @@ import { ConcertContext } from "../../../utils/GlobalState";
 import { GET_CONCERT_BY_ID } from "../../../utils/queries"
 import CheckedYes from "../CheckedYes"
 import UncheckedYes from "../UncheckedYes"
+import YesCount from "../YesCount";
 
 const RsvpYes = ({ concertId }) => {
     //import user query results from GlobalState
@@ -37,14 +38,18 @@ const RsvpYes = ({ concertId }) => {
     };
     //save result of isCheckedYes as 'checked'
     const checked = isCheckedYes(yesData, userId);
-    
+
     return (
-        <div>
-            {checked ? (
-                <CheckedYes concertId={concertId} />
-            ) : (
-                <UncheckedYes concertId={concertId} />
-            )}
+        <div className="rsvp-wrapper">
+            <div>
+                {checked ? (
+                    <CheckedYes concertId={concertId} />
+                ) : (
+                    <UncheckedYes concertId={concertId} />
+                )}
+            </div>
+
+            <YesCount />
         </div>
     )
 }

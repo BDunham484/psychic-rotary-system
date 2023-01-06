@@ -271,6 +271,11 @@ main {
   justify-content: space-around;
 }
 
+.rsvp-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .rsvp-yes {
   width: 50px;
   color:#386472
