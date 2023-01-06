@@ -4,6 +4,7 @@ import { ConcertContext } from "../../../utils/GlobalState";
 import { GET_CONCERT_BY_ID } from "../../../utils/queries"
 import CheckedMaybe from "../CheckedMaybe";
 import UncheckedMaybe from "../UncheckedMaybe";
+import RsvpCount from "../RsvpCount";
 
 const RsvpMaybe = ({ concertId }) => {
 
@@ -45,13 +46,19 @@ const RsvpMaybe = ({ concertId }) => {
     //save result of isCheckedNo as 'checked'
     const checked = isCheckedMaybe(maybeData, userId);
 
+    const count = maybeData.length;
+
     return (
-        <div>
-            {checked ? (
-                <CheckedMaybe concertId={concertId} />
-            ) : (
-                <UncheckedMaybe concertId={concertId} />
-            )}
+        <div className="rsvp-wrapper">
+            <div>
+                {checked ? (
+                    <CheckedMaybe concertId={concertId} />
+                ) : (
+                    <UncheckedMaybe concertId={concertId} />
+                )}
+            </div>
+
+            <RsvpCount count={count} />
         </div>
     )
 }

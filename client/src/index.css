@@ -276,6 +276,10 @@ main {
   align-items: center;
 }
 
+.rsvp-counts {
+  padding-left: 2vh;
+}
+
 .rsvp-yes {
   width: 50px;
   color:#386472

@@ -4,6 +4,7 @@ import { ConcertContext } from "../../../utils/GlobalState";
 import { GET_CONCERT_BY_ID } from "../../../utils/queries"
 import CheckedNo from "../CheckedNo";
 import UncheckedNo from "../UncheckedNo";
+import RsvpCount from "../RsvpCount";
 
 const RsvpNo = ({ concertId }) => {
     //import user query results from GlobalState
@@ -14,8 +15,8 @@ const RsvpNo = ({ concertId }) => {
     const { data, startPolling, stopPolling } = useQuery(GET_CONCERT_BY_ID, {
         variables: { concertId: concertId }
     });
-    
-    useEffect (() => {
+
+    useEffect(() => {
         startPolling(250)
         return () => {
             stopPolling()
@@ -44,14 +45,20 @@ const RsvpNo = ({ concertId }) => {
     };
     //save result of isCheckedNo as 'checked'
     const checked = isCheckedNo(noData, userId);
-    
+
+    const count = noData.length;
+
     return (
-        <div>
-            {checked ? (
-                <CheckedNo concertId={concertId} />
-            ) : (
-                <UncheckedNo concertId={concertId} />
-            )}
+        <div className="rsvp-wrapper">
+            <div>
+                {checked ? (
+                    <CheckedNo concertId={concertId} />
+                ) : (
+                    <UncheckedNo concertId={concertId} />
+                )}
+            </div>
+
+            <RsvpCount count={count} />
         </div>
     )
 }
