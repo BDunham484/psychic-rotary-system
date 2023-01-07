@@ -6,7 +6,7 @@ const RsvpCount = ({ count }) => {
         <div className="rsvp-counts" >
             {count > 0 && 
                 <>
-                    {count} Going
+                    {count}
                 </>
             }
         </div>

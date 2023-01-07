@@ -330,11 +330,14 @@ const resolvers = {
                         artists: data.artists,
                         venue: data.venue,
                         date: data.date,
-                        dateTime: data.dateTime,
+                        times: data.times,
                         address: data.address,
                         website: data.website,
                         email: data.email,
                         ticketLink: data.ticketLink,
+                        yes: data.yes,
+                        no: data.no,
+                        maybe: data.maybe,
                     }
                     const updatedConcert = await Concert.findByIdAndUpdate(
                         savedConcertId,

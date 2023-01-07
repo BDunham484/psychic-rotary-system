@@ -18,21 +18,7 @@ import { ConcertContext } from '../utils/GlobalState'
 
 const Home = () => {
   const { today, date, setDate, austinScraper } = useContext(ConcertContext);
-  // console.log('AUSTIN SCRAPER RESULTS PASSED TO HOME.JS');
-  // console.log(austinScraper)
-
-  //set initial state using today's date
-  // const [date, setDate] = useState(today)
-
-  // const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
-  //   variables: { date: today }
-  // })
-
-  // const concertDataArr = austinScraper?.concertsForDatabase || [];
-  // const concertDataArr = concertData?.concertsForDatabase || [];
-  // console.log('SCRAPER QUERY BY DATE');
-  // console.log(concertDataArr);
-
+  
   const [addConcert] = useMutation(ADD_CONCERT)
 
   const dbConcertUpdater = async (arr) => {
@@ -59,11 +45,12 @@ const Home = () => {
   }
 
   const yesterday = getYesterdaysDate(date);
+  // const yesterday = "Sun Jan 22 2023";
+
 
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
     variables: { date: yesterday }
   })
-  // console.log(yesterdaysConcertData.getYesterdaysConcerts[0]._id);
 
   const yesterdaysDatesArr = [];
 
@@ -81,6 +68,7 @@ const Home = () => {
       console.error(e)
     }
   }
+  // deleteYesterdaysConcerts(yesterday);
 
 
   // const delay = 60000;
@@ -97,9 +85,10 @@ const Home = () => {
   },)
 
   //use useQuery hook to make query request with dynamic date
-  const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
+  const { loading, data} = useQuery(GET_CONCERTS_BY_DATE, {
     variables: { date: date }
   });
+
 
   // const { data: userData } = useQuery(QUERY_ME_BASIC);
 
@@ -126,10 +115,7 @@ const Home = () => {
     setDate(theLastDay);
   }
 
-
-
   // const loggedIn = Auth.loggedIn();
-
 
   return (
     <div className="wrapper">
@@ -155,6 +141,7 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
+              {/* <TodaysConcerts date={date} /> */}
               <TodaysConcerts concerts={concerts} />
             </>
           )}
