@@ -169,7 +169,7 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 2; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
@@ -247,7 +247,8 @@ const resolvers = {
                                 })
                             })
                         }
-
+                        // console.log('AAAAAAAAAARRRRRRRGGGGGG!!!!!');
+                        // console.log(events);
                         const newEventsArr = await Promise.all(events.map((event) => {
                             const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
 
@@ -276,8 +277,8 @@ const resolvers = {
                             }
                             return moreEventDetails();
                         }, events))
-                    } catch (err) {
-                        console.error(err);
+                    } catch (error) {
+                        console.error(error.response.data);
                     }
                     concertData.push(events);
                 }))
