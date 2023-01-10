@@ -1,16 +1,11 @@
 import { useEffect, useContext } from "react";
-// import { useState, useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
-  // QUERY_ME_BASIC,
-  // GET_CONCERTS_FOR_DATABASE,
   GET_YESTERDAYS_CONCERTS,
   GET_CONCERTS_BY_DATE
 } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
-// import { getTodaysDate } from "../utils/helpers";
 import TodaysConcerts from "../components/TodaysConcerts";
-// import Auth from '../utils/auth';
 import Spinner from '../components/shared/Spinner';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 import { ConcertContext } from '../utils/GlobalState'
@@ -89,13 +84,6 @@ const Home = () => {
     variables: { date: date }
   });
 
-
-  // const { data: userData } = useQuery(QUERY_ME_BASIC);
-
-  // if (userData) {
-  //   console.log(userData)
-  // }
-
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
   // console.log('CONCERT DATA FROM DB BY DATE');
@@ -115,11 +103,8 @@ const Home = () => {
     setDate(theLastDay);
   }
 
-  // const loggedIn = Auth.loggedIn();
-
   return (
     <div className="wrapper">
-      {/* <div className={`page-wrapper ${loggedIn && 'page-wrapper-logged-in'}`}> */}
       <div className="utility-bar">
         {/* <button onClick={deleteYesterdaysConcerts}>DELETE_YESTERDAYS_CONCERTS</button> */}
         <span className="display-flex date-wrapper">
@@ -141,7 +126,6 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
-              {/* <TodaysConcerts date={date} /> */}
               <TodaysConcerts concerts={concerts} />
             </>
           )}
