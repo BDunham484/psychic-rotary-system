@@ -70,6 +70,10 @@ header {
   width: 217px;
 }
 
+#title-mobile {
+  display: none;
+}
+
 header h1 {
   /* font-family: 'Zen Dots', cursive; */
   /* font-family: 'Orbitron', sans-serif; */
@@ -510,4 +514,21 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+
+/* MEDIA QUERIES START */
+
+/* PORTRAIT MODE MOBILE DEVICES START */
+@media screen and
+(max-device-width: 500px) and
+(orientation: portrait) {
+  #title {
+    display: none;
+  }
+
+  #title-mobile {
+    display: block;
+  }
 }
