@@ -23,7 +23,7 @@ const ConcertProvider = ({ children }) => {
             console.log('GLOBALSTATE USER')
             console.log(user);
         }
-        startPolling(250)
+        startPolling(250);
         return () => {
             stopPolling()
         }
