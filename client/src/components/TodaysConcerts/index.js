@@ -49,7 +49,7 @@ const ConcertList = ({ concerts }) => {
                                 <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
-                                at {concert.venue} | {concert.times}
+                                <span id="at-venue">at</span> <span id="venue">{concert.venue}</span> <span id="divider">|</span> {concert.times}
                             </p>
                         </div>
                         <div>

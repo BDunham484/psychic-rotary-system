@@ -134,23 +134,6 @@ header nav ul li a {
   background-color: var(--background);
 }
 
-
-/* .page-wrapper-logged-in {
-  width: 80vh;
-  padding-top: 14vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: grey;
-} */
-
-/* .logged-in-home {
-  width: 20vh;
-  padding-top: 14vh;
-  color: grey;
-} */
-
 /* HOME STYLES START */
 main {
   width: 100vw;
@@ -522,13 +505,58 @@ footer {
 
 /* PORTRAIT MODE MOBILE DEVICES START */
 @media screen and
-(max-device-width: 500px) and
+(max-device-width: 767px) and
 (orientation: portrait) {
+  /* HEADER STYLES START */
+  .title-wrapper {
+    width: 125px;
+  }
+
   #title {
     display: none;
   }
 
   #title-mobile {
     display: block;
+  }
+
+  /* DATE STYLES START */
+  #date {
+    font-size: 14px;
+  }
+
+  /* SHOWCARD DATA STYLES START */
+  .plus-sign {
+    margin-left: 0;
+  }
+
+  #show-card-data {
+    padding: 1vh 0;
+  }
+
+  #artists-link {
+    display: block;
+    /* width: 200px; */
+    width: 70vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #at-venue {
+    display: none;
+  }
+
+  #venue {
+    display: block;
+    /* width: 200px; */
+    width: 70vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #divider {
+    display: none;
   }
 }
