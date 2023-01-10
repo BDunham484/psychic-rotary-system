@@ -169,7 +169,7 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 30; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
@@ -177,7 +177,7 @@ const resolvers = {
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
                 const day = date.slice(8, 10);
-                const month = (new Date().getMonth()) + 1;
+                const month = ('0' + (new Date().getMonth()) + 1).slice(-2);
                 const year = new Date().getFullYear();
                 console.log('CONCERTSFORDATABASE-DATES');
                 console.log(year + '-' + month + '-' + day)
@@ -278,14 +278,14 @@ const resolvers = {
                             return moreEventDetails();
                         }, events))
                     } catch (error) {
-                        console.error(error.response.data);
+                        console.error(error);
                     }
                     concertData.push(events);
                 }))
                 // ^^^^^URLARR PROMISE END
             }))
-            // console.log('CONCERTDATA');
-            // console.log(concertData);
+            console.log('CONCERTDATA');
+            console.log(concertData);
             return concertData;
         },
         getYesterdaysConcerts: async (parent, { date }) => {
@@ -336,9 +336,6 @@ const resolvers = {
                         website: data.website,
                         email: data.email,
                         ticketLink: data.ticketLink,
-                        yes: data.yes,
-                        no: data.no,
-                        maybe: data.maybe,
                     }
                     const updatedConcert = await Concert.findByIdAndUpdate(
                         savedConcertId,
@@ -425,6 +422,7 @@ const resolvers = {
                 { new: true }
             )
 
+            console.log(concert);
             return concert
         },
         cancelRsvpYes: async (parent, { concertId, userId }) => {
