@@ -66,8 +66,8 @@ const Home = () => {
   // deleteYesterdaysConcerts(yesterday);
 
 
-  const delay = 60000;
-  // const delay = (60000 * 60)
+  // const delay = 60000;
+  const delay = (60000 * 60)
 
   useEffect(() => {
     const interval = setInterval(() => {

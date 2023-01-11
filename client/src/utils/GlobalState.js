@@ -42,15 +42,15 @@ const ConcertProvider = ({ children }) => {
     console.log(concertData);
     const [austinScraper, setAustinScraper] = useState([[]]);
 
-    const delay = 60000;
-    // const delay = (60000 * 60)
+    // const delay = 60000;
+    const delay = (60000 * 60)
 
     useEffect(() => {
         if (concertData) {
             const interval = setInterval(() => {
                 const concertDataArr = concertData.austinConcertScraper
                 setAustinScraper(concertDataArr)
-                // console.log(austinScraper);
+                console.log(austinScraper);
             }, delay);
 
             return () => clearInterval(interval);
