@@ -17,6 +17,7 @@ const Home = () => {
   const [addConcert] = useMutation(ADD_CONCERT)
 
   const dbConcertUpdater = async (arr) => {
+    console.log('dbConcertUpdater is running');
     await Promise.all(arr.map(async (dailyArr) => {
       await Promise.all(dailyArr.map(async (concert) => {
         try {
@@ -70,6 +71,7 @@ const Home = () => {
   // const delay = (60000 * 60)
 
   useEffect(() => {
+    
     const interval = setInterval(() => {
       console.log('DELAYED EFFECT RUNNING');
       dbConcertUpdater(austinScraper);

@@ -13,9 +13,9 @@ const ConcertProvider = ({ children }) => {
     // USER STATE,QUERY AND USEEFFECT
     const [user, setUser] = useState({});
 
-    const { loading ,data: userData, startPolling, stopPolling } = useQuery(QUERY_ME_BASIC);
+    const { loading, data: userData, startPolling, stopPolling } = useQuery(QUERY_ME_BASIC);
 
-    useEffect (() => {
+    useEffect(() => {
         if (loading) {
             console.log('USERDATA LOADING...');
         } else {
@@ -38,8 +38,11 @@ const ConcertProvider = ({ children }) => {
     const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
         variables: { date: today }
     })
-    // console.log('SCRAPER RESULTS IN GLOBAL STATE')
-    // console.log(concertData);
+
+    if (concertData) {
+        console.log(concertData.austinConcertScraper.length/2 + ' days of concerts have been scraped.');
+    };
+
     const [austinScraper, setAustinScraper] = useState([[]]);
 
     const delay = 60000;
