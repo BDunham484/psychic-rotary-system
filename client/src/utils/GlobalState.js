@@ -23,10 +23,10 @@ const ConcertProvider = ({ children }) => {
             console.log('GLOBALSTATE USER')
             console.log(user);
         }
-        // startPolling(250);
-        // return () => {
-        //     stopPolling()
-        // }
+        startPolling(250);
+        return () => {
+            stopPolling()
+        }
     }, [loading, userData, user, startPolling, stopPolling])
 
     //get today's date with imported helper function
