@@ -42,8 +42,8 @@ const ConcertProvider = ({ children }) => {
     // console.log(concertData);
     const [austinScraper, setAustinScraper] = useState([[]]);
 
-    // const delay = 60000;
-    const delay = (60000 * 60)
+    const delay = 60000;
+    // const delay = (60000 * 60)
 
     useEffect(() => {
         if (concertData) {
