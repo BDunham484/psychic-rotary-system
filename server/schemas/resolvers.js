@@ -169,18 +169,22 @@ const resolvers = {
             //save date to another variable for for loop
             let arrayDate = date;
             //for loop that continously gets upcoming dates and pushes them to array
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 1; i++) {
                 let nextDate = nextDay(arrayDate);
                 dateArr.push(nextDate);
                 arrayDate = nextDate;
             }
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
+                // const delay = (parseInt(((index + 1) + '000'))) * 30;
+                // setTimeout(() => {
+                //     console.log('DELAY: ' + delay);
+                // }, delay)
+                
                 const day = date.slice(8, 10);
                 const month = ('0' + (new Date().getMonth()) + 1).slice(-2);
                 const year = new Date().getFullYear();
-                console.log('CONCERTSFORDATABASE-DATES');
-                console.log(year + '-' + month + '-' + day)
+                console.log('DATE TO BE SCRAPED: ' + year + '-' + month + '-' + day)
                 const urlArr = [
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
@@ -285,7 +289,7 @@ const resolvers = {
                 // ^^^^^URLARR PROMISE END
             }))
             console.log('CONCERTDATA');
-            console.log(concertData);
+            console.log(concertData.length/2 + ' days of concerts scraped');
             return concertData;
         },
         getYesterdaysConcerts: async (parent, { date }) => {
@@ -343,7 +347,7 @@ const resolvers = {
                         { new: true }
                     )
                     console.log('UPDATEDCONCERT');
-                    console.log(updatedConcert);
+                    console.log(updatedConcert.artists + ' has been updated');
                     return updatedConcert;
                 } else {
                     const concert = await Concert.create({ ...data })
