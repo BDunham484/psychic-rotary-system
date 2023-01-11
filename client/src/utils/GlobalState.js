@@ -23,10 +23,10 @@ const ConcertProvider = ({ children }) => {
             console.log('GLOBALSTATE USER')
             console.log(user);
         }
-        startPolling(250);
-        return () => {
-            stopPolling()
-        }
+        // startPolling(250);
+        // return () => {
+        //     stopPolling()
+        // }
     }, [loading, userData, user, startPolling, stopPolling])
 
     //get today's date with imported helper function
@@ -38,12 +38,12 @@ const ConcertProvider = ({ children }) => {
     const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
         variables: { date: today }
     })
-    console.log('SCRAPER RESULTS IN GLOBAL STATE')
-    console.log(concertData);
+    // console.log('SCRAPER RESULTS IN GLOBAL STATE')
+    // console.log(concertData);
     const [austinScraper, setAustinScraper] = useState([[]]);
 
-    const delay = 60000;
-    // const delay = (60000 * 60)
+    // const delay = 60000;
+    const delay = (60000 * 60)
 
     useEffect(() => {
         if (concertData) {
