@@ -64,7 +64,10 @@ const Home = () => {
       console.error(e)
     }
   }
-  // deleteYesterdaysConcerts(yesterday);
+
+  if (yesterdaysConcertData.getYesterdaysConcerts.length > 0) {
+  deleteYesterdaysConcerts(yesterday);
+  }
 
 
   const delay = 60000;
@@ -75,7 +78,7 @@ const Home = () => {
     const interval = setInterval(() => {
       console.log('DELAYED EFFECT RUNNING');
       dbConcertUpdater(austinScraper);
-      deleteYesterdaysConcerts(yesterday);
+      // deleteYesterdaysConcerts(yesterday);
     }, delay);
 
     return () => clearInterval(interval);
