@@ -22,11 +22,12 @@ const ConcertProvider = ({ children }) => {
             setUser(userData);
             console.log('GLOBALSTATE USER')
             console.log(user);
+            startPolling(250);
+            return () => {
+                stopPolling()
+            }
         }
-        startPolling(250);
-        return () => {
-            stopPolling()
-        }
+
     }, [loading, userData, user, startPolling, stopPolling])
 
     //get today's date with imported helper function
@@ -40,7 +41,7 @@ const ConcertProvider = ({ children }) => {
     })
 
     if (concertData) {
-        console.log(concertData.austinConcertScraper.length/2 + ' days of concerts have been scraped.');
+        console.log(concertData.austinConcertScraper.length / 2 + ' days of concerts have been scraped.');
     };
 
     const [austinScraper, setAustinScraper] = useState([[]]);

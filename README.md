@@ -26,19 +26,25 @@
 
 ## Description
 
-A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected.  
+* A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected. 
 
-* Currently under development.  Mainly focused on functionality at the moment. UX/UI is on the back burner for now. 
-* The homepage loads all of the local concert listings for that day.
-* You can change dates by selecting the appropriate arrow icon.
-* Once signed up/logged in the Nav bar customizes to Logged In user.
-* You can save concerts to your profile on the individual concert page.  Icons will be added to homepage as well. 
-* Currently focused on adding the ability to add friends.  
-* An 'add friend' button has been added to other users profiles.  
-* A form which allows user input to search/add a friend has been added to the profile
-* Updating styles a bit to make it more user friendly
+![nbx](./client/assets/images/home_loggedOut.png)
 
-![nbx](./client/assets/images/home-screenshot.png)
+* When a user is logged in, they then have the ability to save a concert to their profile. 
+
+![nbx](./client/assets/images/home-loggedIn.png)
+
+* When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  The ability to see the venue location via google maps, add it to google calendar, and other details will be added soon. 
+
+![nbx](./client/assets/images/show-loggedOut.png)
+
+*  The option to RSVP yes, no, or maybe and add/remove the show from the user's profile is available if logged in.  The number of RSVP's are tallied and the number is displayed allowing users to have some expectations about attendance.
+
+![nbx](./client/assets/images/show-loggedIn.png)
+
+* On the profile page the user is shown a list of their saved shows as well as their friend list and the ability to add friends if they know the user name.  The ability to remove, block or approve friend requests will be added soon. 
+
+![nbx](./client/assets/images/profile.png)
 
 
 
@@ -51,5 +57,11 @@ A Single Page React App that scrapes local concert listings from free to use inf
 
 * Run `mongod` from the command line
 * Run `npm run develop` from the command line
+
+## Deployment
+
+* Be advised, mobile responsivness is currently under development
+* The scraper in it's current form times out on Heroku.  Because of this it only scrapes a small    amount of days at a time. This fix is currently under development and will be updated soon. 
+* Deployed to Heroku [here](https://whispering-retreat-35925.herokuapp.com/)
 
 ### Made with ❤️ by  Brad Dunham
