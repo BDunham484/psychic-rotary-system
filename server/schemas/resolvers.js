@@ -176,7 +176,11 @@ const resolvers = {
             }
             const concertData = [];
             await Promise.all(dateArr.map(async (date, index) => {
-                console.log('INDEX: ' + index);
+                // const delay = (parseInt(((index + 1) + '000'))) * 30;
+                // setTimeout(() => {
+                //     console.log('DELAY: ' + delay);
+                // }, delay)
+                
                 const day = date.slice(8, 10);
                 const month = ('0' + (new Date().getMonth()) + 1).slice(-2);
                 const year = new Date().getFullYear();

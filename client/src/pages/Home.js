@@ -82,7 +82,7 @@ const Home = () => {
   // }
 
   if (yesterdaysConcerts.length > 0) {
-    deleteYesterdaysConcerts(yesterdaysConcerts);
+    // deleteYesterdaysConcerts(yesterdaysConcerts);
   };
 
 
@@ -92,12 +92,11 @@ const Home = () => {
   useEffect(() => {
 
     const interval = setInterval(() => {
-      console.log('DELAYED EFFECT RUNNING');
       dbConcertUpdater(austinScraper);
     }, delay);
 
     return () => clearInterval(interval);
-  },)
+  }, )
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
