@@ -41,14 +41,18 @@ const Home = () => {
   }
 
   const yesterday = getYesterdaysDate(today);
-  // const yesterday = "Sun Jan 22 2023";
+  // const yesterday = "Sat Jan 07 2023";
 
   // queries yesterdays concerts by date 
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
     variables: { date: yesterday }
   })
+
+
   //save GET_YESTERDAYS_CONCERTS query results to variable
-  const yesterdaysConcerts = useMemo(() => yesterdaysConcertData?.getYesterdaysConcerts || [], [yesterdaysConcertData]);
+  // const yesterdaysConcerts = useMemo(() => yesterdaysConcertData?.getYesterdaysConcerts || [], [yesterdaysConcertData,]);
+
+  // const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
   //declare empty array to save yesterdaysConcerts _id's to
 
   // const yesterdaysIdsArr = [];
@@ -88,11 +92,15 @@ const Home = () => {
   //   }
   // }
 
-  if (yesterdaysConcerts.length > 0) {
-    // deleteYesterdaysConcerts(yesterdaysConcerts);
-  };
+  // if (yesterdaysConcerts.length > 0) {
+  //   // deleteYesterdaysConcerts(yesterdaysConcerts);
+  // };
+
+  
 
   useEffect(() => {
+    const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
+
     const yesterdaysIdsArr = [];
 
     const deleteYesterdaysConcerts = async (yesterdaysConcerts) => {
@@ -111,7 +119,8 @@ const Home = () => {
     };
 
     deleteYesterdaysConcerts(yesterdaysConcerts);
-  }, [yesterdaysConcerts, deleteConcerts])
+  }, [deleteConcerts, yesterdaysConcertData?.getYesterdaysConcerts])
+
 
 
   // const delay = 60000;
@@ -124,7 +133,7 @@ const Home = () => {
     }, delay);
 
     return () => clearInterval(interval);
-  }, )
+  },)
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
