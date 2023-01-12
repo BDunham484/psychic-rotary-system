@@ -1,4 +1,4 @@
-import { useEffect, useContext, useMemo } from "react";
+import { useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   GET_YESTERDAYS_CONCERTS,
@@ -50,7 +50,6 @@ const Home = () => {
 
 
   //save GET_YESTERDAYS_CONCERTS query results to variable
-  // const yesterdaysConcerts = useMemo(() => yesterdaysConcertData?.getYesterdaysConcerts || [], [yesterdaysConcertData,]);
 
   // const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
   //declare empty array to save yesterdaysConcerts _id's to
@@ -73,9 +72,7 @@ const Home = () => {
   //   } catch (e) {
   //     console.error(e)
   //   }
-  // }
-
-
+  // 
 
   // const deleteYesterdaysConcerts = async () => {
   //   for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
@@ -142,8 +139,7 @@ const Home = () => {
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
-  // console.log('CONCERT DATA FROM DB BY DATE');
-  // console.log(concerts);
+  
   //function that gets the next day
   const nextDayButton = (date) => {
     const next = new Date(date);
