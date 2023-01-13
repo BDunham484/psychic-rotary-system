@@ -157,7 +157,8 @@ const resolvers = {
         austinConcertScraper: async (parent, { date }) => {
                 const concertData = [];
                 const day = date.slice(8, 10);
-                const month = ('0' + (new Date().getMonth()) + 1).slice(-2);
+                // const month = ('0' + (new Date(date).getMonth()) + 1).slice(-2);
+                const month = ('0' + (new Date(date).getMonth() + 1));
                 const year = new Date().getFullYear();
                 console.log('DATE TO BE SCRAPED: ' + year + '-' + month + '-' + day)
                 const urlArr = [
@@ -471,7 +472,7 @@ const resolvers = {
                     const concert = await Concert.create({ ...data })
                     // .select(-__v);
                     console.log('SAVEDCONCERT');
-                    console.log(concert);
+                    console.log(concert.artists + ' has been added');
                     return concert;
                 }
             })

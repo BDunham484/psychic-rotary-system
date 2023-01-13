@@ -60,18 +60,18 @@ const ConcertProvider = ({ children }) => {
         //save date to another variable for for loop
         let arrayDate = today;
         //for loop that continously gets upcoming dates and pushes them to array
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 89; i++) {
             let nextDate = nextDay(arrayDate);
             dateArr.push(nextDate);
             arrayDate = nextDate;
         }
 
         let index = 0;
-        const delay = (1000 * 30)
+        const delay = (1000 * 20)
         
         let interval = setInterval(function () {
             index += 1;
-            if (index >= 10) {
+            if (index >= 90) {
                 return () => clearInterval(interval);
             }
 
@@ -84,7 +84,9 @@ const ConcertProvider = ({ children }) => {
 
 
     }, [today])
-
+    // console.log('DATE TESTER!!!!!!!!!!!!!!!');
+    // let fart = 'Wed Feb 1 2023'
+    // console.log('0' + (new Date(fart).getMonth() + 1));
 
     // //save date to another variable for for loop
     // let arrayDate = today;
