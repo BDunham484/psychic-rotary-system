@@ -67,6 +67,7 @@ const ConcertProvider = ({ children }) => {
         }
 
         let index = 0;
+        const delay = (1000 * 30)
         
         let interval = setInterval(function () {
             index += 1;
@@ -75,10 +76,11 @@ const ConcertProvider = ({ children }) => {
             }
 
             console.log('interval has run: ' + index);
-            console.log(dateArr[index])
+            console.log('DATE TO BE SCRAPED: ' + dateArr[index])
+            setScraperDate(dateArr[index]);
             
-        }, 2000);
-        // ), (1000 * 30);
+        // }, 2000);
+        }, delay);
 
 
     }, [today])
@@ -127,13 +129,13 @@ const ConcertProvider = ({ children }) => {
 
     useEffect(() => {
         if (concertData) {
-            const interval = setInterval(() => {
+            // const interval = setInterval(() => {
                 const concertDataArr = concertData.austinConcertScraper
                 setAustinScraper(concertDataArr)
                 // console.log(austinScraper);
-            }, delay);
+            // }, delay);
 
-            return () => clearInterval(interval);
+            // return () => clearInterval(interval);
         }
 
     }, [concertData, austinScraper, delay])
