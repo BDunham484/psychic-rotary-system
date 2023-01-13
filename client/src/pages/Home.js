@@ -16,21 +16,6 @@ const Home = () => {
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
-  // const dbConcertUpdater = async (arr) => {
-  //   console.log('dbConcertUpdater is running');
-  //   await Promise.all(arr.map(async (dailyArr) => {
-  //     await Promise.all(dailyArr.map(async (concert) => {
-  //       try {
-  //         await addConcert({
-  //           variables: { ...concert }
-  //         })
-  //       } catch (e) {
-  //         console.error(e)
-  //       };
-  //     }));
-  //   }));
-  // };
-
   const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
   const getYesterdaysDate = (date) => {
@@ -47,53 +32,6 @@ const Home = () => {
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
     variables: { date: yesterday }
   })
-
-
-  //save GET_YESTERDAYS_CONCERTS query results to variable
-
-  // const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
-  //declare empty array to save yesterdaysConcerts _id's to
-
-  // const yesterdaysIdsArr = [];
-
-  //function that takes yesterdaysConcerts, pushes all of their _id's to yesterdaysIdsArr, and then passes that array to a mutation that deletes concerts by an array of _id's.
-
-
-  // const deleteYesterdaysConcerts = async (yesterdaysConcerts) => {
-  //   for (let i = 0; i < yesterdaysConcerts.length; i++) {
-  //     yesterdaysIdsArr.push(yesterdaysConcerts[i]._id)
-  //   }
-  //   console.log('YESTERDAYS DATES TO BE DELETED');
-  //   console.log(yesterdaysIdsArr);
-  //   try {
-  //     await deleteConcerts({
-  //       variables: { concertId: yesterdaysIdsArr }
-  //     })
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // 
-
-  // const deleteYesterdaysConcerts = async () => {
-  //   for (let i = 0; i < yesterdaysConcertData.getYesterdaysConcerts.length; i++) {
-  //     yesterdaysIdsArr.push(yesterdaysConcertData.getYesterdaysConcerts[i]._id)
-  //   }
-  //   console.log('YESTERDAYS DATES TO BE DELETED');
-  //   console.log(yesterdaysIdsArr);
-  //   try {
-  //     await deleteConcerts({
-  //       variables: { concertId: yesterdaysIdsArr }
-  //     })
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // }
-
-  // if (yesterdaysConcerts.length > 0) {
-  //   // deleteYesterdaysConcerts(yesterdaysConcerts);
-  // };
-
-  
 
   useEffect(() => {
     const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
@@ -118,11 +56,6 @@ const Home = () => {
     deleteYesterdaysConcerts(yesterdaysConcerts);
   }, [deleteConcerts, yesterdaysConcertData?.getYesterdaysConcerts])
 
-
-
-  // const delay = 60000;
-  const delay = (60000 * 60)
-
   useEffect(() => {
     const dbConcertUpdater = async (arr) => {
       console.log('dbConcertUpdater is running');
@@ -139,11 +72,8 @@ const Home = () => {
       }));
     };
 
-    // const interval = setInterval(() => {
-      dbConcertUpdater(austinScraper);
-    // }, delay);
+    dbConcertUpdater(austinScraper);
 
-    // return () => clearInterval(interval);
   }, [addConcert, austinScraper])
 
   //use useQuery hook to make query request with dynamic date
