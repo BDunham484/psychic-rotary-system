@@ -16,20 +16,20 @@ const Home = () => {
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
-  const dbConcertUpdater = async (arr) => {
-    console.log('dbConcertUpdater is running');
-    await Promise.all(arr.map(async (dailyArr) => {
-      await Promise.all(dailyArr.map(async (concert) => {
-        try {
-          await addConcert({
-            variables: { ...concert }
-          })
-        } catch (e) {
-          console.error(e)
-        };
-      }));
-    }));
-  };
+  // const dbConcertUpdater = async (arr) => {
+  //   console.log('dbConcertUpdater is running');
+  //   await Promise.all(arr.map(async (dailyArr) => {
+  //     await Promise.all(dailyArr.map(async (concert) => {
+  //       try {
+  //         await addConcert({
+  //           variables: { ...concert }
+  //         })
+  //       } catch (e) {
+  //         console.error(e)
+  //       };
+  //     }));
+  //   }));
+  // };
 
   const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
@@ -120,17 +120,31 @@ const Home = () => {
 
 
 
-  const delay = 60000;
-  // const delay = (60000 * 60)
+  // const delay = 60000;
+  const delay = (60000 * 60)
 
   useEffect(() => {
+    const dbConcertUpdater = async (arr) => {
+      console.log('dbConcertUpdater is running');
+      await Promise.all(arr.map(async (dailyArr) => {
+        await Promise.all(dailyArr.map(async (concert) => {
+          try {
+            await addConcert({
+              variables: { ...concert }
+            })
+          } catch (e) {
+            console.error(e)
+          };
+        }));
+      }));
+    };
 
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
       dbConcertUpdater(austinScraper);
-    }, delay);
+    // }, delay);
 
-    return () => clearInterval(interval);
-  },)
+    // return () => clearInterval(interval);
+  }, [addConcert, austinScraper])
 
   //use useQuery hook to make query request with dynamic date
   const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {

@@ -36,19 +36,54 @@ const ConcertProvider = ({ children }) => {
     //set initial state using today's date
     const [date, setDate] = useState(today);
 
-    // const [scraperDate, setScraperDate] = useState(today);
+    const [scraperDate, setScraperDate] = useState(today);
 
     // //delcare empty array for dates
     // const dateArr = [];
     // //push todays date into dateArr
     // dateArr.push(today);
-    // //function to get the next day based on the date passed in to it
-    // const nextDay = (date) => {
-    //     const next = new Date(date);
-    //     next.setDate(next.getDate() + 1);
-    //     const theNextDay = next.toDateString();
-    //     return theNextDay;
-    // };
+    //function to get the next day based on the date passed in to it
+
+
+    useEffect(() => {
+        //  delcare empty array for dates
+        const dateArr = [];
+        //push todays date into dateArr
+        dateArr.push(today);
+        //function to get the next day based on the date passed in to it
+        const nextDay = (date) => {
+            const next = new Date(date);
+            next.setDate(next.getDate() + 1);
+            const theNextDay = next.toDateString();
+            return theNextDay;
+        }
+        //save date to another variable for for loop
+        let arrayDate = today;
+        //for loop that continously gets upcoming dates and pushes them to array
+        for (let i = 0; i < 9; i++) {
+            let nextDate = nextDay(arrayDate);
+            dateArr.push(nextDate);
+            arrayDate = nextDate;
+        }
+
+        let index = 0;
+        
+        let interval = setInterval(function () {
+            index += 1;
+            if (index >= 10) {
+                return () => clearInterval(interval);
+            }
+
+            console.log('interval has run: ' + index);
+            console.log(dateArr[index])
+            
+        }, 2000);
+        // ), (1000 * 30);
+
+
+    }, [today])
+
+
     // //save date to another variable for for loop
     // let arrayDate = today;
     // //for loop that continously gets upcoming dates and pushes them to array
@@ -66,7 +101,7 @@ const ConcertProvider = ({ children }) => {
     // //                 console.log('DELAY: ' + delay);
     // //                 return setScraperDate(date)
     // //             }, delay)
-        
+
     // // })
 
     // dateArr.map((date,index) => {
@@ -76,17 +111,19 @@ const ConcertProvider = ({ children }) => {
     // })
 
     const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
-        variables: { date: today }
+        // variables: { date: today }
+        variables: { date: scraperDate }
     })
 
     if (concertData) {
-        console.log(concertData.austinConcertScraper.length/2 + ' days of concerts have been scraped.');
+        console.log(concertData.austinConcertScraper.length / 2 + ' days of concerts have been scraped.');
+        console.log(concertData);
     };
 
     const [austinScraper, setAustinScraper] = useState([[]]);
 
-    const delay = 60000;
-    // const delay = (60000 * 60)
+    // const delay = 60000;
+    const delay = (60000 * 60)
 
     useEffect(() => {
         if (concertData) {
