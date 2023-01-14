@@ -408,6 +408,7 @@ main {
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 16px;
+  padding: 3px;
 }
 
 #profile-showcard-data button:hover {
@@ -579,12 +580,12 @@ footer {
   }
 
   #profile-showcard-data {
-    padding: 3vh 0;
-    align-items: center;
+    /* padding: 3vh 0; */
+    /* align-items: center; */
   }
 
   #profile-showcard-data button {
-    width: 85vw;
+    /* width: 85vw; */
   }
 
   .profile-friends-card {
@@ -596,7 +597,7 @@ footer {
     width: 90%;
   }
 
-  .friend-list-container {
+  /* .friend-list-container {
     margin-bottom: 3vh;
-  }
+  } */
 }
