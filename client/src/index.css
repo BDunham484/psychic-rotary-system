@@ -122,6 +122,9 @@ header nav ul li a {
   width: 100vw;
   height: 10vh;
   margin-top: 12vh;
+  z-index: 9999;
+  position: fixed;
+  opacity: .90;
 }
 
 .home-page-wrapper {
@@ -527,7 +530,15 @@ footer {
 
   /* SHOWCARD DATA STYLES START */
   .plus-sign {
-    margin-left: 0;
+    margin: 0 1vw;
+  }
+
+  .plus-sign-logged-out {
+    margin: 0 1vw;
+  }
+
+  .minus-sign {
+    margin: 0 1vw;
   }
 
   #show-card-data {

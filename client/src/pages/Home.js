@@ -7,12 +7,12 @@ import {
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
 import TodaysConcerts from "../components/TodaysConcerts";
 import Spinner from '../components/shared/Spinner';
-import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 import { ConcertContext } from '../utils/GlobalState'
+import  UtilityBar  from './UtilityBar';
 
 
 const Home = () => {
-  const { today, date, setDate, austinScraper } = useContext(ConcertContext);
+  const { today, date, austinScraper } = useContext(ConcertContext);
 
   const [addConcert] = useMutation(ADD_CONCERT)
 
@@ -83,39 +83,10 @@ const Home = () => {
 
   //assign data to variable if present
   const concerts = data?.concertsFromDb || [];
-  
-  //function that gets the next day
-  const nextDayButton = (date) => {
-    const next = new Date(date);
-    next.setDate(next.getDate() + 1);
-    const theNextDay = next.toDateString();
-    setDate(theNextDay);
-  }
-  //function that gets the previous day
-  const dayBeforeButton = (date) => {
-    const before = new Date(date);
-    before.setDate(before.getDate() - 1);
-    const theLastDay = before.toDateString();
-    setDate(theLastDay);
-  }
 
   return (
     <div className="wrapper">
-      <div className="utility-bar">
-        {/* <button onClick={deleteYesterdaysConcerts}>DELETE_YESTERDAYS_CONCERTS</button> */}
-        <span className="display-flex date-wrapper">
-          {today === date ? (
-            <LeftArrow className="disabled-arrows" />
-          ) : (
-            <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
-          )}
-
-
-          <h3 id="date">{date}</h3>
-          <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
-        </span>
-        {/* <button onClick={() => dbConcertUpdater(concertDataArr)}>ADD_CONCERT_TEST</button> */}
-      </div>
+      <UtilityBar />
       <div className={`home-page-wrapper`}>
         <div>
           {loading ? (
