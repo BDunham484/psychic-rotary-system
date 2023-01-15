@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import { CubeAlt } from '@styled-icons/boxicons-regular';
-import UtilityBar from "../UtilityBar";
-
 
 const Header = () => {
   const logout = event => {
@@ -49,7 +47,6 @@ const Header = () => {
 
         </nav>
       </header>
-      <UtilityBar />
     </>
 
   );

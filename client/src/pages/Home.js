@@ -8,7 +8,7 @@ import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
 import TodaysConcerts from "../components/TodaysConcerts";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
-// import  UtilityBar  from '../components/UtilityBar';
+import  UtilityBar  from '../components/UtilityBar';
 
 
 const Home = () => {
@@ -84,20 +84,23 @@ const Home = () => {
   const concerts = data?.concertsFromDb || [];
 
   return (
-    <div className="wrapper">
-      {/* <UtilityBar /> */}
-      <div className={`home-page-wrapper`}>
-        <div>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <>
-              <TodaysConcerts concerts={concerts} />
-            </>
-          )}
+    <>
+      <UtilityBar />
+      <div className="wrapper">
+        <div className={`home-page-wrapper`}>
+          <div>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <>
+                <TodaysConcerts concerts={concerts} />
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
+
   );
 };
 

@@ -217,8 +217,12 @@ main {
   margin: 2vh 0;
 }
 
-.show-links a {
-  margin-top: 10vh;
+.show-links {
+  list-style: none;
+}
+
+.show-links li {
+  margin: 2vh 0;
 }
 
 .plus-sign {

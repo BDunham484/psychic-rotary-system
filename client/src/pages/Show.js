@@ -10,6 +10,8 @@ const Show = () => {
 
     const { concert } = location.state
 
+    const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.address}`
+
     const loggedIn = Auth.loggedIn();
 
     return (
@@ -25,13 +27,20 @@ const Show = () => {
                     <h2>
                         {concert.artists}
                     </h2>
-                    <h3>at {concert.venue} | {concert.times}</h3>
+                    <h3>at  
+                        <a href={concert.website}> {concert.venue}</a> | {concert.times}</h3>
                     <p>{concert.address}</p>
-                    <div className="show-links">
-                        <a href={concert.website}>{concert.website}</a>
-                        <a href={"mailto:" + concert.email}>{concert.email}</a>
-                        <a href={concert.ticketLink}>{concert.ticketLink}</a>
-                    </div>
+                    <ul className="show-links">
+                        <li>
+                            <a href={googleMaps}>Open in Google Maps</a>
+                        </li>
+                        <li>
+                            <a href={"mailto:" + concert.email}>{concert.email}</a>
+                        </li>
+                        <li>
+                            <a href={concert.ticketLink}>Get Tickets</a>
+                        </li>
+                    </ul>
                 </div>
             </ShowCard>
             {loggedIn &&
