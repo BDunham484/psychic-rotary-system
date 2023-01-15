@@ -37,9 +37,11 @@ const Show = () => {
                         <li>
                             <a href={"mailto:" + concert.email}>{concert.email}</a>
                         </li>
+                        {concert.ticketLink &&
                         <li>
                             <a href={concert.ticketLink}>Get Tickets</a>
                         </li>
+                        }
                     </ul>
                 </div>
             </ShowCard>
