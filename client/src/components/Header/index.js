@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import { CubeAlt } from '@styled-icons/boxicons-regular';
+import UtilityBar from "../UtilityBar";
 
 
 const Header = () => {
@@ -11,46 +12,46 @@ const Header = () => {
 
 
   return (
-    <header>
-      
+    <>
+      <header>
+
         <div className="display-flex title-wrapper">
-        <Link to="/">
-        <h1 id="title">NOISEBX</h1>
-        <h1 id="title-mobile">NBX</h1>
-        </Link>
-        <CubeAlt id="cube-icon"/>
-        
+          <Link to="/">
+            <h1 id="title">NOISEBX</h1>
+            <h1 id="title-mobile">NBX</h1>
+          </Link>
+          <CubeAlt id="cube-icon" />
+
         </div>
-      
-      <nav id="navigation">
-        {Auth.loggedIn() ? (
-          <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/" onClick={logout}>
+
+        <nav id="navigation">
+          {Auth.loggedIn() ? (
+            <ul>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={logout}>
                   Logout
-              </Link>
-            </li>
-          </ul>
-        ) : (
-          <ul>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-          </ul>
-        )}
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+            </ul>
+          )}
 
+        </nav>
+      </header>
+      <UtilityBar />
+    </>
 
-
-
-      </nav>
-
-    </header>
   );
 };
 

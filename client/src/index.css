@@ -113,6 +113,7 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
+  padding-top: 24vh;
 }
 
 .utility-bar {
@@ -120,11 +121,12 @@ header nav ul li a {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 10vh;
+  height: 12vh;
   margin-top: 12vh;
   z-index: 9999;
   position: fixed;
   opacity: .90;
+  background-color: var(--background);
 }
 
 .home-page-wrapper {

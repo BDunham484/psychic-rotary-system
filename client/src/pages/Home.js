@@ -8,7 +8,7 @@ import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
 import TodaysConcerts from "../components/TodaysConcerts";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
-import  UtilityBar  from './UtilityBar';
+// import  UtilityBar  from '../components/UtilityBar';
 
 
 const Home = () => {
@@ -26,7 +26,6 @@ const Home = () => {
   }
 
   const yesterday = getYesterdaysDate(today);
-  // const yesterday = "Sat Jan 07 2023";
 
   // queries yesterdays concerts by date 
   const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
@@ -86,7 +85,7 @@ const Home = () => {
 
   return (
     <div className="wrapper">
-      <UtilityBar />
+      {/* <UtilityBar /> */}
       <div className={`home-page-wrapper`}>
         <div>
           {loading ? (

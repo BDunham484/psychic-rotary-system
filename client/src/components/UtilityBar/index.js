@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ConcertContext } from "../utils/GlobalState";
+import { ConcertContext } from "../../utils/GlobalState";
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 
 const UtilityBar = () => {
