@@ -70,7 +70,6 @@ const Home = () => {
         }));
       }));
     };
-
     dbConcertUpdater(austinScraper);
 
   }, [addConcert, austinScraper])
