@@ -16,6 +16,8 @@ const Show = () => {
 
     const wazeMaps = `https://waze.com/ul?q=${concert.venue}&navigate=yes`;
 
+    const phoneNumber = `tel:${concert.phone}`;
+
     const loggedIn = Auth.loggedIn();
 
     return (
@@ -39,7 +41,7 @@ const Show = () => {
                             {concert.address}
                         </li>
                         <li>
-                            {concert.phone}
+                            <a href={phoneNumber}>{concert.phone}</a>
                         </li>
                         <li>
                             <a href={googleMaps}>Open in Google Maps</a>
