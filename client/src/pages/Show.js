@@ -10,7 +10,7 @@ const Show = () => {
 
     const { concert } = location.state
 
-    const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.address}`
+    const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.venue}`
 
     const loggedIn = Auth.loggedIn();
 
