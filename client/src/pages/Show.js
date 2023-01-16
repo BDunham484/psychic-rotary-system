@@ -10,6 +10,8 @@ const Show = () => {
 
     const { concert } = location.state
 
+    console.log(concert)
+
     const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.venue}`
 
     const wazeMaps = `https://waze.com/ul?q=${concert.venue}&navigate=yes`;
