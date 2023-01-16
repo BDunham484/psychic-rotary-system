@@ -12,6 +12,8 @@ const Show = () => {
 
     const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.venue}`
 
+    const wazeMaps = `https://waze.com/ul?q=${concert.address}&navigate=yes`;
+
     const loggedIn = Auth.loggedIn();
 
     return (
@@ -36,6 +38,9 @@ const Show = () => {
                         </li>
                         <li>
                             <a href={"mailto:" + concert.email}>{concert.email}</a>
+                        </li>
+                        <li>
+                            <a href={wazeMaps}>Open in Waze</a>
                         </li>
                         {concert.ticketLink &&
                         <li>
