@@ -75,15 +75,15 @@ const ConcertProvider = ({ children }) => {
 
     // }, [today])
 
-    // const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
-    //     // variables: { date: today }
-    //     variables: { date: scraperDate }
-    // })
+    const { data: concertData } = useQuery(AUSTIN_CONCERT_SCRAPER, {
+        // variables: { date: today }
+        variables: { date: scraperDate }
+    })
 
-    // if (concertData) {
-    //     console.log(concertData.austinConcertScraper.length / 2 + ' days of concerts have been scraped.');
-    //     console.log(concertData);
-    // };
+    if (concertData) {
+        console.log(concertData.austinConcertScraper.length / 2 + ' days of concerts have been scraped.');
+        console.log(concertData);
+    };
 
     const [austinScraper, setAustinScraper] = useState([[]]);
 

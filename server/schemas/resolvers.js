@@ -237,8 +237,12 @@ const resolvers = {
                                 var $ = cheerio.load(data);
 
                                 $('.venue-details:eq(0)', data).each(function () {
-                                    var address = $(this).text();
+                                    var addressPhone = $(this).text();
+                                    const addressArr = addressPhone.split(',');
+                                    var address = addressArr[0];
+                                    const phone = addressArr[1];
                                     event["address"] = address
+                                    event["phone"] = phone
                                     return event;
                                 })
                                 $('.venue-details:eq(1)', data).each(function () {
