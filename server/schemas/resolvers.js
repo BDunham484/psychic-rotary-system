@@ -153,7 +153,7 @@ const resolvers = {
 
             return concerts;
         },
-        //scrape one day at a time --- under development
+        //scrape one day at a time
         austinConcertScraper: async (parent, { date }) => {
                 const concertData = [];
                 const day = date.slice(8, 10);

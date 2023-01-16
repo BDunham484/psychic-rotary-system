@@ -37,10 +37,10 @@ const Show = () => {
                             <a href={googleMaps}>Open in Google Maps</a>
                         </li>
                         <li>
-                            <a href={"mailto:" + concert.email}>{concert.email}</a>
+                            <a href={wazeMaps}>Open in Waze</a>
                         </li>
                         <li>
-                            <a href={wazeMaps}>Open in Waze</a>
+                            <a href={"mailto:" + concert.email}>{concert.email}</a>
                         </li>
                         {concert.ticketLink &&
                         <li>
