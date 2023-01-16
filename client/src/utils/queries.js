@@ -9,6 +9,7 @@ export const GET_TODAYS_CONCERTS = gql`
             times
             venue
             address
+            phone
             website
             email
             ticketLink
@@ -26,6 +27,7 @@ export const GET_CONCERTS_BY_DATE = gql`
             times
             venue
             address
+            phone
             website
             email
             ticketLink
@@ -42,6 +44,7 @@ export const AUSTIN_CONCERT_SCRAPER = gql`
             times
             venue
             address
+            phone
             website
             email
             ticketLink
@@ -59,6 +62,7 @@ export const QUERY_USER_CONCERTS = gql`
             times
             venue
             address
+            phone
             website
             email
             ticketLink
@@ -81,6 +85,7 @@ export const QUERY_USER = gql`
                 times
                 venue
                 address
+                phone
                 website
                 email
                 ticketLink
@@ -109,6 +114,7 @@ export const QUERY_ME = gql`
                 times
                 venue
                 address
+                phone
                 website
                 email
                 ticketLink
@@ -149,6 +155,7 @@ export const GET_YESTERDAYS_CONCERTS = gql`
             customId
             artists
             address
+            phone
             venue
             date
             times
@@ -171,6 +178,7 @@ export const GET_CONCERT_BY_ID = gql`
             times
             venue
             address
+            phone
             website
             email
             ticketLink

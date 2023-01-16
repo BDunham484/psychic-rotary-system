@@ -460,6 +460,7 @@ const resolvers = {
                         date: data.date,
                         times: data.times,
                         address: data.address,
+                        phone: data.phone,
                         website: data.website,
                         email: data.email,
                         ticketLink: data.ticketLink,
