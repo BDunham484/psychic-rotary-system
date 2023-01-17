@@ -44,6 +44,7 @@ export const AUSTIN_CONCERT_SCRAPER = gql`
             times
             venue
             address
+            address2
             phone
             website
             email

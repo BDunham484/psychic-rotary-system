@@ -239,10 +239,23 @@ const resolvers = {
                                 $('.venue-details:eq(0)', data).each(function () {
                                     var addressPhone = $(this).text();
                                     const addressArr = addressPhone.split(',');
+                                    console.log('ADDRESSARR!!!!!!!!!');
+                                    console.log(addressArr);
+                                    //assign regex to recoginze 1-9 to variable num
+                                    let num = /\d/
                                     var address = addressArr[0];
-                                    const phone = addressArr[1];
+                                    var address2 = addressArr[1];
+                                    var address3 = addressArr[2];
+                                    if (num.test(address2[1])) {
+                                        event["phone"] = address2;
+                                    } else {
+                                        event["phone"] = address3;
+                                        console.log('ADDRESS3');
+                                        console.log(address3);
+                                        event["address2"] = address2
+                                    }
+
                                     event["address"] = address
-                                    event["phone"] = phone
                                     return event;
                                 })
                                 $('.venue-details:eq(1)', data).each(function () {
@@ -270,6 +283,7 @@ const resolvers = {
                 // ^^^^^URLARR PROMISE END
             // }))
             console.log('CONCERTDATA');
+            console.log(concertData);
             console.log(concertData.length/2 + ' days of concerts scraped');
             return concertData;
         },

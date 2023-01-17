@@ -29,6 +29,9 @@ const concertSchema = new Schema(
         address: {
             type: String
         },
+        address2: {
+            type: String
+        },
         phone: {
             type: String
         },
