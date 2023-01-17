@@ -33,13 +33,17 @@ const Show = () => {
                     <h2>
                         {concert.artists}
                     </h2>
-                    <h3>at  
+                    <h3>at
                         <a href={concert.website}> {concert.venue}</a> | {concert.times}</h3>
 
                     <ul className="show-links">
                         <li>
                             {concert.address}
                         </li>
+                        {concert.address2 &&
+                            <li>
+                                {concert.address2};
+                            </li>}
                         <li>
                             <a href={phoneNumber}>{concert.phone}</a>
                         </li>
@@ -53,9 +57,9 @@ const Show = () => {
                             <a href={"mailto:" + concert.email}>{concert.email}</a>
                         </li>
                         {concert.ticketLink &&
-                        <li>
-                            <a href={concert.ticketLink}>Get Tickets</a>
-                        </li>
+                            <li>
+                                <a href={concert.ticketLink}>Get Tickets</a>
+                            </li>
                         }
                     </ul>
                 </div>
