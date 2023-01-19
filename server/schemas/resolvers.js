@@ -239,21 +239,19 @@ const resolvers = {
                                 $('.venue-details:eq(0)', data).each(function () {
                                     var addressPhone = $(this).text();
                                     const addressArr = addressPhone.split(',');
-                                    // console.log('ADDRESSARR!!!!!!!!!');
-                                    // console.log(addressArr);
                                     //assign regex to recoginze 1-9 to variable num
                                     let num = /\d/
                                     var address = addressArr[0];
                                     var address2 = addressArr[1];
-                                    // var numTest = address2[1];
                                     var address3 = addressArr[2];
-                                    if (num.test(address2.charAt(1))) {
-                                        event["phone"] = address2;
-                                    } else {
-                                        event["phone"] = address3;
-                                        event["address2"] = address2;
+                                    if (address2) {
+                                        if (num.test(address2[1])) {
+                                            event["phone"] = address2;
+                                        } else {
+                                            event["phone"] = address3;
+                                            event["address2"] = address2;
+                                        }
                                     }
-
                                     event["address"] = address
                                     return event;
                                 })
@@ -459,8 +457,6 @@ const resolvers = {
             return { token, user };
         },
         addConcert: async (parent, { ...data }) => {
-            console.log('DATA!!!!!!!!!!!!');
-            console.log(data);
             await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
                 if (err) return handleError(err);
 

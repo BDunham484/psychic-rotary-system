@@ -25,7 +25,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_CONCERT = gql`
-    mutation addConcert($customId: String, $artists: String, $venue: String, $date: String, $times: String, $address: String, $address: String, $phone: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
+    mutation addConcert($customId: String, $artists: String, $venue: String, $date: String, $times: String, $address: String, $address2: String, $phone: String, $website: String, $email: String, $ticketLink: String, $artistsLink: String) {
         addConcert(customId: $customId, artists: $artists, venue: $venue, date: $date, times: $times, address: $address, address2: $address2, phone: $phone, website: $website, email: $email, ticketLink: $ticketLink, artistsLink: $artistsLink) {
             _id
             artists

@@ -259,6 +259,10 @@ main {
   font-weight: bold;
 }
 
+#address2 {
+  margin-top: -2vh;
+}
+
 /* RSVP STYLES START */
 
 .rsvp-container {

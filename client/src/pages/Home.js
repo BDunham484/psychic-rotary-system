@@ -13,7 +13,7 @@ import  UtilityBar  from '../components/UtilityBar';
 
 const Home = () => {
   const { today, date, austinScraper } = useContext(ConcertContext);
-
+  
   const [addConcert] = useMutation(ADD_CONCERT)
 
   const [deleteConcerts] = useMutation(DELETE_CONCERTS);

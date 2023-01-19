@@ -27,6 +27,7 @@ export const GET_CONCERTS_BY_DATE = gql`
             times
             venue
             address
+            address2
             phone
             website
             email
