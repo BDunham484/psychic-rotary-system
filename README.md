@@ -61,7 +61,6 @@
 ## Deployment
 
 * Be advised, mobile responsivness is currently under development
-* The scraper in it's current form times out on Heroku.  Because of this it only scrapes a small    amount of days at a time. This fix is currently under development and will be updated soon. 
 * Deployed to Heroku [here](https://whispering-retreat-35925.herokuapp.com/)
 
 ### Made with ❤️ by  Brad Dunham
