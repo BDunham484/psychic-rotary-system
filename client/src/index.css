@@ -633,3 +633,16 @@ footer {
     margin-bottom: 3vh;
   } */
 }
+
+/* LANDSCAPE MODE DEVICES START */
+@media screen and
+(max-device-width: 767px) and
+(orientation: landscape) {
+  .rsvp-container {
+    margin-bottom: 3vh;
+  }
+
+  footer {
+    min-height: 16vh;
+  }
+}
