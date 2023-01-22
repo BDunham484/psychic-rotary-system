@@ -10,9 +10,11 @@ import ShowCard from "../components/ShowCard";
 const Profile = () => {
     const [text, setText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
+    const [friend, setFriend] = useState(false);
     //destructure mutation function 
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const { username: userParam } = useParams();
+
     //query that checks param value then conditionally runs query based on result
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
         variables: { username: userParam }
@@ -20,7 +22,7 @@ const Profile = () => {
 
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
-    console.log(user);
+    // console.log(user);
     //onClick handler for add friend
     const handleClick = async () => {
         try {
@@ -57,13 +59,20 @@ const Profile = () => {
         console.log("EVENT: " + event)
         console.log("ID: " + friendId)
 
-        try {
-            await addFriend({
-                variables: { id: friendId }
-            });
-        } catch (e) {
-            console.error(e)
+        if (!friendId) {
+            console.log('user not found');
+            setFriend(true);
+        } else {
+            try {
+                await addFriend({
+                    variables: { id: friendId }
+                });
+            } catch (e) {
+                console.error(e)
+            }
         }
+
+
     }
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -124,24 +133,7 @@ const Profile = () => {
                         </ShowCard>
                     ))}
 
-                {/* <div>
-                    {user.concerts.map((concert, index) => (
-                        <div key={index} className="events">
-                            <div>Date: {concert.dateTime}</div>
-                            <div>
-                                Artist: {concert.artists}
-                            </div>
-                            <div>Venue: {concert.venue}</div>
-                            <div>Address: {concert.address}</div>
-                            <div>Website: {concert.website}</div>
-                            <div>Email: {concert.email}</div>
-                            <div>Ticket Link: {concert.ticketLink}</div>
-                            <div>Artists Link: {concert.artistsLink}</div>
-                            <div>Concert ID: {concert._id}</div>
-                            <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
-                        </div>
-                    ))}
-                </div> */}
+
             </div>
             <div className="profile-friends-card">
                 <div className="profile-friends-card-header">
@@ -161,7 +153,11 @@ const Profile = () => {
                                 placeholder="Add Friend"
                                 value={text}
                             />
+                            
                         </div>
+                        {friend && 
+                                <div>USER NOT FOUND</div>
+                            }
                         <div>
                             <button type="submit" disabled={btnDisabled}>Add Friend</button>
                         </div>
