@@ -37,7 +37,7 @@ const resolvers = {
             return User.findOne({ username })
                 .select('-__v -password')
                 .populate('concerts')
-                .populate('friends');
+                .populate('friends')
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {
