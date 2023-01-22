@@ -582,6 +582,16 @@ footer {
     display: none;
   }
 
+  /* RSVP STYLES START */
+  .rsvp-wrapper {
+    flex-direction: column;
+  }
+
+  .rsvp-counts {
+    padding-left: 0;
+    padding-top: 2vh;
+  }
+
   /* PROFILE STYLES START */
   .profile-page-wrapper {
     flex-direction: column;
