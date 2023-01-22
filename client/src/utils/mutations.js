@@ -94,6 +94,15 @@ export const DELETE_CONCERTS = gql`
     }
 `;
 
+export const DELETE_OLD_CONCERTS = gql`
+    mutation deleteOldConcerts ($date: String) {
+        deleteOldConcerts(date: $date) {
+            _id
+        }
+    }
+`;
+
+
 export const RSVP_YES = gql`
     mutation rsvpYes ($concertId: ID!, $userId: ID!) {
         rsvpYes(concertId: $concertId, userId: $userId) {

@@ -542,7 +542,7 @@ const resolvers = {
             });
             return concerts
         },
-        deleteLastWeeksConcerts: async (parent, { date }) => {
+        deleteOldConcerts: async (parent, { date }) => {
             //declare empty array for dates
             const dateArr = [];
             dateArr.push(date);
