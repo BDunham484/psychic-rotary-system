@@ -61,6 +61,7 @@ export const QUERY_USER_CONCERTS = gql`
             artists
             artistsLink
             description
+            date
             times
             venue
             address
@@ -84,6 +85,7 @@ export const QUERY_USER = gql`
                 artists
                 artistsLink
                 description
+                date
                 times
                 venue
                 address
@@ -113,6 +115,7 @@ export const QUERY_ME = gql`
                 artists
                 artistsLink
                 description
+                date
                 times
                 venue
                 address

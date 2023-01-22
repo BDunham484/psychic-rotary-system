@@ -20,7 +20,7 @@ const Profile = () => {
 
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
-    // console.log(user);
+    console.log(user);
     //onClick handler for add friend
     const handleClick = async () => {
         try {
@@ -111,7 +111,7 @@ const Profile = () => {
                     user.concerts.map((concert, index) => (
                         <ShowCard key={index}>
                             <div id="profile-showcard-data">
-                                <div>{concert.dateTime}</div>
+                                <div>{concert.date}</div>
                                 <Link to={`/show/${concert.artists}`} state={{ concert }}>
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
