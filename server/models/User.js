@@ -4,6 +4,8 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 //import the Concert model
 const Concert = require('./Concert');
+//import Request model
+const Request = require('./Request');
 
 //create the schema for the model using the Schema constructor and outline the fields
 const userSchema = new Schema(
@@ -36,7 +38,8 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
+        ],
+        openRequests: [Request.schema]
     },
     {
         toJSON: {
