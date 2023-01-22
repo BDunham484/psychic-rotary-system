@@ -674,6 +674,54 @@ const resolvers = {
 
             return concert
         },
+        sendRequest: async (parent, { username }, context) => {
+            if (!username) {
+                throw new Error("You must submit a username");
+            };
+            if(username === context.user.username) {
+                throw new Error("Please submit another username");
+            };
+            //create new request and push it to the chosen user's open requests
+            const request = await Request.create({
+                'username': context.user.username,
+                accepted: false
+            })
+            const user = await User.findOneAndUpdate(
+                { 'username': username },
+                { $push: { openRequests: request }}
+            )
+            if(!user) {
+                throw new Error('User does not exist');
+            }
+            return username
+        },
+        //takes request away from chosen user's open requests if you choose to cancel the friend request
+        cancelRequest: async (parent, { username }, context) => {
+            await User.findOneAndUpdate(
+                { 'username': username },
+                { $pull: { openRequests: {
+                    'username': context.user.username
+                }}}
+            )
+            return username
+        },
+        //changes your open request from a user to show that it has been accepted
+        acceptRequest: async (parent, { username }, context) => {
+            await User.findOneAndUpdate(
+                { 'username': context.user.username,
+                    'openRequests.username': username },
+                    { 'openRequests.$.accepted': true }
+            )
+                return context.user.username
+        },
+        //remove someones friend request from your own open request list
+        declineRequest: async (parent, { username }, context) => {
+            await User.findOneAndUpdate(
+                { 'username': context.user.username },
+                { $pull: { openRequests: { 'username': username }}}
+            )
+            return username
+        }
     }
 };
 module.exports = resolvers;

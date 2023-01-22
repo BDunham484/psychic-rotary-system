@@ -33,6 +33,12 @@ const typeDefs = gql`
         maybe: [User]
     }
 
+    type Request {
+        _id: ID
+        username: String
+        accepted: Boolean
+    }
+
     type Query {
         me: User
         users: [User]
@@ -64,6 +70,10 @@ const typeDefs = gql`
         cancelRsvpNo(concertId: ID!, userId: ID!): Concert
         rsvpMaybe(concertId: ID!, userId: ID!): Concert
         cancelRsvpMaybe(concertId: ID!, userId: ID!): Concert
+        sendRequest(username: String!): String
+        cancelRequest(username: String!): String
+        acceptRequest(username: String!): String
+        declineRequest(username: String!): String
     }
 
     type Auth {
