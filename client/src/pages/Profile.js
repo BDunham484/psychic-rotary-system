@@ -152,8 +152,7 @@ const Profile = () => {
                                 type="text"
                                 placeholder="Add Friend"
                                 value={text}
-                            />
-                            
+                            />   
                         </div>
                         {friend && 
                                 <div>USER NOT FOUND</div>

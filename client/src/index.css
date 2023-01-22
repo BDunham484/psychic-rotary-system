@@ -344,7 +344,9 @@ main {
   width: 75%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 2vh 8vh 0 8vh;
+  font-family: var(--secondary-font);
 }
 
 .form-card label {
