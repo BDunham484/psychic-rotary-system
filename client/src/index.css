@@ -311,7 +311,8 @@ main {
 /* LOGIN STYLES START */
 .container {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 88vh;
+  padding-top: 12vh;
   display: flex;
   justify-content: center;
   align-items: center;
