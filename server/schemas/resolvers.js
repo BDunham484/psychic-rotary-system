@@ -163,7 +163,9 @@ const resolvers = {
                 console.log('DATE TO BE SCRAPED: ' + year + '-' + month + '-' + day)
                 const urlArr = [
                     `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`,
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-3`,
+                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-4`
                 ];
                 await Promise.all(urlArr.map(async (url, index) => {
                     try {
