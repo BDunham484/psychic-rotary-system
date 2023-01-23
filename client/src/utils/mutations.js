@@ -177,6 +177,38 @@ export const CANCEL_RSVP_MAYBE = gql`
 
 export const SEND_FRIEND_REQUEST = gql`
     mutation sendRequest($username: String!) {
-        sendRequest(username: $username)
+        sendRequest(username: $username) {
+            username
+            openRequests {
+                _id
+                accepted
+                username
+            }
+        }
+    }
+`;
+
+export const CANCEL_FRIEND_REQUEST = gql`
+    mutation cancelRequest($userame: String!) {
+        cancelRequest(username: $username) {
+            username
+            openRequests {
+                _id
+                accepted
+                username
+            }
+        }
+    }
+`;
+
+export const ACCEPT_FRIEND_REQUEST = gql`
+    mutation acceptRequest($username: String!) {
+        acceptRequest(username: $username) 
+    }
+`;
+
+export const DECLINE_FRIEND_REQUEST = gql`
+    mutation declineRequest($username: String!) {
+        declineRequest(username: $username)
     }
 `;

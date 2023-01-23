@@ -698,13 +698,13 @@ const resolvers = {
         },
         //takes request away from chosen user's open requests if you choose to cancel the friend request
         cancelRequest: async (parent, { username }, context) => {
-            await User.findOneAndUpdate(
+            const user = await User.findOneAndUpdate(
                 { 'username': username },
                 { $pull: { openRequests: {
                     'username': context.user.username
                 }}}
             )
-            return username
+            return user
         },
         //changes your open request from a user to show that it has been accepted
         acceptRequest: async (parent, { username }, context) => {
