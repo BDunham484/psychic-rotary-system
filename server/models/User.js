@@ -39,7 +39,13 @@ const userSchema = new Schema(
                 ref: 'User'
             }
         ],
-        openRequests: [Request.schema]
+        openRequests: [
+            // Request.schema
+            {
+            type: Request.schema,
+            unique: true
+            }
+        ]
     },
     {
         toJSON: {

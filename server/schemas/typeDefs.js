@@ -11,6 +11,7 @@ const typeDefs = gql`
         friendCount: Int
         concerts: [Concert]
         friends: [User]
+        openRequests: [Request]
     }
 
     type Concert {
@@ -70,7 +71,7 @@ const typeDefs = gql`
         cancelRsvpNo(concertId: ID!, userId: ID!): Concert
         rsvpMaybe(concertId: ID!, userId: ID!): Concert
         cancelRsvpMaybe(concertId: ID!, userId: ID!): Concert
-        sendRequest(username: String!): String
+        sendRequest(username: String!): User
         cancelRequest(username: String!): String
         acceptRequest(username: String!): String
         declineRequest(username: String!): String

@@ -1,6 +1,7 @@
 // const { User, Concert } = require('../models');
 const User = require('../models/User');
 const Concert = require('../models/Concert');
+const Request = require('../models/Request');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 // const { getArtists } = require('../utils/scraper');
@@ -688,12 +689,12 @@ const resolvers = {
             })
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $push: { openRequests: request }}
+                { $addToSet: { openRequests: request }}
             )
             if(!user) {
                 throw new Error('User does not exist');
             }
-            return username
+            return user
         },
         //takes request away from chosen user's open requests if you choose to cancel the friend request
         cancelRequest: async (parent, { username }, context) => {
