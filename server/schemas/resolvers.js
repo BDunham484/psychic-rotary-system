@@ -689,7 +689,8 @@ const resolvers = {
             })
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $addToSet: { openRequests: request }}
+                { $addToSet: { openRequests: request }},
+                { new: true }
             )
             if(!user) {
                 throw new Error('User does not exist');

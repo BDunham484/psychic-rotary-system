@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { 
+import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
@@ -17,7 +17,7 @@ const Friends = ({ userParam, user }) => {
 
     //destructure mutation function 
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
-    const [sendRequest ] = useMutation(SEND_FRIEND_REQUEST);
+    const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -39,14 +39,18 @@ const Friends = ({ userParam, user }) => {
         setText(e.target.value)
     }
 
+    //array to store pending friend request usernames
+    const pendingRequestArr = [];
+
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendId, event) => {
+    const handleSubmit = async (friendName, event) => {
         // event.preventDefault();
         console.log("EVENT: " + event)
-        console.log("ID: " + friendId)
+        console.log("ID: " + friendName)
 
-        if (!friendId) {
+        if (!friendName) {
             console.log('user not found');
+            //setFriend to true display conditional messaging
             setFriend(true);
         } else {
             // try {
@@ -56,9 +60,10 @@ const Friends = ({ userParam, user }) => {
             // } catch (e) {
             //     console.error(e)
             // }
+            pendingRequestArr.push(friendName);
             try {
                 await sendRequest({
-                    variables: { id: friendId }
+                    variables: { username: friendName }
                 })
             } catch (e) {
                 console.error(e);
@@ -66,16 +71,38 @@ const Friends = ({ userParam, user }) => {
         }
     }
 
+    const friendName = text;
+    console.log(friendName);
+
     //query user if use inputs text value in 'add friend' input
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
-    const friendId = userdata?.data?.user?._id || '';
+    // const friendId = userdata?.data?.user?._id || '';
+    const openRequests = userdata?.data?.user?.openRequests || [];
+    // if (openRequests) {
+    //     console.log('OPEN REQUESTS');
+    //     console.log(openRequests);
+    // }
 
-    if (friendId) {
-        console.log("USERNAME: " + text)
-        console.log("USER ID: " + friendId)
-    }
+    const acceptedArr = openRequests.map((request) => {
+        // console.log(request.accepted);
+        if (request.username === user.username) {
+            // console.log(request.accepted);
+            return request.accepted
+        } else return 'wrong request';
+    })
+
+    console.log(acceptedArr);
+
+    const notAccepted = acceptedArr.some(request => request === false);
+
+    console.log(notAccepted);
+
+    // if (friendId) {
+    //     console.log("USERNAME: " + text)
+    //     console.log("USER ID: " + friendId)
+    // }
 
     return (
         <div className="profile-friends-card">
@@ -88,7 +115,7 @@ const Friends = ({ userParam, user }) => {
                 </button>
             }
             {!userParam &&
-                <form className="form-card" onSubmit={() => { handleSubmit(friendId) }}>
+                <form className="form-card" onSubmit={() => { handleSubmit(friendName) }}>
                     <div>
                         <input
                             onChange={handleTextChange}
@@ -106,6 +133,18 @@ const Friends = ({ userParam, user }) => {
                 </form>
             }
             {err && <div>An Error has occurred.</div>}
+
+            {notAccepted &&
+                <div>
+                    <h2>Pending Requests</h2>
+                    {pendingRequestArr.map((username, index) => (
+                        <div key={index}>
+                            {username}
+                        </div>
+                    ))}
+                </div>
+
+            }
 
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>

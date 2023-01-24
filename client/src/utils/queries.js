@@ -99,6 +99,10 @@ export const QUERY_USER = gql`
                 _id
                 username
             }
+            openRequests {
+                username
+                accepted
+            }
         }
     }
 `;
@@ -128,6 +132,10 @@ export const QUERY_ME = gql`
             friends {
                 _id
                 username
+            }
+            openRequests {
+                username
+                accepted
             }
         }
     }
