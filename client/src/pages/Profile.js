@@ -3,20 +3,13 @@ import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import {
-    // ADD_FRIEND,
-    DELETE_CONCERT_FROM_USER
-} from '../utils/mutations';
+import { DELETE_CONCERT_FROM_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import ShowCard from "../components/ShowCard";
 import Friends from "../components/Friends";
 
 const Profile = () => {
-    // const [text, setText] = useState('');
-    // const [btnDisabled, setBtnDisabled] = useState(true);
-    // const [friend, setFriend] = useState(false);
-    // //destructure mutation function 
-    // const [addFriend, { err }] = useMutation(ADD_FRIEND);
+
     const { username: userParam } = useParams();
 
     //query that checks param value then conditionally runs query based on result
@@ -27,55 +20,7 @@ const Profile = () => {
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
     // console.log(user);
-    // //onClick handler for add friend
-    // const handleClick = async () => {
-    //     try {
-    //         await addFriend({
-    //             variables: { id: user._id }
-    //         });
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // };
-    // const handleTextChange = (e) => {
-    //     if (text === '') {
-    //         setBtnDisabled(true)
-    //     } else {
-    //         setBtnDisabled(false)
-    //     }
-    //     setText(e.target.value)
-    // }
-    // //query user if use inputs text value in 'add friend' input
-    // const userdata = useQuery(QUERY_USER, {
-    //     variables: { username: text }
-    // })
-    // const userId = userdata?.data?.user?._id || '';
 
-    // if (userId) {
-    //     console.log("USERNAME: " + text)
-    //     console.log("USER ID: " + userId)
-    // }
-
-
-    // //onSubmit handler to add a friend by user input
-    // const handleSubmit = async (friendId, event) => {
-    //     // event.preventDefault();
-    //     console.log("EVENT: " + event)
-    //     console.log("ID: " + friendId)
-
-    //     if (!friendId) {
-    //         console.log('user not found');
-    //         setFriend(true);
-    //     } else {
-    //         try {
-    //             await addFriend({
-    //                 variables: { id: friendId }
-    //             });
-    //         } catch (e) {
-    //             console.error(e)
-    //         }
-    //     }
-    // }
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
     //function to delete concert from user
@@ -138,54 +83,6 @@ const Profile = () => {
 
             </div>
             <Friends userParam={userParam} user={user}/>
-            {/* <div className="profile-friends-card">
-                <div className="profile-friends-card-header">
-                    <h2>Add Friends</h2>
-                </div>
-                {userParam &&
-                    <button onClick={handleClick}>
-                        Add Friend
-                    </button>
-                }
-                {!userParam &&
-                    <form className="form-card" onSubmit={() => { handleSubmit(userId) }}>
-                        <div>
-                            <input
-                                onChange={handleTextChange}
-                                type="text"
-                                placeholder="Add Friend"
-                                value={text}
-                            />   
-                        </div>
-                        {friend && 
-                                <div>USER NOT FOUND</div>
-                            }
-                        <div>
-                            <button type="submit" disabled={btnDisabled}>Add Friend</button>
-                        </div>
-                    </form>
-                }
-                {err && <div>An Error has occurred.</div>}
-
-                <div className="profile-friends-list-header">
-                    <h2>Friends</h2>
-                    <div>Total : {user.friendCount}</div>
-                </div>
-                <div className="friend-list-container">
-                    <div>
-                        {user.friends.map((friend, index) => (
-                            <div key={index} className="names">
-                                <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-
-
-            </div> */}
-
-
         </div>
     )
 }
