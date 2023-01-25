@@ -14,7 +14,8 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            trim: true
+            trim: true,
+            minlength: 3
         },
         email: {
             type: String,
@@ -44,6 +45,12 @@ const userSchema = new Schema(
             {
             type: Request.schema,
             unique: true
+            }
+        ],
+        sentRequests: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
             }
         ]
     },

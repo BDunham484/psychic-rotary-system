@@ -80,15 +80,9 @@ const Friends = ({ userParam, user }) => {
     })
     // const friendId = userdata?.data?.user?._id || '';
     const openRequests = userdata?.data?.user?.openRequests || [];
-    // if (openRequests) {
-    //     console.log('OPEN REQUESTS');
-    //     console.log(openRequests);
-    // }
 
     const acceptedArr = openRequests.map((request) => {
-        // console.log(request.accepted);
         if (request.username === user.username) {
-            // console.log(request.accepted);
             return request.accepted
         } else return 'wrong request';
     })
@@ -98,6 +92,8 @@ const Friends = ({ userParam, user }) => {
     const notAccepted = acceptedArr.some(request => request === false);
 
     console.log(notAccepted);
+
+    //NOTES: i think i need to save the open request to a new field in the user model called sent requests.  this can be iterated over to create a 'pending request' list of names.  each row of names will have a 'cancel request' button.  When a request is approved it will have to also remove the sent request from the user who sent it.
 
     // if (friendId) {
     //     console.log("USERNAME: " + text)
@@ -127,24 +123,15 @@ const Friends = ({ userParam, user }) => {
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
+                    {notAccepted && 
+                        <div>Request Pending</div>
+                    }
                     <div>
                         <button type="submit" disabled={btnDisabled}>Send Request</button>
                     </div>
                 </form>
             }
             {err && <div>An Error has occurred.</div>}
-
-            {notAccepted &&
-                <div>
-                    <h2>Pending Requests</h2>
-                    {pendingRequestArr.map((username, index) => (
-                        <div key={index}>
-                            {username}
-                        </div>
-                    ))}
-                </div>
-
-            }
 
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>
