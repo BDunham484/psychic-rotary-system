@@ -179,7 +179,7 @@ export const SEND_FRIEND_REQUEST = gql`
     mutation sendRequest($username: String!) {
         sendRequest(username: $username) {
             username
-            openRequests {
+            receivedRequests {
                 _id
                 accepted
                 senderUsername
@@ -192,7 +192,7 @@ export const CANCEL_FRIEND_REQUEST = gql`
     mutation cancelRequest($userame: String!) {
         cancelRequest(username: $username) {
             username
-            openRequests {
+            receivedRequests {
                 _id
                 accepted
                 username

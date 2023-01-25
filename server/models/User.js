@@ -40,7 +40,8 @@ const userSchema = new Schema(
                 ref: 'User'
             }
         ],
-        openRequests: [Request.schema],
+        // openRequests: [Request.schema],
+        receivedRequests: [Request.schema],
         sentRequests: [Request.schema]
     },
     {
@@ -74,6 +75,11 @@ userSchema.virtual('concertCount').get(function () {
 userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
+
+//get total count of sentRequests on retrieval
+userSchema.virtual('requestCount').get(function () {
+    return this.sentRequests.length;
+})
 
 //create the User model using the userSchema
 const User = model('User', userSchema);

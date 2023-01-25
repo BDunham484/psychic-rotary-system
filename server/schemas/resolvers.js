@@ -692,7 +692,7 @@ const resolvers = {
             })
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $addToSet: { openRequests: request }},
+                { $addToSet: { receivedRequests: request }},
                 { new: true }
             )
             // //send username to 'sentRequest' field in the senders user profile
@@ -711,7 +711,7 @@ const resolvers = {
         cancelRequest: async (parent, { username }, context) => {
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $pull: { openRequests: {
+                { $pull: { receivedRequests: {
                     'username': context.user.username
                 }}}
             )
@@ -721,8 +721,8 @@ const resolvers = {
         acceptRequest: async (parent, { username }, context) => {
             await User.findOneAndUpdate(
                 { 'username': context.user.username,
-                    'openRequests.username': username },
-                    { 'openRequests.$.accepted': true }
+                    'receivedRequests.username': username },
+                    { 'receivedRequests.$.accepted': true }
             )
                 return context.user.username
         },
@@ -730,7 +730,7 @@ const resolvers = {
         declineRequest: async (parent, { username }, context) => {
             await User.findOneAndUpdate(
                 { 'username': context.user.username },
-                { $pull: { openRequests: { 'username': username }}}
+                { $pull: { receivedRequests: { 'username': username }}}
             )
             return username
         }

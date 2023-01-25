@@ -88,23 +88,14 @@ const Friends = ({ userParam, user }) => {
         } else return 'wrong request';
     })
 
-    // console.log(acceptedArr);
-
     const notAccepted = acceptedArr.some(request => request === false);
 
     console.log(notAccepted);
 
-    //NOTES: i think i need to save the open request to a new field in the user model called sent requests.  this can be iterated over to create a 'pending request' list of names.  each row of names will have a 'cancel request' button.  When a request is approved it will have to also remove the sent request from the user who sent it.
-
-    // if (friendId) {
-    //     console.log("USERNAME: " + text)
-    //     console.log("USER ID: " + friendId)
-    // }
-
     return (
         <div className="profile-friends-card">
             <div className="profile-friends-card-header">
-                <h2>Add Friends</h2>
+                <h2>Friend Requests</h2>
             </div>
             {userParam &&
                 <button onClick={handleClick}>
@@ -117,7 +108,7 @@ const Friends = ({ userParam, user }) => {
                         <input
                             onChange={handleTextChange}
                             type="text"
-                            placeholder="Add Friend"
+                            placeholder="Username"
                             value={text}
                         />
                     </div>
@@ -134,16 +125,19 @@ const Friends = ({ userParam, user }) => {
             }
             {err && <div>An Error has occurred.</div>}
 
-            {pendingRequests &&
-                <div>
-                    <h2>Pending Requests</h2>
-                    {pendingRequests.map((request, index) => (
-                        <div key={index}>
-                            <div>{request.receiverUsername}</div>
-                        </div>
-                    ))}
-                </div>
-            }
+
+            <div className="profile-friends-list-header">
+                <h2>Pending Requests</h2>
+                <div>Total : {user.requestCount}</div>
+            </div>
+            <div className="friend-list-container">
+                {pendingRequests.map((request, index) => (
+                    <div key={index} className="names">
+                        <div>{request.receiverUsername}</div>
+                    </div>
+                ))}
+            </div>
+
 
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>
@@ -163,3 +157,6 @@ const Friends = ({ userParam, user }) => {
 }
 
 export default Friends
+
+// TODO
+// 1. Hide pending request section if there are no pending request names in sentRequest User field

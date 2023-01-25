@@ -99,10 +99,11 @@ export const QUERY_USER = gql`
                 _id
                 username
             }
-            openRequests {
+            receivedRequests {
                 senderUsername
                 accepted
             }
+            requestCount
             sentRequests {
                 receiverUsername
             }
@@ -136,10 +137,11 @@ export const QUERY_ME = gql`
                 _id
                 username
             }
-            openRequests {
+            receivedRequests {
                 senderUsername
                 accepted
             }
+            requestCount
             sentRequests {
                 receiverUsername
             }
