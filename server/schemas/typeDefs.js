@@ -12,7 +12,7 @@ const typeDefs = gql`
         concerts: [Concert]
         friends: [User]
         openRequests: [Request]
-        sentRequests: [User]
+        sentRequests: [Request]
     }
 
     type Concert {
@@ -37,7 +37,8 @@ const typeDefs = gql`
 
     type Request {
         _id: ID
-        username: String
+        senderUsername: String
+        receiverUsername: String
         accepted: Boolean
     }
 

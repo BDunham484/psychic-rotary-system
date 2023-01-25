@@ -676,6 +676,7 @@ const resolvers = {
             return concert
         },
         sendRequest: async (parent, { username }, context) => {
+            console.log('USERNAME: ' + username)
             if (!username) {
                 throw new Error("You must submit a username");
             };
@@ -685,7 +686,8 @@ const resolvers = {
             
             //create new request and push it to the chosen user's open requests
             const request = await Request.create({
-                'username': context.user.username,
+                'senderUsername': context.user.username,
+                'receiverUsername': username,
                 accepted: false
             })
             const user = await User.findOneAndUpdate(
@@ -694,11 +696,12 @@ const resolvers = {
                 { new: true }
             )
             // //send username to 'sentRequest' field in the senders user profile
-            // const sentRequests = await User.findOneAndUpdate(
-            //     { 'username': context.user.username },
-            //     { $addToSet: { sentRequests: username } },
-            // )
-            // console.log('SENT REQUESTS: ' + sentRequests)
+            const test = await User.findOneAndUpdate(
+                { 'username': context.user.username },
+                { $addToSet: { sentRequests: request } },
+                { new: true }
+            )
+
             if(!user) {
                 throw new Error('User does not exist');
             }

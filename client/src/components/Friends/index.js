@@ -19,6 +19,9 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
 
+    const pendingRequests = user.sentRequests;
+    // console.log(pendingRequests);
+
     //onClick handler for add friend
     const handleClick = async () => {
         try {
@@ -39,8 +42,6 @@ const Friends = ({ userParam, user }) => {
         setText(e.target.value)
     }
 
-    //array to store pending friend request usernames
-    const pendingRequestArr = [];
 
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendName, event) => {
@@ -60,7 +61,6 @@ const Friends = ({ userParam, user }) => {
             // } catch (e) {
             //     console.error(e)
             // }
-            pendingRequestArr.push(friendName);
             try {
                 await sendRequest({
                     variables: { username: friendName }
@@ -83,12 +83,12 @@ const Friends = ({ userParam, user }) => {
     console.log(openRequests);
 
     const acceptedArr = openRequests.map((request) => {
-        if (request.username === user.username) {
+        if (request.senderUsername === user.username) {
             return request.accepted
         } else return 'wrong request';
     })
 
-    console.log(acceptedArr);
+    // console.log(acceptedArr);
 
     const notAccepted = acceptedArr.some(request => request === false);
 
@@ -124,7 +124,7 @@ const Friends = ({ userParam, user }) => {
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
-                    {notAccepted && 
+                    {notAccepted &&
                         <div>Request Pending</div>
                     }
                     <div>
@@ -133,6 +133,17 @@ const Friends = ({ userParam, user }) => {
                 </form>
             }
             {err && <div>An Error has occurred.</div>}
+
+            {pendingRequests &&
+                <div>
+                    <h2>Pending Requests</h2>
+                    {pendingRequests.map((request, index) => (
+                        <div key={index}>
+                            <div>{request.receiverUsername}</div>
+                        </div>
+                    ))}
+                </div>
+            }
 
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>

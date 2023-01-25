@@ -182,7 +182,7 @@ export const SEND_FRIEND_REQUEST = gql`
             openRequests {
                 _id
                 accepted
-                username
+                senderUsername
             }
         }
     }

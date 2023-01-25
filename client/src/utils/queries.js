@@ -100,12 +100,11 @@ export const QUERY_USER = gql`
                 username
             }
             openRequests {
-                username
+                senderUsername
                 accepted
             }
             sentRequests {
-                _id
-                username
+                receiverUsername
             }
         }
     }
@@ -138,12 +137,11 @@ export const QUERY_ME = gql`
                 username
             }
             openRequests {
-                username
+                senderUsername
                 accepted
             }
             sentRequests {
-                _id
-                username
+                receiverUsername
             }
         }
     }

@@ -5,7 +5,10 @@ const { Schema, model } = require('mongoose');
 //create the schema for the model using the Schema constructor and outline the fields
 const requestSchema = new Schema(
     {   
-        username: {
+        senderUsername: {
+            type: String
+        },
+        receiverUsername: {
             type: String
         },
         accepted: {
