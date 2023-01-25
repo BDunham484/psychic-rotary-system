@@ -682,12 +682,7 @@ const resolvers = {
             if(username === context.user.username) {
                 throw new Error("Please submit another username");
             };
-            //send username to 'sentRequest' field in the senders user profile
-            await User.findOneAndUpdate(
-                { 'username': context.user.username },
-                { $addToSet: { sentRequests: username } },
-                { new: true }
-            )
+            
             //create new request and push it to the chosen user's open requests
             const request = await Request.create({
                 'username': context.user.username,
@@ -698,6 +693,12 @@ const resolvers = {
                 { $addToSet: { openRequests: request }},
                 { new: true }
             )
+            // //send username to 'sentRequest' field in the senders user profile
+            // const sentRequests = await User.findOneAndUpdate(
+            //     { 'username': context.user.username },
+            //     { $addToSet: { sentRequests: username } },
+            // )
+            // console.log('SENT REQUESTS: ' + sentRequests)
             if(!user) {
                 throw new Error('User does not exist');
             }

@@ -12,6 +12,7 @@ const typeDefs = gql`
         concerts: [Concert]
         friends: [User]
         openRequests: [Request]
+        sentRequests: [User]
     }
 
     type Concert {

@@ -80,6 +80,7 @@ const Friends = ({ userParam, user }) => {
     })
     // const friendId = userdata?.data?.user?._id || '';
     const openRequests = userdata?.data?.user?.openRequests || [];
+    console.log(openRequests);
 
     const acceptedArr = openRequests.map((request) => {
         if (request.username === user.username) {

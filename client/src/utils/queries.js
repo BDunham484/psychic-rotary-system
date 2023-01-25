@@ -103,6 +103,10 @@ export const QUERY_USER = gql`
                 username
                 accepted
             }
+            sentRequests {
+                _id
+                username
+            }
         }
     }
 `;
@@ -136,6 +140,10 @@ export const QUERY_ME = gql`
             openRequests {
                 username
                 accepted
+            }
+            sentRequests {
+                _id
+                username
             }
         }
     }
