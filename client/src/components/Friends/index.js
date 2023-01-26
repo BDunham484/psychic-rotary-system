@@ -10,7 +10,7 @@ import {
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
-import  ApproveDeny  from '../ApproveDeny';
+import ApproveDeny from '../ApproveDeny';
 
 const Friends = ({ userParam, user }) => {
     const [text, setText] = useState('');
@@ -24,7 +24,7 @@ const Friends = ({ userParam, user }) => {
     const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
     const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    
+
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -67,7 +67,7 @@ const Friends = ({ userParam, user }) => {
             // }
             try {
                 await sendRequest({
-                    variables: { 
+                    variables: {
                         username: friendName,
                         receiverId: friendId
                     }
@@ -78,11 +78,14 @@ const Friends = ({ userParam, user }) => {
         }
     }
 
-    const handleCancel = async (requestId) => {
-        console.log('handleCancel Clicked: ' + requestId);
+    const handleCancel = async (requestId, username) => {
+        console.log('handleCancel Clicked: ' + requestId + ' | ' + username);
         try {
             await cancelRequest({
-                variables: { requestId: requestId }
+                variables: {
+                    requestId: requestId,
+                    username: username
+                }
             });
         } catch (e) {
             console.error(e);
@@ -144,26 +147,28 @@ const Friends = ({ userParam, user }) => {
             }
             {err && <div>An Error has occurred.</div>}
 
-{/* PENDING REQUESTS */}
+            {/* PENDING REQUESTS */}
             <div className="profile-friends-list-header">
                 <h2>Pending Requests</h2>
                 <div>Total : {user.requestCount}</div>
             </div>
-            {sentRequestArrLength > 0 && 
+            {sentRequestArrLength > 0 &&
                 <div>SENT</div>
             }
+            {/* SENDER - CANCEL */}
             <div className="friend-list-container">
                 {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
                         <div>{request.receiverId.username}</div>
-                        <Cancel className="cancel" onClick={() => handleCancel(request._id)} />
+                        <Cancel className="cancel" onClick={() => handleCancel(request._id, request.receiverId.username)} />
                     </div>
                 ))}
             </div>
 
-            {receivedRequestsArrLength > 0 && 
+            {receivedRequestsArrLength > 0 &&
                 <div>RECEIVED</div>
             }
+            {/* RECEIVER - APPROVE/DENY */}
             <div className="friend-list-container">
                 {user.receivedRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
@@ -173,7 +178,7 @@ const Friends = ({ userParam, user }) => {
                 ))}
             </div>
 
-{/* FRIENDS LIST */}
+            {/* FRIENDS LIST */}
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>
                 <div>Total : {user.friendCount}</div>
