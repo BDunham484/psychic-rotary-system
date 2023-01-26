@@ -521,6 +521,12 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+        deleteUser: async (parent, { userId }) => {
+            console.log(userId);
+            const user = await User.deleteOne({ _id: userId });
+            console.log(user);
+            return "deleted";
+        },
         deleteConcertFromUser: async (parent, { concertId }, context) => {
             if (context.user) {
 
@@ -709,12 +715,20 @@ const resolvers = {
         },
         //takes request away from chosen user's open requests if you choose to cancel the friend request
         cancelRequest: async (parent, { username }, context) => {
+            console.log(username + 'CANCELLED');
+            const sender = await User.findOneAndUpdate(
+                { 'username': context.user.username },
+                { $pull: { sentRequests: { receiverUsername: username }}}
+            )
+
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $pull: { receivedRequests: {
+                { $pull: { openRequests: {
                     'username': context.user.username
                 }}}
             )
+            console.log(sender);
+            console.log(user);
             return user
         },
         //changes your open request from a user to show that it has been accepted

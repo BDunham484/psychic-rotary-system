@@ -64,6 +64,7 @@ const typeDefs = gql`
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
         addConcertToUser(concertId: ID!): User
+        deleteUser(userId: ID!): String
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User

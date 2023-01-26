@@ -9,6 +9,7 @@ import {
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
+import { Cancel } from '@styled-icons/typicons/Cancel'
 
 const Friends = ({ userParam, user }) => {
     const [text, setText] = useState('');
@@ -18,6 +19,7 @@ const Friends = ({ userParam, user }) => {
     //destructure mutation function 
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
+    const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
 
     const pendingRequests = user.sentRequests;
     // console.log(pendingRequests);
@@ -71,6 +73,17 @@ const Friends = ({ userParam, user }) => {
         }
     }
 
+    const handleCancel = async (username) => {
+        console.log('handleCancel Clicked: ' + username);
+        try {
+            await cancelRequest({
+                variables: { username: username }
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     const friendName = text;
     console.log(friendName);
 
@@ -80,7 +93,7 @@ const Friends = ({ userParam, user }) => {
     })
     // const friendId = userdata?.data?.user?._id || '';
     const openRequests = userdata?.data?.user?.openRequests || [];
-    console.log(openRequests);
+    // console.log(openRequests);
 
     const acceptedArr = openRequests.map((request) => {
         if (request.senderUsername === user.username) {
@@ -90,7 +103,7 @@ const Friends = ({ userParam, user }) => {
 
     const notAccepted = acceptedArr.some(request => request === false);
 
-    console.log(notAccepted);
+    // console.log(notAccepted);
 
     return (
         <div className="profile-friends-card">
@@ -125,20 +138,21 @@ const Friends = ({ userParam, user }) => {
             }
             {err && <div>An Error has occurred.</div>}
 
-
+{/* PENDING REQUESTS */}
             <div className="profile-friends-list-header">
                 <h2>Pending Requests</h2>
                 <div>Total : {user.requestCount}</div>
             </div>
             <div className="friend-list-container">
                 {pendingRequests.map((request, index) => (
-                    <div key={index} className="names">
+                    <div key={index} className="names display-flex">
                         <div>{request.receiverUsername}</div>
+                        <Cancel className="cancel" onClick={() => handleCancel(request.receiverUsername)} />
                     </div>
                 ))}
             </div>
 
-
+{/* FRIENDS LIST */}
             <div className="profile-friends-list-header">
                 <h2>Friends</h2>
                 <div>Total : {user.friendCount}</div>

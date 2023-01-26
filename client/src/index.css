@@ -16,6 +16,7 @@
   --darkest: #202020;
   --main-text: #EEE3D0;
   --button: #386472;
+  --cancel: #a23e25;
   --primary-font: 'Kodchasan', sans-serif;
   --secondary-font: 'Bungee Hairline', cursive;
 }
@@ -238,7 +239,7 @@ main {
 
 .minus-sign {
   width: 50px;
-  color: #a23e25;
+  color: var(--cancel);
   margin-left: 2vw;
   /* visibility: hidden; */
 }
@@ -291,7 +292,7 @@ main {
 
 .rsvp-no {
   width: 50px;
-  color:#a23e25;
+  color: var(--cancel)
 }
 
 .rsvp-no:hover {
@@ -431,6 +432,7 @@ main {
   cursor: pointer;
 }
 
+/* FRIEND STYLES START */
 .profile-friends-card {
   /* background-color: var(--darkest); */
   margin-top: 14vh;
@@ -500,6 +502,15 @@ main {
   padding: 1vh 0 1vh 2vh;
   /* background-color: var(--darkest); */
   border-bottom: 1px solid var(--darkest);
+}
+
+.cancel {
+  width: 50px;
+  color: var(--cancel);
+}
+
+.cancel:hover {
+  cursor: pointer;
 }
 
 
