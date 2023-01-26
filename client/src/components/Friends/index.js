@@ -78,11 +78,11 @@ const Friends = ({ userParam, user }) => {
         }
     }
 
-    const handleCancel = async (username) => {
-        console.log('handleCancel Clicked: ' + username);
+    const handleCancel = async (requestId) => {
+        console.log('handleCancel Clicked: ' + requestId);
         try {
             await cancelRequest({
-                variables: { username: username }
+                variables: { requestId: requestId }
             });
         } catch (e) {
             console.error(e);
@@ -156,7 +156,7 @@ const Friends = ({ userParam, user }) => {
                 {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
                         <div>{request.receiverId.username}</div>
-                        <Cancel className="cancel" onClick={() => handleCancel(request.receiverUsername)} />
+                        <Cancel className="cancel" onClick={() => handleCancel(request._id)} />
                     </div>
                 ))}
             </div>

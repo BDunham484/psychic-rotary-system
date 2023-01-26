@@ -138,6 +138,7 @@ export const QUERY_ME = gql`
                 username
             }
             receivedRequests {
+                _id
                 senderId {
                     _id
                     username
@@ -149,6 +150,7 @@ export const QUERY_ME = gql`
             }
             requestCount
             sentRequests {
+                _id
                 senderId {
                     _id
                     username

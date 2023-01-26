@@ -188,15 +188,9 @@ export const SEND_FRIEND_REQUEST = gql`
 `;
 
 export const CANCEL_FRIEND_REQUEST = gql`
-    mutation cancelRequest($username: String!) {
-        cancelRequest(username: $username) {
-            username
-            receivedRequests {
-                _id
-                accepted
-                senderUsername
-                receiverUsername
-            }
+    mutation cancelRequest($requestId: ID!) {
+        cancelRequest(requestId: $requestId) {
+            
         }
     }
 `;

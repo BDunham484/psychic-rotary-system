@@ -726,29 +726,29 @@ const resolvers = {
             return user
         },
         //takes request away from chosen user's received requests and the senders sent requests if you choose to cancel the friend request
-        cancelRequest: async (parent, { username }, context) => {
-            console.log('FRIEND REQUEST CANCELLED: ' + username);
-            if (context.user) {
-                const sender = await User.findOneAndUpdate(
-                    { 'username': context.user.username },
-                    { $pull: { sentRequests: { receiverUsername: username } } },
-                    { new: true }
-                ).populate('sentRequests');
+        cancelRequest: async (parent, { requestId }, context) => {
+            console.log('FRIEND REQUEST CANCELLED: ' + requestId);
+            // if (context.user) {
+            //     const sender = await User.findOneAndUpdate(
+            //         { 'username': context.user.username },
+            //         { $pull: { sentRequests: { receiverUsername: username } } },
+            //         { new: true }
+            //     ).populate('sentRequests');
 
-                const receiver = await User.findOneAndUpdate(
-                    { 'username': username },
-                    {
-                        $pull: {
-                            receivedRequests: {
-                                'senderUsername': context.user.username
-                            }
-                        }
-                    },
-                    { new: true }
-                ).populate('receivedRequests');
-                return receiver
-            }
-            throw new AuthenticationError('You need to be logged in!');
+            //     const receiver = await User.findOneAndUpdate(
+            //         { 'username': username },
+            //         {
+            //             $pull: {
+            //                 receivedRequests: {
+            //                     'senderUsername': context.user.username
+            //                 }
+            //             }
+            //         },
+            //         { new: true }
+            //     ).populate('receivedRequests');
+            //     return receiver
+            // }
+            // throw new AuthenticationError('You need to be logged in!');
         },
         //changes your open request from a user to show that it has been accepted
         acceptRequest: async (parent, { username }, context) => {
