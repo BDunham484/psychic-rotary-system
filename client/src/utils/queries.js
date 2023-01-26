@@ -139,6 +139,7 @@ export const QUERY_ME = gql`
             }
             receivedRequests {
                 senderUsername
+                receiverUsername
                 accepted
             }
             requestCount

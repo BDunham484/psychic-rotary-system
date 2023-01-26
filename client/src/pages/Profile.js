@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
@@ -13,13 +13,24 @@ const Profile = () => {
     const { username: userParam } = useParams();
 
     //query that checks param value then conditionally runs query based on result
-    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    const { loading, data, startPolling, stopPolling } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
         variables: { username: userParam }
     });
 
+    useEffect(() => {
+        if (loading) {
+            console.log('QUERY LOADING...');
+        } else {
+            startPolling(1000);
+            return () => {
+                stopPolling()
+            };
+        };
+    })
+
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
-    // console.log(user);
+    console.log(user);
 
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);

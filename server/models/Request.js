@@ -4,10 +4,22 @@ const { Schema, model } = require('mongoose');
 
 //create the schema for the model using the Schema constructor and outline the fields
 const requestSchema = new Schema(
-    {   
+    {
+        senderId: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
         senderUsername: {
             type: String
         },
+        receiverId: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
         receiverUsername: {
             type: String
         },

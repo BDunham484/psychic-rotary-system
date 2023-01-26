@@ -176,8 +176,8 @@ export const CANCEL_RSVP_MAYBE = gql`
 `;
 
 export const SEND_FRIEND_REQUEST = gql`
-    mutation sendRequest($username: String!) {
-        sendRequest(username: $username) {
+    mutation sendRequest($username: String!, $receiverId: ID) {
+        sendRequest(username: $username, receiverId: $receiverId) {
             username
             receivedRequests {
                 _id

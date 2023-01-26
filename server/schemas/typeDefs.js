@@ -38,7 +38,9 @@ const typeDefs = gql`
 
     type Request {
         _id: ID
+        senderId: User
         senderUsername: String
+        receiverId: User
         receiverUsername: String
         accepted: Boolean
     }
@@ -75,7 +77,7 @@ const typeDefs = gql`
         cancelRsvpNo(concertId: ID!, userId: ID!): Concert
         rsvpMaybe(concertId: ID!, userId: ID!): Concert
         cancelRsvpMaybe(concertId: ID!, userId: ID!): Concert
-        sendRequest(username: String!): User
+        sendRequest(username: String!, receiverId: ID): User
         cancelRequest(username: String!): User
         acceptRequest(username: String!): String
         declineRequest(username: String!): String

@@ -16,7 +16,8 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate('concerts')
-                    .populate('friends');
+                    .populate('friends')
+                    .populate('receivedRequests');
 
                 return userData;
             }
@@ -156,134 +157,134 @@ const resolvers = {
         },
         //scrape one day at a time
         austinConcertScraper: async (parent, { date }) => {
-                const concertData = [];
-                const day = date.slice(8, 10);
-                // const month = ('0' + (new Date(date).getMonth()) + 1).slice(-2);
-                const month = ('0' + (new Date(date).getMonth() + 1));
-                const year = new Date().getFullYear();
-                console.log('DATE TO BE SCRAPED: ' + year + '-' + month + '-' + day)
-                const urlArr = [
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`,
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-3`,
-                    `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-4`
-                ];
-                await Promise.all(urlArr.map(async (url, index) => {
-                    try {
-                        const { data } = await axios.get(url);
-                        const $ = cheerio.load(data);
-                        var events = [];
-                        if ($('ul:eq(-1)').length === 0) {
-                            $('ul:eq(0) .list-item', data).each(function () {
-                                const artists = $(this).find('h2').text()
-                                const artistsLink = $(this).find('a').attr('href');
-                                const description = $(this).find('.description').text()
-                                const dateTime = $(this).find('.date-time').text()
-                                const venue = $(this).find('.venue').text()
-                                const headliner = artists.split(',')[0];
-                                const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
-                                const timeArr = dateTime.split(",")
-                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
-                                let times
-                                timeArr.map((time) => {
-                                    if (timex.test(time)) {
-                                        times = time;
-                                        return times;
-                                    }
-                                })
-                                events.push({
-                                    customId,
-                                    artists,
-                                    artistsLink,
-                                    description,
-                                    date,
-                                    times,
-                                    venue
-                                })
+            const concertData = [];
+            const day = date.slice(8, 10);
+            // const month = ('0' + (new Date(date).getMonth()) + 1).slice(-2);
+            const month = ('0' + (new Date(date).getMonth() + 1));
+            const year = new Date().getFullYear();
+            console.log('DATE TO BE SCRAPED: ' + year + '-' + month + '-' + day)
+            const urlArr = [
+                `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/`,
+                `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-2`,
+                `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-3`,
+                `https://www.austinchronicle.com/events/music/${year}-${month}-${day}/page-4`
+            ];
+            await Promise.all(urlArr.map(async (url, index) => {
+                try {
+                    const { data } = await axios.get(url);
+                    const $ = cheerio.load(data);
+                    var events = [];
+                    if ($('ul:eq(-1)').length === 0) {
+                        $('ul:eq(0) .list-item', data).each(function () {
+                            const artists = $(this).find('h2').text()
+                            const artistsLink = $(this).find('a').attr('href');
+                            const description = $(this).find('.description').text()
+                            const dateTime = $(this).find('.date-time').text()
+                            const venue = $(this).find('.venue').text()
+                            const headliner = artists.split(',')[0];
+                            const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                            const timeArr = dateTime.split(",")
+                            const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                            let times
+                            timeArr.map((time) => {
+                                if (timex.test(time)) {
+                                    times = time;
+                                    return times;
+                                }
                             })
-                        } else {
-                            $('ul:eq(-1) .list-item', data).each(function () {
-                                const artists = $(this).find('h2').text()
-                                const artistsLink = $(this).find('a').attr('href');
-                                const description = $(this).find('.description').text()
-                                const dateTime = $(this).find('.date-time').text()
-                                const venue = $(this).find('.venue').text()
-                                const headliner = artists.split(',')[0];
-                                const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
-                                const timeArr = dateTime.split(",")
-                                const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
-                                let times
-                                timeArr.map((time) => {
-                                    if (timex.test(time)) {
-                                        times = time;
-                                        return times;
-                                    }
-                                })
-                                events.push({
-                                    customId,
-                                    artists,
-                                    artistsLink,
-                                    description,
-                                    date,
-                                    times,
-                                    venue
-                                })
+                            events.push({
+                                customId,
+                                artists,
+                                artistsLink,
+                                description,
+                                date,
+                                times,
+                                venue
                             })
-                        }
-                        // console.log('AAAAAAAAAARRRRRRRGGGGGG!!!!!');
-                        // console.log(events);
-                        const newEventsArr = await Promise.all(events.map((event) => {
-                            const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
-
-                            let moreEventDetails = async () => {
-                                var { data } = await axios.get(eventUrl)
-                                var $ = cheerio.load(data);
-
-                                $('.venue-details:eq(0)', data).each(function () {
-                                    var addressPhone = $(this).text();
-                                    const addressArr = addressPhone.split(',');
-                                    //assign regex to recoginze 1-9 to variable num
-                                    let num = /\d/
-                                    var address = addressArr[0];
-                                    var address2 = addressArr[1];
-                                    var address3 = addressArr[2];
-                                    if (address2) {
-                                        if (num.test(address2[1])) {
-                                            event["phone"] = address2;
-                                        } else {
-                                            event["phone"] = address3;
-                                            event["address2"] = address2;
-                                        }
-                                    }
-                                    event["address"] = address
-                                    return event;
-                                })
-                                $('.venue-details:eq(1)', data).each(function () {
-                                    var website = $(this).find('a').attr('href');
-                                    var email = $(this).find('b:eq(1)').text()
-                                    event["website"] = website
-                                    event["email"] = email
-                                    return event;
-                                })
-                                $('.ticket-link', data).each(function () {
-                                    var ticketLink = $(this).attr('href')
-                                    event["ticketLink"] = ticketLink
-                                    return event;
-                                })
-                                return event;
-                            }
-                            return moreEventDetails();
-                        }, events))
-                    } catch (error) {
-                        console.error(error);
+                        })
+                    } else {
+                        $('ul:eq(-1) .list-item', data).each(function () {
+                            const artists = $(this).find('h2').text()
+                            const artistsLink = $(this).find('a').attr('href');
+                            const description = $(this).find('.description').text()
+                            const dateTime = $(this).find('.date-time').text()
+                            const venue = $(this).find('.venue').text()
+                            const headliner = artists.split(',')[0];
+                            const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
+                            const timeArr = dateTime.split(",")
+                            const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
+                            let times
+                            timeArr.map((time) => {
+                                if (timex.test(time)) {
+                                    times = time;
+                                    return times;
+                                }
+                            })
+                            events.push({
+                                customId,
+                                artists,
+                                artistsLink,
+                                description,
+                                date,
+                                times,
+                                venue
+                            })
+                        })
                     }
-                    concertData.push(events);
-                    
-                }))
-                // ^^^^^URLARR PROMISE END
+                    // console.log('AAAAAAAAAARRRRRRRGGGGGG!!!!!');
+                    // console.log(events);
+                    const newEventsArr = await Promise.all(events.map((event) => {
+                        const eventUrl = `https://www.austinchronicle.com${event.artistsLink}`;
+
+                        let moreEventDetails = async () => {
+                            var { data } = await axios.get(eventUrl)
+                            var $ = cheerio.load(data);
+
+                            $('.venue-details:eq(0)', data).each(function () {
+                                var addressPhone = $(this).text();
+                                const addressArr = addressPhone.split(',');
+                                //assign regex to recoginze 1-9 to variable num
+                                let num = /\d/
+                                var address = addressArr[0];
+                                var address2 = addressArr[1];
+                                var address3 = addressArr[2];
+                                if (address2) {
+                                    if (num.test(address2[1])) {
+                                        event["phone"] = address2;
+                                    } else {
+                                        event["phone"] = address3;
+                                        event["address2"] = address2;
+                                    }
+                                }
+                                event["address"] = address
+                                return event;
+                            })
+                            $('.venue-details:eq(1)', data).each(function () {
+                                var website = $(this).find('a').attr('href');
+                                var email = $(this).find('b:eq(1)').text()
+                                event["website"] = website
+                                event["email"] = email
+                                return event;
+                            })
+                            $('.ticket-link', data).each(function () {
+                                var ticketLink = $(this).attr('href')
+                                event["ticketLink"] = ticketLink
+                                return event;
+                            })
+                            return event;
+                        }
+                        return moreEventDetails();
+                    }, events))
+                } catch (error) {
+                    console.error(error);
+                }
+                concertData.push(events);
+
+            }))
+            // ^^^^^URLARR PROMISE END
             // }))
             console.log('CONCERTDATA');
-            console.log(concertData.length/2 + ' days of concerts scraped');
+            console.log(concertData.length / 2 + ' days of concerts scraped');
             return concertData;
         },
 
@@ -505,7 +506,7 @@ const resolvers = {
                 ).populate('friends');
                 return updatedUser;
             }
-            throw new AuthenticationError('Youj need to be logged in!');
+            throw new AuthenticationError('You need to be logged in!');
         },
         addConcertToUser: async (parent, { concertId }, context) => {
             console.log(concertId);
@@ -572,9 +573,9 @@ const resolvers = {
             }
             const oldConcertsArr = []
             //map through array of last weeks dates and delete any shows with that date
-            await Promise.all(dateArr.map(async(date) => {
+            await Promise.all(dateArr.map(async (date) => {
                 const concerts = await Concert.find({ date: date })
-                
+
                 await concerts.map((concert) => {
                     oldConcertsArr.push(concert._id);
                 })
@@ -681,70 +682,102 @@ const resolvers = {
 
             return concert
         },
-        sendRequest: async (parent, { username }, context) => {
+        sendRequest: async (parent, { username, receiverId }, context) => {
             console.log('USERNAME: ' + username)
+            console.log('RECEIVER ID: ' + receiverId);
             if (!username) {
                 throw new Error("You must submit a username");
             };
-            if(username === context.user.username) {
+            if (username === context.user.username) {
                 throw new Error("Please submit another username");
             };
-            
+
             //create new request and push it to the chosen user's open requests
             const request = await Request.create({
+                'senderId': context.user._id,
                 'senderUsername': context.user.username,
+                'receiverId': receiverId,
                 'receiverUsername': username,
                 accepted: false
             })
+            console.log('REQUEST');
+            console.log(request);
             const user = await User.findOneAndUpdate(
                 { 'username': username },
-                { $addToSet: { receivedRequests: request }},
+                { $addToSet: { receivedRequests: request } },
                 { new: true }
-            )
+            ).populate('receivedRequests');
             // //send username to 'sentRequest' field in the senders user profile
-            const test = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { 'username': context.user.username },
                 { $addToSet: { sentRequests: request } },
                 { new: true }
-            )
+            ).populate('sentRequests');
 
-            if(!user) {
+            if (!user) {
                 throw new Error('User does not exist');
             }
+            
             return user
         },
-        //takes request away from chosen user's open requests if you choose to cancel the friend request
+        //takes request away from chosen user's received requests and the senders sent requests if you choose to cancel the friend request
         cancelRequest: async (parent, { username }, context) => {
-            console.log(username + 'CANCELLED');
-            const sender = await User.findOneAndUpdate(
-                { 'username': context.user.username },
-                { $pull: { sentRequests: { receiverUsername: username }}}
-            )
+            console.log('FRIEND REQUEST CANCELLED: ' + username);
+            if (context.user) {
+                const sender = await User.findOneAndUpdate(
+                    { 'username': context.user.username },
+                    { $pull: { sentRequests: { receiverUsername: username } } },
+                    { new: true }
+                ).populate('sentRequests');
 
-            const user = await User.findOneAndUpdate(
-                { 'username': username },
-                { $pull: { openRequests: {
-                    'username': context.user.username
-                }}}
-            )
-            console.log(sender);
-            console.log(user);
-            return user
+                const receiver = await User.findOneAndUpdate(
+                    { 'username': username },
+                    {
+                        $pull: {
+                            receivedRequests: {
+                                'senderUsername': context.user.username
+                            }
+                        }
+                    },
+                    { new: true }
+                ).populate('receivedRequests');
+                return receiver
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
         //changes your open request from a user to show that it has been accepted
         acceptRequest: async (parent, { username }, context) => {
+            // await User.findOneAndUpdate(
+            //     {
+            //         'username': context.user.username,
+            //         'receivedRequests.username': username
+            //     },
+            //     { 'receivedRequests.$.accepted': true }
+            // )
+            // return context.user.username
+            console.log('acceptRequest: ' + username);
             await User.findOneAndUpdate(
-                { 'username': context.user.username,
-                    'receivedRequests.username': username },
-                    { 'receivedRequests.$.accepted': true }
+                { 'username': username },
+                { $pull: { sentRequests: { 'receiverUsername': context.user.username }}}
             )
-                return context.user.username
+
+            await User.findOneAndUpdate(
+                { 'username': context.user.username },
+                { $pull: { receivedRequests: { 'senderUsername': username } } }
+            )
+            
         },
         //remove someones friend request from your own open request list
         declineRequest: async (parent, { username }, context) => {
+            console.log('declineRequest: ' + username);
+            await User.findOneAndUpdate(
+                { 'username': username },
+                { $pull: { sentRequests: { 'receiverUsername': context.user.username }}}
+            )
+
             await User.findOneAndUpdate(
                 { 'username': context.user.username },
-                { $pull: { receivedRequests: { 'username': username }}}
+                { $pull: { receivedRequests: { 'senderUsername': username } } }
             )
             return username
         }

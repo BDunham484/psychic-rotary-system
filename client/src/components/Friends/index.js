@@ -10,6 +10,7 @@ import {
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
+import  ApproveDeny  from '../ApproveDeny';
 
 const Friends = ({ userParam, user }) => {
     const [text, setText] = useState('');
@@ -20,9 +21,10 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
+    const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
+    const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    const pendingRequests = user.sentRequests;
-    // console.log(pendingRequests);
+    
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -46,11 +48,11 @@ const Friends = ({ userParam, user }) => {
 
 
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendName, event) => {
+    const handleSubmit = async (friendName, friendId, event) => {
         // event.preventDefault();
         console.log("EVENT: " + event)
-        console.log("ID: " + friendName)
-
+        console.log("FRIEND NAME: " + friendName)
+        console.log('FRIEND ID: ' + friendId);
         if (!friendName) {
             console.log('user not found');
             //setFriend to true display conditional messaging
@@ -65,7 +67,10 @@ const Friends = ({ userParam, user }) => {
             // }
             try {
                 await sendRequest({
-                    variables: { username: friendName }
+                    variables: { 
+                        username: friendName,
+                        receiverId: friendId
+                    }
                 })
             } catch (e) {
                 console.error(e);
@@ -84,6 +89,9 @@ const Friends = ({ userParam, user }) => {
         }
     }
 
+    const sentRequestArrLength = user.sentRequests.length;
+    const receivedRequestsArrLength = user.receivedRequests.length;
+
     const friendName = text;
     console.log(friendName);
 
@@ -91,9 +99,9 @@ const Friends = ({ userParam, user }) => {
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
-    // const friendId = userdata?.data?.user?._id || '';
+    const friendId = userdata?.data?.user?._id || '';
+    console.log(friendId);
     const openRequests = userdata?.data?.user?.openRequests || [];
-    // console.log(openRequests);
 
     const acceptedArr = openRequests.map((request) => {
         if (request.senderUsername === user.username) {
@@ -102,8 +110,6 @@ const Friends = ({ userParam, user }) => {
     })
 
     const notAccepted = acceptedArr.some(request => request === false);
-
-    // console.log(notAccepted);
 
     return (
         <div className="profile-friends-card">
@@ -116,7 +122,7 @@ const Friends = ({ userParam, user }) => {
                 </button>
             }
             {!userParam &&
-                <form className="form-card" onSubmit={() => { handleSubmit(friendName) }}>
+                <form className="form-card" onSubmit={() => { handleSubmit(friendName, friendId) }}>
                     <div>
                         <input
                             onChange={handleTextChange}
@@ -143,11 +149,26 @@ const Friends = ({ userParam, user }) => {
                 <h2>Pending Requests</h2>
                 <div>Total : {user.requestCount}</div>
             </div>
+            {sentRequestArrLength > 0 && 
+                <div>SENT</div>
+            }
             <div className="friend-list-container">
-                {pendingRequests.map((request, index) => (
+                {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
                         <div>{request.receiverUsername}</div>
                         <Cancel className="cancel" onClick={() => handleCancel(request.receiverUsername)} />
+                    </div>
+                ))}
+            </div>
+
+            {receivedRequestsArrLength > 0 && 
+                <div>RECEIVED</div>
+            }
+            <div className="friend-list-container">
+                {user.receivedRequests.map((request, index) => (
+                    <div key={index} className="names display-flex">
+                        <div>{request.senderUsername}</div>
+                        <ApproveDeny senderUsername={request.senderUsername} />
                     </div>
                 ))}
             </div>

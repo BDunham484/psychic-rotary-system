@@ -505,11 +505,30 @@ main {
 }
 
 .cancel {
-  width: 50px;
+  width: 25px;
   color: var(--cancel);
 }
 
 .cancel:hover {
+  cursor: pointer;
+}
+
+.approve {
+  width: 25px;
+  color: var(--button);
+  margin-right: 3vh;
+}
+
+.approve:hover {
+  cursor: pointer;
+}
+
+.deny {
+  width: 25px;
+  color: var(--cancel);
+}
+
+.deny:hover {
   cursor: pointer;
 }
 
