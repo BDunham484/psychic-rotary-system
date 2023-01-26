@@ -17,7 +17,11 @@ const resolvers = {
                     .select('-__v -password')
                     .populate('concerts')
                     .populate('friends')
-                    .populate('receivedRequests');
+                    .populate('receivedRequests.senderId')
+                    .populate('receivedRequests.receiverId')
+                    .populate('sentRequests.receiverId')
+                    .populate('sentRequests.senderId')
+                
 
                 return userData;
             }
@@ -695,11 +699,12 @@ const resolvers = {
             //create new request and push it to the chosen user's open requests
             const request = await Request.create({
                 'senderId': context.user._id,
-                'senderUsername': context.user.username,
+                // 'senderUsername': context.user.username,
                 'receiverId': receiverId,
-                'receiverUsername': username,
-                accepted: false
+                // 'receiverUsername': username,
+                // accepted: false
             })
+
             console.log('REQUEST');
             console.log(request);
             const user = await User.findOneAndUpdate(
@@ -708,7 +713,7 @@ const resolvers = {
                 { new: true }
             ).populate('receivedRequests');
             // //send username to 'sentRequest' field in the senders user profile
-            await User.findOneAndUpdate(
+            const userTwo = await User.findOneAndUpdate(
                 { 'username': context.user.username },
                 { $addToSet: { sentRequests: request } },
                 { new: true }

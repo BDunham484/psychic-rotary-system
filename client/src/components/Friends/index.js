@@ -155,7 +155,7 @@ const Friends = ({ userParam, user }) => {
             <div className="friend-list-container">
                 {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request.receiverUsername}</div>
+                        <div>{request.receiverId.username}</div>
                         <Cancel className="cancel" onClick={() => handleCancel(request.receiverUsername)} />
                     </div>
                 ))}
@@ -167,7 +167,7 @@ const Friends = ({ userParam, user }) => {
             <div className="friend-list-container">
                 {user.receivedRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request.senderUsername}</div>
+                        <div>{request.senderId.username}</div>
                         <ApproveDeny senderUsername={request.senderUsername} />
                     </div>
                 ))}

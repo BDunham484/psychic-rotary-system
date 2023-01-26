@@ -40,7 +40,6 @@ const userSchema = new Schema(
                 ref: 'User'
             }
         ],
-        // openRequests: [Request.schema],
         receivedRequests: [Request.schema],
         sentRequests: [Request.schema]
     },

@@ -181,7 +181,6 @@ export const SEND_FRIEND_REQUEST = gql`
             username
             receivedRequests {
                 _id
-                accepted
                 senderUsername
             }
         }

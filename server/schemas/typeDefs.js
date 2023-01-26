@@ -39,10 +39,7 @@ const typeDefs = gql`
     type Request {
         _id: ID
         senderId: User
-        senderUsername: String
         receiverId: User
-        receiverUsername: String
-        accepted: Boolean
     }
 
     type Query {
