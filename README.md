@@ -34,19 +34,13 @@
 
 ![noisebx-login](https://user-images.githubusercontent.com/40290683/215205316-94df0ca4-29bc-46d8-88a8-a0d5d39d7724.gif)
 
-
-<!-- ![nbx](./client/assets/images/home-loggedIn.png) -->
-
 * When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  Venue location, contact, and ticket links are presented.  Some shows may not have all forms of contact information or ticket links present depending on what was available from the source material.  
 
 <img alt="noisebx-screenshot" src="https://user-images.githubusercontent.com/40290683/215206532-37f8c0c3-74a5-4edc-8fc1-b880725ac34f.png">
 
-
-<!-- ![nbx](./client/assets/images/show-loggedOut.png) -->
-
 *  The option to RSVP yes, no, or maybe and add/remove the show from the user's profile is available if logged in.  The number of RSVP's are tallied and the number is displayed allowing users to have some expectations about attendance.
 
-![nbx](./client/assets/images/show-loggedIn.png)
+![noisebx-rsvp](https://user-images.githubusercontent.com/40290683/215209270-989e6ea3-e573-47ed-92fe-d4b25d2e6077.gif)
 
 * On the profile page the user is shown a list of their saved shows as well as their friend and pending friend request list. If you know your potential friends username you can enter it into the input and send off a friend request.  The request is then added to your pending request: sent list and to the other users pending request: received list.  You have the option of cancelling the request while the other user has the options of accepting or denying the request.  Once cancelled or denied the request is removed from each list.  If approved, both user are added to each others friend list.  They then have access to each others profiles. 
 
