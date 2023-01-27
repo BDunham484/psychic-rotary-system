@@ -37,7 +37,7 @@
 
 <!-- ![nbx](./client/assets/images/home-loggedIn.png) -->
 
-* When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  The ability to see the venue location via google maps, add it to google calendar, and other details will be added soon. 
+* When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  Venue location, contact, and ticket links are presented.  Some shows may not have all forms of contact information or ticket links present depending on what was available from the source material.  
 
 <img alt="noisebx-screenshot" src="https://user-images.githubusercontent.com/40290683/215206532-37f8c0c3-74a5-4edc-8fc1-b880725ac34f.png">
 
