@@ -181,7 +181,6 @@ export const SEND_FRIEND_REQUEST = gql`
             username
             receivedRequests {
                 _id
-                senderUsername
             }
         }
     }
@@ -194,13 +193,13 @@ export const CANCEL_FRIEND_REQUEST = gql`
 `;
 
 export const ACCEPT_FRIEND_REQUEST = gql`
-    mutation acceptRequest($username: String!) {
-        acceptRequest(username: $username) 
+    mutation acceptRequest($username: String!, $eventId: ID!, $senderId: ID!, $receiverId: ID!) {
+        acceptRequest(username: $username, eventId: $eventId, senderId: $senderId, receiverId: $receiverId) 
     }
 `;
 
 export const DECLINE_FRIEND_REQUEST = gql`
-    mutation declineRequest($username: String!) {
-        declineRequest(username: $username)
+    mutation declineRequest($username: String!, $eventId: ID!) {
+        declineRequest(username: $username, eventId: $eventId)
     }
 `;

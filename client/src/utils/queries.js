@@ -100,12 +100,27 @@ export const QUERY_USER = gql`
                 username
             }
             receivedRequests {
-                senderUsername
-                accepted
+                _id
+                senderId {
+                    _id
+                    username
+                }
+                receiverId {
+                    _id
+                    username
+                }
             }
             requestCount
             sentRequests {
-                receiverUsername
+                _id
+                senderId {
+                    _id
+                    username
+                }
+                receiverId {
+                    _id
+                    username
+                }
             }
         }
     }

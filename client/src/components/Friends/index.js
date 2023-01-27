@@ -4,8 +4,8 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
-    ACCEPT_FRIEND_REQUEST,
-    DECLINE_FRIEND_REQUEST
+    // ACCEPT_FRIEND_REQUEST,
+    // DECLINE_FRIEND_REQUEST
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
@@ -21,8 +21,8 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
-    const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
+    // const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
+    // const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
 
 
@@ -173,7 +173,7 @@ const Friends = ({ userParam, user }) => {
                 {user.receivedRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
                         <div>{request.senderId.username}</div>
-                        <ApproveDeny senderUsername={request.senderUsername} />
+                        <ApproveDeny senderUsername={request.senderId.username} eventId={request._id} senderId={request.senderId._id} receiverId={request.receiverId._id} />
                     </div>
                 ))}
             </div>

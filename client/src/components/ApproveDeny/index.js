@@ -6,30 +6,45 @@ import {
 import { UserCheck } from '@styled-icons/icomoon/UserCheck';
 import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
-const ApproveDeny = ({ senderUsername }) => {
+const ApproveDeny = ({ senderUsername, eventId, senderId, receiverId }) => {
     
     const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
     const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    const handleDeny = async () => {
+    const handleDeny = async (senderUsername, eventId) => {
         console.log('handleDeny');
         try {
             await declineRequest({
-                variables: { username: senderUsername }
+                variables: { 
+                    username: senderUsername, 
+                    eventId: eventId
+                }
             })
         } catch (e) {
             console.error(e);
         }
     }
 
-    const handleApprove = () => {
-        console.log('handleApprove');
+    const handleApprove = async (senderUsername, eventId, senderId, receiverId) => {
+        console.log('handleApprove: ' + senderUsername, eventId, senderId, receiverId);
+        try {
+            await acceptRequest({
+                variables: {
+                    username: senderUsername,
+                    eventId: eventId,
+                    senderId: senderId,
+                    receiverId: receiverId
+                }
+            }) 
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     return (
         <div>
-            <UserCheck className='approve' onClick={() => handleApprove(senderUsername)} />
-            <UserMinus className='deny' onClick={() => handleDeny(senderUsername)} />
+            <UserCheck className='approve' onClick={() => handleApprove(senderUsername, eventId, senderId, receiverId)} />
+            <UserMinus className='deny' onClick={() => handleDeny(senderUsername, eventId)} />
         </div>
     )
 }

@@ -76,8 +76,8 @@ const typeDefs = gql`
         cancelRsvpMaybe(concertId: ID!, userId: ID!): Concert
         sendRequest(username: String!, receiverId: ID): User
         cancelRequest(requestId: ID!, username: String!): String
-        acceptRequest(username: String!): String
-        declineRequest(username: String!): String
+        acceptRequest(username: String!, eventId: ID!, senderId: ID, receiverId: ID): String
+        declineRequest(username: String!, eventId: ID!): String
     }
 
     type Auth {

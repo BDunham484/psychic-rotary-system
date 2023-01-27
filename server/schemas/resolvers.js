@@ -713,7 +713,7 @@ const resolvers = {
                 { new: true }
             ).populate('receivedRequests');
             // //send username to 'sentRequest' field in the senders user profile
-            const userTwo = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { 'username': context.user.username },
                 { $addToSet: { sentRequests: request } },
                 { new: true }
@@ -751,38 +751,46 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         //changes your open request from a user to show that it has been accepted
-        acceptRequest: async (parent, { username }, context) => {
-            // await User.findOneAndUpdate(
-            //     {
-            //         'username': context.user.username,
-            //         'receivedRequests.username': username
-            //     },
-            //     { 'receivedRequests.$.accepted': true }
-            // )
-            // return context.user.username
-            console.log('acceptRequest: ' + username);
+        acceptRequest: async (parent, { username, eventId, senderId, receiverId }, context) => {
+            console.log(username + ' acceptRequest: ' + eventId);
+            console.log('friends: ' + senderId + ' & ' + receiverId)
             await User.findOneAndUpdate(
                 { 'username': username },
-                { $pull: { sentRequests: { 'receiverUsername': context.user.username }}}
+                { $pull: { sentRequests: { '_id': eventId }}},
+                { new: true }
             )
 
             await User.findOneAndUpdate(
                 { 'username': context.user.username },
-                { $pull: { receivedRequests: { 'senderUsername': username } } }
+                { $pull: { receivedRequests: { '_id': eventId } } },
+                { new: true }
             )
-            
+
+            const receiver = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { friends: senderId } },
+                { new: true }
+            ).populate('friends');
+
+            const sender = await User.findOneAndUpdate(
+                { _id: senderId },
+                { $addToSet: { friends: receiverId}},
+                { new: true }
+            ).populate('friends');
+
+            return 'fart';
         },
         //remove someones friend request from your own open request list
-        declineRequest: async (parent, { username }, context) => {
-            console.log('declineRequest: ' + username);
+        declineRequest: async (parent, { username, eventId }, context) => {
+            console.log(username + ' decline request: ' + eventId);
             await User.findOneAndUpdate(
                 { 'username': username },
-                { $pull: { sentRequests: { 'receiverUsername': context.user.username }}}
+                { $pull: { sentRequests: { '_id': eventId }}}
             )
 
             await User.findOneAndUpdate(
                 { 'username': context.user.username },
-                { $pull: { receivedRequests: { 'senderUsername': username } } }
+                { $pull: { receivedRequests: { '_id': eventId } } }
             )
             return username
         }
