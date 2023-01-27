@@ -1,7 +1,7 @@
 # <h1 align="center">NOISEBX</h1>
 
 
-<img width="159" alt="noisebx-logo" src="https://user-images.githubusercontent.com/40290683/215210452-cfed714d-34cb-4410-929e-e904eb7ffb09.png">
+<img width="159" alt="noisebx-logo" align="center" src="https://user-images.githubusercontent.com/40290683/215210452-cfed714d-34cb-4410-929e-e904eb7ffb09.png">
 
 <h2 align="center">🎸🎹Local Concert Listing React App🎹🎸</h2>
 
