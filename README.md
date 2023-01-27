@@ -39,7 +39,7 @@
 
 * When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  The ability to see the venue location via google maps, add it to google calendar, and other details will be added soon. 
 
-<img width="959" alt="noisebx-screenshot" src="https://user-images.githubusercontent.com/40290683/215206532-37f8c0c3-74a5-4edc-8fc1-b880725ac34f.png">
+<img alt="noisebx-screenshot" src="https://user-images.githubusercontent.com/40290683/215206532-37f8c0c3-74a5-4edc-8fc1-b880725ac34f.png">
 
 
 <!-- ![nbx](./client/assets/images/show-loggedOut.png) -->
