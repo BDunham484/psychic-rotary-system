@@ -32,6 +32,9 @@
 
 * When a user is logged in, they then have the ability to save a concert to their profile. 
 
+![noisebx-login](https://user-images.githubusercontent.com/40290683/215205316-94df0ca4-29bc-46d8-88a8-a0d5d39d7724.gif)
+
+
 ![nbx](./client/assets/images/home-loggedIn.png)
 
 * When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  The ability to see the venue location via google maps, add it to google calendar, and other details will be added soon. 
