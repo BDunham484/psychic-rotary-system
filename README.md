@@ -28,7 +28,7 @@
 
 * A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected. 
 
-![nbx](./client/assets/images/home_loggedOut.png)
+![noisebx-home](https://user-images.githubusercontent.com/40290683/215203917-ce209e10-93f8-4ea3-bb22-11c970a92012.gif)
 
 * When a user is logged in, they then have the ability to save a concert to their profile. 
 
