@@ -504,6 +504,15 @@ main {
   border-bottom: 1px solid var(--darkest);
 }
 
+.remove-friend-icon {
+  width: 25px;
+  color: var(--main-text)
+}
+
+.remove-friend-icon:hover {
+  cursor: pointer;
+}
+
 .cancel {
   width: 25px;
   color: var(--cancel);

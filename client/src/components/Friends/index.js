@@ -11,6 +11,7 @@ import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
 import ApproveDeny from '../ApproveDeny';
+import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
 const Friends = ({ userParam, user }) => {
     const [text, setText] = useState('');
@@ -186,8 +187,9 @@ const Friends = ({ userParam, user }) => {
             <div className="friend-list-container">
                 <div>
                     {user.friends.map((friend, index) => (
-                        <div key={index} className="names">
+                        <div key={index} className="names display-flex">
                             <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
+                            <UserMinus className="remove-friend-icon"/>
                         </div>
                     ))}
                 </div>
