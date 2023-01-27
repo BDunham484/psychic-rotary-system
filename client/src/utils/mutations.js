@@ -203,3 +203,14 @@ export const DECLINE_FRIEND_REQUEST = gql`
         declineRequest(username: $username, eventId: $eventId)
     }
 `;
+
+export const REMOVE_FRIEND = gql`
+    mutation removeFriend($friendId: ID!) {
+        removeFriend(friendId: $friendId) {
+            username
+            friends {
+                _id
+            }
+        }
+    }
+`;

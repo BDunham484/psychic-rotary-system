@@ -51,4 +51,4 @@ const ApproveDeny = ({ senderUsername, eventId, senderId, receiverId }) => {
 
 export default ApproveDeny
 
-// NOTES: need to figure out why I can't query user and get all of the new data from the receivedRequest User field
+

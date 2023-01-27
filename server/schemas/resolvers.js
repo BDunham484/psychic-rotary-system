@@ -778,7 +778,7 @@ const resolvers = {
                 { new: true }
             ).populate('friends');
 
-            return 'fart';
+            return 'friends forever';
         },
         //remove someones friend request from your own open request list
         declineRequest: async (parent, { username, eventId }, context) => {
@@ -793,7 +793,20 @@ const resolvers = {
                 { $pull: { receivedRequests: { '_id': eventId } } }
             )
             return username
-        }
+        },
+        //remove a friends _id from the friend list of the logged in user
+        removeFriend: async (parent, { friendId }, context) => {
+            console.log(friendId + " removed from " + context.user.username + "'s friend list");
+            if (context.user) {
+                let user = await User.findOneAndUpdate(
+                    { 'username': context.user.username },
+                    { $pull: { friends: friendId }},
+                    { new: true }
+                ).populate('friends');
+                return user;
+            };
+            throw new AuthenticationError('You need to be logged in!');
+        },
     }
 };
 module.exports = resolvers;
