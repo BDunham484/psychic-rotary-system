@@ -42,9 +42,7 @@
 
 ![nbx](./client/assets/images/show-loggedIn.png)
 
-* On the profile page the user is shown a list of their saved shows as well as their friend list and the ability to add friends if they know the user name.  The ability to remove, block or approve friend requests will be added soon. 
-
-![nbx](./client/assets/images/profile.png)
+* On the profile page the user is shown a list of their saved shows as well as their friend and pending friend request list. If you know your potential friends username you can enter it into the input and send off a friend request.  The request is then added to your pending request: sent list and to the other users pending request: received list.  You have the option of cancelling the request while the other user has the options of accepting or denying the request.  Once cancelled or denied the request is removed from each list.  If approved, both user are added to each others friend list.  They then have access to each others profiles. 
 
 ![F4E](https://user-images.githubusercontent.com/40290683/215193902-e28dbee4-c712-46fb-bb7b-734db3f99e34.gif)
 
