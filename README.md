@@ -1,4 +1,7 @@
-# <h1 align="center">NOISEBX</h1>
+<p align="center">
+<img width="300" alt="noisebx-logo" src="https://user-images.githubusercontent.com/40290683/215211602-6af32352-1600-4fb3-8460-824c638b99bc.png">
+</p>
+<hr>
 
 <h2 align="center">🎸🎹Local Concert Listing React App🎹🎸</h2>
 
@@ -22,30 +25,27 @@
 ![Axios](https://img.shields.io/badge/-Axios-5A29E4?logo=axios&logoColor=white?style=plastic)
 ![Cheerio](https://img.shields.io/badge/1.0.0/rc.12-cheerio-F9DC3e?style=plastic)
 
-![nbx](./client/assets/images/loading-screenshot.png)
-
 ## Description
 
 * A Single Page React App that scrapes local concert listings from free to use information websites and displays them depending on the day selected. 
 
-![nbx](./client/assets/images/home_loggedOut.png)
+![noisebx-home](https://user-images.githubusercontent.com/40290683/215203917-ce209e10-93f8-4ea3-bb22-11c970a92012.gif)
 
 * When a user is logged in, they then have the ability to save a concert to their profile. 
 
-![nbx](./client/assets/images/home-loggedIn.png)
+![noisebx-login](https://user-images.githubusercontent.com/40290683/215205316-94df0ca4-29bc-46d8-88a8-a0d5d39d7724.gif)
 
-* When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  The ability to see the venue location via google maps, add it to google calendar, and other details will be added soon. 
+* When a show is clicked on from the homepage the user is taken to a page that displays full details about the show.  Venue location, contact, and ticket links are presented.  Some shows may not have all forms of contact information or ticket links present depending on what was available from the source material.  
 
-![nbx](./client/assets/images/show-loggedOut.png)
+<img alt="noisebx-screenshot" src="https://user-images.githubusercontent.com/40290683/215206532-37f8c0c3-74a5-4edc-8fc1-b880725ac34f.png">
 
 *  The option to RSVP yes, no, or maybe and add/remove the show from the user's profile is available if logged in.  The number of RSVP's are tallied and the number is displayed allowing users to have some expectations about attendance.
 
-![nbx](./client/assets/images/show-loggedIn.png)
+![noisebx-rsvp](https://user-images.githubusercontent.com/40290683/215209270-989e6ea3-e573-47ed-92fe-d4b25d2e6077.gif)
 
-* On the profile page the user is shown a list of their saved shows as well as their friend list and the ability to add friends if they know the user name.  The ability to remove, block or approve friend requests will be added soon. 
+* On the profile page the user is shown a list of their saved shows as well as their friend and pending friend request list. If you know your potential friends username you can enter it into the input and send off a friend request.  The request is then added to your pending request: sent list and to the other users pending request: received list.  You have the option of cancelling the request while the other user has the options of accepting or denying the request.  Once cancelled or denied the request is removed from each list.  If approved, both user are added to each others friend list.  They then have access to each others profiles. 
 
-![nbx](./client/assets/images/profile.png)
-
+![F4E](https://user-images.githubusercontent.com/40290683/215193902-e28dbee4-c712-46fb-bb7b-734db3f99e34.gif)
 
 
 ## Local Development
