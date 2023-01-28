@@ -362,7 +362,7 @@ main {
   padding: 5px 0 5px 5px;
 }
 
-.form-card button {
+.form-card-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 75%;
@@ -376,8 +376,22 @@ main {
   font-size: 20px;
 }
 
-.form-card button:hover {
+.form-card-button:hover {
   cursor: pointer;
+}
+
+#already-sent-button {
+  margin: 4vh 0;
+  padding: 3px 0;
+  width: 100%;
+  background-color: var(--dark);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 20px;
 }
 
 /* PROFILE STYLES START */

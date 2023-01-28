@@ -44,6 +44,8 @@ const resolvers = {
                 .select('-__v -password')
                 .populate('concerts')
                 .populate('friends')
+                .populate('sentRequests')
+                .populate('receivedRequests')
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {

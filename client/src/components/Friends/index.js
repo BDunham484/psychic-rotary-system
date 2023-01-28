@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
@@ -13,11 +13,14 @@ import ApproveDeny from '../ApproveDeny';
 import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
 const Friends = ({ userParam, user }) => {
+    console.log(user);
+
     const [text, setText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [friend, setFriend] = useState(false);
+    const [pending, setPending] = useState(false)
 
-    //destructure mutation function 
+    //destructure mutation functions 
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
@@ -33,23 +36,19 @@ const Friends = ({ userParam, user }) => {
             console.error(e);
         }
     };
-
+    //handler for friend request text input
     const handleTextChange = (e) => {
-        if (text === '') {
+        if (text === '' || pending) {
+            console.log('I SHOULD BE DISABLED');
             setBtnDisabled(true)
         } else {
             setBtnDisabled(false)
         }
         setText(e.target.value)
     }
-
-
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendName, friendId, event) => {
         // event.preventDefault();
-        console.log("EVENT: " + event)
-        console.log("FRIEND NAME: " + friendName)
-        console.log('FRIEND ID: ' + friendId);
         if (!friendName) {
             console.log('user not found');
             //setFriend to true display conditional messaging
@@ -66,9 +65,10 @@ const Friends = ({ userParam, user }) => {
                 console.error(e);
             }
         }
+        //reset input
         setText('');
     }
-
+    //handler to cancel a sent friend request
     const handleCancel = async (requestId, username) => {
         console.log('handleCancel Clicked: ' + requestId + ' | ' + username);
         try {
@@ -80,44 +80,53 @@ const Friends = ({ userParam, user }) => {
             });
         } catch (e) {
             console.error(e);
-        }
-    }
-
+        };
+    };
+    //handler to remove friend from friend list
     const handleRemove = async (friendId, username) => {
         console.log('handleRemove Clicked: ' + friendId + ': ' + username);
         try {
             await removeFriend({
-                variables: { 
+                variables: {
                     friendId: friendId,
-                    username: username 
+                    username: username
                 }
             });
         } catch (e) {
             console.error(e);
         };
     };
-
+    //request lengths to conditionally display the separate request sections
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
+    //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
 
     const friendName = text;
     console.log(friendName);
-
     //query user if use inputs text value in 'add friend' input
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
+    //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
     const friendId = userdata?.data?.user?._id || '';
     console.log(friendId);
-    const openRequests = userdata?.data?.user?.openRequests || [];
+    const sentFriendRequestsArr = user?.sentRequests || [];
 
-    const acceptedArr = openRequests.map((request) => {
-        if (request.senderUsername === user.username) {
-            return request.accepted
-        } else return 'wrong request';
+    const sentBoolArr = sentFriendRequestsArr.map((request) => {
+        console.log(request.receiverId.username);
+        if (friendName === request.receiverId.username) {
+            return true;
+        }
+        return false
     })
 
-    const notAccepted = acceptedArr.some(request => request === false);
+    const stillPending = sentBoolArr.some(request => request === true);
+    useEffect(() => {
+        if (stillPending) {
+            console.log(stillPending);
+            setPending(stillPending);
+        }
+    }, [stillPending])
 
     return (
         <div className="profile-friends-card">
@@ -130,7 +139,7 @@ const Friends = ({ userParam, user }) => {
                 </button>
             }
             {!userParam &&
-                <form className="form-card" onSubmit={() => { handleSubmit(friendName, friendId) }}>
+                <form className="form-card">
                     <div>
                         <input
                             onChange={handleTextChange}
@@ -142,12 +151,21 @@ const Friends = ({ userParam, user }) => {
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
-                    {notAccepted &&
-                        <div>Request Pending</div>
+                    {stillPending ? (
+                        <div>
+                            <div id="already-sent-button">Already Sent</div>
+                        </div>
+                    ) : (
+                        <div>
+                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
+                        </div>
+                    )
+
+
                     }
-                    <div>
-                        <button type="button" disabled={btnDisabled} onClick={() => {handleSubmit(friendName, friendId)}} >Send Request</button>
-                    </div>
+                    {/* <div>
+                        <button type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
+                    </div> */}
                 </form>
             }
             {err && <div>An Error has occurred.</div>}
