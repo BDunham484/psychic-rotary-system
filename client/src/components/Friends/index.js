@@ -4,8 +4,7 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
-    // ACCEPT_FRIEND_REQUEST,
-    // DECLINE_FRIEND_REQUEST
+    REMOVE_FRIEND,
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
@@ -22,10 +21,7 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    // const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
-    // const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
-
-
+    const [removeFriend] = useMutation(REMOVE_FRIEND);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -59,13 +55,6 @@ const Friends = ({ userParam, user }) => {
             //setFriend to true display conditional messaging
             setFriend(true);
         } else {
-            // try {
-            //     await addFriend({
-            //         variables: { id: friendId }
-            //     });
-            // } catch (e) {
-            //     console.error(e)
-            // }
             try {
                 await sendRequest({
                     variables: {
@@ -77,6 +66,7 @@ const Friends = ({ userParam, user }) => {
                 console.error(e);
             }
         }
+        setText('');
     }
 
     const handleCancel = async (requestId, username) => {
@@ -92,6 +82,20 @@ const Friends = ({ userParam, user }) => {
             console.error(e);
         }
     }
+
+    const handleRemove = async (friendId, username) => {
+        console.log('handleRemove Clicked: ' + friendId + ': ' + username);
+        try {
+            await removeFriend({
+                variables: { 
+                    friendId: friendId,
+                    username: username 
+                }
+            });
+        } catch (e) {
+            console.error(e);
+        };
+    };
 
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
@@ -142,7 +146,7 @@ const Friends = ({ userParam, user }) => {
                         <div>Request Pending</div>
                     }
                     <div>
-                        <button type="submit" disabled={btnDisabled}>Send Request</button>
+                        <button type="button" disabled={btnDisabled} onClick={() => {handleSubmit(friendName, friendId)}} >Send Request</button>
                     </div>
                 </form>
             }
@@ -189,7 +193,7 @@ const Friends = ({ userParam, user }) => {
                     {user.friends.map((friend, index) => (
                         <div key={index} className="names display-flex">
                             <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                            <UserMinus className="remove-friend-icon"/>
+                            <UserMinus className="remove-friend-icon" onClick={() => handleRemove(friend._id, friend.username)} />
                         </div>
                     ))}
                 </div>

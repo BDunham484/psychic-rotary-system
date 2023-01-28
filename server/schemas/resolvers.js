@@ -21,7 +21,7 @@ const resolvers = {
                     .populate('receivedRequests.receiverId')
                     .populate('sentRequests.receiverId')
                     .populate('sentRequests.senderId')
-                
+
 
                 return userData;
             }
@@ -284,9 +284,7 @@ const resolvers = {
                 }
                 concertData.push(events);
 
-            }))
-            // ^^^^^URLARR PROMISE END
-            // }))
+            }));
             console.log('CONCERTDATA');
             console.log(concertData.length / 2 + ' days of concerts scraped');
             return concertData;
@@ -589,141 +587,151 @@ const resolvers = {
             });
             return deletedConcerts;
         },
-        rsvpYes: async (parent, { concertId, userId }) => {
+        rsvpYes: async (parent, { concertId, userId }, context) => {
             console.log('RSVPYES');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $addToSet: { yes: userId } },
-                { new: true }
-            );
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { no: userId } },
-                { new: true }
-            )
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { maybe: userId } },
-                { new: true }
-            )
-
-            console.log(concert);
-            return concert
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $addToSet: { yes: userId } },
+                    { new: true }
+                );
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { no: userId } },
+                    { new: true }
+                )
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { maybe: userId } },
+                    { new: true }
+                )
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        cancelRsvpYes: async (parent, { concertId, userId }) => {
+        cancelRsvpYes: async (parent, { concertId, userId }, context) => {
             console.log('CANCELRSVPYES');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { yes: userId } },
-                { new: true }
-            );
-
-            return concert
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { yes: userId } },
+                    { new: true }
+                );
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        rsvpNo: async (parent, { concertId, userId }) => {
+        rsvpNo: async (parent, { concertId, userId }, context) => {
             console.log('RSVPNO');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $addToSet: { no: userId } },
-                { new: true }
-            );
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { rsvpYes: userId } },
-                { new: true }
-            )
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { maybe: userId } },
-                { new: true }
-            )
-
-            return concert
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $addToSet: { no: userId } },
+                    { new: true }
+                );
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { rsvpYes: userId } },
+                    { new: true }
+                )
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { maybe: userId } },
+                    { new: true }
+                )
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        cancelRsvpNo: async (parent, { concertId, userId }) => {
+        cancelRsvpNo: async (parent, { concertId, userId }, context) => {
             console.log('CANCELRSVPNO');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { no: userId } },
-                { new: true }
-            );
-
-            return concert
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { no: userId } },
+                    { new: true }
+                );
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        rsvpMaybe: async (parent, { concertId, userId }) => {
+        rsvpMaybe: async (parent, { concertId, userId }, context) => {
             console.log('RSVPMAYBE');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $addToSet: { maybe: userId } },
-                { new: true }
-            );
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { yes: userId } },
-                { new: true }
-            )
-            await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { no: userId } },
-                { new: true }
-            )
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $addToSet: { maybe: userId } },
+                    { new: true }
+                );
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { yes: userId } },
+                    { new: true }
+                )
+                await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { no: userId } },
+                    { new: true }
+                )
 
-            return concert
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
-        cancelRsvpMaybe: async (parent, { concertId, userId }) => {
+        cancelRsvpMaybe: async (parent, { concertId, userId }, context) => {
             console.log('CANCELRSVPMAYBE');
             console.log(concertId + ' and ' + userId);
-            const concert = await Concert.findByIdAndUpdate(
-                { _id: concertId },
-                { $pull: { maybe: userId } },
-                { new: true }
-            );
-
-            return concert
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { maybe: userId } },
+                    { new: true }
+                );
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
         },
         sendRequest: async (parent, { username, receiverId }, context) => {
             console.log('USERNAME: ' + username)
             console.log('RECEIVER ID: ' + receiverId);
-            if (!username) {
-                throw new Error("You must submit a username");
-            };
-            if (username === context.user.username) {
-                throw new Error("Please submit another username");
-            };
+            if (context.user) {
+                if (!username) {
+                    throw new Error("You must submit a username");
+                };
+                if (username === context.user.username) {
+                    throw new Error("Please submit another username");
+                };
+                //create new request and push it to the chosen user's open requests
+                const request = await Request.create({
+                    'senderId': context.user._id,
+                    'receiverId': receiverId,
+                });
+                console.log('REQUEST');
+                console.log(request);
+                const user = await User.findOneAndUpdate(
+                    { 'username': username },
+                    { $addToSet: { receivedRequests: request } },
+                    { new: true }
+                ).populate('receivedRequests');
+                // //send username to 'sentRequest' field in the senders user profile
+                await User.findOneAndUpdate(
+                    { 'username': context.user.username },
+                    { $addToSet: { sentRequests: request } },
+                    { new: true }
+                ).populate('sentRequests');
 
-            //create new request and push it to the chosen user's open requests
-            const request = await Request.create({
-                'senderId': context.user._id,
-                // 'senderUsername': context.user.username,
-                'receiverId': receiverId,
-                // 'receiverUsername': username,
-                // accepted: false
-            })
+                if (!user) {
+                    throw new Error('User does not exist');
+                }
 
-            console.log('REQUEST');
-            console.log(request);
-            const user = await User.findOneAndUpdate(
-                { 'username': username },
-                { $addToSet: { receivedRequests: request } },
-                { new: true }
-            ).populate('receivedRequests');
-            // //send username to 'sentRequest' field in the senders user profile
-            await User.findOneAndUpdate(
-                { 'username': context.user.username },
-                { $addToSet: { sentRequests: request } },
-                { new: true }
-            ).populate('sentRequests');
-
-            if (!user) {
-                throw new Error('User does not exist');
+                return user
             }
-            
-            return user
+            throw new AuthenticationError('You need to be logged in!');
         },
         //takes request away from chosen user's received requests and the senders sent requests if you choose to cancel the friend request
         cancelRequest: async (parent, { requestId, username }, context) => {
@@ -737,13 +745,7 @@ const resolvers = {
 
                 const receiver = await User.findOneAndUpdate(
                     { 'username': username },
-                    {
-                        $pull: {
-                            receivedRequests: {
-                                '_id': requestId
-                            }
-                        }
-                    },
+                    { $pull: { receivedRequests: { '_id': requestId } } },
                     { new: true }
                 ).populate('receivedRequests');
                 return username
@@ -754,55 +756,67 @@ const resolvers = {
         acceptRequest: async (parent, { username, eventId, senderId, receiverId }, context) => {
             console.log(username + ' acceptRequest: ' + eventId);
             console.log('friends: ' + senderId + ' & ' + receiverId)
-            await User.findOneAndUpdate(
-                { 'username': username },
-                { $pull: { sentRequests: { '_id': eventId }}},
-                { new: true }
-            )
+            if (context.user) {
+                await User.findOneAndUpdate(
+                    { 'username': username },
+                    { $pull: { sentRequests: { '_id': eventId } } },
+                    { new: true }
+                )
 
-            await User.findOneAndUpdate(
-                { 'username': context.user.username },
-                { $pull: { receivedRequests: { '_id': eventId } } },
-                { new: true }
-            )
+                await User.findOneAndUpdate(
+                    { 'username': context.user.username },
+                    { $pull: { receivedRequests: { '_id': eventId } } },
+                    { new: true }
+                )
 
-            const receiver = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { friends: senderId } },
-                { new: true }
-            ).populate('friends');
+                const receiver = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { friends: senderId } },
+                    { new: true }
+                ).populate('friends');
 
-            const sender = await User.findOneAndUpdate(
-                { _id: senderId },
-                { $addToSet: { friends: receiverId}},
-                { new: true }
-            ).populate('friends');
+                const sender = await User.findOneAndUpdate(
+                    { _id: senderId },
+                    { $addToSet: { friends: receiverId } },
+                    { new: true }
+                ).populate('friends');
 
-            return 'friends forever';
+                return 'friends forever';
+            };
+            throw new AuthenticationError('You need to be logged i!');
+
         },
         //remove someones friend request from your own open request list
         declineRequest: async (parent, { username, eventId }, context) => {
             console.log(username + ' decline request: ' + eventId);
-            await User.findOneAndUpdate(
-                { 'username': username },
-                { $pull: { sentRequests: { '_id': eventId }}}
-            )
+            if (context.user) {
+                await User.findOneAndUpdate(
+                    { 'username': username },
+                    { $pull: { sentRequests: { '_id': eventId } } }
+                );
 
-            await User.findOneAndUpdate(
-                { 'username': context.user.username },
-                { $pull: { receivedRequests: { '_id': eventId } } }
-            )
-            return username
+                await User.findOneAndUpdate(
+                    { 'username': context.user.username },
+                    { $pull: { receivedRequests: { '_id': eventId } } }
+                );
+                return username
+            };
+            throw new AuthenticationError('You need to be logged in!');
         },
         //remove a friends _id from the friend list of the logged in user
-        removeFriend: async (parent, { friendId }, context) => {
-            console.log(friendId + " removed from " + context.user.username + "'s friend list");
+        removeFriend: async (parent, { friendId, username }, context) => {
+            console.log(friendId + ":" + username + " removed from " + context.user.username + "'s friend list");
             if (context.user) {
                 let user = await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $pull: { friends: friendId }},
+                    { $pull: { friends: friendId } },
                     { new: true }
                 ).populate('friends');
+
+                await User.findOneAndUpdate(
+                    { '_id': friendId },
+                    { $pull: { friends: context.user._id } }
+                )
                 return user;
             };
             throw new AuthenticationError('You need to be logged in!');
