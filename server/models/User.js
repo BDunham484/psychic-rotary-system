@@ -75,9 +75,19 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-//get total count of sentRequests on retrieval
+//get total count of sentRequests + receivedRequests on retrieval
 userSchema.virtual('requestCount').get(function () {
+    return (this.sentRequests.length + this.receivedRequests.length);
+})
+
+//get total count of sentRequest
+userSchema.virtual('sentCount').get(function () {
     return this.sentRequests.length;
+})
+
+//get total count of sentRequest
+userSchema.virtual('receivedCount').get(function () {
+    return this.receivedRequests.length;
 })
 
 //create the User model using the userSchema
