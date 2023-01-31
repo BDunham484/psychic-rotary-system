@@ -36,12 +36,6 @@ const typeDefs = gql`
         maybe: [User]
     }
 
-    type Request {
-        _id: ID
-        senderId: User
-        receiverId: User
-    }
-
     type Query {
         me: User
         users: [User]

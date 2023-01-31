@@ -1,7 +1,6 @@
 // const { User, Concert } = require('../models');
 const User = require('../models/User');
 const Concert = require('../models/Concert');
-const Request = require('../models/Request');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 // const { getArtists } = require('../utils/scraper');
