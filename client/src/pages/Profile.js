@@ -18,19 +18,23 @@ const Profile = () => {
     });
 
     useEffect(() => {
-        if (loading) {
-            console.log('QUERY LOADING...');
-        } else {
+        // if (loading) {
+        //     console.log('QUERY LOADING...');
+        // } else {
             startPolling(1000);
             return () => {
                 stopPolling()
             };
-        };
+        // };
     })
 
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
     console.log(user);
+
+    const butts = data || {};
+    console.log('BUTTS');
+    console.log(butts);
 
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -56,7 +60,7 @@ const Profile = () => {
         return <div>Loading...</div>
     }
 
-    if (!user?.username) {
+    if (!user?._id) {
         return (
             <h4>
                 You need to be logged in to see this page. Login or Signup above!

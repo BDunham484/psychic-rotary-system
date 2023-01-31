@@ -123,7 +123,6 @@ const Friends = ({ userParam, user }) => {
     const stillPending = sentBoolArr.some(request => request === true);
     useEffect(() => {
         if (stillPending) {
-            console.log(stillPending);
             setPending(stillPending);
         }
     }, [stillPending])
@@ -152,20 +151,15 @@ const Friends = ({ userParam, user }) => {
                         <div>USER NOT FOUND</div>
                     }
                     {stillPending ? (
-                        <div>
-                            <div id="already-sent-button">Already Sent</div>
-                        </div>
-                    ) : (
-                        <div>
-                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
-                        </div>
-                    )
-
-
+                            <div>
+                                <div id="already-sent-button">Already Sent</div>
+                            </div>
+                        ) : (
+                            <div>
+                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
+                            </div>
+                        )
                     }
-                    {/* <div>
-                        <button type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
-                    </div> */}
                 </form>
             }
             {err && <div>An Error has occurred.</div>}
