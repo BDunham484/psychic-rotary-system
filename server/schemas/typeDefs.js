@@ -12,8 +12,8 @@ const typeDefs = gql`
         requestCount: Int
         concerts: [Concert]
         friends: [User]
-        receivedRequests: [Request]
-        sentRequests: [Request]
+        receivedRequests: [User]
+        sentRequests: [User]
     }
 
     type Concert {

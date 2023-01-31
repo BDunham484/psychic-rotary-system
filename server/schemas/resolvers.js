@@ -708,22 +708,15 @@ const resolvers = {
                 if (username === context.user.username) {
                     throw new Error("Please submit another username");
                 };
-                //create new request and push it to the chosen user's open requests
-                const request = await Request.create({
-                    'senderId': context.user._id,
-                    'receiverId': receiverId,
-                });
-                console.log('REQUEST');
-                console.log(request);
                 const user = await User.findOneAndUpdate(
                     { 'username': username },
-                    { $addToSet: { receivedRequests: request } },
+                    { $addToSet: { receivedRequests: context.user._id } },
                     { new: true }
                 ).populate('receivedRequests');
                 // //send username to 'sentRequest' field in the senders user profile
                 await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $addToSet: { sentRequests: request } },
+                    { $addToSet: { sentRequests: receiverId } },
                     { new: true }
                 ).populate('sentRequests');
 
