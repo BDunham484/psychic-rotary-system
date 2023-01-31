@@ -40,20 +40,8 @@ const userSchema = new Schema(
                 ref: 'User'
             }
         ],
-        // receivedRequests: [Request.schema],
-        // sentRequests: [Request.schema]
-        receivedRequests: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
-        sentRequests: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ]
+        receivedRequests: [Request.schema],
+        sentRequests: [Request.schema]
     },
     {
         toJSON: {
