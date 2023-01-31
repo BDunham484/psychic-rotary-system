@@ -191,8 +191,8 @@ const Friends = ({ userParam, user }) => {
             <div className="friend-list-container">
                 {user.receivedRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request.senderId.username}</div>
-                        <ApproveDeny senderUsername={request.senderId.username} eventId={request._id} senderId={request.senderId._id} receiverId={request.receiverId._id} />
+                        <div>{request.username}</div>
+                        <ApproveDeny senderId={request._id} senderName={request.username} />
                     </div>
                 ))}
             </div>

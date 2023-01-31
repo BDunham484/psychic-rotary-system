@@ -746,19 +746,19 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         //changes your open request from a user to show that it has been accepted
-        acceptRequest: async (parent, { username, eventId, senderId, receiverId }, context) => {
-            console.log(username + ' acceptRequest: ' + eventId);
-            console.log('friends: ' + senderId + ' & ' + receiverId)
+        acceptRequest: async (parent, { senderId, senderName }, context) => {
+            console.log('SENDERID: ' + senderId);
+            console.log('SENDERNAME: ' + senderName)
             if (context.user) {
                 await User.findOneAndUpdate(
-                    { 'username': username },
-                    { $pull: { sentRequests: { '_id': eventId } } },
+                    { 'username': senderName },
+                    { $pull: { sentRequests: context.user._id } },
                     { new: true }
                 )
 
                 await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $pull: { receivedRequests: { '_id': eventId } } },
+                    { $pull: { receivedRequests: senderId } },
                     { new: true }
                 )
 
@@ -770,7 +770,7 @@ const resolvers = {
 
                 const sender = await User.findOneAndUpdate(
                     { _id: senderId },
-                    { $addToSet: { friends: receiverId } },
+                    { $addToSet: { friends: context.user._id } },
                     { new: true }
                 ).populate('friends');
 
@@ -780,19 +780,19 @@ const resolvers = {
 
         },
         //remove someones friend request from your own open request list
-        declineRequest: async (parent, { username, eventId }, context) => {
-            console.log(username + ' decline request: ' + eventId);
+        declineRequest: async (parent, { senderId, senderName }, context) => {
+            console.log('decline request from ' + senderName);
             if (context.user) {
                 await User.findOneAndUpdate(
-                    { 'username': username },
-                    { $pull: { sentRequests: { '_id': eventId } } }
+                    { 'username': senderName },
+                    { $pull: { sentRequests: context.user._id } }
                 );
 
                 await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $pull: { receivedRequests: { '_id': eventId } } }
+                    { $pull: { receivedRequests: senderId } }
                 );
-                return username
+                return senderName
             };
             throw new AuthenticationError('You need to be logged in!');
         },

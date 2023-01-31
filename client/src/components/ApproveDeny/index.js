@@ -6,18 +6,18 @@ import {
 import { UserCheck } from '@styled-icons/icomoon/UserCheck';
 import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
-const ApproveDeny = ({ senderUsername, eventId, senderId, receiverId }) => {
+const ApproveDeny = ({ senderId, senderName }) => {
     
     const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
     const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    const handleDeny = async (senderUsername, eventId) => {
+    const handleDeny = async (senderName) => {
         console.log('handleDeny');
         try {
             await declineRequest({
                 variables: { 
-                    username: senderUsername, 
-                    eventId: eventId
+                    senderId: senderId,
+                    senderName: senderName
                 }
             })
         } catch (e) {
@@ -25,15 +25,13 @@ const ApproveDeny = ({ senderUsername, eventId, senderId, receiverId }) => {
         }
     }
 
-    const handleApprove = async (senderUsername, eventId, senderId, receiverId) => {
-        console.log('handleApprove: ' + senderUsername, eventId, senderId, receiverId);
+    const handleApprove = async (senderId, senderName) => {
+        console.log('handleApprove: ' + senderId + ' | ' + senderName);
         try {
             await acceptRequest({
                 variables: {
-                    username: senderUsername,
-                    eventId: eventId,
                     senderId: senderId,
-                    receiverId: receiverId
+                    senderName: senderName
                 }
             }) 
         } catch (e) {
@@ -43,8 +41,8 @@ const ApproveDeny = ({ senderUsername, eventId, senderId, receiverId }) => {
 
     return (
         <div>
-            <UserCheck className='approve' onClick={() => handleApprove(senderUsername, eventId, senderId, receiverId)} />
-            <UserMinus className='deny' onClick={() => handleDeny(senderUsername, eventId)} />
+            <UserCheck className='approve' onClick={() => handleApprove(senderId, senderName )} />
+            <UserMinus className='deny' onClick={() => handleDeny(senderId, senderName)} />
         </div>
     )
 }
