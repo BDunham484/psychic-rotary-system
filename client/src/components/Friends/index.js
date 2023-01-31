@@ -48,6 +48,7 @@ const Friends = ({ userParam, user }) => {
     }
     //onSubmit handler to add a friend by user input
     const handleSubmit = async (friendName, friendId, event) => {
+        console.log(friendName, friendId);
         // event.preventDefault();
         if (!friendName) {
             console.log('user not found');
@@ -69,13 +70,13 @@ const Friends = ({ userParam, user }) => {
         setText('');
     }
     //handler to cancel a sent friend request
-    const handleCancel = async (requestId, username) => {
-        console.log('handleCancel Clicked: ' + requestId + ' | ' + username);
+    const handleCancel = async (friendId, friendName) => {
+        console.log('handleCancel Clicked: ' + friendId + ' | ' + friendName);
         try {
             await cancelRequest({
                 variables: {
-                    requestId: requestId,
-                    username: username
+                    friendId: friendId,
+                    friendName: friendName
                 }
             });
         } catch (e) {
@@ -107,14 +108,15 @@ const Friends = ({ userParam, user }) => {
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
+    // console.log(userdata);
     //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
     const friendId = userdata?.data?.user?._id || '';
     console.log(friendId);
     const sentFriendRequestsArr = user?.sentRequests || [];
 
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
-        console.log(request.receiverId.username);
-        if (friendName === request.receiverId.username) {
+        
+        if (friendName === request.username) {
             return true;
         }
         return false
@@ -176,8 +178,8 @@ const Friends = ({ userParam, user }) => {
             <div className="friend-list-container">
                 {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request._id.username}</div>
-                        <Cancel className="cancel" onClick={() => handleCancel(request._id, request.receiverId.username)} />
+                        <div>{request.username}</div>
+                        <Cancel className="cancel" onClick={() => handleCancel(request._id, request.username)} />
                     </div>
                 ))}
             </div>

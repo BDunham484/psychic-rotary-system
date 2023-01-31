@@ -18,18 +18,19 @@ const Profile = () => {
     });
 
     useEffect(() => {
-        // if (loading) {
-        //     console.log('QUERY LOADING...');
-        // } else {
+        if (loading) {
+            console.log('QUERY LOADING...');
+        } else {
             startPolling(1000);
             return () => {
                 stopPolling()
             };
-        // };
+        };
     })
 
     //user declaration set up to handle each type of response from above useQuery
     const user = data?.me || data?.user || {};
+    console.log('USER DATA FROM PROFILE.JS');
     console.log(user);
 
     const butts = data || {};

@@ -17,10 +17,8 @@ const resolvers = {
                     .select('-__v -password')
                     .populate('concerts')
                     .populate('friends')
-                    .populate('receivedRequests.senderId')
-                    .populate('receivedRequests.receiverId')
-                    .populate('sentRequests.receiverId')
-                    .populate('sentRequests.senderId')
+                    .populate('receivedRequests')
+                    .populate('sentRequests')
 
 
                 return userData;
@@ -714,7 +712,7 @@ const resolvers = {
                     { new: true }
                 ).populate('receivedRequests');
                 // //send username to 'sentRequest' field in the senders user profile
-                await User.findOneAndUpdate(
+                const sender = await User.findOneAndUpdate(
                     { 'username': context.user.username },
                     { $addToSet: { sentRequests: receiverId } },
                     { new: true }
@@ -723,27 +721,27 @@ const resolvers = {
                 if (!user) {
                     throw new Error('User does not exist');
                 }
-
+                
                 return user
             }
             throw new AuthenticationError('You need to be logged in!');
         },
         //takes request away from chosen user's received requests and the senders sent requests if you choose to cancel the friend request
-        cancelRequest: async (parent, { requestId, username }, context) => {
-            console.log('FRIEND REQUEST CANCELLED: ' + requestId + ' | ' + username);
+        cancelRequest: async (parent, { friendId, friendName }, context) => {
+            console.log('FRIEND REQUEST CANCELLED: ' + friendId + ' | ' + friendName);
             if (context.user) {
-                const sender = await User.findOneAndUpdate(
+                await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $pull: { sentRequests: { _id: requestId } } },
+                    { $pull: { sentRequests: friendId } },
                     { new: true }
                 ).populate('sentRequests');
 
-                const receiver = await User.findOneAndUpdate(
-                    { 'username': username },
-                    { $pull: { receivedRequests: { '_id': requestId } } },
+                await User.findOneAndUpdate(
+                    { 'username': friendName },
+                    { $pull: { receivedRequests: context.user._id } },
                     { new: true }
                 ).populate('receivedRequests');
-                return username
+                return friendName
             }
             throw new AuthenticationError('You need to be logged in!');
         },
