@@ -47,8 +47,8 @@ const Friends = ({ userParam, user }) => {
         setText(e.target.value)
     }
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendName, friendId, event) => {
-        console.log(friendName, friendId);
+    const handleSubmit = async (friendId, friendName) => {
+        console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
         // event.preventDefault();
         if (!friendName) {
             console.log('user not found');
@@ -58,8 +58,8 @@ const Friends = ({ userParam, user }) => {
             try {
                 await sendRequest({
                     variables: {
-                        username: friendName,
-                        receiverId: friendId
+                        friendId: friendId,
+                        friendName: friendName
                     }
                 })
             } catch (e) {
@@ -158,7 +158,7 @@ const Friends = ({ userParam, user }) => {
                             </div>
                         ) : (
                             <div>
-                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendName, friendId) }} >Send Request</button>
+                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit( friendId, friendName) }} >Send Request</button>
                             </div>
                         )
                     }

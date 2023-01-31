@@ -696,25 +696,24 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        sendRequest: async (parent, { username, receiverId }, context) => {
-            console.log('USERNAME: ' + username)
-            console.log('RECEIVER ID: ' + receiverId);
+        sendRequest: async (parent, { friendId, friendName }, context) => {
+            console.log('request sent: ' + friendId + ' | ' + friendName);
             if (context.user) {
-                if (!username) {
+                if (!friendName) {
                     throw new Error("You must submit a username");
                 };
-                if (username === context.user.username) {
+                if (friendName === context.user.username) {
                     throw new Error("Please submit another username");
                 };
                 const user = await User.findOneAndUpdate(
-                    { 'username': username },
+                    { 'username': friendName },
                     { $addToSet: { receivedRequests: context.user._id } },
                     { new: true }
                 ).populate('receivedRequests');
                 // //send username to 'sentRequest' field in the senders user profile
                 const sender = await User.findOneAndUpdate(
                     { 'username': context.user.username },
-                    { $addToSet: { sentRequests: receiverId } },
+                    { $addToSet: { sentRequests: friendId } },
                     { new: true }
                 ).populate('sentRequests');
 
@@ -747,8 +746,7 @@ const resolvers = {
         },
         //changes your open request from a user to show that it has been accepted
         acceptRequest: async (parent, { senderId, senderName }, context) => {
-            console.log('SENDERID: ' + senderId);
-            console.log('SENDERNAME: ' + senderName)
+            console.log('accept request: ' + senderId + ' | ' + senderName);
             if (context.user) {
                 await User.findOneAndUpdate(
                     { 'username': senderName },
@@ -792,7 +790,7 @@ const resolvers = {
                     { 'username': context.user.username },
                     { $pull: { receivedRequests: senderId } }
                 );
-                return senderName
+                return 'request declined: ' + senderId + ' | ' + senderName
             };
             throw new AuthenticationError('You need to be logged in!');
         },
