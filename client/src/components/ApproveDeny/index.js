@@ -11,8 +11,8 @@ const ApproveDeny = ({ senderId, senderName }) => {
     const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
     const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    const handleDeny = async (senderName) => {
-        console.log('handleDeny');
+    const handleDeny = async (senderId, senderName) => {
+        console.log('handleDeny: ' + senderId + ' | ' + senderName);
         try {
             await declineRequest({
                 variables: { 

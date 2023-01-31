@@ -781,7 +781,7 @@ const resolvers = {
         },
         //remove someones friend request from your own open request list
         declineRequest: async (parent, { senderId, senderName }, context) => {
-            console.log('decline request from ' + senderName);
+            console.log('decline request: ' + senderId + ' | ' + senderName);
             if (context.user) {
                 await User.findOneAndUpdate(
                     { 'username': senderName },
