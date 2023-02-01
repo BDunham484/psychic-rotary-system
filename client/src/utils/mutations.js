@@ -214,3 +214,15 @@ export const REMOVE_FRIEND = gql`
         }
     }
 `;
+
+export const BLOCK_USER = gql`
+    mutation blockUser($blockedId: ID!) {
+        blockUser(blockedId: $blockedId) {
+            username
+            blockedUsers {
+                _id
+                username
+            }
+        }
+    }
+`;
