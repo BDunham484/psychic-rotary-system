@@ -14,6 +14,7 @@ const typeDefs = gql`
         friends: [User]
         receivedRequests: [User]
         sentRequests: [User]
+        blockedUsers: [User]
     }
 
     type Concert {

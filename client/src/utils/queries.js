@@ -108,6 +108,10 @@ export const QUERY_USER = gql`
                 _id
                 username
             }
+            blockedUsers {
+                _id
+                username
+            }
         }
     }
 `;
@@ -144,6 +148,10 @@ export const QUERY_ME = gql`
             }
             requestCount
             sentRequests {
+                _id
+                username
+            }
+            blockedUsers {
                 _id
                 username
             }
