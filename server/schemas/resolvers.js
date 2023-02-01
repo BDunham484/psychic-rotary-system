@@ -811,6 +811,19 @@ const resolvers = {
             };
             throw new AuthenticationError('You need to be logged in!');
         },
+        //add blocked User's _id to blockedUsers field in User model
+        blockUser: async (parent, { blockedId }, context) => {
+            console.log('USER BLOCKED: ' + blockedId);
+            if (context.user) {
+                let user = await User.findOneAndUpdate(
+                    { '_id': context.user._id },
+                    { $push: { blockedUsers: blockedId }},
+                    { new: true }
+                ).populate('blockedUsers');
+                return user;
+            };
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 };
 module.exports = resolvers;
