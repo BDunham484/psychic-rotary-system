@@ -4,13 +4,14 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
-    REMOVE_FRIEND,
+    // REMOVE_FRIEND,
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
 import ApproveDeny from '../ApproveDeny';
-import { UserMinus } from '@styled-icons/icomoon/UserMinus'
+import FriendListOptions from "../FriendListOptions";
+// import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
 const Friends = ({ userParam, user }) => {
     console.log(user);
@@ -24,7 +25,7 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    const [removeFriend] = useMutation(REMOVE_FRIEND);
+    // const [removeFriend] = useMutation(REMOVE_FRIEND);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -93,19 +94,19 @@ const Friends = ({ userParam, user }) => {
             console.error(e);
         };
     };
-    //handler to remove friend from friend list
-    const handleRemove = async (friendId) => {
-        console.log('handleRemove Clicked: ' + friendId);
-        try {
-            await removeFriend({
-                variables: {
-                    friendId: friendId
-                }
-            });
-        } catch (e) {
-            console.error(e);
-        };
-    };
+    // //handler to remove friend from friend list
+    // const handleRemove = async (friendId) => {
+    //     console.log('handleRemove Clicked: ' + friendId);
+    //     try {
+    //         await removeFriend({
+    //             variables: {
+    //                 friendId: friendId
+    //             }
+    //         });
+    //     } catch (e) {
+    //         console.error(e);
+    //     };
+    // };
     //request lengths to conditionally display the separate request sections
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
@@ -216,7 +217,8 @@ const Friends = ({ userParam, user }) => {
                     {user.friends.map((friend, index) => (
                         <div key={index} className="names display-flex">
                             <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                            <UserMinus className="remove-friend-icon" onClick={() => handleRemove(friend._id, friend.username)} />
+                            <FriendListOptions friendId={friend._id} />
+                            {/* <UserMinus className="friend-list-icons" onClick={() => handleRemove(friend._id)} /> */}
                         </div>
                     ))}
                 </div>
