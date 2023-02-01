@@ -18,13 +18,10 @@ const Profile = () => {
     });
 
     useEffect(() => {
-        if (loading) {
-            console.log('QUERY LOADING...');
-        } else {
-            startPolling(1000);
-            return () => {
-                stopPolling()
-            };
+        //runs the query every second
+        startPolling(1000);
+        return () => {
+            stopPolling()
         };
     })
 
@@ -32,10 +29,6 @@ const Profile = () => {
     const user = data?.me || data?.user || {};
     console.log('USER DATA FROM PROFILE.JS');
     console.log(user);
-
-    const butts = data || {};
-    console.log('BUTTS');
-    console.log(butts);
 
     //delete saved concert
     const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -98,7 +91,7 @@ const Profile = () => {
 
 
             </div>
-            <Friends userParam={userParam} user={user}/>
+            <Friends userParam={userParam} user={user} />
         </div>
     )
 }

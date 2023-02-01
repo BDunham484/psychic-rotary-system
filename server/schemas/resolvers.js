@@ -794,8 +794,8 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         //remove a friends _id from the friend list of the logged in user
-        removeFriend: async (parent, { friendId, username }, context) => {
-            console.log(friendId + ":" + username + " removed from " + context.user.username + "'s friend list");
+        removeFriend: async (parent, { friendId }, context) => {
+            console.log(friendId + " removed from " + context.user.username + "'s friend list");
             if (context.user) {
                 let user = await User.findOneAndUpdate(
                     { 'username': context.user.username },

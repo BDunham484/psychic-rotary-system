@@ -84,13 +84,12 @@ const Friends = ({ userParam, user }) => {
         };
     };
     //handler to remove friend from friend list
-    const handleRemove = async (friendId, username) => {
-        console.log('handleRemove Clicked: ' + friendId + ': ' + username);
+    const handleRemove = async (friendId) => {
+        console.log('handleRemove Clicked: ' + friendId);
         try {
             await removeFriend({
                 variables: {
-                    friendId: friendId,
-                    username: username
+                    friendId: friendId
                 }
             });
         } catch (e) {
@@ -101,10 +100,9 @@ const Friends = ({ userParam, user }) => {
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
-
     const friendName = text;
     console.log(friendName);
-    //query user if use inputs text value in 'add friend' input
+    //query user if user inputs text value in 'add friend' input
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
     })
@@ -217,6 +215,3 @@ const Friends = ({ userParam, user }) => {
 }
 
 export default Friends
-
-// TODO
-// 1. Hide pending request section if there are no pending request names in sentRequest User field
