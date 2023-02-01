@@ -47,10 +47,20 @@ const Friends = ({ userParam, user }) => {
         setText(e.target.value)
     }
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendId, friendName) => {
+    const handleSubmit = async (friendId, friendName, blockedArr) => {
         console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
         // event.preventDefault();
-        if (!friendName) {
+        const blockedBoolArr = blockedArr.map((blockedUser) => {
+            if (friendId === blockedUser._id) {
+                return true;
+            };
+            return false
+        });
+        const isBlocked = blockedBoolArr.some(block => block === true);
+
+        if (isBlocked) {
+            console.log('blocked');
+        } else if (!friendName) {
             console.log('user not found');
             //setFriend to true display conditional messaging
             setFriend(true);
@@ -109,6 +119,9 @@ const Friends = ({ userParam, user }) => {
     //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
     const friendId = userdata?.data?.user?._id || '';
     console.log(friendId);
+    const blockedArr = userdata?.data?.user?.blockedUsers || [];
+    console.log('blockedArr');
+    console.log(blockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
@@ -154,7 +167,7 @@ const Friends = ({ userParam, user }) => {
                             </div>
                         ) : (
                             <div>
-                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit( friendId, friendName) }} >Send Request</button>
+                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit( friendId, friendName, blockedArr) }} >Send Request</button>
                             </div>
                         )
                     }
