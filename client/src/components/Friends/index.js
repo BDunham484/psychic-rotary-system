@@ -105,21 +105,19 @@ const Friends = ({ userParam, user }) => {
     //query user if user inputs text value in 'add friend' input
     const userdata = useQuery(QUERY_USER, {
         variables: { username: text }
-    })
-    // console.log(userdata);
+    });
     //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
     const friendId = userdata?.data?.user?._id || '';
     console.log(friendId);
     const sentFriendRequestsArr = user?.sentRequests || [];
-
+    //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
-        
         if (friendName === request.username) {
             return true;
-        }
+        };
         return false
-    })
-
+    });
+    //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
     const stillPending = sentBoolArr.some(request => request === true);
     useEffect(() => {
         if (stillPending) {

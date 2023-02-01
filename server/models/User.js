@@ -50,6 +50,12 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
+        ],
+        blockedUsers: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
         ]
     },
     {
