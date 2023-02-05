@@ -3,7 +3,8 @@ import {
     REMOVE_FRIEND,
     BLOCK_USER
 } from '../../utils/mutations';
-import { Blocked } from '@styled-icons/octicons/Blocked'
+// import { Blocked } from '@styled-icons/octicons/Blocked'
+import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
 import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
 
@@ -51,7 +52,7 @@ const FriendListOptions = ({ friendId }) => {
 
     return (
         <div>
-            <Blocked className='friend-list-icons' onClick={() => handleBlock(friendId)} />
+            <OctagonFill className='friend-list-icons' onClick={() => handleBlock(friendId)} />
             <UserMinus className="friend-list-icons" onClick={() => handleRemove(friendId)} />
         </div>
     )

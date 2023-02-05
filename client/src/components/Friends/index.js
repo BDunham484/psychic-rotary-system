@@ -9,7 +9,8 @@ import {
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
-import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
+import { Blocked } from '@styled-icons/octicons/Blocked'
+// import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
 
@@ -106,12 +107,8 @@ const Friends = ({ userParam, user }) => {
         } catch (e) {
             console.error(e);
         }
-    }
-    //request lengths to conditionally display the separate request sections
-    const sentRequestArrLength = user.sentRequests.length;
-    const receivedRequestsArrLength = user.receivedRequests.length;
-    const blockedUsersArrLength = user.blockedUsers.length;
-    console.log(user.blockedUsers);
+    };
+
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
     console.log(friendName);
@@ -123,8 +120,6 @@ const Friends = ({ userParam, user }) => {
     const friendId = userdata?.data?.user?._id || '';
     console.log(friendId);
     const blockedArr = userdata?.data?.user?.blockedUsers || [];
-    console.log('blockedArr');
-    console.log(blockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
@@ -179,11 +174,13 @@ const Friends = ({ userParam, user }) => {
             {err && <div>An Error has occurred.</div>}
 
             {/* PENDING REQUESTS */}
-            <div className="profile-friends-list-header">
-                <h2>Pending Requests</h2>
-                <div>Total : {user.requestCount}</div>
-            </div>
-            {sentRequestArrLength > 0 &&
+            {user.requestCount > 0 &&
+                <div className="profile-friends-list-header">
+                    <h2>Pending Requests</h2>
+                    <div>Total : {user.requestCount}</div>
+                </div>
+            }
+            {user.sentCount > 0 &&
                 <div>SENT</div>
             }
             {/* SENDER - CANCEL */}
@@ -197,7 +194,7 @@ const Friends = ({ userParam, user }) => {
             </div>
 
             {/* RECEIVED REQUESTS */}
-            {receivedRequestsArrLength > 0 &&
+            {user.receivedCount > 0 &&
                 <div>RECEIVED</div>
             }
             {/* RECEIVER - APPROVE/DENY */}
@@ -211,10 +208,12 @@ const Friends = ({ userParam, user }) => {
             </div>
 
             {/* FRIENDS LIST */}
-            <div className="profile-friends-list-header">
-                <h2>Friends</h2>
-                <div>Total : {user.friendCount}</div>
-            </div>
+            {user.friendCount > 0 &&
+                <div className="profile-friends-list-header">
+                    <h2>Friends</h2>
+                    <div>Total : {user.friendCount}</div>
+                </div>
+            }
             <div className="friend-list-container">
                 <div>
                     {user.friends.map((friend, index) => (
@@ -227,7 +226,7 @@ const Friends = ({ userParam, user }) => {
             </div>
 
             {/* BLOCKED FRIENDS LIST */}
-            {blockedUsersArrLength > 0 &&
+            {user.blockedCount > 0 &&
                 <div className="profile-friends-list-header">
                     <h2>Blocked</h2>
                     <div>Total : {user.blockedCount}</div>
@@ -239,12 +238,12 @@ const Friends = ({ userParam, user }) => {
                         <Link to={`/profile/${blocked.username}`}>
                             {blocked.username}
                         </Link>
-                        <OctagonFill className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
+                        <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
                     </div>
                 ))}
             </div>
 
-            
+
 
         </div>
     )
