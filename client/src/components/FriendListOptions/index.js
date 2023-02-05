@@ -3,7 +3,7 @@ import {
     REMOVE_FRIEND,
     BLOCK_USER
 } from '../../utils/mutations';
-import { Adblock } from '@styled-icons/simple-icons/Adblock'
+import { Blocked } from '@styled-icons/octicons/Blocked'
 import { UserMinus } from '@styled-icons/icomoon/UserMinus'
 
 
@@ -51,7 +51,7 @@ const FriendListOptions = ({ friendId }) => {
 
     return (
         <div>
-            <Adblock className='friend-list-icons' onClick={() => handleBlock(friendId)} />
+            <Blocked className='friend-list-icons' onClick={() => handleBlock(friendId)} />
             <UserMinus className="friend-list-icons" onClick={() => handleRemove(friendId)} />
         </div>
     )

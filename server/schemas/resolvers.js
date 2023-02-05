@@ -556,7 +556,6 @@ const resolvers = {
         deleteOldConcerts: async (parent, { date }) => {
             //declare empty array for dates
             const dateArr = [];
-            dateArr.push(date);
             //function to get the previous date based on the date passed into it
             const dayBefore = (date) => {
                 const before = new Date(date);

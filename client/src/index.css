@@ -533,14 +533,13 @@ main {
 
 .friend-list-icons {
   width: 25px;
-  color: var(--main-text)
+  color: var(--main-text);
+  margin-right: 2vh;
 }
 
 .friend-list-icons:hover {
   cursor: pointer;
 }
-
-
 
 .cancel {
   width: 25px;
@@ -554,7 +553,7 @@ main {
 .approve {
   width: 25px;
   color: var(--button);
-  margin-right: 3vh;
+  margin-right: 2vh;
 }
 
 .approve:hover {
@@ -564,6 +563,7 @@ main {
 .deny {
   width: 25px;
   color: var(--cancel);
+  margin-right: 2vh;
 }
 
 .deny:hover {
