@@ -9,7 +9,6 @@ import {
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
-import { UserCheck } from '@styled-icons/icomoon/UserCheck';
 import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
@@ -245,8 +244,12 @@ const Friends = ({ userParam, user }) => {
                 ))}
             </div>
 
+            
+
         </div>
     )
 }
 
 export default Friends
+
+// NOTES: MAKE SURE THAT WHEN A FRIEND REQUEST IS SENT IT CHECKS TO MAKE SURE THAT CONTEXT.USER ISN'T IN THE REQUESTING USERS BLOCKED USER LIST
