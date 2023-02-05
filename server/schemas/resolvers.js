@@ -18,6 +18,7 @@ const resolvers = {
                     .populate('friends')
                     .populate('receivedRequests')
                     .populate('sentRequests')
+                    .populate('blockedUsers')
 
 
                 return userData;

@@ -8,6 +8,7 @@ import {
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
+import { UserCheck } from '@styled-icons/icomoon/UserCheck';
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
 
@@ -96,6 +97,7 @@ const Friends = ({ userParam, user }) => {
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
     const blockedUsersArrLength = user.blockedUsers.length;
+    console.log(user.blockedUsers);
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
     console.log(friendName);
@@ -223,6 +225,7 @@ const Friends = ({ userParam, user }) => {
                         <Link to={`/profile/${blocked.username}`}>
                             {blocked.username}
                         </Link>
+                        <UserCheck className="approve"/>
                     </div>
                 ))}
             </div>
