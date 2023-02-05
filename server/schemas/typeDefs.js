@@ -78,6 +78,7 @@ const typeDefs = gql`
         declineRequest(senderId: ID!, senderName: String!): String
         removeFriend(friendId: ID!): User
         blockUser(blockedId: ID!): User
+        unblockUser(blockedId: ID!): User
     }
 
     type Auth {

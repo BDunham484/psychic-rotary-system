@@ -226,3 +226,15 @@ export const BLOCK_USER = gql`
         }
     }
 `;
+
+export const UNBLOCK_USER = gql`
+    mutation unblockUser($blockedId: ID!) {
+        unblockUser(blockedId: $blockedId) {
+            username
+            blockedUsers {
+                _id
+                username
+            }
+        }
+    }
+`;

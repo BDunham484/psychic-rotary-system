@@ -823,6 +823,19 @@ const resolvers = {
                 return user;
             };
             throw new AuthenticationError('You need to be logged in!');
+        },
+        //remove blocked User's _id from blockedUsers field in User model
+        unblockUser: async (parent, { blockedId }, context) => {
+            console.log('USER UNBLOCKED: ' + blockedId);
+            if (context.user) {
+                let user = await User.findOneAndUpdate(
+                    { '_id': context.user._id },
+                    { $pull: { blockedUsers: blockedId }},
+                    { new: true }
+                )
+                return user;
+            };
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };

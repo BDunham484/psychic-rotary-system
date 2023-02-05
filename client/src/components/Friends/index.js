@@ -4,11 +4,13 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
+    UNBLOCK_USER
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
 import { UserCheck } from '@styled-icons/icomoon/UserCheck';
+import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
 
@@ -24,7 +26,7 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    // const [removeFriend] = useMutation(REMOVE_FRIEND);
+    const [unblockUser] = useMutation(UNBLOCK_USER);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -93,6 +95,19 @@ const Friends = ({ userParam, user }) => {
             console.error(e);
         };
     };
+    //handler to unblock a user
+    const handleUnblock = async (blockedId) => {
+        console.log('handleUnblock Clicked: ' + blockedId);
+        try {
+            await unblockUser({
+                variables: {
+                    blockedId: blockedId
+                }
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    }
     //request lengths to conditionally display the separate request sections
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
@@ -225,7 +240,7 @@ const Friends = ({ userParam, user }) => {
                         <Link to={`/profile/${blocked.username}`}>
                             {blocked.username}
                         </Link>
-                        <UserCheck className="approve"/>
+                        <OctagonFill className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
                     </div>
                 ))}
             </div>
