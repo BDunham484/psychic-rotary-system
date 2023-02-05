@@ -137,20 +137,23 @@ export const QUERY_ME = gql`
                 email
                 ticketLink
             }
+            requestCount
             friendCount
             friends {
                 _id
                 username
             }
+            receivedCount
             receivedRequests {
                 _id
                 username
             }
-            requestCount
+            sentCount
             sentRequests {
                 _id
                 username
             }
+            blockedCount
             blockedUsers {
                 _id
                 username

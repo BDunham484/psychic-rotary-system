@@ -105,6 +105,11 @@ userSchema.virtual('receivedCount').get(function () {
     return this.receivedRequests.length;
 })
 
+//get total count of blockedUsers
+userSchema.virtual('blockedCount').get(function () {
+    return this.blockedUsers.length;
+})
+
 //create the User model using the userSchema
 const User = model('User', userSchema);
 

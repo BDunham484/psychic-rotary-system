@@ -95,6 +95,7 @@ const Friends = ({ userParam, user }) => {
     //request lengths to conditionally display the separate request sections
     const sentRequestArrLength = user.sentRequests.length;
     const receivedRequestsArrLength = user.receivedRequests.length;
+    const blockedUsersArrLength = user.blockedUsers.length;
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
     console.log(friendName);
@@ -148,14 +149,14 @@ const Friends = ({ userParam, user }) => {
                         <div>USER NOT FOUND</div>
                     }
                     {stillPending ? (
-                            <div>
-                                <div id="already-sent-button">Already Sent</div>
-                            </div>
-                        ) : (
-                            <div>
-                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit( friendId, friendName, blockedArr) }} >Send Request</button>
-                            </div>
-                        )
+                        <div>
+                            <div id="already-sent-button">Already Sent</div>
+                        </div>
+                    ) : (
+                        <div>
+                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr) }} >Send Request</button>
+                        </div>
+                    )
                     }
                 </form>
             }
@@ -179,6 +180,7 @@ const Friends = ({ userParam, user }) => {
                 ))}
             </div>
 
+            {/* RECEIVED REQUESTS */}
             {receivedRequestsArrLength > 0 &&
                 <div>RECEIVED</div>
             }
@@ -207,6 +209,24 @@ const Friends = ({ userParam, user }) => {
                     ))}
                 </div>
             </div>
+
+            {/* BLOCKED FRIENDS LIST */}
+            {blockedUsersArrLength > 0 &&
+                <div className="profile-friends-list-header">
+                    <h2>Blocked</h2>
+                    <div>Total : {user.blockedCount}</div>
+                </div>
+            }
+            <div>
+                {user.blockedUsers.map((blocked, index) => (
+                    <div key={index} className="names display-flex">
+                        <Link to={`/profile/${blocked.username}`}>
+                            {blocked.username}
+                        </Link>
+                    </div>
+                ))}
+            </div>
+
         </div>
     )
 }

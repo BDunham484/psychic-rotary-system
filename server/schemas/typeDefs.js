@@ -8,12 +8,15 @@ const typeDefs = gql`
         username: String
         email: String
         concertCount: Int
-        friendCount: Int
-        requestCount: Int
         concerts: [Concert]
+        requestCount: Int
+        friendCount: Int
         friends: [User]
+        receivedCount: Int
         receivedRequests: [User]
+        sentCount: Int
         sentRequests: [User]
+        blockedCount: Int
         blockedUsers: [User]
     }
 
