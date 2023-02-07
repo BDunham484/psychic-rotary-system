@@ -4,14 +4,11 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
-    // UNBLOCK_USER
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
-import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
-// import { Blocked } from '@styled-icons/octicons/Blocked'
 import ApproveDeny from '../ApproveDeny';
-import FriendListOptions from "../FriendListOptions";
+import PendingRequests from "../PendingRequests";
 import FriendList from "../FriendList";
 import BlockedFriends from "../BlockedFriends";
 
@@ -28,7 +25,6 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    // const [unblockUser] = useMutation(UNBLOCK_USER);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -97,19 +93,7 @@ const Friends = ({ userParam, user }) => {
             console.error(e);
         };
     };
-    //handler to unblock a user
-    // const handleUnblock = async (blockedId) => {
-    //     console.log('handleUnblock Clicked: ' + blockedId);
-    //     try {
-    //         await unblockUser({
-    //             variables: {
-    //                 blockedId: blockedId
-    //             }
-    //         });
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // };
+
 
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
@@ -175,58 +159,8 @@ const Friends = ({ userParam, user }) => {
             }
             {err && <div>An Error has occurred.</div>}
 
-            {/* PENDING REQUESTS */}
-            {user.requestCount > 0 &&
-                <div className="profile-friends-list-header">
-                    <h2>Pending Requests</h2>
-                    <div>Total : {user.requestCount}</div>
-                </div>
-            }
-            {user.sentCount > 0 &&
-                <div>SENT</div>
-            }
-            {/* SENDER - CANCEL */}
-            <div className="friend-list-container">
-                {user.sentRequests.map((request, index) => (
-                    <div key={index} className="names display-flex">
-                        <div>{request.username}</div>
-                        <Cancel className="cancel" onClick={() => handleCancel(request._id, request.username)} />
-                    </div>
-                ))}
-            </div>
-
-            {/* RECEIVED REQUESTS */}
-            {user.receivedCount > 0 &&
-                <div>RECEIVED</div>
-            }
-            {/* RECEIVER - APPROVE/DENY */}
-            <div className="friend-list-container">
-                {user.receivedRequests.map((request, index) => (
-                    <div key={index} className="names display-flex">
-                        <div>{request.username}</div>
-                        <ApproveDeny senderId={request._id} senderName={request.username} />
-                    </div>
-                ))}
-            </div>
-
-            {/* FRIENDS LIST */}
+            <PendingRequests user={user} />
             <FriendList user={user} />
-            {/* {user.friendCount > 0 &&
-                <div className="profile-friends-list-header">
-                    <h2>Friends</h2>
-                    <div>Total : {user.friendCount}</div>
-                </div>
-            }
-            <div className="friend-list-container">
-                <div>
-                    {user.friends.map((friend, index) => (
-                        <div key={index} className="names display-flex">
-                            <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-                            <FriendListOptions friendId={friend._id} />
-                        </div>
-                    ))}
-                </div>
-            </div> */}
             <BlockedFriends user={user} />
         </div>
     )
