@@ -10,9 +10,9 @@ import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
 import { Blocked } from '@styled-icons/octicons/Blocked'
-// import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
+import BlockedFriends from "../BlockedFriends";
 
 const Friends = ({ userParam, user }) => {
     console.log(user);
@@ -226,6 +226,7 @@ const Friends = ({ userParam, user }) => {
             </div>
 
             {/* BLOCKED FRIENDS LIST */}
+            <BlockedFriends user={user} />
             {user.blockedCount > 0 &&
                 <div className="profile-friends-list-header">
                     <h2>Blocked</h2>
