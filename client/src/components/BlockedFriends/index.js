@@ -23,10 +23,12 @@ const BlockedFriends = ({ user }) => {
 
     return (
         <>
-            <div className="profile-friends-list-header">
-                <h2>Blocked</h2>
-                <div>Total : {user.blockedCount}</div>
-            </div>
+            {user.blockedCount > 0 &&
+                <div className="profile-friends-list-header">
+                    <h2>Blocked</h2>
+                    <div>Total : {user.blockedCount}</div>
+                </div>
+            }
             <div>
                 {user.blockedUsers.map((blocked, index) => (
                     <div key={index} className="names display-flex">

@@ -4,15 +4,17 @@ import {
     ADD_FRIEND,
     SEND_FRIEND_REQUEST,
     CANCEL_FRIEND_REQUEST,
-    UNBLOCK_USER
+    // UNBLOCK_USER
 } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import { Cancel } from '@styled-icons/typicons/Cancel'
-import { Blocked } from '@styled-icons/octicons/Blocked'
+// import { Blocked } from '@styled-icons/octicons/Blocked'
 import ApproveDeny from '../ApproveDeny';
 import FriendListOptions from "../FriendListOptions";
+import FriendList from "../FriendList";
 import BlockedFriends from "../BlockedFriends";
+
 
 const Friends = ({ userParam, user }) => {
     console.log(user);
@@ -26,7 +28,7 @@ const Friends = ({ userParam, user }) => {
     const [addFriend, { err }] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
-    const [unblockUser] = useMutation(UNBLOCK_USER);
+    // const [unblockUser] = useMutation(UNBLOCK_USER);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -96,18 +98,18 @@ const Friends = ({ userParam, user }) => {
         };
     };
     //handler to unblock a user
-    const handleUnblock = async (blockedId) => {
-        console.log('handleUnblock Clicked: ' + blockedId);
-        try {
-            await unblockUser({
-                variables: {
-                    blockedId: blockedId
-                }
-            });
-        } catch (e) {
-            console.error(e);
-        }
-    };
+    // const handleUnblock = async (blockedId) => {
+    //     console.log('handleUnblock Clicked: ' + blockedId);
+    //     try {
+    //         await unblockUser({
+    //             variables: {
+    //                 blockedId: blockedId
+    //             }
+    //         });
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // };
 
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
@@ -208,7 +210,8 @@ const Friends = ({ userParam, user }) => {
             </div>
 
             {/* FRIENDS LIST */}
-            {user.friendCount > 0 &&
+            <FriendList user={user} />
+            {/* {user.friendCount > 0 &&
                 <div className="profile-friends-list-header">
                     <h2>Friends</h2>
                     <div>Total : {user.friendCount}</div>
@@ -223,33 +226,11 @@ const Friends = ({ userParam, user }) => {
                         </div>
                     ))}
                 </div>
-            </div>
-
-            {/* BLOCKED FRIENDS LIST */}
+            </div> */}
             <BlockedFriends user={user} />
-            {user.blockedCount > 0 &&
-                <div className="profile-friends-list-header">
-                    <h2>Blocked</h2>
-                    <div>Total : {user.blockedCount}</div>
-                </div>
-            }
-            <div>
-                {user.blockedUsers.map((blocked, index) => (
-                    <div key={index} className="names display-flex">
-                        <Link to={`/profile/${blocked.username}`}>
-                            {blocked.username}
-                        </Link>
-                        <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
-                    </div>
-                ))}
-            </div>
-
-
-
         </div>
     )
 }
 
 export default Friends
 
-// NOTES: MAKE SURE THAT WHEN A FRIEND REQUEST IS SENT IT CHECKS TO MAKE SURE THAT CONTEXT.USER ISN'T IN THE REQUESTING USERS BLOCKED USER LIST
