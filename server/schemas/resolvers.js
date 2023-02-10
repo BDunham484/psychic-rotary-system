@@ -44,6 +44,7 @@ const resolvers = {
                 .populate('friends')
                 .populate('sentRequests')
                 .populate('receivedRequests')
+                .populate('blockedUsers')
         },
         //get all concerts by username.  If no username, get all concerts
         userConcerts: async (parent, { username }) => {

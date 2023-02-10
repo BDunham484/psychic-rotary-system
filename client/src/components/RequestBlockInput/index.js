@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { QUERY_USER } from "../../utils/queries";
-import { ADD_FRIEND, SEND_FRIEND_REQUEST } from "../../utils/mutations";
+import { ADD_FRIEND, SEND_FRIEND_REQUEST, BLOCK_USER } from "../../utils/mutations";
 import Switch from 'react-switch';
 
 const FriendRequestInput = ({ userParam, user }) => {
@@ -15,6 +15,7 @@ const FriendRequestInput = ({ userParam, user }) => {
 
     const [addFriend] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
+    const [blockUser] = useMutation(BLOCK_USER);
 
     //onClick handler for add friend
     const handleClick = async () => {
@@ -38,10 +39,10 @@ const FriendRequestInput = ({ userParam, user }) => {
     }
 
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendId, friendName, blockedArr, userId) => {
-        console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
+    const handleRequestSubmit = async (friendId, friendName, userBlockedArr, userId) => {
+        console.log('handleRequestSubmit clicked: ' + friendId + ' | ' + friendName);
         // event.preventDefault();
-        const blockedBoolArr = blockedArr.map((blockedUser) => {
+        const blockedBoolArr = userBlockedArr.map((blockedUser) => {
             if (userId === blockedUser._id) {
                 return true;
             };
@@ -70,6 +71,38 @@ const FriendRequestInput = ({ userParam, user }) => {
         setText('');
     }
 
+    const handleBlockSubmit = async (friendId, friendName, userId) => {
+        console.log('handleBlockSubmit clicked: ' + friendId + ' | ' + userId);
+        // event.preventDefault();
+        const blockedBoolArr = meBlockedArr.map((blockedUser) => {
+            if (friendId === blockedUser._id) {
+                return true;
+            };
+            return false
+        });
+        const isBlocked = blockedBoolArr.some(block => block === true);
+        if (isBlocked) {
+            console.log('Already Blocked');
+        } else if (!friendName) {
+            console.log('user not found');
+            //setFriend to true display conditional messaging
+            setFriend(true);
+        } else {
+            try {
+                await blockUser({
+                    variables: {
+                        blockedId: friendId
+                    }
+                })
+            } catch (e) {
+                console.error(e);
+            };
+        }
+        //reset input
+        setText('');
+
+    }
+
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
     console.log(friendName);
@@ -94,7 +127,10 @@ const FriendRequestInput = ({ userParam, user }) => {
     const friendId = userdata?.user?._id || '';
     console.log(friendId);
     const userId = user._id;
-    const blockedArr = userdata?.user?.blockedUsers || [];
+    const userBlockedArr = userdata?.user?.blockedUsers || [];
+    const meBlockedArr = user?.blockedUsers || [];
+    console.log('meBlockedArr');
+    console.log(meBlockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
 
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
@@ -185,12 +221,14 @@ const FriendRequestInput = ({ userParam, user }) => {
                             </div>
                         ) : (
                             <div>
-                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr, userId) }} >Send Request</button>
+                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
                             </div>
                         )
                         :
                         <div>
-                            <div id="form-block-button">Block User</div>
+                            <div id="form-block-button" type="button" disabled={btnDisabled} onClick={() => {
+                                handleBlockSubmit(friendId, friendName, userId)
+                            }} >Block User</div>
                         </div>
                     }
                     {/* {stillPending ? (
@@ -199,7 +237,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                         </div>
                     ) : (
                         <div>
-                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr, userId) }} >Send Request</button>
+                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
                         </div>
                     )
                     } */}
