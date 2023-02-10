@@ -1,4 +1,4 @@
-import FriendRequestInput from "../FriendRequestInput";
+import RequestBlockInput from "../RequestBlockInput";
 // import BlockUserInput from "../BlockUserInput";
 import PendingRequests from "../PendingRequests";
 import FriendList from "../FriendList";
@@ -9,7 +9,7 @@ const Friends = ({ userParam, user }) => {
 
     return (
         <div className="profile-friends-card">
-            <FriendRequestInput userParam={userParam} user={user} />
+            <RequestBlockInput userParam={userParam} user={user} />
             {/* <BlockUserInput userParam={userParam} user={user} /> */}
             <PendingRequests user={user} />
             <FriendList user={user} />

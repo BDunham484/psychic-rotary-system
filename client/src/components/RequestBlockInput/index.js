@@ -158,10 +158,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                         </label>
                         <h2>Block</h2>
                     </>
-
                 )}
-
-
             </div>
             {userParam &&
                 <button onClick={handleClick}>
@@ -181,7 +178,22 @@ const FriendRequestInput = ({ userParam, user }) => {
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
-                    {stillPending ? (
+                    {switched ?
+                        stillPending ? (
+                            <div>
+                                <div id="already-sent-button">Already Sent</div>
+                            </div>
+                        ) : (
+                            <div>
+                                <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr, userId) }} >Send Request</button>
+                            </div>
+                        )
+                        :
+                        <div>
+                            <div id="form-block-button">Block User</div>
+                        </div>
+                    }
+                    {/* {stillPending ? (
                         <div>
                             <div id="already-sent-button">Already Sent</div>
                         </div>
@@ -190,7 +202,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                             <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr, userId) }} >Send Request</button>
                         </div>
                     )
-                    }
+                    } */}
                 </form>
             }
         </div>
