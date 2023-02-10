@@ -54,7 +54,7 @@ const Profile = () => {
         return <div>Loading...</div>
     }
 
-    if (!user?.username) {
+    if (!user?._id) {
         return (
             <h4>
                 You need to be logged in to see this page. Login or Signup above!

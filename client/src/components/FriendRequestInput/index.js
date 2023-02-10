@@ -4,6 +4,7 @@ import { QUERY_USER } from "../../utils/queries";
 import { ADD_FRIEND, SEND_FRIEND_REQUEST } from "../../utils/mutations";
 
 const FriendRequestInput = ({ userParam, user }) => {
+    console.log(user);
 
     const [text, setText] = useState('');
     const [pending, setPending] = useState(false);
@@ -37,17 +38,17 @@ const FriendRequestInput = ({ userParam, user }) => {
     }
 
     //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendId, friendName, blockedArr) => {
+    const handleSubmit = async (friendId, friendName, blockedArr, userId) => {
         console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
         // event.preventDefault();
         const blockedBoolArr = blockedArr.map((blockedUser) => {
-            if (friendId === blockedUser._id) {
+            if (userId === blockedUser._id) {
                 return true;
             };
             return false
         });
+        console.log(blockedBoolArr);
         const isBlocked = blockedBoolArr.some(block => block === true);
-
         if (isBlocked) {
             console.log('blocked');
         } else if (!friendName) {
@@ -64,7 +65,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                 })
             } catch (e) {
                 console.error(e);
-            }
+            };
         }
         //reset input
         setText('');
@@ -75,14 +76,29 @@ const FriendRequestInput = ({ userParam, user }) => {
     console.log(friendName);
 
     //query user if user inputs text value in 'add friend' input
-    const userdata = useQuery(QUERY_USER, {
+    const { loading, data: userdata, startPolling, stopPolling } = useQuery(QUERY_USER, {
         variables: { username: text }
     });
+    console.log('QUERY_USER');
+    console.log(userdata);
+    useEffect(() => {
+        if (loading) {
+            console.log('Loading user query...');
+        } else {
+            //runs the query every second
+            startPolling(1000);
+            return () => {
+                stopPolling()
+            };
+        }
+    })
     //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
-    const friendId = userdata?.data?.user?._id || '';
+    const friendId = userdata?.user?._id || '';
     console.log(friendId);
-    const blockedArr = userdata?.data?.user?.blockedUsers || [];
-
+    const userId = user._id;
+    const blockedArr = userdata?.user?.blockedUsers || [];
+    console.log('BLOCKEDARR!!!!!!!!!');
+    console.log(blockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
 
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
@@ -130,7 +146,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                         </div>
                     ) : (
                         <div>
-                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr) }} >Send Request</button>
+                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleSubmit(friendId, friendName, blockedArr, userId) }} >Send Request</button>
                         </div>
                     )
                     }
