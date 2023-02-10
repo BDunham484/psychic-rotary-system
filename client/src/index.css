@@ -469,8 +469,12 @@ main {
 
 .profile-friends-card-header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+}
+
+.unSwitched {
+  color: var(--dark);
 }
 
 .profile-friends-card form {

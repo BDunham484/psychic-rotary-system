@@ -2,14 +2,15 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { QUERY_USER } from "../../utils/queries";
 import { ADD_FRIEND, SEND_FRIEND_REQUEST } from "../../utils/mutations";
+import Switch from 'react-switch';
 
 const FriendRequestInput = ({ userParam, user }) => {
-    console.log(user);
 
     const [text, setText] = useState('');
     const [pending, setPending] = useState(false);
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [friend, setFriend] = useState(false);
+    const [switched, setSwitched] = useState(true);
 
 
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -29,7 +30,6 @@ const FriendRequestInput = ({ userParam, user }) => {
     //handler for friend request text input
     const handleTextChange = (e) => {
         if (text === '' || pending) {
-            console.log('I SHOULD BE DISABLED');
             setBtnDisabled(true)
         } else {
             setBtnDisabled(false)
@@ -47,7 +47,6 @@ const FriendRequestInput = ({ userParam, user }) => {
             };
             return false
         });
-        console.log(blockedBoolArr);
         const isBlocked = blockedBoolArr.some(block => block === true);
         if (isBlocked) {
             console.log('blocked');
@@ -79,8 +78,7 @@ const FriendRequestInput = ({ userParam, user }) => {
     const { loading, data: userdata, startPolling, stopPolling } = useQuery(QUERY_USER, {
         variables: { username: text }
     });
-    console.log('QUERY_USER');
-    console.log(userdata);
+
     useEffect(() => {
         if (loading) {
             console.log('Loading user query...');
@@ -97,8 +95,6 @@ const FriendRequestInput = ({ userParam, user }) => {
     console.log(friendId);
     const userId = user._id;
     const blockedArr = userdata?.user?.blockedUsers || [];
-    console.log('BLOCKEDARR!!!!!!!!!');
-    console.log(blockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
 
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
@@ -117,10 +113,55 @@ const FriendRequestInput = ({ userParam, user }) => {
         }
     }, [stillPending])
 
+    const handleSwitch = () => {
+        switched ? setSwitched(false) : setSwitched(true)
+    };
+
     return (
         <div>
             <div className="profile-friends-card-header">
-                <h2>Friend Requests</h2>
+                {switched ? (
+                    <>
+                        <h2>Request</h2>
+                        <label>
+                            <Switch
+                                onChange={handleSwitch}
+                                checked={switched}
+                                offColor={'#525050'}
+                                onColor={'#525050'}
+                                offHandleColor={'#383737'}
+                                onHandleColor={'#383737'}
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                                boxShadow={'#eee3d0'}
+                                activeBoxShadow={'#eee3d0'}
+                            />
+                        </label>
+                        <h2 className="unSwitched">Block</h2>
+                    </>
+                ) : (
+                    <>
+                        <h2 className="unSwitched">Request</h2>
+                        <label>
+                            <Switch
+                                onChange={handleSwitch}
+                                checked={switched}
+                                offColor={'#525050'}
+                                onColor={'#525050'}
+                                offHandleColor={'#383737'}
+                                onHandleColor={'#383737'}
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                                boxShadow={'#eee3d0'}
+                                activeBoxShadow={'#eee3d0'}
+                            />
+                        </label>
+                        <h2>Block</h2>
+                    </>
+
+                )}
+
+
             </div>
             {userParam &&
                 <button onClick={handleClick}>
