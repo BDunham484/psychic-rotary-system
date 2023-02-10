@@ -1,130 +1,112 @@
-import { useQuery, useMutation } from "@apollo/client";
-import { useState, useEffect } from "react";
+// import { useQuery, useMutation } from "@apollo/client";
+// import { useState, useEffect } from "react";
 import {
-    ADD_FRIEND,
-    SEND_FRIEND_REQUEST,
-    CANCEL_FRIEND_REQUEST,
+    // ADD_FRIEND,
+    // SEND_FRIEND_REQUEST,
 } from "../../utils/mutations";
-import { QUERY_USER } from "../../utils/queries";
-import { Cancel } from '@styled-icons/typicons/Cancel'
-import ApproveDeny from '../ApproveDeny';
+// import { QUERY_USER } from "../../utils/queries";
+import FriendRequestInput from "../FriendRequestInput";
 import PendingRequests from "../PendingRequests";
 import FriendList from "../FriendList";
 import BlockedFriends from "../BlockedFriends";
 
 
 const Friends = ({ userParam, user }) => {
-    console.log(user);
+    // console.log(user);
 
-    const [text, setText] = useState('');
-    const [btnDisabled, setBtnDisabled] = useState(true);
-    const [friend, setFriend] = useState(false);
-    const [pending, setPending] = useState(false)
+    // const [text, setText] = useState('');
+    // const [btnDisabled, setBtnDisabled] = useState(true);
+    // const [friend, setFriend] = useState(false);
+    // const [pending, setPending] = useState(false)
 
     //destructure mutation functions 
-    const [addFriend, { err }] = useMutation(ADD_FRIEND);
-    const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
-    const [cancelRequest] = useMutation(CANCEL_FRIEND_REQUEST);
+    // const [addFriend, { err }] = useMutation(ADD_FRIEND);
+    // const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
 
-    //onClick handler for add friend
-    const handleClick = async () => {
-        try {
-            await addFriend({
-                variables: { id: user._id }
-            });
-        } catch (e) {
-            console.error(e);
-        }
-    };
-    //handler for friend request text input
-    const handleTextChange = (e) => {
-        if (text === '' || pending) {
-            console.log('I SHOULD BE DISABLED');
-            setBtnDisabled(true)
-        } else {
-            setBtnDisabled(false)
-        }
-        setText(e.target.value)
-    }
-    //onSubmit handler to add a friend by user input
-    const handleSubmit = async (friendId, friendName, blockedArr) => {
-        console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
-        // event.preventDefault();
-        const blockedBoolArr = blockedArr.map((blockedUser) => {
-            if (friendId === blockedUser._id) {
-                return true;
-            };
-            return false
-        });
-        const isBlocked = blockedBoolArr.some(block => block === true);
+    // //onClick handler for add friend
+    // const handleClick = async () => {
+    //     try {
+    //         await addFriend({
+    //             variables: { id: user._id }
+    //         });
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // };
+    // //handler for friend request text input
+    // const handleTextChange = (e) => {
+    //     if (text === '' || pending) {
+    //         console.log('I SHOULD BE DISABLED');
+    //         setBtnDisabled(true)
+    //     } else {
+    //         setBtnDisabled(false)
+    //     }
+    //     setText(e.target.value)
+    // }
+    // //onSubmit handler to add a friend by user input
+    // const handleSubmit = async (friendId, friendName, blockedArr) => {
+    //     console.log('handleSubmit clicked: ' + friendId + ' | ' + friendName);
+    //     // event.preventDefault();
+    //     const blockedBoolArr = blockedArr.map((blockedUser) => {
+    //         if (friendId === blockedUser._id) {
+    //             return true;
+    //         };
+    //         return false
+    //     });
+    //     const isBlocked = blockedBoolArr.some(block => block === true);
 
-        if (isBlocked) {
-            console.log('blocked');
-        } else if (!friendName) {
-            console.log('user not found');
-            //setFriend to true display conditional messaging
-            setFriend(true);
-        } else {
-            try {
-                await sendRequest({
-                    variables: {
-                        friendId: friendId,
-                        friendName: friendName
-                    }
-                })
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        //reset input
-        setText('');
-    }
-    //handler to cancel a sent friend request
-    const handleCancel = async (friendId, friendName) => {
-        console.log('handleCancel Clicked: ' + friendId + ' | ' + friendName);
-        try {
-            await cancelRequest({
-                variables: {
-                    friendId: friendId,
-                    friendName: friendName
-                }
-            });
-        } catch (e) {
-            console.error(e);
-        };
-    };
-
-
-    //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
-    const friendName = text;
-    console.log(friendName);
-    //query user if user inputs text value in 'add friend' input
-    const userdata = useQuery(QUERY_USER, {
-        variables: { username: text }
-    });
-    //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
-    const friendId = userdata?.data?.user?._id || '';
-    console.log(friendId);
-    const blockedArr = userdata?.data?.user?.blockedUsers || [];
-    const sentFriendRequestsArr = user?.sentRequests || [];
-    //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
-    const sentBoolArr = sentFriendRequestsArr.map((request) => {
-        if (friendName === request.username) {
-            return true;
-        };
-        return false
-    });
-    //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
-    const stillPending = sentBoolArr.some(request => request === true);
-    useEffect(() => {
-        if (stillPending) {
-            setPending(stillPending);
-        }
-    }, [stillPending])
+    //     if (isBlocked) {
+    //         console.log('blocked');
+    //     } else if (!friendName) {
+    //         console.log('user not found');
+    //         //setFriend to true display conditional messaging
+    //         setFriend(true);
+    //     } else {
+    //         try {
+    //             await sendRequest({
+    //                 variables: {
+    //                     friendId: friendId,
+    //                     friendName: friendName
+    //                 }
+    //             })
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //     }
+    //     //reset input
+    //     setText('');
+    // }
+    // //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
+    // const friendName = text;
+    // console.log(friendName);
+    // //query user if user inputs text value in 'add friend' input
+    // const userdata = useQuery(QUERY_USER, {
+    //     variables: { username: text }
+    // });
+    // //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
+    // const friendId = userdata?.data?.user?._id || '';
+    // console.log(friendId);
+    // const blockedArr = userdata?.data?.user?.blockedUsers || [];
+    // const sentFriendRequestsArr = user?.sentRequests || [];
+    // //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
+    // const sentBoolArr = sentFriendRequestsArr.map((request) => {
+    //     if (friendName === request.username) {
+    //         return true;
+    //     };
+    //     return false
+    // });
+    // //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
+    // const stillPending = sentBoolArr.some(request => request === true);
+    // useEffect(() => {
+    //     if (stillPending) {
+    //         setPending(stillPending);
+    //     }
+    // }, [stillPending])
 
     return (
         <div className="profile-friends-card">
-            <div className="profile-friends-card-header">
+            <FriendRequestInput userParam={userParam} user={user} />
+            {/* <div className="profile-friends-card-header">
                 <h2>Friend Requests</h2>
             </div>
             {userParam &&
@@ -156,8 +138,8 @@ const Friends = ({ userParam, user }) => {
                     )
                     }
                 </form>
-            }
-            {err && <div>An Error has occurred.</div>}
+            } */}
+            {/* {err && <div>An Error has occurred.</div>} */}
 
             <PendingRequests user={user} />
             <FriendList user={user} />
