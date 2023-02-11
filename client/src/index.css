@@ -496,11 +496,11 @@ main {
   min-height: 80vh;
 }
 
-.profile-friends-card-header {
+/* .profile-friends-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 .unSwitched {
   color: var(--darkest);

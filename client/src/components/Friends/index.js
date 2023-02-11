@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RequestBlockInput from "../RequestBlockInput";
+import RequestBlock from "../RequestBlock";
 import PendingRequests from "../PendingRequests";
 import FriendList from "../FriendList";
 import BlockedFriends from "../BlockedFriends";
@@ -11,7 +11,7 @@ const Friends = ({ userParam, user }) => {
 
     return (
         <div className="profile-friends-card">
-            <RequestBlockInput userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
+            <RequestBlock userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
             <PendingRequests user={user} />
             <FriendList user={user} />
             {!inputSwitched && 

@@ -1,35 +1,36 @@
-import { useMutation, useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { SEND_FRIEND_REQUEST, BLOCK_USER } from "../../utils/mutations";
 import { QUERY_USER } from "../../utils/queries";
-import { ADD_FRIEND, SEND_FRIEND_REQUEST, BLOCK_USER } from "../../utils/mutations";
-import Switch from 'react-switch';
 
-const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }) => {
+const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
 
     const [text, setText] = useState('');
-    // const [pending, setPending] = useState(false);
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [friend, setFriend] = useState(false);
-    // const [inputSwitched, setInputSwitched] = useState(true);
-    // const [blocked, setBlocked] = useState(false);
     console.log('is btn disbaled?: ' + btnDisabled);
     console.log('text: ' + text);
 
-
-    const [addFriend] = useMutation(ADD_FRIEND);
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
     const [blockUser] = useMutation(BLOCK_USER);
 
-    //onClick handler for add friend
-    const handleClick = async () => {
-        try {
-            await addFriend({
-                variables: { id: user._id }
-            });
-        } catch (e) {
-            console.error(e);
+    //query user if user inputs text value in 'add friend' input
+    const { loading, data: userdata, startPolling, stopPolling } = useQuery(QUERY_USER, {
+        variables: { username: text }
+    });
+
+    useEffect(() => {
+        if (loading) {
+            console.log('Loading user query...');
+        } else {
+            //runs the query every second
+            startPolling(1000);
+            return () => {
+                stopPolling()
+            };
         }
-    };
+    })
+
 
     //handler for friend request text input
     const handleTextChange = (e) => {
@@ -106,27 +107,10 @@ const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }
         setText('');
     };
 
+
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
     console.log(friendName);
-
-    //query user if user inputs text value in 'add friend' input
-    const { loading, data: userdata, startPolling, stopPolling } = useQuery(QUERY_USER, {
-        variables: { username: text }
-    });
-
-    useEffect(() => {
-        if (loading) {
-            console.log('Loading user query...');
-        } else {
-            //runs the query every second
-            startPolling(1000);
-            return () => {
-                stopPolling()
-            };
-        }
-    })
-    //capture the _id of the friend the user wishes to send a request to via QUERY_USER above.  Used in handlers related to friend requests.
     const friendId = userdata?.user?._id || '';
     console.log(friendId);
     const userId = user._id;
@@ -167,58 +151,8 @@ const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }
 
     }, [stillPending, alreadyBlocked])
 
-    const handleInputSwitch = () => {
-        inputSwitched ? setInputSwitched(false) : setInputSwitched(true)
-    };
-
     return (
         <div>
-            <div className="profile-friends-card-header">
-                {inputSwitched ? (
-                    <>
-                        <h2>Request</h2>
-                        <label>
-                            <Switch
-                                onChange={handleInputSwitch}
-                                checked={inputSwitched}
-                                offColor={'#525050'}
-                                onColor={'#525050'}
-                                offHandleColor={'#383737'}
-                                onHandleColor={'#383737'}
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                                boxShadow={'#eee3d0'}
-                                activeBoxShadow={'#eee3d0'}
-                            />
-                        </label>
-                        <h2 className="unSwitched">Block</h2>
-                    </>
-                ) : (
-                    <>
-                        <h2 className="unSwitched">Request</h2>
-                        <label>
-                            <Switch
-                                onChange={handleInputSwitch}
-                                checked={inputSwitched}
-                                offColor={'#525050'}
-                                onColor={'#525050'}
-                                offHandleColor={'#383737'}
-                                onHandleColor={'#383737'}
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                                boxShadow={'#eee3d0'}
-                                activeBoxShadow={'#eee3d0'}
-                            />
-                        </label>
-                        <h2>Block</h2>
-                    </>
-                )}
-            </div>
-            {userParam &&
-                <button onClick={handleClick}>
-                    Add Friend
-                </button>
-            }
             {!userParam &&
                 <form className="form-card">
                     <div className="form-input-wrapper">
@@ -261,5 +195,4 @@ const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }
     )
 }
 
-export default FriendRequestInput;
-
+export default RequestBlockForm;
