@@ -4,15 +4,16 @@ import { QUERY_USER } from "../../utils/queries";
 import { ADD_FRIEND, SEND_FRIEND_REQUEST, BLOCK_USER } from "../../utils/mutations";
 import Switch from 'react-switch';
 
-const FriendRequestInput = ({ userParam, user }) => {
+const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }) => {
 
     const [text, setText] = useState('');
-    const [pending, setPending] = useState(false);
+    // const [pending, setPending] = useState(false);
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [friend, setFriend] = useState(false);
-    const [switched, setSwitched] = useState(true);
-    const [blocked, setBlocked] = useState(false);
+    // const [inputSwitched, setInputSwitched] = useState(true);
+    // const [blocked, setBlocked] = useState(false);
     console.log('is btn disbaled?: ' + btnDisabled);
+    console.log('text: ' + text);
 
 
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -32,13 +33,14 @@ const FriendRequestInput = ({ userParam, user }) => {
 
     //handler for friend request text input
     const handleTextChange = (e) => {
-        if (text === '' || pending || blocked) {
+        setText(e.target.value)
+
+        if (text === '') {
             setBtnDisabled(true)
         } else {
             setBtnDisabled(false)
-        }
-        setText(e.target.value)
-    }
+        };
+    };
 
     //onSubmit handler to add a friend by user input
     const handleRequestSubmit = async (friendId, friendName, userBlockedArr, userId) => {
@@ -68,10 +70,10 @@ const FriendRequestInput = ({ userParam, user }) => {
             } catch (e) {
                 console.error(e);
             };
-        }
+        };
         //reset input
         setText('');
-    }
+    };
 
     const handleBlockSubmit = async (friendId, friendName, userId) => {
         console.log('handleBlockSubmit clicked: ' + friendId + ' | ' + userId);
@@ -99,11 +101,10 @@ const FriendRequestInput = ({ userParam, user }) => {
             } catch (e) {
                 console.error(e);
             };
-        }
+        };
         //reset input
         setText('');
-
-    }
+    };
 
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
     const friendName = text;
@@ -155,31 +156,31 @@ const FriendRequestInput = ({ userParam, user }) => {
     //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
     const stillPending = sentBoolArr.some(request => request === true);
 
-    // useEffect(() => {
-    //     if (stillPending) {
-    //         setPending(stillPending);
-    //     }
+    useEffect(() => {
+        if (stillPending) {
+            setBtnDisabled(stillPending);
+        }
 
-    //     if (alreadyBlocked) {
-    //         setBlocked(alreadyBlocked);
-    //     }
+        if (alreadyBlocked) {
+            setBtnDisabled(alreadyBlocked);
+        }
 
-    // }, [stillPending, alreadyBlocked])
+    }, [stillPending, alreadyBlocked])
 
-    const handleSwitch = () => {
-        switched ? setSwitched(false) : setSwitched(true)
+    const handleInputSwitch = () => {
+        inputSwitched ? setInputSwitched(false) : setInputSwitched(true)
     };
 
     return (
         <div>
             <div className="profile-friends-card-header">
-                {switched ? (
+                {inputSwitched ? (
                     <>
                         <h2>Request</h2>
                         <label>
                             <Switch
-                                onChange={handleSwitch}
-                                checked={switched}
+                                onChange={handleInputSwitch}
+                                checked={inputSwitched}
                                 offColor={'#525050'}
                                 onColor={'#525050'}
                                 offHandleColor={'#383737'}
@@ -197,8 +198,8 @@ const FriendRequestInput = ({ userParam, user }) => {
                         <h2 className="unSwitched">Request</h2>
                         <label>
                             <Switch
-                                onChange={handleSwitch}
-                                checked={switched}
+                                onChange={handleInputSwitch}
+                                checked={inputSwitched}
                                 offColor={'#525050'}
                                 onColor={'#525050'}
                                 offHandleColor={'#383737'}
@@ -231,7 +232,7 @@ const FriendRequestInput = ({ userParam, user }) => {
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
-                    {switched ?
+                    {inputSwitched ?
                         stillPending ? (
                             <div className="form-button-wrapper">
                                 <div className="already-sent-blocked-button">Already Sent</div>
@@ -262,4 +263,3 @@ const FriendRequestInput = ({ userParam, user }) => {
 
 export default FriendRequestInput;
 
-// NOTES: Determine a way to disable form button via useState if friendName is already bloked or sent. Current setup isn't working properly. btnDisabled is reading the wrong boolean response than what it should be.  double check textchangehadler and stillPending and alreadyBlocked
