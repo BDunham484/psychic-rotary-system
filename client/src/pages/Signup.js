@@ -38,7 +38,7 @@ const Signup = () => {
             <FormCard>
                 <form onSubmit={handleFormSubmit}>
                     <p>SIGN UP</p>
-                    <div>
+                    <div className="form-div">
                         <label htmlFor="username">Username</label>
                         <input
                             placeholder='Your username'
@@ -49,7 +49,7 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className="form-div">
                         <label htmlFor="email">Email</label>
                         <input
                             placeholder='Your email'
@@ -60,7 +60,7 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className="form-div">
                         <label htmlFor="password">Password</label>
                         <input
                             placeholder='********'

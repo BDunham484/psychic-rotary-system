@@ -350,7 +350,7 @@ main {
   font-family: var(--secondary-font);
 } */
 
-.form-button-wrapper {
+.form-div {
   width: 75%;
   display: flex;
   flex-direction: column;

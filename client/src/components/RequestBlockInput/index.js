@@ -234,21 +234,21 @@ const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }
                     }
                     {inputSwitched ?
                         stillPending ? (
-                            <div className="form-button-wrapper">
+                            <div className="form-div">
                                 <div className="already-sent-blocked-button">Already Sent</div>
                             </div>
                         ) : (
-                            <div className="form-button-wrapper">
+                            <div className="form-div">
                                 <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
                             </div>
                         )
                         :
                         alreadyBlocked ? (
-                            <div className="form-button-wrapper">
+                            <div className="form-div">
                                 <div className='already-sent-blocked-button'>Blocked</div>
                             </div>
                         ) : (
-                            <div className="form-button-wrapper">
+                            <div className="form-div">
                                 <button id="form-block-button" type="button" disabled={btnDisabled} onClick={() => {
                                     handleBlockSubmit(friendId, friendName, userId)
                                 }} >Block User</button>
