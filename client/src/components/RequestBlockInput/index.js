@@ -11,6 +11,7 @@ const FriendRequestInput = ({ userParam, user }) => {
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [friend, setFriend] = useState(false);
     const [switched, setSwitched] = useState(true);
+    const [blocked, setBlocked] = useState(false);
 
 
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -129,9 +130,15 @@ const FriendRequestInput = ({ userParam, user }) => {
     const userId = user._id;
     const userBlockedArr = userdata?.user?.blockedUsers || [];
     const meBlockedArr = user?.blockedUsers || [];
-    console.log('meBlockedArr');
-    console.log(meBlockedArr);
     const sentFriendRequestsArr = user?.sentRequests || [];
+
+    //array of boolean responses based off whether the name entered into the block user input is already in the user's blockedUsers field
+    const blockBoolArr = meBlockedArr.map((blocked) => {
+        if (friendId === blocked._id) {
+            return true
+        };
+        return false
+    });
 
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
@@ -141,13 +148,22 @@ const FriendRequestInput = ({ userParam, user }) => {
         return false
     });
 
+    //if there is a true response in blockBoolArr save to variable alreadyBlocked.  Use alreadyBlocked to conditionally display content
+    const alreadyBlocked = blockBoolArr.some(block => block === true);
+
     //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
     const stillPending = sentBoolArr.some(request => request === true);
+
     useEffect(() => {
         if (stillPending) {
             setPending(stillPending);
         }
-    }, [stillPending])
+
+        if (alreadyBlocked) {
+            setBlocked(alreadyBlocked);
+        }
+
+    }, [stillPending, alreadyBlocked])
 
     const handleSwitch = () => {
         switched ? setSwitched(false) : setSwitched(true)
@@ -203,7 +219,7 @@ const FriendRequestInput = ({ userParam, user }) => {
             }
             {!userParam &&
                 <form className="form-card">
-                    <div>
+                    <div className="form-input-wrapper">
                         <input
                             onChange={handleTextChange}
                             type="text"
@@ -216,31 +232,27 @@ const FriendRequestInput = ({ userParam, user }) => {
                     }
                     {switched ?
                         stillPending ? (
-                            <div>
-                                <div id="already-sent-button">Already Sent</div>
+                            <div className="form-button-wrapper">
+                                <div className="already-sent-blocked-button">Already Sent</div>
                             </div>
                         ) : (
-                            <div>
+                            <div className="form-button-wrapper">
                                 <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
                             </div>
                         )
                         :
-                        <div>
-                            <div id="form-block-button" type="button" disabled={btnDisabled} onClick={() => {
-                                handleBlockSubmit(friendId, friendName, userId)
-                            }} >Block User</div>
-                        </div>
+                        alreadyBlocked ? (
+                            <div className="form-button-wrapper">
+                                <div className='already-sent-blocked-button'>Blocked</div>
+                            </div>
+                        ) : (
+                            <div className="form-button-wrapper">
+                                <button id="form-block-button" type="button" disabled={btnDisabled} onClick={() => {
+                                    handleBlockSubmit(friendId, friendName, userId)
+                                }} >Block User</button>
+                            </div>
+                        )
                     }
-                    {/* {stillPending ? (
-                        <div>
-                            <div id="already-sent-button">Already Sent</div>
-                        </div>
-                    ) : (
-                        <div>
-                            <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
-                        </div>
-                    )
-                    } */}
                 </form>
             }
         </div>

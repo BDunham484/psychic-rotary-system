@@ -341,7 +341,16 @@ main {
   letter-spacing: 5px;
 }
 
-.form-card div {
+/* .form-card div {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2vh 8vh 0 8vh;
+  font-family: var(--secondary-font);
+} */
+
+.form-button-wrapper {
   width: 75%;
   display: flex;
   flex-direction: column;
@@ -407,7 +416,11 @@ main {
   font-size: 20px;
 }
 
-#already-sent-button {
+#form-block-button:hover {
+  cursor: pointer;
+}
+
+.already-sent-blocked-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 100%;
@@ -419,6 +432,8 @@ main {
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 /* PROFILE STYLES START */
@@ -499,8 +514,13 @@ main {
   align-items: center;
 }
 
-.profile-friends-card form div {
-  /* background-color: var(--darker); */
+/* .profile-friends-card form div {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+} */
+
+.form-input-wrapper {
   width: 65%;
   display: flex;
   justify-content: center;
