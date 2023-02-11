@@ -12,6 +12,7 @@ const FriendRequestInput = ({ userParam, user }) => {
     const [friend, setFriend] = useState(false);
     const [switched, setSwitched] = useState(true);
     const [blocked, setBlocked] = useState(false);
+    console.log('is btn disbaled?: ' + btnDisabled);
 
 
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -31,7 +32,7 @@ const FriendRequestInput = ({ userParam, user }) => {
 
     //handler for friend request text input
     const handleTextChange = (e) => {
-        if (text === '' || pending) {
+        if (text === '' || pending || blocked) {
             setBtnDisabled(true)
         } else {
             setBtnDisabled(false)
@@ -154,16 +155,16 @@ const FriendRequestInput = ({ userParam, user }) => {
     //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
     const stillPending = sentBoolArr.some(request => request === true);
 
-    useEffect(() => {
-        if (stillPending) {
-            setPending(stillPending);
-        }
+    // useEffect(() => {
+    //     if (stillPending) {
+    //         setPending(stillPending);
+    //     }
 
-        if (alreadyBlocked) {
-            setBlocked(alreadyBlocked);
-        }
+    //     if (alreadyBlocked) {
+    //         setBlocked(alreadyBlocked);
+    //     }
 
-    }, [stillPending, alreadyBlocked])
+    // }, [stillPending, alreadyBlocked])
 
     const handleSwitch = () => {
         switched ? setSwitched(false) : setSwitched(true)
@@ -260,3 +261,5 @@ const FriendRequestInput = ({ userParam, user }) => {
 }
 
 export default FriendRequestInput;
+
+// NOTES: Determine a way to disable form button via useState if friendName is already bloked or sent. Current setup isn't working properly. btnDisabled is reading the wrong boolean response than what it should be.  double check textchangehadler and stillPending and alreadyBlocked
