@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { BLOCK_USER } from "../../utils/mutations";
 
-const BlockButtons = ({ user, friendId, btnDisabled, setBtnDisabled, setFriend, setText, friendName, userId }) => {
+const BlockButtons = ({ user, friendName, friendId, btnDisabled, setBtnDisabled, setFriend, setText }) => {
 
     const [blockUser] = useMutation(BLOCK_USER);
 
@@ -37,6 +37,7 @@ const BlockButtons = ({ user, friendId, btnDisabled, setBtnDisabled, setFriend, 
         setText('');
     };
 
+    const userId = user._id;
     const meBlockedArr = user?.blockedUsers || [];
 
 

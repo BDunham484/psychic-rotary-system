@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { SEND_FRIEND_REQUEST } from "../../utils/mutations";
 
-const RequestButtons = ({ user, userId, userdata, friendName, friendId, setBtnDisabled, btnDisabled, setFriend, setText }) => {
+const RequestButtons = ({ user, userdata, friendName, friendId, btnDisabled, setBtnDisabled, setFriend, setText }) => {
 
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
 
@@ -39,6 +39,7 @@ const RequestButtons = ({ user, userId, userdata, friendName, friendId, setBtnDi
         setText('');
     };
 
+    const userId = user._id
     const sentFriendRequestsArr = user?.sentRequests || [];
     const userBlockedArr = userdata?.user?.blockedUsers || [];
 

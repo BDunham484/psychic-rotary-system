@@ -40,12 +40,11 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
         };
     };
 
-    //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHanlder
+    //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHandler
     const friendName = text;
     console.log(friendName);
     const friendId = userdata?.user?._id || '';
     console.log(friendId);
-    const userId = user._id;
 
     return (
         <div>
@@ -65,25 +64,23 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                     {inputSwitched ?
                         <RequestButtons 
                             user={user}
-                            userId={userId}
                             userdata={userdata}
                             friendName={friendName}
                             friendId={friendId}
-                            setBtnDisabled={setBtnDisabled}
                             btnDisabled={btnDisabled}
+                            setBtnDisabled={setBtnDisabled}
                             setFriend={setFriend}
                             setText={setText}
                         />
                         :
                         <BlockButtons
                             user={user} 
+                            friendName={friendName}
                             friendId={friendId} 
                             btnDisabled={btnDisabled} 
                             setBtnDisabled={setBtnDisabled} 
                             setFriend={setFriend} 
                             setText={setText} 
-                            friendName={friendName}
-                            userId={userId} 
                         />
                     }
                 </form>
