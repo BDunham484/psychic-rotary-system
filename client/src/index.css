@@ -759,7 +759,13 @@ footer {
 
   /* PROFILE STYLES START */
 
-  .profile-page-wrapper {
+  /* .profile-page-header h2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  } */
+
+  .concert-friend-wrapper {
     flex-direction: column;
     align-items: center;
   }
@@ -769,9 +775,9 @@ footer {
     min-height: 30vh;
   }
 
-  .profile-concerts-card-header h2 {
+  /* .profile-concerts-card-header h2 {
     font-size: 16px;
-  }
+  } */
 
   .profile-concerts-card-header p {
     font-size: 14px;
