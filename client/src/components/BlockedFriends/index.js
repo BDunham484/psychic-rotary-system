@@ -25,14 +25,14 @@ const BlockedFriends = ({ user }) => {
         <>
             {user.blockedCount > 0 &&
                 <div className="profile-friends-sub-header">
-                    <h2>Blocked</h2>
-                    <div>Total : {user.blockedCount}</div>
+                    <h3 className="friends-sub-titles">Blocked</h3>
+                    <div className="totals">{user.blockedCount}</div>
                 </div>
             }
             <div>
                 {user.blockedUsers.map((blocked, index) => (
                     <div key={index} className="names display-flex">
-                        <Link to={`/profile/${blocked.username}`}>
+                        <Link className="name" to={`/profile/${blocked.username}`}>
                             {blocked.username}
                         </Link>
                         <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />

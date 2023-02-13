@@ -16,7 +16,9 @@ const Friends = ({ userParam, user }) => {
             </div>
             <RequestBlock userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
             <PendingRequests user={user} />
+            {inputSwitched && 
             <FriendList user={user} />
+            }
             {!inputSwitched && 
             <BlockedFriends user={user} />
             }
