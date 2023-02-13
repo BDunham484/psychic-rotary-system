@@ -64,34 +64,38 @@ const Profile = () => {
 
     return (
         <div className='profile-page-wrapper'>
-
-            <div className="profile-concerts-card">
-                <div className="profile-concerts-card-header">
-                    <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
-                    <p>Concerts: {user.concertCount}</p>
-                </div>
-
-                {error && <div>An error occurred</div>}
-                {user.concerts &&
-                    user.concerts.map((concert, index) => (
-                        <ShowCard key={index}>
-                            <div id="profile-showcard-data">
-                                <div>{concert.date}</div>
-                                <Link to={`/show/${concert.artists}`} state={{ concert }}>
-                                    <span id="artists-link">{concert.artists} </span>
-                                </Link>
-                                {concert.venue}
-                                <div>
-                                    <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
-                                </div>
-
-                            </div>
-                        </ShowCard>
-                    ))}
-
-
+            <div className="profile-page-header">
+                <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
             </div>
-            <Friends userParam={userParam} user={user} />
+            <div className="concert-friend-wrapper">
+                <div className="profile-concerts-card">
+                    <div className="profile-concerts-card-header">
+                        <h2>Concerts</h2>
+                    </div>
+
+                    {/* <p>Concerts: {user.concertCount}</p> */}
+
+                    {error && <div>An error occurred</div>}
+                    {user.concerts &&
+                        user.concerts.map((concert, index) => (
+                            <ShowCard key={index}>
+                                <div id="profile-showcard-data">
+                                    <div>{concert.date}</div>
+                                    <Link to={`/show/${concert.artists}`} state={{ concert }}>
+                                        <span id="artists-link">{concert.artists} </span>
+                                    </Link>
+                                    {concert.venue}
+                                    <div>
+                                        <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
+                                    </div>
+
+                                </div>
+                            </ShowCard>
+                        ))}
+                </div>
+                <Friends userParam={userParam} user={user} />
+            </div>
+
         </div>
     )
 }

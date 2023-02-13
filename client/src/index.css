@@ -437,26 +437,57 @@ main {
 }
 
 /* PROFILE STYLES START */
-.profile-page-wrapper {
+.profile-page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12vh;
+  width: 100%;
+  min-height: 10vh;
+}
+
+/* .profile-page-wrapper {
   width: 100vw;
   min-height: 100vh;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  flex-direction: column;
+  background-color: var(--background);
+} */
+.profile-page-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: var(--background);
 }
 
+.concert-friend-wrapper {
+  width: 100%;
+  min-height: 92vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 .profile-concerts-card {
-  margin-top: 14vh;
   width: 60vw;
   min-height: 80vh;
 }
 
 .profile-concerts-card-header {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2vh; */
+  padding: 2vh 0 2vh 2vh;
   margin-bottom: 2vh;
+  border-bottom: 2px solid var(--dark);
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 
 #profile-showcard-data {
@@ -491,13 +522,12 @@ main {
 /* FRIEND STYLES START */
 .profile-friends-card {
   /* background-color: var(--darkest); */
-  margin-top: 14vh;
   width: 30vw;
   min-height: 80vh;
 }
 
 .profile-friends-card-header {
-  padding: 2vh 0;
+  padding: 2vh 0 2vh 2vh;
   margin-bottom: 2vh;
   border-bottom: 2px solid var(--dark);
   letter-spacing: 2px;
@@ -718,6 +748,7 @@ footer {
   }
 
   /* PROFILE STYLES START */
+
   .profile-page-wrapper {
     flex-direction: column;
     align-items: center;
