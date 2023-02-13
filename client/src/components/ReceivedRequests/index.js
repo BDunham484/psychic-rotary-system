@@ -5,13 +5,13 @@ const ReceivedRequests = ({ user }) => {
         <div>
             {/* RECEIVED REQUESTS */}
             {user.receivedCount > 0 &&
-                <div>RECEIVED</div>
+                <div className="sent-received">RECEIVED</div>
             }
             {/* RECEIVER - APPROVE/DENY */}
             <div className="friend-list-container">
                 {user.receivedRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request.username}</div>
+                        <div className="name">{request.username}</div>
                         <ApproveDeny senderId={request._id} senderName={request.username} />
                     </div>
                 ))}

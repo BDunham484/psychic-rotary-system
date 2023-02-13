@@ -24,13 +24,13 @@ const SentRequests = ({ user }) => {
     return (
         <div>
             {user.sentCount > 0 &&
-                <div>SENT</div>
+                <div className='sent-received'>SENT</div>
             }
             {/* SENDER - CANCEL */}
             <div className="friend-list-container">
                 {user.sentRequests.map((request, index) => (
                     <div key={index} className="names display-flex">
-                        <div>{request.username}</div>
+                        <div className='name'>{request.username}</div>
                         <Cancel className="cancel" onClick={() => handleCancel(request._id, request.username)} />
                     </div>
                 ))}

@@ -533,12 +533,6 @@ main {
   font-size: 20px;
 }
 
-.friends-sub-titles {
-  font-size: 22px;
-  font-weight: 100;
-  letter-spacing: 2px;
-}
-
 /* .profile-friends-card-header {
   display: flex;
   justify-content: space-between;
@@ -597,6 +591,21 @@ main {
   margin: 2vh 0;
 }
 
+.friends-sub-titles {
+  font-size: 22px;
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+
+.totals {
+  padding-right: 2vh;
+}
+
+.sent-received {
+  margin: 0 0 1vh 1vh;
+  letter-spacing: 2px;
+}
+
 .friend-list-container {
   background-color: var(--darker);
   /* margin: 2vh 0; */
@@ -612,8 +621,13 @@ main {
   border-bottom: 1px solid var(--darkest);
 }
 
+.name {
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
 .friend-list-icons {
-  width: 25px;
+  width: 20px;
   color: var(--main-text);
   margin-right: 2vh;
 }
@@ -632,7 +646,7 @@ main {
 }
 
 .approve {
-  width: 25px;
+  width: 20px;
   color: var(--button);
   margin-right: 2vh;
 }
@@ -642,7 +656,7 @@ main {
 }
 
 .deny {
-  width: 25px;
+  width: 20px;
   color: var(--cancel);
   margin-right: 2vh;
 }

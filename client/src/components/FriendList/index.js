@@ -15,7 +15,8 @@ const FriendList = ({ user }) => {
         <div>
             {user.friendCount > 0 &&
                 <div className="profile-friends-sub-header">
-                    <h2>Friends</h2>
+                    <h2 className="friends-sub-titles">Friends List:</h2>
+                    <div className="totals"> {user.friendCount}</div>
                     <Switch
                                 onChange={handleFriendSwitch}
                                 checked={friendSwitch}
@@ -28,14 +29,13 @@ const FriendList = ({ user }) => {
                                 boxShadow={'#eee3d0'}
                                 activeBoxShadow={'#eee3d0'}
                             />
-                    <div>Total : {user.friendCount}</div>
                 </div>
             }
             <div className="friend-list-container">
                 <div>
                     {user.friends.map((friend, index) => (
                         <div key={index} className="names display-flex">
-                            <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
+                            <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
                             {!friendSwitch && 
                             <FriendListOptions friendId={friend._id} />
                             }

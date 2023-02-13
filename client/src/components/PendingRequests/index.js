@@ -7,7 +7,7 @@ const PendingRequests = ({ user }) => {
             {user.requestCount > 0 &&
                 <div className="profile-friends-sub-header">
                     <h2 className="friends-sub-titles">Pending Requests</h2>
-                    <div>{user.requestCount}</div>
+                    <div className="totals">{user.requestCount}</div>
                 </div>
             }
             <SentRequests user={user} />
