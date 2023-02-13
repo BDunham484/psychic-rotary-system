@@ -5,9 +5,9 @@ const PendingRequests = ({ user }) => {
     return (
         <div>
             {user.requestCount > 0 &&
-                <div className="profile-friends-list-header">
-                    <h2>Pending Requests</h2>
-                    <div>Total : {user.requestCount}</div>
+                <div className="profile-friends-sub-header">
+                    <h2 className="friends-sub-titles">Pending Requests</h2>
+                    <div>{user.requestCount}</div>
                 </div>
             }
             <SentRequests user={user} />

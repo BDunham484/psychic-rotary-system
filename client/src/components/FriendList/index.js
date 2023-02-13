@@ -14,7 +14,7 @@ const FriendList = ({ user }) => {
     return (
         <div>
             {user.friendCount > 0 &&
-                <div className="profile-friends-list-header">
+                <div className="profile-friends-sub-header">
                     <h2>Friends</h2>
                     <Switch
                                 onChange={handleFriendSwitch}

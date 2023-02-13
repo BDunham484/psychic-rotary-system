@@ -24,7 +24,7 @@ const BlockedFriends = ({ user }) => {
     return (
         <>
             {user.blockedCount > 0 &&
-                <div className="profile-friends-list-header">
+                <div className="profile-friends-sub-header">
                     <h2>Blocked</h2>
                     <div>Total : {user.blockedCount}</div>
                 </div>

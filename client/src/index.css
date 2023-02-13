@@ -521,7 +521,6 @@ main {
 
 /* FRIEND STYLES START */
 .profile-friends-card {
-  /* background-color: var(--darkest); */
   width: 30vw;
   min-height: 80vh;
 }
@@ -532,16 +531,13 @@ main {
   border-bottom: 2px solid var(--dark);
   letter-spacing: 2px;
   font-size: 20px;
-  /* font-family: var(--secondary-font); */
 }
 
-.request-block-titles {
+.friends-sub-titles {
   font-size: 22px;
   font-weight: 100;
   letter-spacing: 2px;
 }
-
-
 
 /* .profile-friends-card-header {
   display: flex;
@@ -594,7 +590,7 @@ main {
   font-size: 20px;
 }
 
-.profile-friends-list-header {
+.profile-friends-sub-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
