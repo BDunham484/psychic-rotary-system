@@ -16,6 +16,9 @@ const BlockButtons = (
 
     const [blockUser] = useMutation(BLOCK_USER);
 
+    const userId = user._id;
+    const meBlockedArr = user?.blockedUsers || [];
+
     const handleBlockSubmit = async (friendId, friendName, userId) => {
         console.log('handleBlockSubmit clicked: ' + friendId + ' | ' + userId);
         // event.preventDefault();
@@ -46,10 +49,6 @@ const BlockButtons = (
         //reset input
         setText('');
     };
-
-    const userId = user._id;
-    const meBlockedArr = user?.blockedUsers || [];
-
 
     //array of boolean responses based off whether the name entered into the block user input is already in the user's blockedUsers field
     const blockBoolArr = meBlockedArr.map((blocked) => {

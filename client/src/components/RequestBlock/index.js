@@ -3,7 +3,7 @@ import { ADD_FRIEND } from "../../utils/mutations";
 import RequestBlockHeader from "../RequestBlockHeader";
 import RequestBlockForm from "../RequestBlockForm";
 
-const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }) => {
+const RequestBlock = ({ userParam, user, inputSwitched, setInputSwitched }) => {
 
     const [addFriend] = useMutation(ADD_FRIEND);
 
@@ -31,5 +31,5 @@ const FriendRequestInput = ({ userParam, user, inputSwitched, setInputSwitched }
     )
 }
 
-export default FriendRequestInput;
+export default RequestBlock;
 

@@ -11,6 +11,9 @@ const Friends = ({ userParam, user }) => {
 
     return (
         <div className="profile-friends-card">
+            <div className="profile-friends-card-header" >
+                <h2>Friends</h2>
+            </div>
             <RequestBlock userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
             <PendingRequests user={user} />
             <FriendList user={user} />
