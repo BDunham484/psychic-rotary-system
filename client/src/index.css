@@ -521,7 +521,7 @@ main {
 } */
 
 .form-input-wrapper {
-  width: 65%;
+  width: 75%;
   display: flex;
   justify-content: center;
 }

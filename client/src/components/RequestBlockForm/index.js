@@ -13,7 +13,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
     console.log('text: ' + text);
 
     //query user if user inputs text value in 'add friend' input
-    const { loading, data: userdata, startPolling, stopPolling } = useQuery(QUERY_USER, {
+    const { loading, data: inputData, startPolling, stopPolling } = useQuery(QUERY_USER, {
         variables: { username: text }
     });
 
@@ -35,6 +35,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
 
         if (text === '') {
             setBtnDisabled(true)
+            setFriend(false)
         } else {
             setBtnDisabled(false)
         };
@@ -43,7 +44,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
     //capture the name of the friend the user wishes to send a request to via state set by the request input. Used to submit the friend request handler: submitHandler
     const friendName = text;
     console.log(friendName);
-    const friendId = userdata?.user?._id || '';
+    const friendId = inputData?.user?._id || '';
     console.log(friendId);
 
     return (
@@ -64,7 +65,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                     {inputSwitched ?
                         <RequestButtons 
                             user={user}
-                            userdata={userdata}
+                            inputData={inputData}
                             friendName={friendName}
                             friendId={friendId}
                             btnDisabled={btnDisabled}

@@ -2,9 +2,24 @@ import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { SEND_FRIEND_REQUEST } from "../../utils/mutations";
 
-const RequestButtons = ({ user, userdata, friendName, friendId, btnDisabled, setBtnDisabled, setFriend, setText }) => {
+const RequestButtons = (
+    { 
+    user,
+    inputData,
+    friendName, 
+    friendId, 
+    btnDisabled, 
+    setBtnDisabled, 
+    setFriend, 
+    setText 
+    }
+) => {
 
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
+
+    const userId = user._id
+    const sentFriendRequestsArr = user?.sentRequests || [];
+    const userBlockedArr = inputData?.user?.blockedUsers || [];
 
     //onSubmit handler to add a friend by user input
     const handleRequestSubmit = async (friendId, friendName, userBlockedArr, userId) => {
@@ -39,11 +54,6 @@ const RequestButtons = ({ user, userdata, friendName, friendId, btnDisabled, set
         setText('');
     };
 
-    const userId = user._id
-    const sentFriendRequestsArr = user?.sentRequests || [];
-    const userBlockedArr = userdata?.user?.blockedUsers || [];
-
-
     //array of boolean responses based off whether the name entered into the friend request input is already in the user's sentRequest field
     const sentBoolArr = sentFriendRequestsArr.map((request) => {
         if (friendName === request.username) {
@@ -52,7 +62,7 @@ const RequestButtons = ({ user, userdata, friendName, friendId, btnDisabled, set
         return false
     });
 
-    //if there is a true response in sentBoolArr save to variable stillPending.  Use stillPending to conditionally display content
+    //if there is a true response in sentBoolArr save true to variable stillPending else false.  Use stillPending to conditionally display request buttons
     const stillPending = sentBoolArr.some(request => request === true);
 
     useEffect(() => {
