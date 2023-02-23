@@ -96,9 +96,7 @@ export const DELETE_CONCERTS = gql`
 
 export const DELETE_OLD_CONCERTS = gql`
     mutation deleteOldConcerts ($date: String) {
-        deleteOldConcerts(date: $date) {
-            _id
-        }
+        deleteOldConcerts(date: $date) 
     }
 `;
 

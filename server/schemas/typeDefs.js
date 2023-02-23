@@ -65,7 +65,7 @@ const typeDefs = gql`
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User
-        deleteOldConcerts(date: String!): Concert
+        deleteOldConcerts(date: String!): [String]
         rsvpYes(concertId: ID!, userId: ID!): Concert
         cancelRsvpYes(concertId: ID!, userId: ID!): Concert
         rsvpNo(concertId: ID!, userId: ID!): Concert
