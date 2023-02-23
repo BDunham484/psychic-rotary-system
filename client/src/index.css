@@ -1,3 +1,11 @@
+/* Table of Contents: 
+  1. UNIVERSAL
+  2. GLOBAL
+  3. HEADER / NAVBAR STYLES START
+  
+  */
+
+/* 1. UNIVERSAL */
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +16,8 @@
 *::selection {
   background-color: transparent;
 }
+
+/* 2. GLOBAL */
 
 :root {
   --background: #000;
@@ -613,6 +623,18 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+.friend-list {
+  overflow-y: scroll;
+  max-height: 26vh;
+}
+
+.blocked-list {
+  overflow-y: scroll;
+  max-height: 26vh;
+}
+
+
 
 .names {
   margin: 1vh 2vh 1vh 2vh;

@@ -21,6 +21,8 @@ const BlockedFriends = ({ user }) => {
         }
     };
 
+    console.log('blockedCount: ' + user.blockedCount)
+
     return (
         <>
             {user.blockedCount > 0 &&
@@ -29,7 +31,19 @@ const BlockedFriends = ({ user }) => {
                     <div className="totals">{user.blockedCount}</div>
                 </div>
             }
-            <div>
+            {user.blockedCount <= 5 ? (
+                <div>
+                    {user.blockedUsers.map((blocked, index) => (
+                        <div key={index} className="names display-flex">
+                            <Link className="name" to={`/profile/${blocked.username}`}>
+                                {blocked.username}
+                            </Link>
+                            <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="blocked-list">
                 {user.blockedUsers.map((blocked, index) => (
                     <div key={index} className="names display-flex">
                         <Link className="name" to={`/profile/${blocked.username}`}>
@@ -39,6 +53,8 @@ const BlockedFriends = ({ user }) => {
                     </div>
                 ))}
             </div>
+            )}
+
         </>
     )
 }

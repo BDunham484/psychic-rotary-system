@@ -10,6 +10,7 @@ const FriendList = ({ user }) => {
     const handleFriendSwitch = () => {
         friendSwitch ? setFriendSwitch(false) : setFriendSwitch(true)
     }
+    console.log('friendCount: ' + user.friendCount);
 
     return (
         <div>
@@ -35,17 +36,30 @@ const FriendList = ({ user }) => {
                 </div>
             }
             <div className="friend-list-container">
-                <div>
+                {user.friendCount <= 5 ? (
+                    <div>
+                        {user.friends.map((friend, index) => (
+                            <div key={index} className="names display-flex">
+                                <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
+                                {!friendSwitch &&
+                                    <FriendListOptions friendId={friend._id} />
+                                }
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="friend-list">
                     {user.friends.map((friend, index) => (
                         <div key={index} className="names display-flex">
                             <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
                             {!friendSwitch &&
                                 <FriendListOptions friendId={friend._id} />
                             }
-
                         </div>
                     ))}
                 </div>
+                )}
+
             </div>
         </div>
     )
