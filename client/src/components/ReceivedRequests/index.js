@@ -4,9 +4,9 @@ const ReceivedRequests = ({ user }) => {
     return (
         <div>
             {/* RECEIVED REQUESTS */}
-            {user.receivedCount > 0 &&
+            {/* {user.receivedCount > 0 &&
                 <div className="sent-received">RECEIVED</div>
-            }
+            } */}
             {/* RECEIVER - APPROVE/DENY */}
             <div className="friend-list-container">
                 {user.receivedRequests.map((request, index) => (

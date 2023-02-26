@@ -23,9 +23,9 @@ const SentRequests = ({ user }) => {
 
     return (
         <div>
-            {user.sentCount > 0 &&
+            {/* {user.sentCount > 0 &&
                 <div className='sent-received'>SENT</div>
-            }
+            } */}
             {/* SENDER - CANCEL */}
             <div className="friend-list-container">
                 {user.sentRequests.map((request, index) => (
