@@ -19,22 +19,21 @@ const PendingRequests = ({ user }) => {
                         <h2 className="friends-sub-titles">Pending Requests</h2>
                         <div className="totals">{user.requestCount}</div>
                     </div>
-
+                    {/* if the sent request count is > 0 and the received count is equal to zero, display SentRequests only */}
                     {(user.sentCount > 0 && user.receivedCount === 0) &&
                         <>
                             <div className='sent-received'>SENT</div>
                             <SentRequests user={user} />
                         </>
-
                     }
-
+                    {/* if the received request count is > 0 and the sent count is equal to zero, display ReceivedRequest only */}
                     {(user.sentCount === 0 && user.receivedCount > 0) &&
                         <>
                             <div className="sent-received">RECEIVED</div>
                             <ReceivedRequests user={user} />
                         </>
                     }
-
+                    {/* if both sent and received request counts are greater than zero, display both with a switch */}
                     {!(user.sentCount > 0 && user.receivedCount > 0) ? (
                         <></>
                     ) : (

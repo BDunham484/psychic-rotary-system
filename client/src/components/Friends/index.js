@@ -15,12 +15,15 @@ const Friends = ({ userParam, user }) => {
                 <h2>Friends</h2>
             </div>
             <RequestBlock userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
-            <PendingRequests user={user} />
-            {inputSwitched && 
-            <FriendList user={user} />
+            {inputSwitched &&
+                <>
+                    <PendingRequests user={user} />
+                    <FriendList user={user} />
+                </>
+
             }
-            {!inputSwitched && 
-            <BlockedFriends user={user} />
+            {!inputSwitched &&
+                <BlockedFriends user={user} />
             }
         </div>
     )
