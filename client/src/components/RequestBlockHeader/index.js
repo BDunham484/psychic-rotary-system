@@ -8,7 +8,7 @@ const RequestBlockHeader = ({ inputSwitched, setInputSwitched }) => {
 
     return (
         <div>
-<div className="display-flex">
+            <div className="display-flex">
                 {inputSwitched ? (
                     <>
                         <h3 className='friends-sub-titles'>Request</h3>

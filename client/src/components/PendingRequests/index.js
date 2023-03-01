@@ -40,7 +40,7 @@ const PendingRequests = ({ user }) => {
                         requestSwitch ? (
                             <>
                                 <div className="profile-friends-sub-header">
-                                    <div className='friends-sub-titles'>SENT</div>
+                                    <div className='friends-sub-titles'>Sent</div>
                                     <Switch
                                         onChange={handleRequestSwitch}
                                         checked={requestSwitch}
@@ -53,14 +53,14 @@ const PendingRequests = ({ user }) => {
                                         boxShadow={'#eee3d0'}
                                         activeBoxShadow={'#eee3d0'}
                                     />
-                                    <div className="unSwitched">RECEIVED</div>
+                                    <div className="unSwitched">Received</div>
                                 </div>
                                 <SentRequests user={user} />
                             </>
                         ) : (
                             <>
                                 <div className="profile-friends-sub-header">
-                                    <div className='unSwitched'>SENT</div>
+                                    <div className='unSwitched'>Sent</div>
                                     <Switch
                                         onChange={handleRequestSwitch}
                                         checked={requestSwitch}
@@ -73,7 +73,7 @@ const PendingRequests = ({ user }) => {
                                         boxShadow={'#eee3d0'}
                                         activeBoxShadow={'#eee3d0'}
                                     />
-                                    <div className="friends-sub-titles">RECEIVED</div>
+                                    <div className="friends-sub-titles">Received</div>
                                 </div>
                                 <ReceivedRequests user={user} />
                             </>
