@@ -48,7 +48,7 @@ const FriendList = ({ user }) => {
                         ))}
                     </div>
                 ) : (
-                    <div className="friend-list">
+                    <div className="friend-list styled-scrollbars">
                     {user.friends.map((friend, index) => (
                         <div key={index} className="names display-flex">
                             <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
