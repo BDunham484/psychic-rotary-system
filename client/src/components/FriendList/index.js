@@ -10,7 +10,25 @@ const FriendList = ({ user }) => {
     const handleFriendSwitch = () => {
         friendSwitch ? setFriendSwitch(false) : setFriendSwitch(true)
     }
-    console.log('friendCount: ' + user.friendCount);
+    // const userFriendNamesArr = [];
+    const userFriends = user.friends;
+    // userFriends.map((friend) => {
+    //     userFriendNamesArr.push(friend.username);
+    // });
+    // const friendNamesArr = userFriendNamesArr.sort();
+    // console.log(friendNamesArr);
+
+    console.log(userFriends);
+    userFriends.sort(function (a, b) {
+        if (a.username < b.username) {
+            return -1;
+        }
+        if (a.username > b.username) {
+            return 1;
+        }
+        return 0;
+    });
+    console.log(userFriends);
 
     return (
         <div>
@@ -38,6 +56,14 @@ const FriendList = ({ user }) => {
             <div className="friend-list-container">
                 {user.friendCount <= 5 ? (
                     <div>
+                        {/* {friendNamesArr.map((friend, index) => (
+                            <div key={index} className="names display-flex">
+                                <Link className="name" to={`/profile/${friend}`}>{friend}</Link>
+                                {!friendSwitch &&
+                                    <FriendListOptions friendId={friend._id} />
+                                }
+                            </div>
+                        ))} */}
                         {user.friends.map((friend, index) => (
                             <div key={index} className="names display-flex">
                                 <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
