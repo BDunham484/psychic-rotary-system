@@ -11,15 +11,18 @@ const FriendList = ({ user }) => {
         friendSwitch ? setFriendSwitch(false) : setFriendSwitch(true)
     }
     // const userFriendNamesArr = [];
-    const userFriends = user.friends;
+    // const userFriends = user.friends;
     // userFriends.map((friend) => {
     //     userFriendNamesArr.push(friend.username);
     // });
     // const friendNamesArr = userFriendNamesArr.sort();
     // console.log(friendNamesArr);
 
-    console.log(userFriends);
-    userFriends.sort(function (a, b) {
+    // console.log(userFriends);
+    let userFriendsArr = [...user.friends];
+    console.log('userFriendsArr');
+    console.log(userFriendsArr)
+    userFriendsArr.sort(function (a, b) {
         if (a.username < b.username) {
             return -1;
         }
@@ -28,7 +31,8 @@ const FriendList = ({ user }) => {
         }
         return 0;
     });
-    console.log(userFriends);
+    console.log('SORTED')
+    console.log(userFriendsArr);
 
     return (
         <div>
@@ -56,15 +60,7 @@ const FriendList = ({ user }) => {
             <div className="friend-list-container">
                 {user.friendCount <= 5 ? (
                     <div>
-                        {/* {friendNamesArr.map((friend, index) => (
-                            <div key={index} className="names display-flex">
-                                <Link className="name" to={`/profile/${friend}`}>{friend}</Link>
-                                {!friendSwitch &&
-                                    <FriendListOptions friendId={friend._id} />
-                                }
-                            </div>
-                        ))} */}
-                        {user.friends.map((friend, index) => (
+                        {userFriendsArr.map((friend, index) => (
                             <div key={index} className="names display-flex">
                                 <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
                                 {!friendSwitch &&
@@ -75,17 +71,16 @@ const FriendList = ({ user }) => {
                     </div>
                 ) : (
                     <div className="friend-list styled-scrollbars">
-                    {user.friends.map((friend, index) => (
-                        <div key={index} className="names display-flex">
-                            <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
-                            {!friendSwitch &&
-                                <FriendListOptions friendId={friend._id} />
-                            }
-                        </div>
-                    ))}
-                </div>
+                        {userFriendsArr.map((friend, index) => (
+                            <div key={index} className="names display-flex">
+                                <Link className="name" to={`/profile/${friend.username}`}>{friend.username}</Link>
+                                {!friendSwitch &&
+                                    <FriendListOptions friendId={friend._id} />
+                                }
+                            </div>
+                        ))}
+                    </div>
                 )}
-
             </div>
         </div>
     )
