@@ -631,6 +631,14 @@ main {
   padding-right: 2vh;
 }
 
+.chevron {
+  width: 50px;
+}
+
+.chevron:hover {
+  cursor: pointer;
+}
+
 .sent-received {
   margin: 0 0 1vh 1vh;
   letter-spacing: 2px;

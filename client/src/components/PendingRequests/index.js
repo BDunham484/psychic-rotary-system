@@ -1,14 +1,22 @@
 import { useState } from "react";
-import SentRequests from "../SentRequests";
-import ReceivedRequests from "../ReceivedRequests";
-import Switch from 'react-switch';
+// import SentRequests from "../SentRequests";
+// import ReceivedRequests from "../ReceivedRequests";
+import SentReceived from "../SentReceived";
+// import Switch from 'react-switch';
+import { ExpandLess } from "@styled-icons/material-rounded/ExpandLess";
+import { ExpandMore } from "@styled-icons/material-sharp/ExpandMore";
 
 const PendingRequests = ({ user }) => {
 
-    const [requestSwitch, setRequestSwitch] = useState(true);
+    // const [requestSwitch, setRequestSwitch] = useState(true);
+    const [expand, setExpand] = useState(false);
 
-    const handleRequestSwitch = () => {
-        requestSwitch ? setRequestSwitch(false) : setRequestSwitch(true)
+    // const handleRequestSwitch = () => {
+    //     requestSwitch ? setRequestSwitch(false) : setRequestSwitch(true)
+    // }
+
+    const handleExpand = () => {
+        expand ? setExpand(false) : setExpand(true)
     }
 
     return (
@@ -16,25 +24,35 @@ const PendingRequests = ({ user }) => {
             {user.requestCount > 0 &&
                 <>
                     <div className="profile-friends-sub-header">
+                        {!expand ? (
+                            <ExpandMore className="chevron" onClick={handleExpand} />
+                        ) : (
+                            <ExpandLess className="chevron" onClick={handleExpand} />
+                        )}
                         <h2 className="friends-sub-titles">Pending Requests</h2>
                         <div className="totals">{user.requestCount}</div>
                     </div>
+                    {!expand ? (
+                        <></>
+                    ) : (
+                        <SentReceived user={user} />
+                    )}
                     {/* if the sent request count is > 0 and the received count is equal to zero, display SentRequests only */}
-                    {(user.sentCount > 0 && user.receivedCount === 0) &&
+                    {/* {(user.sentCount > 0 && user.receivedCount === 0) &&
                         <>
                             <div className='sent-received'>SENT</div>
                             <SentRequests user={user} />
                         </>
-                    }
+                    } */}
                     {/* if the received request count is > 0 and the sent count is equal to zero, display ReceivedRequest only */}
-                    {(user.sentCount === 0 && user.receivedCount > 0) &&
+                    {/* {(user.sentCount === 0 && user.receivedCount > 0) &&
                         <>
                             <div className="sent-received">RECEIVED</div>
                             <ReceivedRequests user={user} />
                         </>
-                    }
+                    } */}
                     {/* if both sent and received request counts are greater than zero, display both with a switch */}
-                    {!(user.sentCount > 0 && user.receivedCount > 0) ? (
+                    {/* {!(user.sentCount > 0 && user.receivedCount > 0) ? (
                         <></>
                     ) : (
                         requestSwitch ? (
@@ -78,7 +96,7 @@ const PendingRequests = ({ user }) => {
                                 <ReceivedRequests user={user} />
                             </>
                         )
-                    )}
+                    )} */}
                 </>
             }
         </div>
