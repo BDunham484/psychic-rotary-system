@@ -400,7 +400,7 @@ main {
   padding: 5px 0 5px 5px;
 }
 
-.form-card button {
+.login-signup-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 75%;
@@ -413,7 +413,7 @@ main {
   letter-spacing: 3px;
   font-size: 20px;
 }
-.form-card-button {
+/* .form-card-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 75%;
@@ -429,7 +429,7 @@ main {
 
 .form-card-button:hover {
   cursor: pointer;
-}
+} */
 
 #form-block-button {
   margin: 4vh 0;
@@ -599,7 +599,7 @@ main {
   margin-top: 4vh;
 }
 
-.profile-friends-card form div button {
+.form-request-button {
   width: 100%;
   margin: 4vh 0;
   padding: 3px 0;
@@ -612,6 +612,23 @@ main {
   letter-spacing: 3px;
   font-size: 20px;
 }
+
+.form-request-button:hover {
+  cursor: pointer;
+}
+/* .profile-friends-card form div button {
+  width: 100%;
+  margin: 4vh 0;
+  padding: 3px 0;
+  background-color: var(--button);
+  border: none;
+  border-radius: 10px;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 20px;
+} */
 
 .profile-friends-sub-header {
   display: flex;

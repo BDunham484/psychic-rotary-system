@@ -71,7 +71,7 @@ const Signup = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <button type='submit'>Submit</button>
+                    <button type='submit' className="login-signup-button">Submit</button>
                 </form>
                 {error && <div>Sign up failed</div>}
             </FormCard>

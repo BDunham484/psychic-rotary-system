@@ -79,7 +79,7 @@ const RequestButtons = (
                 </div>
             ) : (
                 <div className="form-div">
-                    <button className="form-card-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
+                    <button className="form-request-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
                 </div>
             )}
         </>

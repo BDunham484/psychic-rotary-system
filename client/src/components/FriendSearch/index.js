@@ -24,8 +24,8 @@ const FriendSearch = () => {
 
     return (
         <div>
-            {/* <form> */}
-            <div className="form-input-wrapper">
+            <form>
+            <div>
                 <input
                     onChange={handleTextChange}
                     type="text"
@@ -34,7 +34,7 @@ const FriendSearch = () => {
                 />
                 <button className="friend-search-button">Search</button>
             </div>
-            {/* </form> */}
+            </form>
             
         </div>
     )
