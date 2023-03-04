@@ -658,6 +658,12 @@ main {
   max-height: 26vh;
 }
 
+.friend-search-button {
+  min-width: 60px;
+  height: 20px;
+  background-color: var(--button);
+}
+
 .blocked-list {
   overflow-y: scroll;
   max-height: 26vh;
