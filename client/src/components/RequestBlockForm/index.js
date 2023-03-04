@@ -57,13 +57,14 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                             type="text"
                             placeholder="Username"
                             value={text}
+                            className="profile-friends-card-input"
                         />
                     </div>
                     {friend &&
                         <div>USER NOT FOUND</div>
                     }
                     {inputSwitched ?
-                        <RequestButtons 
+                        <RequestButtons
                             user={user}
                             inputData={inputData}
                             friendName={friendName}
@@ -75,13 +76,13 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                         />
                         :
                         <BlockButtons
-                            user={user} 
+                            user={user}
                             friendName={friendName}
-                            friendId={friendId} 
-                            btnDisabled={btnDisabled} 
-                            setBtnDisabled={setBtnDisabled} 
-                            setFriend={setFriend} 
-                            setText={setText} 
+                            friendId={friendId}
+                            btnDisabled={btnDisabled}
+                            setBtnDisabled={setBtnDisabled}
+                            setFriend={setFriend}
+                            setText={setText}
                         />
                     }
                 </form>

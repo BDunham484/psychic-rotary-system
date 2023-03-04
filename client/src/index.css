@@ -592,12 +592,18 @@ main {
   justify-content: center;
 }
 
-.profile-friends-card form div input {
+.profile-friends-card-input {
   width: 100%;
   border-radius: 8px;
   padding: 5px 0 5px 5px;
   margin-top: 4vh;
 }
+/* .profile-friends-card form div input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 5px 0 5px 5px;
+  margin-top: 4vh;
+} */
 
 .form-request-button {
   width: 100%;
@@ -675,10 +681,30 @@ main {
   max-height: 26vh;
 }
 
+.friend-search-input-wrapper {
+  width: 100%;
+  margin-bottom: 4vh;
+}
+
+.friend-search-input {
+  border: none;
+  width: 75%;
+  border-radius: 10px 0 0 10px;
+  padding: 5px 0 5px 5px;
+  font-family: var(--primary-font);
+}
+
 .friend-search-button {
-  min-width: 60px;
-  height: 20px;
+  width: 25%;
+  color: var(--main-text);
+  font-family: var(--primary-font);
   background-color: var(--button);
+  border-radius: 0 10px 10px 0;
+  padding: 5px;
+}
+
+.friend-search-button:hover {
+  cursor:pointer;
 }
 
 .blocked-list {

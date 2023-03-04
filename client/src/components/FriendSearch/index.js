@@ -25,17 +25,18 @@ const FriendSearch = () => {
     return (
         <div>
             <form>
-            <div>
-                <input
-                    onChange={handleTextChange}
-                    type="text"
-                    placeholder="Username"
-                    value={text}
-                />
-                <button className="friend-search-button">Search</button>
-            </div>
+                <div className="friend-search-input-wrapper">
+                    <input
+                        onChange={handleTextChange}
+                        type="text"
+                        placeholder="Username"
+                        value={text}
+                        className="friend-search-input"
+                    />
+                    <button className="friend-search-button">Search</button>
+                </div>
             </form>
-            
+
         </div>
     )
 }
