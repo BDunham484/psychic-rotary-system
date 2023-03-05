@@ -12,8 +12,10 @@ const PendingRequests = ({ user }) => {
                 <>
                     <div className="profile-friends-sub-header">
                         <Expander expand={expand} setExpand={setExpand} />
-                        <h2 className="friends-sub-titles">Pending Requests</h2>
-                        <div className="totals">{user.requestCount}</div>
+                        {/* <div className="display-flex"> */}
+                            <h2 className="friends-sub-titles">Requests</h2>
+                            <div className="friends-sub-titles totals">{user.requestCount}</div>
+                        {/* </div> */}
                     </div>
                     {!expand ? (
                         <></>

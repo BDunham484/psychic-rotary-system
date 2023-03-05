@@ -642,6 +642,8 @@ main {
   /* justify-content: space-between; */
   align-items: center;
   margin: 2vh 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--dark)
 }
 
 .friends-sub-titles {
@@ -655,7 +657,7 @@ main {
 }
 
 .chevron {
-  width: 50px;
+  width: 25px;
 }
 
 .chevron:hover {

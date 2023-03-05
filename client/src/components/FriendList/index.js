@@ -24,10 +24,10 @@ const FriendList = ({ user }) => {
         <div>
             {user.friendCount > 0 &&
                 <div className="profile-friends-sub-header">
-                    {/* <div className="display-flex"> */}
                     <Expander expand={expand} setExpand={setExpand} />
-                    <h3 className="friends-sub-titles">Your Friends </h3>
-                    <div className="friends-sub-titles"> {user.friendCount}</div>
+                    {/* <div className="display-flex"> */}
+                    <h3 className="friends-sub-titles">Friends</h3>
+                    <div className="friends-sub-titles totals"> {user.friendCount}</div>
                     {/* </div> */}
                 </div>
             }
@@ -36,7 +36,7 @@ const FriendList = ({ user }) => {
             ) : (
                 <div>
                     <div className="profile-friends-sub-header">
-                        <Search className="friend-list-icons" onClick={handleFriendSearch}/>
+                        <Search className="friend-list-icons" onClick={handleFriendSearch} />
                         {/* <h3>Options</h3> */}
                         <Switch
                             onChange={handleFriendSwitch}
@@ -51,9 +51,9 @@ const FriendList = ({ user }) => {
                             activeBoxShadow={'#eee3d0'}
                         />
                     </div>
-                    {search && 
-                    <FriendSearch user={user} friendSwitch={friendSwitch} />
-                    
+                    {search &&
+                        <FriendSearch user={user} friendSwitch={friendSwitch} />
+
                     }
                     <FriendListNames user={user} friendSwitch={friendSwitch} />
                 </div>
