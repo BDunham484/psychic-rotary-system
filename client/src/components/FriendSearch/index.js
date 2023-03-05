@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search } from "@styled-icons/bootstrap/Search";
 
 
@@ -7,6 +8,7 @@ const FriendSearch = ({ user }) => {
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [showResult, setShowResult] = useState(false);
     const [result, setResult] = useState('');
+    const [found, setFound] = useState(false);
 
 
 
@@ -31,16 +33,24 @@ const FriendSearch = ({ user }) => {
         console.log(text);
 
         if (user.friendCount > 0) {
-            user.friends.map((friend) => {
+            const friendBoolArr = user.friends.map((friend) => {
                 if (friend.username === text) {
-                    setResult(text);
+                    return true;
                 } else {
-                    setResult('User Not Found');
+                    return false;
                 }
-            })
+            });
+            const isFriend = friendBoolArr.some(friend => friend === true);
+            if (isFriend) {
+                setResult(text);
+                setFound(true);
+                console.log(found);
+            } else {
+                setResult('Username Not Found');
+                setFound(false);
+                console.log(found);
+            }
         }
-        
-
         setText('');
         setShowResult(true);
     }
@@ -61,7 +71,11 @@ const FriendSearch = ({ user }) => {
             </form>
             {showResult &&
                 <div className="names">
-                    {result}
+                    {found ? (
+                        <Link className="name" to={`/profile/${result}`}>{result}</Link>
+                    ) : (
+                        <div>{result}</div>
+                    )}
                 </div>
             }
 
