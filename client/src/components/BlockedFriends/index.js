@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { UNBLOCK_USER } from "../../utils/mutations";
 import { Blocked } from '@styled-icons/octicons/Blocked';
+import Expander from "../shared/Expander";
 
 const BlockedFriends = ({ user }) => {
+
+    const [expand, setExpand] = useState(false);
 
     const [unblockUser] = useMutation(UNBLOCK_USER);
 
@@ -27,34 +31,38 @@ const BlockedFriends = ({ user }) => {
         <>
             {user.blockedCount > 0 &&
                 <div className="profile-friends-sub-header">
+                    <Expander expand={expand} setExpand={setExpand} />
                     <h3 className="friends-sub-titles">Blocked</h3>
                     <div className="totals">{user.blockedCount}</div>
                 </div>
             }
-            {user.blockedCount <= 5 ? (
+            {expand &&
                 <div>
-                    {user.blockedUsers.map((blocked, index) => (
-                        <div key={index} className="names display-flex">
-                            <Link className="name" to={`/profile/${blocked.username}`}>
-                                {blocked.username}
-                            </Link>
-                            <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
+                    {user.blockedCount <= 5 ? (
+                        <div>
+                            {user.blockedUsers.map((blocked, index) => (
+                                <div key={index} className="names display-flex">
+                                    <Link className="name" to={`/profile/${blocked.username}`}>
+                                        {blocked.username}
+                                    </Link>
+                                    <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        <div className="blocked-list styled-scrollbars">
+                            {user.blockedUsers.map((blocked, index) => (
+                                <div key={index} className="names display-flex">
+                                    <Link className="name" to={`/profile/${blocked.username}`}>
+                                        {blocked.username}
+                                    </Link>
+                                    <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-            ) : (
-                <div className="blocked-list">
-                {user.blockedUsers.map((blocked, index) => (
-                    <div key={index} className="names display-flex">
-                        <Link className="name" to={`/profile/${blocked.username}`}>
-                            {blocked.username}
-                        </Link>
-                        <Blocked className="friend-list-icons" onClick={() => handleUnblock(blocked._id)} />
-                    </div>
-                ))}
-            </div>
-            )}
-
+            }
         </>
     )
 }

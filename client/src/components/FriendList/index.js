@@ -31,9 +31,7 @@ const FriendList = ({ user }) => {
                     {/* </div> */}
                 </div>
             }
-            {!expand ? (
-                <></>
-            ) : (
+            {expand && 
                 <div>
                     <div className="profile-friends-sub-header">
                         <Search className="friend-list-icons" onClick={handleFriendSearch} />
@@ -57,7 +55,7 @@ const FriendList = ({ user }) => {
                     }
                     <FriendListNames user={user} friendSwitch={friendSwitch} />
                 </div>
-            )}
+            }
         </div>
     )
 }
