@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "@styled-icons/bootstrap/Search";
+import FriendListOptions from "../FriendListOptions";
 
 
-const FriendSearch = ({ user }) => {
+const FriendSearch = ({ user, friendSwitch }) => {
     const [text, setText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
     const [showResult, setShowResult] = useState(false);
     const [result, setResult] = useState('');
     const [found, setFound] = useState(false);
+    const [friendId, setFriendId] = useState('');
 
-
+    console.log(friendSwitch)
 
     //handler for friend request text input
     const handleTextChange = (e) => {
@@ -35,6 +37,7 @@ const FriendSearch = ({ user }) => {
         if (user.friendCount > 0) {
             const friendBoolArr = user.friends.map((friend) => {
                 if (friend.username === text) {
+                    setFriendId(friend._id)
                     return true;
                 } else {
                     return false;
@@ -72,7 +75,14 @@ const FriendSearch = ({ user }) => {
             {showResult &&
                 <div className="names">
                     {found ? (
-                        <Link className="name" to={`/profile/${result}`}>{result}</Link>
+                        <div className="display-flex">
+                            <Link className="name" to={`/profile/${result}`}>{result}</Link>
+
+                        {!friendSwitch &&
+                            <FriendListOptions friendId={friendId} />
+                        }
+                        </div>
+
                     ) : (
                         <div>{result}</div>
                     )}

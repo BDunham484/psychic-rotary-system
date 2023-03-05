@@ -52,7 +52,7 @@ const FriendList = ({ user }) => {
                         />
                     </div>
                     {search && 
-                    <FriendSearch user={user} />
+                    <FriendSearch user={user} friendSwitch={friendSwitch} />
                     
                     }
                     <FriendListNames user={user} friendSwitch={friendSwitch} />
