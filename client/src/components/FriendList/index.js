@@ -8,14 +8,16 @@ import { Search } from "@styled-icons/bootstrap/Search";
 const FriendList = ({ user }) => {
     // set state for friends options display switch
     const [friendSwitch, setFriendSwitch] = useState(true);
+    // set state for expander icon to hide/display friendlist names
     const [expand, setExpand] = useState(false);
+    // set state for search icon to hide/display search input
     const [search, setSearch] = useState(false);
 
-    // switch handler
+    // switch handler to hide/display friend list options
     const handleFriendSwitch = () => {
         friendSwitch ? setFriendSwitch(false) : setFriendSwitch(true)
     }
-
+    // handler to hide/display friend search input
     const handleFriendSearch = () => {
         search ? setSearch(false) : setSearch(true);
     }
@@ -25,10 +27,8 @@ const FriendList = ({ user }) => {
             {user.friendCount > 0 &&
                 <div className="profile-friends-sub-header">
                     <Expander expand={expand} setExpand={setExpand} />
-                    {/* <div className="display-flex"> */}
                     <h3 className="friends-sub-titles">Friends</h3>
                     <div className="friends-sub-titles totals"> {user.friendCount}</div>
-                    {/* </div> */}
                 </div>
             }
             {expand && 
