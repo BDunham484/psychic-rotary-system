@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-// import { DELETE_CONCERT_FROM_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-// import ShowCard from "../components/ShowCard";
 import Friends from "../components/Friends";
 import ProfileConcerts from "../components/ProfileConcerts";
 
@@ -31,21 +28,6 @@ const Profile = () => {
     console.log('USER DATA FROM PROFILE.JS');
     console.log(user);
 
-    // //delete saved concert
-    // const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
-    // //function to delete concert from user
-    // const deleteConcertFromUser = async (id) => {
-    //     console.log("delete concert from user");
-    //     console.log(id);
-    //     try {
-    //         await deleteConcert({
-    //             variables: { concertId: id }
-    //         });
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-
     //navigate to personal profile page if username is the logged-in user's
     if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
         return <Navigate to="/profile" />;
@@ -70,29 +52,6 @@ const Profile = () => {
             </div>
             <div className="concert-friend-wrapper">
                 <ProfileConcerts user={user} />
-                {/* <div className="profile-concerts-card">
-                    <div className="profile-concerts-card-header">
-                        <h2>Concerts</h2>
-                    </div>
-
-                    {error && <div>An error occurred</div>}
-                    {user.concerts &&
-                        user.concerts.map((concert, index) => (
-                            <ShowCard key={index}>
-                                <div id="profile-showcard-data">
-                                    <div>{concert.date}</div>
-                                    <Link to={`/show/${concert.artists}`} state={{ concert }}>
-                                        <span id="artists-link">{concert.artists} </span>
-                                    </Link>
-                                    {concert.venue}
-                                    <div>
-                                        <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
-                                    </div>
-
-                                </div>
-                            </ShowCard>
-                        ))}
-                </div> */}
                 <Friends userParam={userParam} user={user} />
             </div>
 

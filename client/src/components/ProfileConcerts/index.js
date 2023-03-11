@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
 import ShowCard from "../../components/ShowCard";
 import { Link } from "react-router-dom";
+import Expander from "../shared/Expander";
 
 
 const ProfileConcerts = ({ user }) => {
+    // set state for expander icon to hide/display friendlist names
+    const [expand, setExpand] = useState(false);
 
     //delete saved concert
     const [deleteConcert] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -27,6 +31,7 @@ const ProfileConcerts = ({ user }) => {
             <div className="profile-concerts-card">
                 <div className="profile-concerts-card-header">
                     <h2>Concerts</h2>
+                    <Expander expand={expand} setExpand={setExpand} />
                 </div>
 
                 {user.concerts &&
