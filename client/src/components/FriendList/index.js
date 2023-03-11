@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FriendListNames from "../FriendListNames";
 import FriendSearch from "../FriendSearch";
 import Expander from "../shared/Expander";
@@ -21,6 +21,13 @@ const FriendList = ({ user }) => {
     const handleFriendSearch = () => {
         search ? setSearch(false) : setSearch(true);
     }
+
+    useEffect(() => {
+        if (user.friendCount === 0) {
+            setExpand(false);
+        }
+    },[user])
+    
 
     return (
         <div>
