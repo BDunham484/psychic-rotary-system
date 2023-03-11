@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { Search } from "@styled-icons/bootstrap/Search";
 import FriendListOptions from "../FriendListOptions";
 
 
@@ -26,7 +25,6 @@ const FriendSearch = ({ user, friendSwitch }) => {
 
         if (text === '') {
             setBtnDisabled(true)
-            // setFriend(false)
         } else {
             setBtnDisabled(false)
         };

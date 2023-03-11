@@ -413,6 +413,10 @@ main {
   letter-spacing: 3px;
   font-size: 20px;
 }
+
+.login-signup-button:hover {
+  cursor: pointer;
+}
 /* .form-card-button {
   margin: 4vh 0;
   padding: 3px 0;
