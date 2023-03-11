@@ -27,7 +27,6 @@ const ConcertProvider = ({ children }) => {
                 stopPolling()
             }
         }
-
     }, [loading, userData, user, startPolling, stopPolling])
 
     //get today's date with imported helper function
