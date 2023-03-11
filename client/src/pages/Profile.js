@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Navigate, useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { DELETE_CONCERT_FROM_USER } from '../utils/mutations';
+// import { DELETE_CONCERT_FROM_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import ShowCard from "../components/ShowCard";
+// import ShowCard from "../components/ShowCard";
 import Friends from "../components/Friends";
+import ProfileConcerts from "../components/ProfileConcerts";
 
 const Profile = () => {
 
@@ -30,20 +31,20 @@ const Profile = () => {
     console.log('USER DATA FROM PROFILE.JS');
     console.log(user);
 
-    //delete saved concert
-    const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
-    //function to delete concert from user
-    const deleteConcertFromUser = async (id) => {
-        console.log("delete concert from user");
-        console.log(id);
-        try {
-            await deleteConcert({
-                variables: { concertId: id }
-            });
-        } catch (e) {
-            console.error(e);
-        }
-    }
+    // //delete saved concert
+    // const [deleteConcert, { error }] = useMutation(DELETE_CONCERT_FROM_USER);
+    // //function to delete concert from user
+    // const deleteConcertFromUser = async (id) => {
+    //     console.log("delete concert from user");
+    //     console.log(id);
+    //     try {
+    //         await deleteConcert({
+    //             variables: { concertId: id }
+    //         });
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 
     //navigate to personal profile page if username is the logged-in user's
     if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -68,12 +69,11 @@ const Profile = () => {
                 <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
             </div>
             <div className="concert-friend-wrapper">
-                <div className="profile-concerts-card">
+                <ProfileConcerts user={user} />
+                {/* <div className="profile-concerts-card">
                     <div className="profile-concerts-card-header">
                         <h2>Concerts</h2>
                     </div>
-
-                    {/* <p>Concerts: {user.concertCount}</p> */}
 
                     {error && <div>An error occurred</div>}
                     {user.concerts &&
@@ -92,7 +92,7 @@ const Profile = () => {
                                 </div>
                             </ShowCard>
                         ))}
-                </div>
+                </div> */}
                 <Friends userParam={userParam} user={user} />
             </div>
 
