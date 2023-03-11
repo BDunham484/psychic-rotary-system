@@ -824,12 +824,18 @@ const resolvers = {
                     { new: true }
                 ).populate('blockedUsers');
 
-                await user.findOneAndUpdate(
+                await User.findOneAndUpdate(
                     { '_id': context.user._id },
                     { $pull: { friends: blockedId }},
                     { new: true }
+                ).populate('friends');
+
+                await User.findOneAndUpdate(
+                    { '_id': blockedId },
+                    { $pull: { friends: context.user._id }},
+                    { new: true }
                 )
-                
+
                 return user;
             };
             throw new AuthenticationError('You need to be logged in!');
