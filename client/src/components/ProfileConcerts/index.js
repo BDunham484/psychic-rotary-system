@@ -8,7 +8,7 @@ import Expander from "../shared/Expander";
 
 const ProfileConcerts = ({ user }) => {
     // set state for expander icon to hide/display friendlist names
-    const [expand, setExpand] = useState(false);
+    const [expand, setExpand] = useState(true);
 
     //delete saved concert
     const [deleteConcert] = useMutation(DELETE_CONCERT_FROM_USER);
@@ -31,10 +31,13 @@ const ProfileConcerts = ({ user }) => {
             <div className="profile-concerts-card">
                 <div className="profile-concerts-card-header">
                     <h2>Concerts</h2>
-                    <Expander expand={expand} setExpand={setExpand} />
+                    <div id="expander">
+                        <Expander expand={expand} setExpand={setExpand} />
+                    </div>
                 </div>
 
-                {user.concerts &&
+                {expand &&
+                    user.concerts &&
                     user.concerts.map((concert, index) => (
                         <ShowCard key={index}>
                             <div id="profile-showcard-data">
@@ -49,7 +52,8 @@ const ProfileConcerts = ({ user }) => {
 
                             </div>
                         </ShowCard>
-                    ))}
+                    ))
+                }
             </div>
         </div>
     )
