@@ -5,7 +5,7 @@ import {
   GET_CONCERTS_BY_DATE
 } from "../utils/queries";
 import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
-import TodaysConcerts from "../components/TodaysConcerts";
+import ConcertList from "../components/ConcertList";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
 import  UtilityBar  from '../components/UtilityBar';
@@ -92,7 +92,7 @@ const Home = () => {
               <Spinner />
             ) : (
               <>
-                <TodaysConcerts concerts={concerts} />
+                <ConcertList concerts={concerts} />
               </>
             )}
           </div>
