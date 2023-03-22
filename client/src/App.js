@@ -13,11 +13,13 @@ import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
 
 
-
+const SERVER_URL = 
+  process.env.NODE_ENV === 'production' ? 'https://whispering-retreat-35925.herokuapp.com' : 'http://localhost:3001'
 
 //establish link to GraphQL server
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: `${SERVER_URL}/graphql`,
+  // uri: '/graphql',
 });
 
 //middleware function that retrieves token and combines with exiisting HTTP Link
