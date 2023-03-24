@@ -58,7 +58,7 @@ const Login = () => {
                             name='password'
                             type='password'
                             id='password'
-                            vlaue={formState.password}
+                            value={formState.password}
                             onChange={handleChange}
                         />
                     </div>
