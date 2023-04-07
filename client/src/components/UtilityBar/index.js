@@ -51,6 +51,7 @@ const UtilityBar = () => {
                 <DatePicker
                     selected={startDate}
                     onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'}
+                    calendarClassName={'calendar'}
                     dateFormat="eee MMM dd yyyy"
                 />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />

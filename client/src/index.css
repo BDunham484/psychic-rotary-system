@@ -165,7 +165,7 @@ header nav ul li a {
   letter-spacing: 3px;
   font-weight: 700;
   font-size: 1.17em;
-  color: antiquewhite;
+  color: var(--main-text);
   /* border: 1px solid var(--button); */
   border: none;
   border-radius: 8px;
@@ -175,6 +175,24 @@ header nav ul li a {
 
 .react-datepicker-wrapper {
   text-align: center;
+}
+
+.calendar {
+  background-color: var(--darkest) !important;
+  border: var(--button) 1px solid !important;
+}
+
+.calendar .react-datepicker__header {
+  background-color: var(--button);
+}
+
+.calendar .react-datepicker__day {
+  color: var(--main-text);
+}
+
+.calendar .react-datepicker__day--selected {
+  background-color: var(--dark);
+  color: var(--main-text);
 }
 
 .home-page-wrapper {
