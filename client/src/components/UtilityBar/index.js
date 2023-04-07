@@ -4,6 +4,7 @@ import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
+import addDays from "date-fns/addDays";
 
 const UtilityBar = () => {
 
@@ -20,10 +21,12 @@ const UtilityBar = () => {
         setDate(convertDate)
     }
 
-    const test = new Date(date);
-    test.setDate(test.getDate() - 1)
+    const yesterday = new Date(date);
+    yesterday.setDate(yesterday.getDate() - 1)
 
-    const testArr = [subDays(test, 1,), subDays(test, 2,), subDays(test, 3,), subDays(test, 4,), subDays(test, 5,), subDays(test, 6,), subDays(test, 7,), subDays(test, 8,)]
+    const tomorrow = new Date(date);
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
     
 
 
@@ -60,7 +63,12 @@ const UtilityBar = () => {
                     onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'}
                     calendarClassName={'calendar'}
                     dateFormat="eee MMM dd yyyy"
-                    excludeDateIntervals={[{start: subDays(test, 31), end: test}]}
+                    excludeDateIntervals={
+                        [
+                            {start: subDays(yesterday, 31), end: yesterday},
+                            {start: addDays(tomorrow, 60), end: addDays(tomorrow, 300)}
+                        ]
+                    }
                 />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
             </span>

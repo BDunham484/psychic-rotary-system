@@ -178,7 +178,7 @@ header nav ul li a {
 }
 
 .calendar {
-  background-color: var(--darkest) !important;
+  background-color: var(--darker) !important;
   border: var(--button) 1px solid !important;
 }
 
