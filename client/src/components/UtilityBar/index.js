@@ -10,16 +10,13 @@ const UtilityBar = () => {
 
     const [startDate, setStartDate] = useState(new Date());
 
-    // console.log('CONSOLELOG: ' + startDate);
-
     const handleDateSelect = (datePick) => {
         setStartDate(datePick);
-        // console.log('STARTDATE: ' + startDate);
-        console.log('DATEPICK: ' + datePick)
-        console.log('OLDDATE: ' + date);
-        const testDate = datePick.toDateString();
-        console.log('TESTDATE: ' + testDate);
-        setDate(testDate)
+        // console.log('DATEPICK: ' + datePick)
+        // console.log('OLDDATE: ' + date);
+        const convertDate = datePick.toDateString();
+        // console.log('TESTDATE: ' + testDate);
+        setDate(convertDate)
     }
 
 
@@ -39,24 +36,17 @@ const UtilityBar = () => {
         const theLastDay = before.toDateString();
         setDate(theLastDay);
         setStartDate(before);
-
     }
 
     return (
         <div className="utility-bar">
-            {/* <DatePicker 
-                selected={startDate}  
-                onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'}
-                dateFormat="eee MMM dd yyyy"    
-            /> */}
             <span className="display-flex date-wrapper">
                 {today === date ? (
                     <LeftArrow className="disabled-arrows" />
                 ) : (
                     <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
                 )}
-
-
+                {/* old date display */}
                 {/* <h3 id="date">{date}</h3> */}
                 <DatePicker
                     selected={startDate}
