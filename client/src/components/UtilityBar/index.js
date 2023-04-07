@@ -1,10 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ConcertContext } from "../../utils/GlobalState";
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
 
 const UtilityBar = () => {
 
     const { today, date, setDate } = useContext(ConcertContext);
+
+    const [startDate, setStartDate] = useState(new Date());
+
+    console.log('CONSOLELOG: ' + startDate);
+
+    const handleDateSelect = (datePick) => {
+        setStartDate(datePick);
+        console.log('STARTDATE: ' + startDate);
+        console.log('DATEPICK: ' + datePick)
+    }
+
 
     //function that gets the next day
     const nextDayButton = (date) => {
@@ -23,6 +36,7 @@ const UtilityBar = () => {
 
     return (
         <div className="utility-bar">
+            <DatePicker selected={startDate}  onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'} />
             <span className="display-flex date-wrapper">
                 {today === date ? (
                     <LeftArrow className="disabled-arrows" />

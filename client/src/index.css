@@ -159,6 +159,19 @@ header nav ul li a {
   background-color: var(--background);
 }
 
+.datePicker {
+  background-color: var(--darkest);
+  font-family: var(--primary-font);
+  letter-spacing: 3px;
+  font-weight: 700;
+  font-size: 1.17em;
+  color: antiquewhite;
+  border: 1px solid var(--button);
+  border-radius: 8px;
+  padding: 5px 0;
+  text-align: center;
+}
+
 .home-page-wrapper {
   width: 100vw;
   min-height: 80vh;
