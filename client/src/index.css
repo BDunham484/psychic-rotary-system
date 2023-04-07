@@ -166,9 +166,14 @@ header nav ul li a {
   font-weight: 700;
   font-size: 1.17em;
   color: antiquewhite;
-  border: 1px solid var(--button);
+  /* border: 1px solid var(--button); */
+  border: none;
   border-radius: 8px;
   padding: 5px 0;
+  text-align: center;
+}
+
+.react-datepicker-wrapper {
   text-align: center;
 }
 
