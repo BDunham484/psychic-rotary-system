@@ -66,7 +66,7 @@ const UtilityBar = () => {
                     excludeDateIntervals={
                         [
                             {start: subDays(yesterday, 31), end: yesterday},
-                            {start: addDays(tomorrow, 60), end: addDays(tomorrow, 300)}
+                            {start: addDays(tomorrow, 88), end: addDays(tomorrow, 365)}
                         ]
                     }
                 />
