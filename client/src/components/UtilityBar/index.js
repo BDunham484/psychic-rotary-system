@@ -21,10 +21,10 @@ const UtilityBar = () => {
         setDate(convertDate)
     }
 
-    const yesterday = new Date(date);
+    const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1)
 
-    const tomorrow = new Date(date);
+    const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
 
     

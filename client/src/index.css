@@ -195,6 +195,11 @@ header nav ul li a {
 }
 
 .calendar .react-datepicker__day--selected {
+  background-color: var(--button);
+  color: var(--main-text);
+}
+
+.calendar .react-datepicker__day:hover {
   background-color: var(--dark);
   color: var(--main-text);
 }
