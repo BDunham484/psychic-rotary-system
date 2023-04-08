@@ -146,6 +146,15 @@ header nav ul li a {
   padding-top: 24vh;
 }
 
+.wrapperOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--background);
+  padding-top: 36vh;
+}
+
 .utility-bar {
   display: flex;
   justify-content: center;
@@ -227,6 +236,19 @@ header nav ul li a {
 
 .options:hover {
   cursor: pointer;
+}
+
+.sortFilterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 12vh;
+  margin-top: 24vh;
+  z-index: 9999;
+  position: fixed;
+  opacity: .90;
+  background-color: var(--background);
 }
 
 .home-page-wrapper {

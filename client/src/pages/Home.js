@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import {
   GET_YESTERDAYS_CONCERTS,
@@ -8,14 +8,16 @@ import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
 import ConcertList from "../components/ConcertList";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
-import  UtilityBar  from '../components/UtilityBar';
-import SortFilterBar from "../components/SortFilterBar";
+import UtilityBar from '../components/UtilityBar';
+// import SortFilterBar from '../components/SortFilterBar';
+
 
 
 const Home = () => {
   const { today, date, austinScraper } = useContext(ConcertContext);
 
-  
+  const [optionsOpen, setOptionsOpen] = useState(false);
+
   const [addConcert] = useMutation(ADD_CONCERT)
 
   const [deleteConcerts] = useMutation(DELETE_CONCERTS);
@@ -86,9 +88,9 @@ const Home = () => {
 
   return (
     <>
-      <UtilityBar />
-      <SortFilterBar />
-      <div className="wrapper">
+      <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
+      {/* <SortFilterBar /> */}
+      <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           <div>
             {loading ? (

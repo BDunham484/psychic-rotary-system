@@ -2,8 +2,8 @@
 
 const SortFilterBar = () => {
     return (
-        <div>
-            sortFilterBar
+        <div className="sortFilterContainer">
+            SORTFILTERBAR
         </div>
     )
 }
