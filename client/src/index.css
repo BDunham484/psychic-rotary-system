@@ -245,7 +245,6 @@ header nav ul li a {
   width: 100vw;
   height: 12vh;
   margin-top: 24vh;
-  z-index: 9999;
   position: fixed;
   opacity: .90;
   background-color: var(--background);
