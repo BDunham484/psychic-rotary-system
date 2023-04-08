@@ -178,20 +178,32 @@ header nav ul li a {
 }
 
 .calendar {
-  background-color: var(--darker) !important;
-  border: var(--button) 1px solid !important;
+  background-color: var(--darkest) !important;
+  border: var(--main-text) 1px solid !important;
 }
 
 .calendar .react-datepicker__header {
-  background-color: var(--button);
+  background-color: var(--main-text);
+}
+
+.calendar .react-datepicker__navigation-icon::before {
+  border-color: var(--darkest);
+}
+
+.calendar .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: var(--dark);
 }
 
 .calendar .react-datepicker__triangle::after {
-  color: var(--button);
+  border-bottom-color: var(--main-text) !important;
 }
 
 .calendar .react-datepicker__day {
   color: var(--main-text);
+}
+
+.calendar .react-datepicker__day--keyboard-selected {
+  background-color: var(--dark);
 }
 
 .calendar .react-datepicker__day--selected {
