@@ -27,8 +27,6 @@ const UtilityBar = () => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
 
-    
-
 
     //function that gets the next day
     const nextDayButton = (date) => {
@@ -65,10 +63,13 @@ const UtilityBar = () => {
                     dateFormat="eee MMM dd yyyy"
                     excludeDateIntervals={
                         [
-                            {start: subDays(yesterday, 31), end: yesterday},
-                            {start: addDays(tomorrow, 88), end: addDays(tomorrow, 365)}
+                            { start: subDays(yesterday, 31), end: yesterday },
+                            { start: addDays(tomorrow, 88), end: addDays(tomorrow, 365) }
                         ]
                     }
+                    onKeyDown={(e) => {
+                        e.preventDefault();
+                    }}
                 />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
             </span>
