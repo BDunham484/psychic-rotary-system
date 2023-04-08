@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
+import { Options } from '@styled-icons/fluentui-system-regular/Options'
+
 
 const UtilityBar = () => {
 
@@ -71,6 +73,7 @@ const UtilityBar = () => {
                         e.preventDefault();
                     }}
                 />
+                <Options className={'options'} />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
             </span>
         </div>

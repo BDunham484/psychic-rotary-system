@@ -9,7 +9,7 @@ import ConcertList from "../components/ConcertList";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
 import  UtilityBar  from '../components/UtilityBar';
-
+import SortFilterBar from "../components/SortFilterBar";
 
 
 const Home = () => {
@@ -87,6 +87,7 @@ const Home = () => {
   return (
     <>
       <UtilityBar />
+      <SortFilterBar />
       <div className="wrapper">
         <div className={`home-page-wrapper`}>
           <div>

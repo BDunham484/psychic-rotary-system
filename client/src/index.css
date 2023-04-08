@@ -220,6 +220,15 @@ header nav ul li a {
   color: var(--main-text);
 }
 
+.options {
+  width: 50px;
+  height: auto;
+}
+
+.options:hover {
+  cursor: pointer;
+}
+
 .home-page-wrapper {
   width: 100vw;
   min-height: 80vh;
