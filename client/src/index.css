@@ -240,7 +240,7 @@ header nav ul li a {
 
 .sortFilterContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 100vw;
   height: 12vh;
@@ -249,6 +249,29 @@ header nav ul li a {
   opacity: .90;
   background-color: var(--background);
 }
+
+.sort-buttons {
+  padding: 3px 10px;
+  border-radius: 8px;
+  background-color: var(--darkest);
+  border: none;
+  color: var(--main-text);
+  font-family: var(--secondary-font);
+  font-weight: bolder;
+}
+
+.sort-buttons:hover {
+  cursor: pointer;
+}
+
+.sortIcon {
+  width: 20px;
+  height: auto;
+}
+
+/* .venue-az {
+  
+} */
 
 .home-page-wrapper {
   width: 100vw;

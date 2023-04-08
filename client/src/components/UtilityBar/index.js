@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
 import { Options } from '@styled-icons/fluentui-system-regular/Options'
-import SortFilterBar from "../SortFilterBar";
+// import SortFilterBar from "../SortFilterBar";
 
 
 const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
@@ -83,9 +83,9 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
                 <Options className={'options'} onClick={handleOptionsClick} />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
             </span>
-            {optionsOpen &&
+            {/* {optionsOpen &&
                 <SortFilterBar />
-            }
+            } */}
         </div>
     )
 }
