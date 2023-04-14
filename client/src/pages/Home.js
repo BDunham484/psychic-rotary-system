@@ -9,7 +9,7 @@ import ConcertList from "../components/ConcertList";
 import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
-import SortFilterBar from '../components/SortFilterBar';
+
 
 
 
@@ -89,9 +89,9 @@ const Home = () => {
   return (
     <>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
-      {optionsOpen &&
+      {/* {optionsOpen &&
                 <SortFilterBar />
-            }
+            } */}
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           <div>
