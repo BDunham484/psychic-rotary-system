@@ -1052,4 +1052,14 @@ footer {
   footer {
     min-height: 16vh;
   }
+
+  
+}
+
+@media screen and 
+(max-device-width: 900px) and
+(orientation: landscape) {
+  .wrapperOptions {
+    padding-top: 39vh;
+  }
 }
