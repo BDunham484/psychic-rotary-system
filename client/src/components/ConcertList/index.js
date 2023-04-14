@@ -5,8 +5,8 @@ import PlusMinus from "../shared/PlusMinus";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 
-const ConcertList = ({ concerts }) => {
 
+const ConcertList = ({ concerts }) => {
 
     if (!concerts.length) {
         return <h3>An error occurred. Try reloading the page.</h3>;
@@ -34,7 +34,8 @@ const ConcertList = ({ concerts }) => {
                             </p>
                         </div>
                     </ShowCard>
-                ))}
+                ))
+            }
         </>
     )
 };

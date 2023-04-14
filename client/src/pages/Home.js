@@ -1,15 +1,19 @@
-import { useEffect, useContext, useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
 import {
-  GET_YESTERDAYS_CONCERTS,
-  GET_CONCERTS_BY_DATE
-} from "../utils/queries";
-import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
-import ConcertList from "../components/ConcertList";
-import Spinner from '../components/shared/Spinner';
+  // useEffect,
+  useContext, useState
+} from "react";
+// import { useQuery, useMutation } from "@apollo/client";
+// import {
+//   GET_YESTERDAYS_CONCERTS,
+//   GET_CONCERTS_BY_DATE
+// } from "../utils/queries";
+// import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
+import ConcertsVenueAZ from '../components/ConcertsVenueAZ'
+// import ConcertList from "../components/ConcertList";
+// import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
-
+import SortFilterBar from '../components/SortFilterBar';
 
 
 
@@ -18,90 +22,92 @@ const Home = () => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
 
-  const [addConcert] = useMutation(ADD_CONCERT)
+  // const [addConcert] = useMutation(ADD_CONCERT)
 
-  const [deleteConcerts] = useMutation(DELETE_CONCERTS);
+  // const [deleteConcerts] = useMutation(DELETE_CONCERTS);
 
-  const getYesterdaysDate = (date) => {
-    const before = new Date(date);
-    before.setDate(before.getDate() - 1);
-    const yesterday = before.toDateString();
-    return yesterday;
-  }
+  // const getYesterdaysDate = (date) => {
+  //   const before = new Date(date);
+  //   before.setDate(before.getDate() - 1);
+  //   const yesterday = before.toDateString();
+  //   return yesterday;
+  // }
 
-  const yesterday = getYesterdaysDate(today);
+  // const yesterday = getYesterdaysDate(today);
 
   // queries yesterdays concerts by date 
-  const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
-    variables: { date: yesterday }
-  })
+  // const { data: yesterdaysConcertData } = useQuery(GET_YESTERDAYS_CONCERTS, {
+  //   variables: { date: yesterday }
+  // })
 
-  useEffect(() => {
-    const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
+  // useEffect(() => {
+  //   const yesterdaysConcerts = yesterdaysConcertData?.getYesterdaysConcerts || [];
 
-    const yesterdaysIdsArr = [];
+  //   const yesterdaysIdsArr = [];
 
-    const deleteYesterdaysConcerts = async (yesterdaysConcerts) => {
-      for (let i = 0; i < yesterdaysConcerts.length; i++) {
-        yesterdaysIdsArr.push(yesterdaysConcerts[i]._id)
-      }
-      console.log('YESTERDAYS IDs TO BE DELETED');
-      console.log(yesterdaysIdsArr);
-      try {
-        await deleteConcerts({
-          variables: { concertId: yesterdaysIdsArr }
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    };
+  //   const deleteYesterdaysConcerts = async (yesterdaysConcerts) => {
+  //     for (let i = 0; i < yesterdaysConcerts.length; i++) {
+  //       yesterdaysIdsArr.push(yesterdaysConcerts[i]._id)
+  //     }
+  //     console.log('YESTERDAYS IDs TO BE DELETED');
+  //     console.log(yesterdaysIdsArr);
+  //     try {
+  //       await deleteConcerts({
+  //         variables: { concertId: yesterdaysIdsArr }
+  //       })
+  //     } catch (e) {
+  //       console.error(e)
+  //     }
+  //   };
 
-    deleteYesterdaysConcerts(yesterdaysConcerts);
-  }, [deleteConcerts, yesterdaysConcertData?.getYesterdaysConcerts])
+  //   deleteYesterdaysConcerts(yesterdaysConcerts);
+  // }, [deleteConcerts, yesterdaysConcertData?.getYesterdaysConcerts])
 
-  useEffect(() => {
-    const dbConcertUpdater = async (arr) => {
-      console.log('dbConcertUpdater is running');
-      await Promise.all(arr.map(async (dailyArr) => {
-        await Promise.all(dailyArr.map(async (concert) => {
-          try {
-            await addConcert({
-              variables: { ...concert }
-            })
-          } catch (e) {
-            console.error(e)
-          };
-        }));
-      }));
-    };
-    dbConcertUpdater(austinScraper);
+  // useEffect(() => {
+  //   const dbConcertUpdater = async (arr) => {
+  //     console.log('dbConcertUpdater is running');
+  //     await Promise.all(arr.map(async (dailyArr) => {
+  //       await Promise.all(dailyArr.map(async (concert) => {
+  //         try {
+  //           await addConcert({
+  //             variables: { ...concert }
+  //           })
+  //         } catch (e) {
+  //           console.error(e)
+  //         };
+  //       }));
+  //     }));
+  //   };
+  //   dbConcertUpdater(austinScraper);
 
-  }, [addConcert, austinScraper])
+  // }, [addConcert, austinScraper])
 
   //use useQuery hook to make query request with dynamic date
-  const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
-    variables: { date: date }
-  });
+  // const { loading, data } = useQuery(GET_CONCERTS_BY_DATE, {
+  //   variables: { date: date }
+  // });
 
   //assign data to variable if present
-  const concerts = data?.concertsFromDb || [];
+  // const concerts = data?.concertsFromDb || [];
 
   return (
     <>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
-      {/* {optionsOpen &&
-                <SortFilterBar />
-            } */}
+      {optionsOpen &&
+        <SortFilterBar />
+      }
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           <div>
-            {loading ? (
+            {/* {loading ? (
               <Spinner />
-            ) : (
-              <>
-                <ConcertList concerts={concerts} />
-              </>
-            )}
+            ) : ( */}
+            <>
+              {/* <ConcertList concerts={concerts} /> */}
+              {/* <ConcertList date={date} /> */}
+              <ConcertsVenueAZ date={date} />
+            </>
+            {/* )} */}
           </div>
         </div>
       </div>
