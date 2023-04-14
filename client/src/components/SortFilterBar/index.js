@@ -1,16 +1,43 @@
 import { TextSortAscending } from '@styled-icons/fluentui-system-filled/TextSortAscending';
 import { Search } from '@styled-icons/bootstrap/Search'
 
-const SortFilterBar = ({ sortOrSearch, setSortOrSearch }) => {
+const SortFilterBar = ({ setSortOrSearch, setVenueName }) => {
+
+    const venueAZClickHandler = () => {
+        setVenueName('');
+        setSortOrSearch('venue')
+    }
+
+    const artistAZClickHandler = () => {
+        setVenueName('');
+        setSortOrSearch('artist')
+    }
+
+    const venueSearchClickHandler = () => {
+        setVenueName('');
+        setSortOrSearch('search')
+    }
+
     return (
+        // <div className="sortFilterContainer">
+        //     <button className={'venue-az sort-buttons'} onClick={() => {setSortOrSearch('venue') && setVenueName('')}}>
+        //         Venue <TextSortAscending className={'sortIcon'} />
+        //     </button>
+        //     <button className={'artist-az sort-buttons'} onClick={() => {setSortOrSearch('artist') && setVenueName('')}}>
+        //         Artist <TextSortAscending className={'sortIcon'} />
+        //     </button>
+        //     <button className={'venue-dropdown sort-buttons'} onClick={() => {setSortOrSearch('search') && setVenueName('')}}>
+        //         Venue <Search className={'sortIcon'} />
+        //     </button>
+        // </div>
         <div className="sortFilterContainer">
-            <button className={'venue-az sort-buttons'} onClick={() => {setSortOrSearch('venue')}}>
+            <button className={'venue-az sort-buttons'} onClick={venueAZClickHandler}>
                 Venue <TextSortAscending className={'sortIcon'} />
             </button>
-            <button className={'artist-az sort-buttons'} onClick={() => {setSortOrSearch('artist')}}>
+            <button className={'artist-az sort-buttons'} onClick={artistAZClickHandler}>
                 Artist <TextSortAscending className={'sortIcon'} />
             </button>
-            <button className={'venue-dropdown sort-buttons'} onClick={() => {setSortOrSearch('search')}}>
+            <button className={'venue-dropdown sort-buttons'} onClick={venueSearchClickHandler}>
                 Venue <Search className={'sortIcon'} />
             </button>
         </div>

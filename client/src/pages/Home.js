@@ -19,6 +19,7 @@ const Home = () => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sortOrSearch, setSortOrSearch] = useState('venue');
+  const [venueName, setVenueName] = useState('');
 
   // const [addConcert] = useMutation(ADD_CONCERT)
 
@@ -92,21 +93,26 @@ const Home = () => {
     <>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
       {optionsOpen &&
-        <SortFilterBar sortOrSearch={sortOrSearch} setSortOrSearch={setSortOrSearch} />
+        <SortFilterBar setSortOrSearch={setSortOrSearch} setVenueName={setVenueName} />
       }
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
-          <div>
-            {sortOrSearch === 'venue' &&
-              <ConcertsVenueAZ date={date} />
-            }
-            {sortOrSearch === 'artist' && 
-              <ConcertsArtistsAZ date={date} />
-            }
-            {sortOrSearch === 'search' && 
-              <VenueSearch />
-            }
-          </div>
+          {venueName ? (
+            <div>{venueName}</div>
+          ) : (
+            <div>
+              {sortOrSearch === 'venue' &&
+                <ConcertsVenueAZ date={date} />
+              }
+              {sortOrSearch === 'artist' &&
+                <ConcertsArtistsAZ date={date} />
+              }
+              {sortOrSearch === 'search' &&
+                <VenueSearch setVenueName={setVenueName} />
+              }
+            </div>
+          )}
+
         </div>
       </div>
     </>

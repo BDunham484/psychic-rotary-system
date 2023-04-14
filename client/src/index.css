@@ -900,6 +900,10 @@ main {
   padding: 20px;
 }
 
+.venue-name:hover {
+  cursor: pointer;
+}
+
 
 
 

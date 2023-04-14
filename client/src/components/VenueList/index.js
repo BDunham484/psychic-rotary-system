@@ -1,6 +1,13 @@
 import ShowCard from "../ShowCard";
 
-const VenueList = ({ venues }) => {
+const VenueList = ({ venues, setVenueName }) => {
+
+    const venueClickHandler = (e) => {
+        e.preventDefault();
+        let venueName = e.target.textContent
+        console.log(venueName);
+        setVenueName(venueName);
+    }
 
     console.log(venues);
     return (
@@ -9,7 +16,7 @@ const VenueList = ({ venues }) => {
                 venues.map((venue, index) => (
                     <ShowCard key={index}>
                         <div id="show-card-data">
-                            {venue}
+                            <span className="venue-name" onClick={venueClickHandler}>{venue}</span>
                         </div>
                     </ShowCard>
                 ))
