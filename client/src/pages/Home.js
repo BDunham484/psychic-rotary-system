@@ -10,6 +10,7 @@ import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
+import VenueList from "../components/VenueList";
 
 
 
@@ -17,7 +18,7 @@ const Home = () => {
   const { today, date, austinScraper } = useContext(ConcertContext);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [venueSort, setVenueSort] = useState(true);
+  const [sortOrSearch, setSortOrSearch] = useState('venue');
 
   // const [addConcert] = useMutation(ADD_CONCERT)
 
@@ -91,16 +92,19 @@ const Home = () => {
     <>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
       {optionsOpen &&
-        <SortFilterBar venueSort={venueSort} setVenueSort={setVenueSort} />
+        <SortFilterBar sortOrSearch={sortOrSearch} setSortOrSearch={setSortOrSearch} />
       }
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           <div>
-            {venueSort &&
+            {sortOrSearch === 'venue' &&
               <ConcertsVenueAZ date={date} />
             }
-            {!venueSort && 
+            {sortOrSearch === 'artist' && 
               <ConcertsArtistsAZ date={date} />
+            }
+            {sortOrSearch === 'search' && 
+              <VenueList />
             }
           </div>
         </div>
