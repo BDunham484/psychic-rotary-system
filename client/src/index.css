@@ -152,7 +152,7 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
-  padding-top: 36vh;
+  padding-top: 40vh;
 }
 
 .utility-bar {
@@ -251,8 +251,8 @@ header nav ul li a {
 }
 
 .sort-buttons {
-  flex: 0.2;
-  margin: 3px;
+  flex: 0 0 20%;
+  margin: 10px 0;
   /* padding: 3px 10px; */
   border-radius: 8px;
   background-color: var(--darkest);
