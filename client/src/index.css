@@ -152,7 +152,7 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
-  padding-top: 40vh;
+  padding-top: 35vh;
 }
 
 .utility-bar {
@@ -254,12 +254,15 @@ header nav ul li a {
   flex: 0 0 20%;
   margin: 10px 0;
   /* padding: 3px 10px; */
+  padding: 10px 0;
   border-radius: 8px;
   background-color: var(--darkest);
   border: none;
   color: var(--main-text);
-  font-family: var(--secondary-font);
-  font-weight: bolder;
+  /* font-family: var(--secondary-font); */
+  letter-spacing: 3px;
+  /* font-weight: bolder; */
+  font-size: 1.17em;
 }
 
 .sort-buttons:hover {
