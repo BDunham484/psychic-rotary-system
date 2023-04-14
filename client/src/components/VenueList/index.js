@@ -5,11 +5,9 @@ const VenueList = ({ venues, setVenueName }) => {
     const venueClickHandler = (e) => {
         e.preventDefault();
         let venueName = e.target.textContent
-        console.log(venueName);
         setVenueName(venueName);
     }
 
-    console.log(venues);
     return (
         <div className="venue-list-wrapper">
             {venues &&

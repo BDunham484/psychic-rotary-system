@@ -23,9 +23,11 @@ const SortFilterBar = ({ setSortOrSearch, setVenueName }) => {
             <button className={'venue-az sort-buttons'} onClick={venueAZClickHandler}>
                 Venue <TextSortAscending className={'sortIcon'} />
             </button>
+
             <button className={'artist-az sort-buttons'} onClick={artistAZClickHandler}>
                 Artist <TextSortAscending className={'sortIcon'} />
             </button>
+            
             <button className={'venue-dropdown sort-buttons'} onClick={venueSearchClickHandler}>
                 Venue <Search className={'sortIcon'} />
             </button>

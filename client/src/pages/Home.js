@@ -11,6 +11,7 @@ import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
 import VenueSearch from "../components/VenueSearch";
+import ShowsByVenue from "../components/ShowsByVenue";
 
 
 
@@ -98,7 +99,7 @@ const Home = () => {
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           {venueName ? (
-            <div>{venueName}</div>
+            <ShowsByVenue venueName={venueName} />
           ) : (
             <div>
               {sortOrSearch === 'venue' &&
