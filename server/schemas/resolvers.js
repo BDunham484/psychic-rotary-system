@@ -61,12 +61,37 @@ const resolvers = {
             // .populate('no')
             // .populate('maybe');
         },
-        //get all concerts in database
+        // get all concerts in database
         concertsFromDb: async (parent, { date }) => {
             const concerts = await Concert.find({
                 date: date
             })
                 .sort({ venue: 'asc' })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe')
+                .exec();
+
+            return concerts
+        },
+        //get all concerts in database
+        concertsSortByVenue: async (parent, { date }) => {
+            const concerts = await Concert.find({
+                date: date
+            })
+                .sort({ venue: 'asc' })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe')
+                .exec();
+            
+            return concerts
+        },
+        concertsSortByArtists: async (parent, { date }) => {
+            const concerts = await Concert.find({
+                date: date
+            })
+                .sort({ artists: 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')

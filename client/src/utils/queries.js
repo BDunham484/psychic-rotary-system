@@ -35,6 +35,42 @@ export const GET_CONCERTS_BY_DATE = gql`
         }
     }
 `;
+export const GET_CONCERTS_SORTED_BY_VENUE = gql`
+    query concertsSortByVenue($date: String!) {
+        concertsSortByVenue(date: $date) {
+            _id
+            artists
+            customId
+            date
+            times
+            venue
+            address
+            address2
+            phone
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+export const GET_CONCERTS_SORTED_BY_ARTISTS = gql`
+    query concertsSortByArtists($date: String!) {
+        concertsSortByArtists(date: $date) {
+            _id
+            artists
+            customId
+            date
+            times
+            venue
+            address
+            address2
+            phone
+            website
+            email
+            ticketLink
+        }
+    }
+`;
 
 export const AUSTIN_CONCERT_SCRAPER = gql`
     query austinConcertScraper($date: String) {

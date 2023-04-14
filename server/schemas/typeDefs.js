@@ -49,6 +49,8 @@ const typeDefs = gql`
         concerts(date: String): [Concert]
         allConcerts: [Concert]
         concertsFromDb(date: String!): [Concert]
+        concertsSortByVenue(date: String!): [Concert]
+        concertsSortByArtists(date: String!): [Concert]
         austinConcertScraper(date: String): [[Concert]]
         getYesterdaysConcerts(date: String!): [Concert]
     }

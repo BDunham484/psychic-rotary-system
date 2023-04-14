@@ -1,7 +1,4 @@
-import {
-  // useEffect,
-  useContext, useState
-} from "react";
+import { useContext, useState } from "react";
 // import { useQuery, useMutation } from "@apollo/client";
 // import {
 //   GET_YESTERDAYS_CONCERTS,
@@ -9,8 +6,6 @@ import {
 // } from "../utils/queries";
 // import { ADD_CONCERT, DELETE_CONCERTS } from "../utils/mutations";
 import ConcertsVenueAZ from '../components/ConcertsVenueAZ'
-// import ConcertList from "../components/ConcertList";
-// import Spinner from '../components/shared/Spinner';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
@@ -99,15 +94,7 @@ const Home = () => {
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           <div>
-            {/* {loading ? (
-              <Spinner />
-            ) : ( */}
-            <>
-              {/* <ConcertList concerts={concerts} /> */}
-              {/* <ConcertList date={date} /> */}
               <ConcertsVenueAZ date={date} />
-            </>
-            {/* )} */}
           </div>
         </div>
       </div>
