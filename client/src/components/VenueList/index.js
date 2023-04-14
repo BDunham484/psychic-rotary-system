@@ -1,4 +1,4 @@
-
+import ShowCard from "../ShowCard";
 
 const VenueList = ({ venues }) => {
 
@@ -6,9 +6,13 @@ const VenueList = ({ venues }) => {
     return (
         <div>
             {venues &&
-                venues.map((venue, index) => {
-                    return <div>{venue}</div>
-                })
+                venues.map((venue, index) => (
+                    <ShowCard key={index}>
+                        <div id="show-card-data">
+                            {venue}
+                        </div>
+                    </ShowCard>
+                ))
             }
         </div>
     )
