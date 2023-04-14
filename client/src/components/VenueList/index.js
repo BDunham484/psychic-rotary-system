@@ -1,9 +1,15 @@
 
 
-const VenueList = () => {
+const VenueList = ({ venues }) => {
+
+    console.log(venues);
     return (
         <div>
-            VENUELIST
+            {venues &&
+                venues.map((venue, index) => {
+                    return <div>{venue}</div>
+                })
+            }
         </div>
     )
 }

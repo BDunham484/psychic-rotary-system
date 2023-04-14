@@ -10,7 +10,7 @@ import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
-import VenueList from "../components/VenueList";
+import VenueSearch from "../components/VenueSearch";
 
 
 
@@ -104,7 +104,7 @@ const Home = () => {
               <ConcertsArtistsAZ date={date} />
             }
             {sortOrSearch === 'search' && 
-              <VenueList />
+              <VenueSearch />
             }
           </div>
         </div>

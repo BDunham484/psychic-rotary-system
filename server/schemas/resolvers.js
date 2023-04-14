@@ -185,6 +185,13 @@ const resolvers = {
 
             return concerts;
         },
+        allVenues: async () => {
+            const venues = await Concert.find()
+                .distinct('venue')
+                
+            console.log(venues);
+            return venues;
+        },
         //scrape one day at a time
         austinConcertScraper: async (parent, { date }) => {
             const concertData = [];

@@ -263,3 +263,9 @@ export const GET_CONCERT_BY_ID = gql`
         }
     }
 `;
+
+export const GET_ALL_VENUES = gql`
+query Query {
+    allVenues
+    }
+`;
