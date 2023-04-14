@@ -3,7 +3,7 @@ import { GET_ALL_VENUES } from "../../utils/queries";
 import VenueList from "../VenueList";
 import Spinner from "../shared/Spinner";
 
-const VenueSearch = ({ setVenueName}) => {
+const VenueSearch = ({ setVenueName }) => {
     // useQuery hook to return all venues from db
     const { loading, data } = useQuery(GET_ALL_VENUES);
 

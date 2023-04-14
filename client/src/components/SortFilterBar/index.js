@@ -19,17 +19,6 @@ const SortFilterBar = ({ setSortOrSearch, setVenueName }) => {
     }
 
     return (
-        // <div className="sortFilterContainer">
-        //     <button className={'venue-az sort-buttons'} onClick={() => {setSortOrSearch('venue') && setVenueName('')}}>
-        //         Venue <TextSortAscending className={'sortIcon'} />
-        //     </button>
-        //     <button className={'artist-az sort-buttons'} onClick={() => {setSortOrSearch('artist') && setVenueName('')}}>
-        //         Artist <TextSortAscending className={'sortIcon'} />
-        //     </button>
-        //     <button className={'venue-dropdown sort-buttons'} onClick={() => {setSortOrSearch('search') && setVenueName('')}}>
-        //         Venue <Search className={'sortIcon'} />
-        //     </button>
-        // </div>
         <div className="sortFilterContainer">
             <button className={'venue-az sort-buttons'} onClick={venueAZClickHandler}>
                 Venue <TextSortAscending className={'sortIcon'} />
