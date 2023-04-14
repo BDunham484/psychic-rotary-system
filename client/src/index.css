@@ -895,6 +895,11 @@ main {
   cursor: pointer;
 }
 
+/* VENUE LIST STYLES START */
+.venue-list-wrapper {
+  padding: 20px;
+}
+
 
 
 
@@ -948,7 +953,8 @@ footer {
   }
 
   #show-card-data {
-    padding: 1vh 0;
+    padding: 1vh;
+    /* padding: 1vh 0; */
   }
 
   #artists-link {

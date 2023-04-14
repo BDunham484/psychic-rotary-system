@@ -4,7 +4,7 @@ const VenueList = ({ venues }) => {
 
     console.log(venues);
     return (
-        <div>
+        <div className="venue-list-wrapper">
             {venues &&
                 venues.map((venue, index) => (
                     <ShowCard key={index}>
