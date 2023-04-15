@@ -12,6 +12,11 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
     const [found, setFound] = useState(false);
     // set state for the result of the search
     const [result, setResult] = useState('');
+    const [matches, setMatches] = useState([])
+    // const [matches, setMatches] = useState({
+    //     query: '',
+    //     list: []
+    // })
 
     const venueClickHandler = (e) => {
         e.preventDefault();
@@ -23,11 +28,36 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
     const handleTextChange = (e) => {
         setText(e.target.value)
 
-        if (text === '') {
+        if (e.target.value === '') {
             setBtnDisabled(true)
+            setShowResult(false)
+            setFound(false)
         } else {
             setBtnDisabled(false)
+
+            setShowResult(true)
+            setFound(true)
+            setResult(text)
         };
+
+        const results = venues.filter(venue => {
+            if (e.target.value === '') {
+                return venues
+            }
+
+            return venue.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+
+        // console.log(results.slice(2))
+
+        setMatches(results[0])
+        // setMatches({
+        //     query: e.target.value,
+        //     list: results[0]
+        // })
+
+        console.log(matches)
+
     };
 
     const handleSearch = (event) => {
@@ -68,7 +98,8 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     {found ? (
                         <ShowCard>
                             <div id="show-card-data">
-                                <span className="venue-name" onClick={venueClickHandler}>{result}</span>
+                                <span className="venue-name" onClick={venueClickHandler}>{matches}</span>
+                                {/* <span className="venue-name" onClick={venueClickHandler}>{result}</span> */}
                             </div>
                         </ShowCard>
                     ) : (
