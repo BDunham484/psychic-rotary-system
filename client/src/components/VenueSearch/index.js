@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_ALL_VENUES } from "../../utils/queries";
 import VenueList from "../VenueList";
+import VenueSearchInput from "../VenueSearchInput";
 import Spinner from "../shared/Spinner";
 
 const VenueSearch = ({ setVenueName }) => {
@@ -15,7 +16,10 @@ const VenueSearch = ({ setVenueName }) => {
             {loading ? (
                 <Spinner />
             ) : (
-                <VenueList venues={venues} setVenueName={setVenueName} />
+                <>
+                    <VenueSearchInput venues={venues} setVenueName={setVenueName} />
+                    <VenueList venues={venues} setVenueName={setVenueName} />
+                </>
             )}
         </div>
     )
