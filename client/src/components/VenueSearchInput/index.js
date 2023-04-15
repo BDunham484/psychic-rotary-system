@@ -46,14 +46,16 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
 
         setMatches(results[0])
 
+        let noMatch = 'No matches';
+
         if (results[0] === undefined) {
             // setShowResult(false)
             // setFound(false)
-            setMatches('No Way Jose')
+            setMatches(noMatch)
         }
     };
 
-    
+
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -93,7 +95,11 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     {found ? (
                         <ShowCard>
                             <div id="show-card-data">
-                                <span className="venue-name" onClick={venueClickHandler}>{matches}</span>
+                                {matches === 'No matches' ? (
+                                    <span className="venue-name">{matches}</span>
+                                ) : (
+                                    <span className="venue-name" onClick={venueClickHandler}>{matches}</span>
+                                )}
                                 {/* <span className="venue-name" onClick={venueClickHandler}>{result}</span> */}
                             </div>
                         </ShowCard>
