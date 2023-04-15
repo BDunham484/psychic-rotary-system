@@ -33,13 +33,18 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
     const handleSearch = (event) => {
         event.preventDefault();
 
-        if (venues.includes(text)) {
-            setResult(text);
+        let lowerCaseVenues = venues.map((venue) => venue.toLowerCase())
+        let lowerCaseText = text.toLowerCase().trim();
+
+        if (lowerCaseVenues.includes(lowerCaseText)) {
+            let index = lowerCaseVenues.indexOf(lowerCaseText)
+            setResult(venues[index]);
             setFound(true);
         } else {
             setResult('Venue Not Found');
             setFound(false);
         }
+
         setText('')
         setShowResult(true);
     }

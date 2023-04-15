@@ -16,9 +16,9 @@ const VenueShowList = ({ concerts }) => {
         <div>
             {concerts &&
                 concerts.map((concert, index) => (
-                    <>
+                    <div key={concert._id}>
                         <div className='venue-list-dates'>{concert.date}</div>
-                        <ShowCard key={concert._id}>
+                        <ShowCard>
                             <div id="show-card-contents">
                                 <div>
                                     {loggedIn
@@ -34,7 +34,7 @@ const VenueShowList = ({ concerts }) => {
                                 </p>
                             </div>
                         </ShowCard>
-                    </>
+                    </div>
 
                 ))
             }
