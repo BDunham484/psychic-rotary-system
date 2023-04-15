@@ -6,6 +6,10 @@ import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const VenueShowList = ({ concerts }) => {
 
+    if (!concerts.length) {
+        return <h3>No concerts at this time.</h3>;
+    }
+
     const loggedIn = Auth.loggedIn();
 
     return (
@@ -13,8 +17,7 @@ const VenueShowList = ({ concerts }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <>
-                        <p>{concert.date}</p>
-
+                        <div className='venue-list-dates'>{concert.date}</div>
                         <ShowCard key={concert._id}>
                             <div id="show-card-contents">
                                 <div>

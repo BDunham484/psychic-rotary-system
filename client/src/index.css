@@ -904,6 +904,16 @@ main {
   cursor: pointer;
 }
 
+.venue-list-dates {
+  font-family: var(--primary-font);
+  letter-spacing: 3px;
+  font-weight: 700;
+  font-size: 1.17em;
+  color: var(--main-text);
+  padding-bottom: 5px;
+  text-align: center;
+}
+
 
 
 
