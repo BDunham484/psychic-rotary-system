@@ -1,17 +1,38 @@
+import Auth from '../../utils/auth';
+import { Link } from "react-router-dom";
 import ShowCard from "../ShowCard";
+import PlusMinus from "../shared/PlusMinus";
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const VenueShowList = ({ concerts }) => {
+
+    const loggedIn = Auth.loggedIn();
+
     return (
         <div>
             {concerts &&
                 concerts.map((concert, index) => (
-                    <ShowCard key={index}>
-                        <div id={'show-card-data'}> 
-                            <div>{concert.date}</div>
-                            {concert.artists}
-                            <div></div>
-                        </div>
-                    </ShowCard>
+                    <>
+                        <p>{concert.date}</p>
+
+                        <ShowCard key={concert._id}>
+                            <div id="show-card-contents">
+                                <div>
+                                    {loggedIn
+                                        ? <PlusMinus concertId={concert._id} />
+                                        : <SquaredPlus id="plus-sign-logged-out" />
+                                    }
+                                </div>
+                                <p id="show-card-data">
+                                    <Link to={`/show/${concert.artists}`} state={{ concert: concert }}>
+                                        <span id="artists-link">{concert.artists} </span>
+                                    </Link>
+                                    <span id="at-venue">at</span> <span id="venue">{concert.venue}</span> <span id="divider">|</span> {concert.times}
+                                </p>
+                            </div>
+                        </ShowCard>
+                    </>
+
                 ))
             }
         </div>
