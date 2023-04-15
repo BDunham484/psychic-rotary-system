@@ -12,11 +12,7 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
     const [found, setFound] = useState(false);
     // set state for the result of the search
     const [result, setResult] = useState('');
-    const [matches, setMatches] = useState([])
-    // const [matches, setMatches] = useState({
-    //     query: '',
-    //     list: []
-    // })
+    const [matches, setMatches] = useState([]);
 
     const venueClickHandler = (e) => {
         e.preventDefault();
@@ -48,17 +44,16 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
             return venue.toLowerCase().includes(e.target.value.toLowerCase())
         })
 
-        // console.log(results.slice(2))
-
         setMatches(results[0])
-        // setMatches({
-        //     query: e.target.value,
-        //     list: results[0]
-        // })
 
-        console.log(matches)
-
+        if (results[0] === undefined) {
+            // setShowResult(false)
+            // setFound(false)
+            setMatches('No Way Jose')
+        }
     };
+
+    
 
     const handleSearch = (event) => {
         event.preventDefault();
