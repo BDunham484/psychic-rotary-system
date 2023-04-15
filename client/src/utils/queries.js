@@ -269,3 +269,33 @@ query Query {
     allVenues
     }
 `;
+
+export const GET_CONCERTS_BY_VENUE = gql`
+query concertsByVenue($venue: String!) {
+    concertsByVenue(venue: $venue) {
+        _id
+        customId
+        artists
+        artistsLink
+        description
+        date
+        times
+        venue
+        address
+        address2
+        phone
+        website
+        email
+        ticketLink
+        yes {
+        _id
+        }
+        no {
+            _id
+        }
+        maybe {
+            _id
+        }
+    }
+}
+`;

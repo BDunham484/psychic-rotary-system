@@ -192,6 +192,18 @@ const resolvers = {
             console.log(venues);
             return venues;
         },
+        concertsByVenue: async (parent, { venue }) => {
+            const concerts = await Concert.find({
+                venue: venue
+            })
+                // .sort({ date: 'asc'})
+                .populate('yes')
+                .populate('no')
+                .populate('maybe');
+
+            console.log(concerts);
+            return concerts;
+        },
         //scrape one day at a time
         austinConcertScraper: async (parent, { date }) => {
             const concertData = [];
