@@ -55,7 +55,7 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                         value={text}
                         className="friend-search-input"
                     />
-                    <button className="friend-search-button" type="submit" >Search</button>
+                    <button disabled={btnDisabled} className="friend-search-button" type="submit" >Search</button>
                 </div>
             </form>
             {showResult &&

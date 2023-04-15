@@ -1,12 +1,22 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import { CubeAlt } from '@styled-icons/boxicons-regular';
+import { ConcertContext } from '../../utils/GlobalState'
+
 
 const Header = () => {
+  const { today, setDate } = useContext(ConcertContext);
+
   const logout = event => {
     event.preventDefault();
     Auth.logout();
   };
+
+  const clickHandler = () => {
+    console.log(today)
+    setDate(today);
+  }
 
 
   return (
@@ -15,8 +25,8 @@ const Header = () => {
 
         <div className="display-flex title-wrapper">
           <Link to="/">
-            <h1 id="title">NOISEBX</h1>
-            <h1 id="title-mobile">NBX</h1>
+            <h1 onClick={clickHandler} id="title">NOISEBX</h1>
+            <h1 onClick={clickHandler} id="title-mobile">NBX</h1>
           </Link>
           <CubeAlt id="cube-icon" />
 

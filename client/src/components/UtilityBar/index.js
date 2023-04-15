@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ConcertContext } from "../../utils/GlobalState";
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
 import DatePicker from "react-datepicker";
@@ -13,8 +13,13 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
 
     const { today, date, setDate } = useContext(ConcertContext);
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date(date));
+    // const [startDate, setStartDate] = useState(new Date());
     // const [optionsOpen, setOptionsOpen] = useState(false);
+
+    useEffect(() => {
+        setStartDate(new Date(date))
+    }, [setStartDate, date])
 
     const handleOptionsClick = () => {
         console.log('OPTIONSCLICKED')
