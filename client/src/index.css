@@ -813,6 +813,10 @@ main {
   padding: 20px;
 }
 
+.border-bottom {
+  border-bottom: 1px solid var(--darkest);
+}
+
 .friend-search-input-wrapper {
   width: 100%;
   margin-bottom: 4vh;

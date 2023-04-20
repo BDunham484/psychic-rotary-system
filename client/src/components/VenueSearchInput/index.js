@@ -44,12 +44,15 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
             return venue.toLowerCase().includes(e.target.value.toLowerCase())
         })
 
-        setMatches(results[0])
+        setMatches([results[0], results[1]])
+        matches.map((fart) => (
+            console.log(fart)
+        ))
 
         let noMatch = 'No matches';
 
-        if (results[0] === undefined) {
-            // setShowResult(false)
+        if (results[0] === undefined && results[1] === undefined) {
+            setShowResult(false)
             // setFound(false)
             setMatches(noMatch)
         }
@@ -89,27 +92,29 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     />
                     <button disabled={btnDisabled} className="friend-search-button" type="submit" >Search</button>
                 </div>
-            {/* </form> */}
-            {showResult &&
-                <>
-                    {found ? (
-                        <ShowCard>
-                            <div id="show-card-data">
-                                {matches === 'No matches' ? (
-                                    <span className="venue-name">{matches}</span>
-                                ) : (
-                                    <span className="venue-name" onClick={venueClickHandler}>{matches}</span>
-                                )}
-                                {/* <span className="venue-name" onClick={venueClickHandler}>{result}</span> */}
-                            </div>
-                        </ShowCard>
-                    ) : (
-                        <div className="names">{result}</div>
-                    )}
-                </>
-            }
+                {/* </form> */}
+                {showResult &&
+                    <>
+                        {found ? (
+                            matches.map((match, index) => (
+                                match &&
+                                <ShowCard key={index}>
+                                    <div id="show-card-data">
+                                        {match === 'No matches' ? (
+                                            <span className="venue-name">{match}</span>
+                                        ) : (
+                                            <span className="venue-name" onClick={venueClickHandler}>{match}</span>
+                                        )}
+                                    </div>
+                                </ShowCard>
+                            ))
+                        ) : (
+                            <div className="names">{result}</div>
+                        )}
+                        <div className="border-bottom"></div>
+                    </>
+                }
             </form>
-
         </div>
     )
 }
