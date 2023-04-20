@@ -809,10 +809,13 @@ main {
   max-height: 26vh;
 }
 
+.venue-search-form {
+  padding: 20px;
+}
+
 .friend-search-input-wrapper {
   width: 100%;
   margin-bottom: 4vh;
-  border: 1px var(--button) solid;
   border-radius: 10px;
 }
 

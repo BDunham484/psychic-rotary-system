@@ -78,7 +78,7 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
 
     return (
         <div>
-            <form onSubmit={handleSearch}>
+            <form className={'venue-search-form'} onSubmit={handleSearch}>
                 <div className="friend-search-input-wrapper">
                     <input
                         onChange={handleTextChange}
@@ -89,7 +89,7 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     />
                     <button disabled={btnDisabled} className="friend-search-button" type="submit" >Search</button>
                 </div>
-            </form>
+            {/* </form> */}
             {showResult &&
                 <>
                     {found ? (
@@ -108,6 +108,8 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     )}
                 </>
             }
+            </form>
+
         </div>
     )
 }
