@@ -35,7 +35,6 @@ const VenueShowList = ({ concerts }) => {
                             </div>
                         </ShowCard>
                     </div>
-
                 ))
             }
         </div>

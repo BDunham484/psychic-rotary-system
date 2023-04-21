@@ -248,6 +248,8 @@ header nav ul li a {
   position: fixed;
   opacity: .90;
   background-color: var(--background);
+  border-top: 1px solid var(--darkest);
+  border-bottom: 1px solid var(--darkest);
 }
 
 .sort-buttons {
