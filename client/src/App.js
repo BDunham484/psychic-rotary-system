@@ -69,10 +69,10 @@ function App() {
                     <Route path="" element={<Profile />} />
                   </Route>
                   <Route path="/show/:artists" element={<Show />} />
-                  {/* <Route
+                  <Route
                     path="*"
                     element={<NoMatch />}
-                  /> */}
+                  />
                 </Routes>
               </main>
             </div>
