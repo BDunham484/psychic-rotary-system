@@ -5,20 +5,20 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
+import addMonths from "date-fns/addMonths";
 import { Options } from '@styled-icons/fluentui-system-regular/Options'
 // import SortFilterBar from "../SortFilterBar";
 
 
-const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
+const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
 
-    const { today, date, setDate } = useContext(ConcertContext);
+    const { date, setDate } = useContext(ConcertContext);
 
     const [startDate, setStartDate] = useState(new Date(date));
-    // const [startDate, setStartDate] = useState(new Date());
-    // const [optionsOpen, setOptionsOpen] = useState(false);
 
     useEffect(() => {
         setStartDate(new Date(date))
+
     }, [setStartDate, date])
 
     const handleOptionsClick = () => {
@@ -63,7 +63,8 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
     return (
         <div className="utility-bar">
             <span className="display-flex date-wrapper">
-                {today === date ? (
+                {/* {today === date ? ( */}
+                {yesterday.toDateString() === date ? (
                     <LeftArrow className="disabled-arrows" />
                 ) : (
                     <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
@@ -84,6 +85,9 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen}) => {
                     onKeyDown={(e) => {
                         e.preventDefault();
                     }}
+                    minDate={new Date()}
+                    maxDate={addMonths(new Date(), 3)}
+                    showDisabledMonthNavigation
                 />
                 <Options className={'options'} onClick={handleOptionsClick} />
                 <RightArrow className="arrows" onClick={() => nextDayButton(date)} />

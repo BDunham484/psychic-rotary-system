@@ -215,6 +215,10 @@ header nav ul li a {
   color: var(--main-text);
 }
 
+.calendar .react-datepicker__day--disabled {
+  color: var(--dark)
+}
+
 .calendar .react-datepicker__day--keyboard-selected {
   background-color: var(--dark);
 }
