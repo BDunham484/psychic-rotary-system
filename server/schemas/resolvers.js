@@ -352,8 +352,7 @@ const resolvers = {
                 concertData.push(events);
 
             }));
-            console.log('CONCERTDATA');
-            console.log(concertData.length / 2 + ' days of concerts scraped');
+            console.log(year + '-' + month + '-' + day + ': SCRAPED')
             return concertData;
         },
 
