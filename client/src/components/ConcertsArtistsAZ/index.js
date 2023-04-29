@@ -12,6 +12,8 @@ const ConcertsArtistsAZ = ({ date }) => {
 
     //assign data to variable if present
     const concerts = data?.concertsSortByArtists || [];
+    console.log('CONCERTS DATA FROM CONCERTSARTISTSAZ');
+    console.log(concerts)
 
     return (
         <div>
