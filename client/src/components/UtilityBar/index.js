@@ -41,6 +41,9 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
 
+    const endOfDays = new Date();
+    endOfDays.setDate(endOfDays.getDate() + 89)
+
 
     //function that gets the next day
     const nextDayButton = (date) => {
@@ -90,7 +93,12 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
                     showDisabledMonthNavigation
                 />
                 <Options className={'options'} onClick={handleOptionsClick} />
-                <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
+                {endOfDays.toDateString() === date ? (
+                    <RightArrow className="disabled-arrows" />
+                ) : (
+                    <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
+
+                )}
             </span>
             {/* {optionsOpen &&
                 <SortFilterBar />
