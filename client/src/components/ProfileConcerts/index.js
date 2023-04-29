@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Expander from "../shared/Expander";
 
 
-const ProfileConcerts = ({ user }) => {
+const ProfileConcerts = ({ userParam, user }) => {
     // set state for expander icon to hide/display friendlist names
     const [expand, setExpand] = useState(true);
 
@@ -35,7 +35,6 @@ const ProfileConcerts = ({ user }) => {
                         <Expander expand={expand} setExpand={setExpand} />
                     </div>
                 </div>
-
                 {expand &&
                     user.concerts &&
                     user.concerts.map((concert, index) => (
@@ -46,10 +45,11 @@ const ProfileConcerts = ({ user }) => {
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
                                 {concert.venue}
-                                <div>
-                                    <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
-                                </div>
-
+                                {!userParam &&
+                                    <div>
+                                        <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
+                                    </div>
+                                }
                             </div>
                         </ShowCard>
                     ))

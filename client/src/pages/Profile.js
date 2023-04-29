@@ -45,15 +45,25 @@ const Profile = () => {
         );
     }
 
+    console.log('USERPARAMS: ' + userParam)
+
+
     return (
         <div className='profile-page-wrapper'>
             <div className="profile-page-header">
                 <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
             </div>
-            <div className="concert-friend-wrapper">
-                <ProfileConcerts user={user} />
-                <Friends userParam={userParam} user={user} />
-            </div>
+            {userParam ? (
+                <div className="concert-friend-wrapper">
+                    <ProfileConcerts userParam={userParam} user={user} />
+                </div>
+            ) : (
+                <div className="concert-friend-wrapper">
+                    <ProfileConcerts userParam={userParam} user={user} />
+                    <Friends userParam={userParam} user={user} />
+                </div>
+            )}
+
 
         </div>
     )

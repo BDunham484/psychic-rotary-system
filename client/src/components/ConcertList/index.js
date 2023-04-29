@@ -9,7 +9,7 @@ import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 const ConcertList = ({ concerts }) => {
 
     if (!concerts.length) {
-        return <h3>An error occurred. Try reloading the page.</h3>;
+        return <h3>No shows, yo. Try again later.</h3>;
     }
 
     const loggedIn = Auth.loggedIn();
