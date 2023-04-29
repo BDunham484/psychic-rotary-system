@@ -633,7 +633,7 @@ const resolvers = {
             //save date to another variable for the for loop
             let arrayDate = date;
             //for loop that gets previous weeks worth of date and pushes the to array
-            for (let i = 0; i < 18; i++) {
+            for (let i = 0; i < 89; i++) {
                 let yesterday = dayBefore(arrayDate);
                 dateArr.push(yesterday);
                 arrayDate = yesterday;
