@@ -84,7 +84,7 @@ const resolvers = {
                 .populate('no')
                 .populate('maybe')
                 .exec();
-            
+
             return concerts
         },
         concertsSortByArtists: async (parent, { date }) => {
@@ -188,7 +188,7 @@ const resolvers = {
         allVenues: async () => {
             const venues = await Concert.find()
                 .distinct('venue')
-                
+
             console.log(venues);
             return venues;
         },
@@ -230,7 +230,18 @@ const resolvers = {
                             const description = $(this).find('.description').text()
                             const dateTime = $(this).find('.date-time').text()
                             const venue = $(this).find('.venue').text()
-                            const headliner = artists.split(',')[0];
+                            //the following headliner block focuses on finding any instance of 'w/' within `unfilitered headliner` and replaces it with 'with'.  The `headliner` variable is used in the customId which becomes a url for the event.  An `/` within the url causes an error. 
+                            let headliner;
+                            let unfilteredHeadliner = artists.split(',')[0];
+                            const splitHeadliner = unfilteredHeadliner.split(' ');
+                            if (splitHeadliner.includes('w/')) {
+                                const wIndex = splitHeadliner.indexOf('w/')
+                                splitHeadliner[wIndex] = 'with';
+                                headliner = splitHeadliner.join(' ');
+                            } else {
+                                headliner = unfilteredHeadliner;
+                            };
+
                             const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
                             const timeArr = dateTime.split(",")
                             const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
@@ -258,7 +269,18 @@ const resolvers = {
                             const description = $(this).find('.description').text()
                             const dateTime = $(this).find('.date-time').text()
                             const venue = $(this).find('.venue').text()
-                            const headliner = artists.split(',')[0];
+                            //the following 'headliner' block focuses on finding any instance of 'w/' within `unfilitered headliner` and replaces it with 'with'.  The `headliner` variable is used in the customId which becomes a url for the event.  An `/` within the url causes an error. 
+                            let headliner;
+                            let unfilteredHeadliner = artists.split(',')[0];
+                            const splitHeadliner = unfilteredHeadliner.split(' ');
+                            if (splitHeadliner.includes('w/')) {
+                                const wIndex = splitHeadliner.indexOf('w/')
+                                splitHeadliner[wIndex] = 'with';
+                                headliner = splitHeadliner.join(' ');
+                            } else {
+                                headliner = unfilteredHeadliner;
+                            };
+
                             const customId = headliner.split(/[,.'\s]+/).join("") + date.split(/[,.'\s]+/).join("") + venue.split(/[,.'\s]+/).join("")
                             const timeArr = dateTime.split(",")
                             const timex = /([0-9]|0[0-9]|1[0-9]|2[0-3]):?([0-5]?[0-9]?)\s*([AaPp][Mm])/
@@ -766,7 +788,7 @@ const resolvers = {
                 if (!user) {
                     throw new Error('User does not exist');
                 }
-                
+
                 return user
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -864,19 +886,19 @@ const resolvers = {
             if (context.user) {
                 let user = await User.findOneAndUpdate(
                     { '_id': context.user._id },
-                    { $push: { blockedUsers: blockedId }},
+                    { $push: { blockedUsers: blockedId } },
                     { new: true }
                 ).populate('blockedUsers');
 
                 await User.findOneAndUpdate(
                     { '_id': context.user._id },
-                    { $pull: { friends: blockedId }},
+                    { $pull: { friends: blockedId } },
                     { new: true }
                 ).populate('friends');
 
                 await User.findOneAndUpdate(
                     { '_id': blockedId },
-                    { $pull: { friends: context.user._id }},
+                    { $pull: { friends: context.user._id } },
                     { new: true }
                 )
 
@@ -890,7 +912,7 @@ const resolvers = {
             if (context.user) {
                 let user = await User.findOneAndUpdate(
                     { '_id': context.user._id },
-                    { $pull: { blockedUsers: blockedId }},
+                    { $pull: { blockedUsers: blockedId } },
                     { new: true }
                 )
                 return user;
