@@ -1036,7 +1036,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    padding-top: 15vh;
+    /* padding-top: 15vh; */
   }
 
   .profile-concerts-card {
@@ -1097,4 +1097,5 @@ footer {
   .wrapperOptions {
     padding-top: 40vh;
   }
+
 }
