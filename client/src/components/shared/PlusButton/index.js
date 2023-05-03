@@ -1,16 +1,30 @@
+import { useContext } from 'react';
 import { useMutation } from "@apollo/client";
-import { ADD_CONCERT_TO_USER } from "../../../utils/mutations";
-import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import { ConcertContext } from '../../../utils/GlobalState';
+import { 
+    ADD_CONCERT_TO_USER,
+    RSVP_MAYBE
+} from "../../../utils/mutations";
+import {  SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const PlusButton = ({ concertId }) => {
+    const { user } = useContext(ConcertContext);
+    const userId = user?.me?._id || {};
 
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
+    const [rsvpMaybe] = useMutation(RSVP_MAYBE);
 
-    const handleClick = async (id) => {
+    const handleClick = async (id, userId) => {
         console.log(id + ' has been added to user profile');
         try {
             await addConcertToUser({
                 variables: { concertId: id }
+            })
+            await rsvpMaybe({
+                variables: {
+                    concertId: id,
+                    userId: userId
+                }
             })
         } catch (e) {
             console.error(e)
@@ -19,7 +33,7 @@ const PlusButton = ({ concertId }) => {
 
     return (
         <>
-            <SquaredPlus className="plus-sign" onClick={() => handleClick(concertId)} />
+            <SquaredPlus className="plus-sign" onClick={() => handleClick(concertId, userId)} />
         </>
     )
 }
