@@ -5,7 +5,8 @@ import { CheckCircle } from '@styled-icons/bootstrap/CheckCircle';
 import {
     RSVP_YES,
     CANCEL_RSVP_NO,
-    CANCEL_RSVP_MAYBE
+    CANCEL_RSVP_MAYBE,
+    ADD_CONCERT_TO_USER
 } from '../../../utils/mutations';
 
 
@@ -20,6 +21,7 @@ const UncheckedYes = ({ concertId }) => {
     const [cancelRsvpNo] = useMutation(CANCEL_RSVP_NO);
     //call cancelRsvpMaybe mutation
     const [cancelRsvpMaybe] = useMutation(CANCEL_RSVP_MAYBE);
+    const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
     //function that removes userId from concert's 'yes' field
     const handleClick = async (concertId, userId) => {
         console.log('userId: ' + userId + ' rsvp-ed yes to concertId: ' + concertId);
@@ -29,6 +31,9 @@ const UncheckedYes = ({ concertId }) => {
                     concertId: concertId,
                     userId: userId
                 }
+            })
+            await addConcertToUser({
+                variables: { concertId: concertId }
             })
             await cancelRsvpNo({
                 variables: {

@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ConcertContext } from '../../../utils/GlobalState';
 import { 
     ADD_CONCERT_TO_USER,
-    RSVP_MAYBE
+    RSVP_MAYBE,
 } from "../../../utils/mutations";
 import {  SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
