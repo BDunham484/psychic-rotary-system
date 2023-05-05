@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Back } from '@styled-icons/entypo/Back'
 
 const BackButton = () => {
     let history = useNavigate()
@@ -10,7 +11,8 @@ const BackButton = () => {
 
     return (
         <div>
-            <button type="button" onClick={clickBack}>BACK</button>
+            <Back type="button" className='back-button' onClick={clickBack} />
+            {/* <button type="button" onClick={clickBack}>BACK</button> */}
         </div>
     )
 }

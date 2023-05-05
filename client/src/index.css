@@ -330,6 +330,22 @@ main {
 }
 
 /* SHOWCARD COMPONENT && SHOW PAGE STYLES START */
+.back-button-wrapper {
+  width: 90vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.back-button {
+  color: var(--main-text);
+  width: 50px;
+}
+
+.back-button:hover {
+  cursor: pointer;
+}
+
 .show-card {
   background-color: var(--darkest);
   margin-bottom: 4vh;

@@ -6,12 +6,12 @@ import ConcertRSVP from "../components/shared/ConcertRSVP";
 import BackButton from "../components/shared/BackButton";
 
 const Show = () => {
-    
+
     const location = useLocation();
 
     const { concert } = location.state
     // const { concert } = location?.state || {};
-    
+
 
     const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.venue}`
 
@@ -23,7 +23,9 @@ const Show = () => {
 
     return (
         <div className='container'>
-            <BackButton />
+            <div className="back-button-wrapper">
+                <BackButton />
+            </div>
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
                 {loggedIn &&
