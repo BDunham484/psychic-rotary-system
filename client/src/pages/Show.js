@@ -10,8 +10,6 @@ const Show = () => {
     const location = useLocation();
 
     const { concert } = location.state
-    // const { concert } = location?.state || {};
-
 
     const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert.venue}`
 

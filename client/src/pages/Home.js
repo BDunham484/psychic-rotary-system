@@ -12,6 +12,7 @@ import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
 import VenueSearch from "../components/VenueSearch";
 import ShowsByVenue from "../components/ShowsByVenue";
+import { useLocation } from "react-router-dom"
 
 
 
@@ -21,6 +22,11 @@ const Home = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sortOrSearch, setSortOrSearch] = useState('venue');
   const [venueName, setVenueName] = useState('');
+  console.log('VENUENAMEVENUENAME: ' + venueName)
+
+  const testyTest = useLocation();
+  console.log('TESTYTESTYTESTYTEST')
+  console.log(testyTest)
 
 
   // const [addConcert] = useMutation(ADD_CONCERT)

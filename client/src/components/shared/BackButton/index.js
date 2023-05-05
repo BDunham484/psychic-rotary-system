@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowHookUpLeft } from '@styled-icons/fluentui-system-regular/ArrowHookUpLeft'
 
 const BackButton = () => {
+
     let history = useNavigate()
 
     const clickBack = () => {
-        console.log('BACKBUTTONCLICKED')
         history(-1)
     }
 
