@@ -3,6 +3,7 @@ import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard';
 import PlusMinus from "../components/shared/PlusMinus";
 import ConcertRSVP from "../components/shared/ConcertRSVP";
+import BackButton from "../components/shared/BackButton";
 
 const Show = () => {
     
@@ -22,6 +23,7 @@ const Show = () => {
 
     return (
         <div className='container'>
+            <BackButton />
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
                 {loggedIn &&
