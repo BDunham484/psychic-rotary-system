@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Back } from '@styled-icons/entypo/Back'
+import { ArrowHookUpLeft } from '@styled-icons/fluentui-system-regular/ArrowHookUpLeft'
 
 const BackButton = () => {
     let history = useNavigate()
@@ -11,8 +11,7 @@ const BackButton = () => {
 
     return (
         <div>
-            <Back type="button" className='back-button' onClick={clickBack} />
-            {/* <button type="button" onClick={clickBack}>BACK</button> */}
+            <ArrowHookUpLeft type="button" className='back-button' onClick={clickBack} />
         </div>
     )
 }
