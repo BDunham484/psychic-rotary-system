@@ -6,7 +6,7 @@ import { ConcertContext } from '../../utils/GlobalState'
 
 
 const Header = () => {
-  const { today, setDate } = useContext(ConcertContext);
+  const { today, setDate, setSortOrSearch } = useContext(ConcertContext);
 
   const logout = event => {
     event.preventDefault();
@@ -14,8 +14,8 @@ const Header = () => {
   };
 
   const clickHandler = () => {
-    console.log(today)
     setDate(today);
+    setSortOrSearch('venue')
   }
 
 

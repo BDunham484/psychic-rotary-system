@@ -14,10 +14,11 @@ import VenueSearch from "../components/VenueSearch";
 
 
 const Home = () => {
-  const { today, date, austinScraper } = useContext(ConcertContext);
+  const { date, sortOrSearch, setSortOrSearch  } = useContext(ConcertContext);
+  // const { today, date, austinScraper } = useContext(ConcertContext);
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [sortOrSearch, setSortOrSearch] = useState('venue');
+  // const [sortOrSearch, setSortOrSearch] = useState('venue');
 
 
   // const [addConcert] = useMutation(ADD_CONCERT)

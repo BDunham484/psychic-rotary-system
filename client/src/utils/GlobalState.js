@@ -20,8 +20,8 @@ const ConcertProvider = ({ children }) => {
             console.log('USERDATA LOADING...');
         } else {
             setUser(userData);
-            console.log('GLOBALSTATE USER')
-            console.log(user);
+            // console.log('GLOBALSTATE USER')
+            // console.log(user);
             startPolling(250);
             return () => {
                 stopPolling()
@@ -31,7 +31,7 @@ const ConcertProvider = ({ children }) => {
 
     //get today's date with imported helper function
     var today = getTodaysDate();
-    console.log("TODAY: " + today);
+
     //set initial state using today's date
     const [date, setDate] = useState(today);
 
@@ -60,7 +60,7 @@ const ConcertProvider = ({ children }) => {
 
     //     let index = 0;
     //     const delay = (1000 * 20)
-        
+
     //     let interval = setInterval(function () {
     //         index += 1;
     //         if (index >= 90) {
@@ -94,6 +94,9 @@ const ConcertProvider = ({ children }) => {
 
     // }, [concertData, austinScraper])
 
+    const [sortOrSearch, setSortOrSearch] = useState('venue');
+
+
 
     return <Provider value={{
         today,
@@ -102,6 +105,8 @@ const ConcertProvider = ({ children }) => {
         austinScraper,
         user,
         setUser,
+        sortOrSearch,
+        setSortOrSearch
     }}>
         {children}
     </Provider>
