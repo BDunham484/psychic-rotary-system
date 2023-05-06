@@ -1,7 +1,8 @@
 import { useState } from "react";
 import ShowCard from "../ShowCard";
+import { Link } from "react-router-dom";
 
-const VenueSearchInput = ({ venues, setVenueName }) => {
+const VenueSearchInput = ({ venues }) => {
     // set state for input text
     const [text, setText] = useState('');
     // set state for search button 
@@ -13,12 +14,6 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
     // set state for the result of the search
     const [result, setResult] = useState('');
     const [matches, setMatches] = useState([]);
-
-    const venueClickHandler = (e) => {
-        e.preventDefault();
-        let venueName = e.target.textContent
-        setVenueName(venueName);
-    }
 
     //handler for friend search text input
     const handleTextChange = (e) => {
@@ -45,20 +40,14 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
         })
 
         setMatches([results[0], results[1]])
-        matches.map((fart) => (
-            console.log(fart)
-        ))
 
         let noMatch = 'No matches';
 
         if (results[0] === undefined && results[1] === undefined) {
             setShowResult(false)
-            // setFound(false)
             setMatches(noMatch)
         }
     };
-
-
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -92,7 +81,6 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                     />
                     <button disabled={btnDisabled} className="friend-search-button" type="submit" >Search</button>
                 </div>
-                {/* </form> */}
                 {showResult &&
                     <>
                         {found ? (
@@ -103,7 +91,9 @@ const VenueSearchInput = ({ venues, setVenueName }) => {
                                         {match === 'No matches' ? (
                                             <span className="venue-name">{match}</span>
                                         ) : (
-                                            <span className="venue-name" onClick={venueClickHandler}>{match}</span>
+                                            <Link to={`/venue/${match}}`} state={{ venueName: match }}>
+                                                <span className="venue-name" >{match}</span>
+                                            </Link>
                                         )}
                                     </div>
                                 </ShowCard>

@@ -1,12 +1,8 @@
 import ShowCard from "../ShowCard";
+import { Link } from "react-router-dom";
 
-const VenueList = ({ venues, setVenueName }) => {
 
-    const venueClickHandler = (e) => {
-        e.preventDefault();
-        let venueName = e.target.textContent
-        setVenueName(venueName);
-    }
+const VenueList = ({ venues }) => {
 
     return (
         <div className="venue-list-wrapper">
@@ -14,7 +10,9 @@ const VenueList = ({ venues, setVenueName }) => {
                 venues.map((venue, index) => (
                     <ShowCard key={index}>
                         <div id="show-card-data">
-                            <span className="venue-name" onClick={venueClickHandler}>{venue}</span>
+                            <Link to={`/venue/${venue}}`} state={{ venueName: venue }}>
+                                <span className="venue-name">{venue}</span>
+                            </Link>
                         </div>
                     </ShowCard>
                 ))

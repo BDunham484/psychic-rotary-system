@@ -1,20 +1,17 @@
 import { TextSortAscending } from '@styled-icons/fluentui-system-filled/TextSortAscending';
 import { Search } from '@styled-icons/bootstrap/Search'
 
-const SortFilterBar = ({ setSortOrSearch, setVenueName }) => {
+const SortFilterBar = ({ setSortOrSearch }) => {
 
     const venueAZClickHandler = () => {
-        setVenueName('');
         setSortOrSearch('venue')
     }
 
     const artistAZClickHandler = () => {
-        setVenueName('');
         setSortOrSearch('artist')
     }
 
     const venueSearchClickHandler = () => {
-        setVenueName('');
         setSortOrSearch('search')
     }
 

@@ -11,9 +11,6 @@ import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
 import VenueSearch from "../components/VenueSearch";
-import ShowsByVenue from "../components/ShowsByVenue";
-import { useLocation } from "react-router-dom"
-
 
 
 const Home = () => {
@@ -21,12 +18,6 @@ const Home = () => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [sortOrSearch, setSortOrSearch] = useState('venue');
-  const [venueName, setVenueName] = useState('');
-  console.log('VENUENAMEVENUENAME: ' + venueName)
-
-  const testyTest = useLocation();
-  console.log('TESTYTESTYTESTYTEST')
-  console.log(testyTest)
 
 
   // const [addConcert] = useMutation(ADD_CONCERT)
@@ -101,13 +92,11 @@ const Home = () => {
     <>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
       {optionsOpen &&
-        <SortFilterBar setSortOrSearch={setSortOrSearch} setVenueName={setVenueName} />
+        <SortFilterBar setSortOrSearch={setSortOrSearch} />
       }
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
-          {venueName ? (
-            <ShowsByVenue venueName={venueName} />
-          ) : (
+          
             <div>
               {sortOrSearch === 'venue' &&
                 <ConcertsVenueAZ date={date} />
@@ -116,15 +105,12 @@ const Home = () => {
                 <ConcertsArtistsAZ date={date} />
               }
               {sortOrSearch === 'search' &&
-                <VenueSearch setVenueName={setVenueName} />
+                <VenueSearch />
               }
             </div>
-          )}
-
         </div>
       </div>
     </>
-
   );
 };
 

@@ -4,7 +4,7 @@ import VenueList from "../VenueList";
 import VenueSearchInput from "../VenueSearchInput";
 import Spinner from "../shared/Spinner";
 
-const VenueSearch = ({ setVenueName }) => {
+const VenueSearch = () => {
     // useQuery hook to return all venues from db
     const { loading, data } = useQuery(GET_ALL_VENUES);
 
@@ -17,8 +17,8 @@ const VenueSearch = ({ setVenueName }) => {
                 <Spinner />
             ) : (
                 <>
-                    <VenueSearchInput venues={venues} setVenueName={setVenueName} />
-                    <VenueList venues={venues} setVenueName={setVenueName} />
+                    <VenueSearchInput venues={venues} />
+                    <VenueList venues={venues} />
                 </>
             )}
         </div>

@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
+import ShowsByVenue from './components/ShowsByVenue';
 
 
 // const SERVER_URL = 
@@ -69,6 +70,7 @@ function App() {
                     <Route path="" element={<Profile />} />
                   </Route>
                   <Route path="/show/:artists" element={<Show />} />
+                  <Route path="/venue/:venueName" element={<ShowsByVenue />} />
                   <Route
                     path="*"
                     element={<NoMatch />}
