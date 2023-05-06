@@ -945,11 +945,12 @@ main {
 
 .venue-show-list-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
   padding-top: 18vh;
+  min-height: 100vh;
 }
 
 .venue-heading {
@@ -959,6 +960,7 @@ main {
   background-color: var(--darkest);
   padding: 10px;
   border-radius: 8px;
+  text-align: center;
 }
 
 .venue-heading-wrapper {
