@@ -943,6 +943,36 @@ main {
   text-align: center;
 }
 
+.venue-show-list-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--background);
+  padding-top: 18vh;
+}
+
+.venue-heading {
+  font-family: 'Kodchasan', sans-serif;
+  letter-spacing: 5px;
+  font-weight: 100;
+  background-color: var(--darkest);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.venue-heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  margin-bottom: 5vh;
+}
+
+.spacer {
+  width: 50px;
+}
+
 
 
 

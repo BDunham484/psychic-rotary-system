@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import ShowCard from "../ShowCard";
 import PlusMinus from "../shared/PlusMinus";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import BackButton from '../shared/BackButton'
+
 
 const VenueShowList = ({ concerts }) => {
+    const venue = concerts[0].venue
 
     if (!concerts.length) {
         return <h3>No concerts at this time.</h3>;
@@ -13,7 +16,12 @@ const VenueShowList = ({ concerts }) => {
     const loggedIn = Auth.loggedIn();
 
     return (
-        <div>
+        <div className='venue-show-list-wrapper'>
+            <div className="venue-heading-wrapper">
+                <BackButton />
+                <h2 className='venue-heading'>{venue}</h2>
+                <div className='spacer'></div>
+            </div>
             {concerts &&
                 concerts.map((concert, index) => (
                     <div key={concert._id}>
