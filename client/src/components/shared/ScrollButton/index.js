@@ -27,10 +27,8 @@ const ScrollButton = () => {
 
 
     return (
-        <button>
             <ArrowUpCircleFill className="top-o-page" onClick={scrollToTop} 
             style={{display: visible ? 'inline' : 'none'}}/>
-        </button>
     )
 }
 
