@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CONCERTS_SORTED_BY_VENUE } from "../../utils/queries";
 import ConcertList from "../ConcertList";
 import Spinner from "../../components/shared/Spinner";
+import ScrollButton from "../shared/ScrollButton"
 
 
 const ConcertsVenueAZ = ({ date }) => {
@@ -18,7 +19,11 @@ const ConcertsVenueAZ = ({ date }) => {
             {loading ? (
                 <Spinner />
             ) : (
-                <ConcertList concerts={concerts} />
+                <>
+                    <ConcertList concerts={concerts} />
+                    <ScrollButton />
+                </>
+
             )}
         </div>
     )
