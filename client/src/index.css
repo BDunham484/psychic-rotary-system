@@ -36,13 +36,14 @@ html,
 body {
   min-height: 100%;
   overflow-x: hidden;
+  background-color: var(--background);
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #525050;
+  /* background: #525050; */
   color: var(--main-text);
 }
 
