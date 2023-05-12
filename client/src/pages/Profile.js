@@ -5,6 +5,7 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import Friends from "../components/Friends";
 import ProfileConcerts from "../components/ProfileConcerts";
+import BackButton from '../components/shared/BackButton';
 
 const Profile = () => {
 
@@ -51,7 +52,10 @@ const Profile = () => {
     return (
         <div className='profile-page-wrapper'>
             <div className="profile-page-header">
-                <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile: {user.username}</h2>
+                <h2>Viewing {userParam ? `${user.username}'s` : 'your'} profile{!userParam && `: ${user.username}`}</h2>
+            </div>
+            <div className="back-button-wrapper">
+                <BackButton />
             </div>
             {userParam ? (
                 <div className="concert-friend-wrapper">
