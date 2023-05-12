@@ -80,6 +80,15 @@ a {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
+.page-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+}
+
 /* HEADER / NAVBAR STYLES START */
 
 header {
