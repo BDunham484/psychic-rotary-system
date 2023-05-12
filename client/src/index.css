@@ -307,7 +307,7 @@ header nav ul li a {
 /* HOME STYLES START */
 main {
   width: 100vw;
-  min-height: 92vh;
+  min-height: 100vh;
 }
 
 .events {
