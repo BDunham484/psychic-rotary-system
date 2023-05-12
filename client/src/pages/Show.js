@@ -7,8 +7,6 @@ import BackButton from "../components/shared/BackButton";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import DisabledConcertRSVP from "../components/DisabledConcertRSVP";
 
-
-
 const Show = () => {
 
     const location = useLocation();
@@ -30,9 +28,6 @@ const Show = () => {
             </div>
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
-                {/* {loggedIn &&
-                    <PlusMinus concertId={concert._id} />
-                } */}
                 {loggedIn ?
                     <PlusMinus concertId={concert._id} />
                     :
