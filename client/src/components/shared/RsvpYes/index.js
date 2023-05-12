@@ -50,7 +50,6 @@ const RsvpYes = ({ concertId }) => {
                     <UncheckedYes concertId={concertId} />
                 )}
             </div>
-
             <RsvpCount count={count} />
         </div>
     )

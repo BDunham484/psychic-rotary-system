@@ -4,6 +4,10 @@ import ShowCard from '../components/ShowCard';
 import PlusMinus from "../components/shared/PlusMinus";
 import ConcertRSVP from "../components/shared/ConcertRSVP";
 import BackButton from "../components/shared/BackButton";
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import DisabledConcertRSVP from "../components/DisabledConcertRSVP";
+
+
 
 const Show = () => {
 
@@ -26,8 +30,13 @@ const Show = () => {
             </div>
             <div className="show-header-wrapper">
                 <h2>{concert.date}</h2>
-                {loggedIn &&
+                {/* {loggedIn &&
                     <PlusMinus concertId={concert._id} />
+                } */}
+                {loggedIn ?
+                    <PlusMinus concertId={concert._id} />
+                    :
+                    <SquaredPlus className={'disabled-icons'} />
                 }
             </div>
             <ShowCard>
@@ -66,10 +75,12 @@ const Show = () => {
                     </ul>
                 </div>
             </ShowCard>
-            {loggedIn &&
-                <ConcertRSVP concertId={concert._id} />
-            }
-
+            {loggedIn ?
+                (
+                    <ConcertRSVP concertId={concert._id} />
+                ) : (
+                    <DisabledConcertRSVP concertId={concert._id} />
+                )}
         </div>
     );
 };

@@ -396,6 +396,11 @@ main {
   margin: 2vh 0;
 }
 
+.disabled-icons {
+  width: 50px;
+  color: var(--dark);
+}
+
 .plus-sign {
   width: 50px;
   color: var(--button);
