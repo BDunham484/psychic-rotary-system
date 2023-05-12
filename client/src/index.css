@@ -982,10 +982,13 @@ main {
 
 .top-o-page {
   width: 50px;
-  color: var(--main-text);
+  color: var(--dark);
+  background-color: var(--main-text);
   position: fixed;
   top: 90vh;
   right: 5vh;
+  border: 2px solid var(--main-text);
+  border-radius: 50%;
 }
 
 .top-o-page:hover {
