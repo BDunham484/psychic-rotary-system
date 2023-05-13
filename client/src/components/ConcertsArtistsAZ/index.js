@@ -10,7 +10,6 @@ const ConcertsArtistsAZ = ({ date }) => {
     const { loading, data } = useQuery(GET_CONCERTS_SORTED_BY_ARTISTS, {
         variables: { date: date }
     });
-
     //assign data to variable if present
     const concerts = data?.concertsSortByArtists || [];
 

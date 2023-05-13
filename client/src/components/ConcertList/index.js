@@ -4,8 +4,6 @@ import ShowCard from "../ShowCard";
 import PlusMinus from "../shared/PlusMinus";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
-
-
 const ConcertList = ({ concerts }) => {
 
     if (!concerts.length) {
@@ -17,7 +15,7 @@ const ConcertList = ({ concerts }) => {
     return (
         <>
             {concerts &&
-                concerts.map((concert, index) => (
+                concerts.map((concert) => (
                     <ShowCard key={concert._id}>
                         <div id="show-card-contents">
                             <div>

@@ -4,7 +4,6 @@ import ConcertList from "../ConcertList";
 import Spinner from "../../components/shared/Spinner";
 import ScrollButton from "../shared/ScrollButton"
 
-
 const ConcertsVenueAZ = ({ date }) => {
     //use useQuery hook to make query request with dynamic date
     const { loading, data } = useQuery(GET_CONCERTS_SORTED_BY_VENUE, {

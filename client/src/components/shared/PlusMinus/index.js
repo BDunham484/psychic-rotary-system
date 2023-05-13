@@ -30,7 +30,6 @@ const PlusMinus = ({ concertId }) => {
     let concertSavedToUser = concertIdCheck(user, concertId);
 
     return (
-
         <div>
             {concertSavedToUser ? (
                 <MinusButton concertId={concertId} />

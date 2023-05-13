@@ -6,9 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import subDays from "date-fns/subDays";
 import addDays from "date-fns/addDays";
 import addMonths from "date-fns/addMonths";
-import { Options } from '@styled-icons/fluentui-system-regular/Options'
-// import SortFilterBar from "../SortFilterBar";
-
+import { Options } from '@styled-icons/fluentui-system-regular/Options';
 
 const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
 
@@ -18,20 +16,15 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
 
     useEffect(() => {
         setStartDate(new Date(date))
-
     }, [setStartDate, date])
 
     const handleOptionsClick = () => {
-        console.log('OPTIONSCLICKED')
         optionsOpen ? setOptionsOpen(false) : setOptionsOpen(true);
     }
 
     const handleDateSelect = (datePick) => {
         setStartDate(datePick);
-        // console.log('DATEPICK: ' + datePick)
-        // console.log('OLDDATE: ' + date);
         const convertDate = datePick.toDateString();
-        // console.log('TESTDATE: ' + testDate);
         setDate(convertDate)
     }
 
@@ -44,12 +37,10 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
     const endOfDays = new Date();
     endOfDays.setDate(endOfDays.getDate() + 89)
 
-
     //function that gets the next day
     const nextDayButton = (date) => {
         const next = new Date(date);
         next.setDate(next.getDate() + 1);
-        // console.log(next);
         const theNextDay = next.toDateString();
         setDate(theNextDay);
         setStartDate(next);
@@ -66,14 +57,11 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
     return (
         <div className="utility-bar">
             <span className="display-flex date-wrapper">
-                {/* {today === date ? ( */}
                 {yesterday.toDateString() === date ? (
                     <LeftArrow className="disabled-arrows" />
                 ) : (
                     <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
                 )}
-                {/* old date display */}
-                {/* <h3 id="date">{date}</h3> */}
                 <DatePicker
                     selected={startDate}
                     onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'}
@@ -100,9 +88,6 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
 
                 )}
             </span>
-            {/* {optionsOpen &&
-                <SortFilterBar />
-            } */}
         </div>
     )
 }

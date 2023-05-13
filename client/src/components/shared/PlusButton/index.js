@@ -10,7 +10,7 @@ import {  SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 const PlusButton = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
     const userId = user?.me?._id || {};
-
+    //call mutations
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
     const [rsvpMaybe] = useMutation(RSVP_MAYBE);
 

@@ -13,7 +13,7 @@ const MinusButton = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
     //save user _id to variable: userId
     const userId = user?.me?._id || {};
-    //call rsvpNo mutation
+    //call mutations
     const [rsvpNo] = useMutation(RSVP_NO);
     const [deleteConcertFromUser] = useMutation(DELETE_CONCERT_FROM_USER);
     const [cancelRsvpYes] = useMutation(CANCEL_RSVP_YES);
