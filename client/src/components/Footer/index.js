@@ -1,11 +1,8 @@
-
-
-
 const Footer = () => {
 
     return (
         <footer>
-            <div>&copy;2022 by Brad Dunham</div>
+            <div>&copy; 2022 noiseBX</div>
         </footer>
     );
 }
