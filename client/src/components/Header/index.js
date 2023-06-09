@@ -18,7 +18,6 @@ const Header = () => {
     setSortOrSearch('venue')
   }
 
-
   return (
     <>
       <header>

@@ -11,6 +11,7 @@ const ConcertList = ({ concerts }) => {
     }
 
     const loggedIn = Auth.loggedIn();
+    
 
     return (
         <>
