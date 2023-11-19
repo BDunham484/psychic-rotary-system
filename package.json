@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/BDunham484/psychic-rotary-system/issues"
   },
-  "homepage": "https://github.com/BDunham484/psychic-rotary-system#readme",
+  "homepage": "https://git.heroku.com/whispering-retreat-35925.git",
   "devDependencies": {
     "concurrently": "^7.5.0"
   }
