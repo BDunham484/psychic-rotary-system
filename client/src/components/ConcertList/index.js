@@ -12,6 +12,12 @@ const ConcertList = ({ concerts }) => {
 
     const loggedIn = Auth.loggedIn();
 
+    // changelog-start
+    console.log('🎃🎃🎃🎃 concerts: ', concerts);
+
+    const time = '6pm';
+    // changelog-end
+
     return (
         <>
             {concerts &&
@@ -28,7 +34,13 @@ const ConcertList = ({ concerts }) => {
                                 <Link to={`/show/${concert.customId}`} state={{ concert: concert }}>
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
-                                <span id="at-venue">at</span> <span id="venue">{concert.venue}</span> <span id="divider">|</span> {concert.times}
+                                <span>
+                                    <span id="at-venue">at</span>
+                                    <span id="venue">{concert.venue}</span>
+                                    {concert.times && 
+                                        <span id="divider">{` | ${concert.times}`}</span> 
+                                    }
+                                </span>
                             </p>
                         </div>
                     </ShowCard>
