@@ -1,8 +1,8 @@
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import PlusMinus from "../shared/PlusMinus";
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
-import PlusMinus from "../shared/PlusMinus";
-import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const ConcertList = ({ concerts }) => {
 
@@ -29,7 +29,7 @@ const ConcertList = ({ concerts }) => {
                                     <span id="artists-link">{concert.artists} </span>
                                 </Link>
                                 <span>
-                                    <span id="at-venue">at</span>
+                                    <span id="at-venue"> at </span>
                                     <span id="venue">{concert.venue}</span>
                                     {concert.times && 
                                         <span id="divider">{` | ${concert.times}`}</span> 
