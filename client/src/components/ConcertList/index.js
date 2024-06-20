@@ -12,12 +12,6 @@ const ConcertList = ({ concerts }) => {
 
     const loggedIn = Auth.loggedIn();
 
-    // changelog-start
-    console.log('🎃🎃🎃🎃 concerts: ', concerts);
-
-    const time = '6pm';
-    // changelog-end
-
     return (
         <>
             {concerts &&
