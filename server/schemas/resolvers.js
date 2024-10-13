@@ -76,6 +76,7 @@ const resolvers = {
         },
         //get all concerts in database
         concertsSortByVenue: async (parent, { date }) => {
+            console.log('🥷🥷🥷🥷 date: ', date);
             const concerts = await Concert.find({
                 date: date
             })

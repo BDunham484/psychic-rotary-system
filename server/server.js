@@ -10,13 +10,13 @@ const path = require('path');
 //import Auth middleware
 const { authMiddleware } = require('./utils/auth');
 
-
 // require('./utils/cron')
-
-
-
-
-
+// changelog-start
+const {
+    ApolloServerPluginLandingPageProductionDefault,
+    ApolloServerPluginLandingPageLocalDefault
+} = require('apollo-server-core');
+// changelog-end
 
 //set environment variable
 const PORT = process.env.PORT || 3001;
@@ -24,7 +24,17 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: authMiddleware
+    context: authMiddleware,
+    // changelog-start
+    plugins: [
+        process.env.NODE_ENV === "production"
+            ? ApolloServerPluginLandingPageProductionDefault({
+                embed: true,
+                graphRef: "plaid-gufzoj@current"
+            })
+            : ApolloServerPluginLandingPageLocalDefault({ embed: true})
+    ]
+    // changelog-end
 });
 //instantiate the server
 const app = express();
