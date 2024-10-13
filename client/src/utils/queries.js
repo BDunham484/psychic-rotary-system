@@ -116,6 +116,7 @@ export const QUERY_USER = gql`
             username
             email
             concertCount
+            isAdmin
             concerts {
                 _id
                 artists
@@ -158,6 +159,7 @@ export const QUERY_ME = gql`
             username
             email
             concertCount
+            isAdmin
             concerts {
                 _id
                 artists
@@ -204,6 +206,7 @@ export const QUERY_ME_BASIC = gql`
             username
             email
             concertCount
+            isAdmin
             concerts {
                 _id
                 artists

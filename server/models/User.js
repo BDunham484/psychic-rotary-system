@@ -27,6 +27,10 @@ const userSchema = new Schema(
             required: true,
             minlength: 5
         },
+        isAdmin: {
+            type: Boolean,
+            defaultValue: false,
+        },
         concerts: [
             {
                 type: Schema.Types.ObjectId,
@@ -56,7 +60,7 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
-        ]
+        ],
     },
     {
         toJSON: {

@@ -1,17 +1,26 @@
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import { ConcertContext } from '../../utils/GlobalState';
 import PlusMinus from "../shared/PlusMinus";
 import { Link } from "react-router-dom";
 import Auth from '../../utils/auth';
 import ShowCard from "../ShowCard";
+import { useContext } from 'react';
 
 const ConcertList = ({ concerts }) => {
+
+    const { user } = useContext(ConcertContext);
+
+    if (user) {
+        console.log('🥷🥷🥷🥷 user: ', user);
+    }
+
 
     if (!concerts.length) {
         return <h3>No shows, yo. Try again later.</h3>;
     }
 
     const loggedIn = Auth.loggedIn();
-    
+
 
     return (
         <>
@@ -32,8 +41,8 @@ const ConcertList = ({ concerts }) => {
                                 <span>
                                     <span id="at-venue"> at </span>
                                     <span id="venue">{concert.venue}</span>
-                                    {concert.times && 
-                                        <span id="divider">{` | ${concert.times}`}</span> 
+                                    {concert.times &&
+                                        <span id="divider">{` | ${concert.times}`}</span>
                                     }
                                 </span>
                             </p>

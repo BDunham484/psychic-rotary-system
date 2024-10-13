@@ -7,6 +7,7 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        isAdmin: Boolean
         concertCount: Int
         concerts: [Concert]
         requestCount: Int
