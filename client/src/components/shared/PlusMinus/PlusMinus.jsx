@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import PlusButton from "../PlusButton";
-import MinusButton from "../MinusButton";
+import MinusButton from "../MinusButton/MinusButton";
 import { ConcertContext } from '../../../utils/GlobalState';
 
 const PlusMinus = ({ concertId }) => {

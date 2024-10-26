@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_CONCERTS_SORTED_BY_ARTISTS } from "../../utils/queries";
-import ConcertList from "../ConcertList";
-import Spinner from "../../components/shared/Spinner";
+import ConcertList from "../ConcertList/ConcertList";
+import Spinner from "../shared/Spinner";
 import ScrollButton from "../shared/ScrollButton";
 
 

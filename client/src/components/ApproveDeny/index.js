@@ -20,8 +20,8 @@ const ApproveDeny = ({ senderId, senderName }) => {
                     senderName: senderName
                 }
             })
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            console.error(err);
         }
     }
 

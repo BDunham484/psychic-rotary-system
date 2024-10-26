@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Auth from '../utils/auth';
-import ShowCard from '../components/ShowCard';
-import PlusMinus from "../components/shared/PlusMinus";
+import ShowCard from '../components/ShowCard/ShowCard';
+import PlusMinus from "../components/shared/PlusMinus/PlusMinus";
 import ConcertRSVP from "../components/shared/ConcertRSVP";
 import BackButton from "../components/shared/BackButton";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';

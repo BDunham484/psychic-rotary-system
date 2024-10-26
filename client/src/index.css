@@ -363,12 +363,31 @@ main {
   border: 1px solid #386472;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 90vw;
 }
 
 #show-card-contents {
   display: flex;
   align-items: center;
-  width: 90vw;
+  justify-content: space-between;
+  width: 95%;
+}
+
+#show-card-left-contents {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+
+#admin-delete:hover {
+  cursor: pointer;
+}
+
+#admin-buttons {
+  display: flex;
+  height: auto;
+  width: 100%;
 }
 
 .testyclass {
@@ -376,7 +395,7 @@ main {
 }
 
 #show-card-data {
-  padding: 3vh 30px;
+  padding: 3vh 0;
   font-size: 20px;
 }
 
@@ -414,7 +433,6 @@ main {
 .plus-sign {
   width: 50px;
   color: var(--button);
-  margin-left: 2vw;
   visibility: visible;
 }
 

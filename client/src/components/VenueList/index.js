@@ -1,4 +1,4 @@
-import ShowCard from "../ShowCard";
+import ShowCard from "../ShowCard/ShowCard";
 import { Link } from "react-router-dom";
 
 

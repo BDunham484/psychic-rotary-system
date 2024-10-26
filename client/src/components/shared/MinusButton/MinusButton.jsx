@@ -43,9 +43,9 @@ const MinusButton = ({ concertId }) => {
     };
 
     return (
-        <>
+        <div>
             <SquaredMinus className="minus-sign" onClick={() => handleClick(concertId, userId)} />
-        </>
+        </div>
     )
 };
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ShowCard from "../ShowCard";
+import ShowCard from "../ShowCard/ShowCard";
 import { Link } from "react-router-dom";
 
 const VenueSearchInput = ({ venues }) => {

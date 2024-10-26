@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import ConcertsVenueAZ from '../components/ConcertsVenueAZ';
-import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ';
+import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';

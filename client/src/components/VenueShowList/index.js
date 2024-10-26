@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Auth from '../../utils/auth';
 import { Link } from "react-router-dom";
-import ShowCard from "../ShowCard";
+import ShowCard from "../ShowCard/ShowCard";
 import Spinner from '../shared/Spinner';
-import PlusMinus from "../shared/PlusMinus";
+import PlusMinus from "../shared/PlusMinus/PlusMinus";
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import BackButton from '../shared/BackButton'
 

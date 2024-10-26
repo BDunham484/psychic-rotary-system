@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
-import ShowCard from "../../components/ShowCard";
+import ShowCard from "../../components/ShowCard/ShowCard";
 import { Link } from "react-router-dom";
 import Expander from "../shared/Expander";
 
