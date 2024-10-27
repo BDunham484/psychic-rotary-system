@@ -46,9 +46,6 @@ const Profile = () => {
         );
     }
 
-    console.log('USERPARAMS: ' + userParam)
-
-
     return (
         <div className='profile-page-wrapper'>
             <div className="profile-page-header">
