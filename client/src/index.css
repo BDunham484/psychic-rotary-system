@@ -1023,7 +1023,7 @@ main {
   top: 90vh;
   right: 5vh;
   border: 2px solid var(--main-text);
-  border-radius: 50%;
+  border-radius: 50%;;
 }
 
 .top-o-page:hover {
@@ -1202,7 +1202,9 @@ footer {
     min-height: 16vh;
   }
 
-  
+  .top-o-page {
+    top: 85vh;
+  }
 }
 
 @media screen and 
