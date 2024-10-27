@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 import { useMutation } from "@apollo/client";
 import { ConcertContext } from '../../../utils/GlobalState';
-import { 
+import {
     ADD_CONCERT_TO_USER,
     RSVP_MAYBE,
 } from "../../../utils/mutations";
-import {  SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 
 const PlusButton = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
     const userId = user?.me?._id || {};
-    //call mutations
+    // Mutation calls
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
     const [rsvpMaybe] = useMutation(RSVP_MAYBE);
 
@@ -26,8 +26,8 @@ const PlusButton = ({ concertId }) => {
                     userId: userId
                 }
             })
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err)
         };
     };
 

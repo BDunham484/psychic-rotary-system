@@ -9,11 +9,9 @@ import {
 import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
 
 const MinusButton = ({ concertId }) => {
-    //import user query results from GlobalState
     const { user } = useContext(ConcertContext);
-    //save user _id to variable: userId
     const userId = user?.me?._id || {};
-    //call mutations
+    // Mutation calls
     const [rsvpNo] = useMutation(RSVP_NO);
     const [deleteConcertFromUser] = useMutation(DELETE_CONCERT_FROM_USER);
     const [cancelRsvpYes] = useMutation(CANCEL_RSVP_YES);
