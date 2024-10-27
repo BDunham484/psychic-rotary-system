@@ -1,7 +1,7 @@
 
-const ShowCard = ({ children }) => {
+const ShowCard = ({ id = undefined, children }) => {
     return (
-        <div className='show-card'>
+        <div id={id} className='show-card'>
             {children}
         </div>
     )
