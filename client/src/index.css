@@ -356,6 +356,10 @@ main {
   cursor: pointer;
 }
 
+#concert-list-show-card {
+  width: 90vw;
+}
+
 .show-card {
   background-color: var(--darkest);
   margin-bottom: 4vh;
@@ -364,7 +368,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90vw;
 }
 
 #show-card-contents {
