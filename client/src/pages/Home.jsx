@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import ConcertsVenueAZ from '../components/ConcertsVenueAZ';
 import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
-import UtilityBar from '../components/UtilityBar';
+import UtilityBar from '../components/UtilityBar/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar';
 import VenueSearch from "../components/VenueSearch";
 
@@ -13,7 +13,7 @@ const Home = () => {
   const [optionsOpen, setOptionsOpen] = useState(false);
 
   return (
-    <>
+    <div id='home-wrapper'>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
       {optionsOpen &&
         <SortFilterBar setSortOrSearch={setSortOrSearch} />
@@ -34,7 +34,7 @@ const Home = () => {
             </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

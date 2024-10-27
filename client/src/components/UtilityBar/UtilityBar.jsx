@@ -1,11 +1,11 @@
-import { useContext, useState, useEffect } from "react";
-import { ConcertContext } from "../../utils/GlobalState";
+import { useContext, useState, useEffect } from 'react';
+import { ConcertContext } from '../../utils/GlobalState';
 import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import subDays from "date-fns/subDays";
-import addDays from "date-fns/addDays";
-import addMonths from "date-fns/addMonths";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import subDays from 'date-fns/subDays';
+import addDays from 'date-fns/addDays';
+import addMonths from 'date-fns/addMonths';
 import { Options } from '@styled-icons/fluentui-system-regular/Options';
 
 const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
@@ -55,36 +55,37 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
     }
 
     return (
-        <div className="utility-bar">
-            <span className="display-flex date-wrapper">
+        <div className='utility-bar'>
+            <span className='display-flex date-wrapper'>
                 {yesterday.toDateString() === date ? (
-                    <LeftArrow className="disabled-arrows" />
+                    <LeftArrow className='disabled-arrows' />
                 ) : (
-                    <LeftArrow className="arrows" onClick={() => dayBeforeButton(date)} />
+                    <LeftArrow className='arrows' onClick={() => dayBeforeButton(date)} />
                 )}
                 <DatePicker
                     selected={startDate}
-                    onSelect={(datePick) => handleDateSelect(datePick)} className={'datePicker'}
-                    calendarClassName={'calendar'}
-                    dateFormat="eee MMM dd yyyy"
+                    onSelect={(datePick) => handleDateSelect(datePick)}
+                    className='datePicker'
+                    calendarClassName='calendar'
+                    dateFormat='eee MMM dd yyyy'
                     excludeDateIntervals={
                         [
                             { start: subDays(yesterday, 31), end: yesterday },
                             { start: addDays(tomorrow, 88), end: addDays(tomorrow, 365) }
                         ]
                     }
-                    onKeyDown={(e) => {
-                        e.preventDefault();
+                    onKeyDown={(err) => {
+                        err.preventDefault();
                     }}
                     minDate={new Date()}
                     maxDate={addMonths(new Date(), 3)}
                     showDisabledMonthNavigation
                 />
-                <Options className={'options'} onClick={handleOptionsClick} />
+                <Options className='options' onClick={handleOptionsClick} />
                 {endOfDays.toDateString() === date ? (
-                    <RightArrow className="disabled-arrows" />
+                    <RightArrow className='disabled-arrows' />
                 ) : (
-                    <RightArrow className="arrows" onClick={() => nextDayButton(date)} />
+                    <RightArrow className='arrows' onClick={() => nextDayButton(date)} />
 
                 )}
             </span>
