@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
-import ShowCard from "../../components/ShowCard/ShowCard";
+import ShowCard from "../ShowCard/ShowCard";
 import { Link } from "react-router-dom";
 import Expander from "../shared/Expander";
 
@@ -47,7 +47,7 @@ const ProfileConcerts = ({ userParam, user }) => {
                                 {concert.venue}
                                 {!userParam &&
                                     <div>
-                                        <button onClick={() => { deleteConcertFromUser(concert._id) }}>Remove</button>
+                                        <button onClick={() => deleteConcertFromUser(concert._id)}>Remove</button>
                                     </div>
                                 }
                             </div>

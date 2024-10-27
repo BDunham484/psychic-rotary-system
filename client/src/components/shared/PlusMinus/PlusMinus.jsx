@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import PlusButton from "../PlusButton";
+import PlusButton from "../PlusButton/PlusButton";
 import MinusButton from "../MinusButton/MinusButton";
 import { ConcertContext } from '../../../utils/GlobalState';
 

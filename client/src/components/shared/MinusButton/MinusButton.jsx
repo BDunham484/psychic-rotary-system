@@ -37,8 +37,8 @@ const MinusButton = ({ concertId }) => {
                     userId: userId
                 }
             })
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err);
         };
     };
 
@@ -46,7 +46,7 @@ const MinusButton = ({ concertId }) => {
         <div>
             <SquaredMinus className="minus-sign" onClick={() => handleClick(concertId, userId)} />
         </div>
-    )
+    );
 };
 
 export default MinusButton

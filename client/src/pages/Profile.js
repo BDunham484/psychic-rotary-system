@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import Friends from "../components/Friends";
-import ProfileConcerts from "../components/ProfileConcerts";
+import ProfileConcerts from "../components/ProfileConcerts/ProfileConcerts";
 import BackButton from '../components/shared/BackButton';
 
 const Profile = () => {
