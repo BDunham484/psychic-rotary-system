@@ -5,7 +5,7 @@ import { ConcertContext } from '../../../utils/GlobalState';
 
 const PlusMinus = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
-    // Checks if concertId is listed in a User's concert field.
+    // Check if concertId is in User's concert field.
     const concertIdCheck = (user, id) => {
         if (Object.keys(user).length === 0) {
             console.log('hang tight');
