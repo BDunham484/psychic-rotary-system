@@ -34,7 +34,7 @@ const ConcertList = ({ concerts }) => {
         <>
             {concertList &&
                 concertList.map((concert) => (
-                    <ShowCard key={concert._id}>
+                    <ShowCard id='concert-list-show-card' key={concert._id}>
                         <div id='show-card-contents'>
                             <div id='show-card-left-contents'>
                                 <div>
