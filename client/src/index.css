@@ -446,7 +446,6 @@ main {
 .minus-sign {
   width: 50px;
   color: var(--cancel);
-  margin-left: 2vw;
   /* visibility: hidden; */
 }
 
