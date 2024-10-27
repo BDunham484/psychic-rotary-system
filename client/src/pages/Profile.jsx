@@ -25,7 +25,7 @@ const Profile = () => {
     })
 
     //user declaration set up to handle each type of response from above useQuery
-    const user = useMemo(() => data?.me || data?.user || {}, []);
+    const user = useMemo(() => data?.me || data?.user || {}, [data?.me, data?.user]);
     console.log('USER DATA FROM PROFILE.JS');
     console.log(user);
 

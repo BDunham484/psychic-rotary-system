@@ -59,8 +59,13 @@ a {
 
 .display-flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+}
+
+#home-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 /* SCROLLBAR STYLES START */
@@ -244,6 +249,7 @@ header nav ul li a {
 }
 
 .options {
+  margin-right: .5vw;
   width: 50px;
   height: auto;
 }
@@ -315,8 +321,7 @@ main {
 }
 
 .date-wrapper {
-  width: 400px;
-  /* margin: 2vh 0; */
+  width: 26%;
   font-family: var(--primary-font);
 }
 
@@ -1059,27 +1064,26 @@ footer {
     display: block;
   }
 
+  .utility-bar {
+    width: 90vw;
+  }
+
   /* DATE STYLES START */
+  .date-wrapper {
+    width: 100%;
+  }
+
   #date {
     font-size: 14px;
   }
 
+  .options {
+    margin-right: 0;
+  }
+
   /* SHOWCARD DATA STYLES START */
-  .plus-sign {
-    margin: 0 1vw;
-  }
-
-  .plus-sign-logged-out {
-    margin: 0 1vw;
-  }
-
-  .minus-sign {
-    margin: 0 1vw;
-  }
-
   #show-card-data {
-    padding: 1vh;
-    /* padding: 1vh 0; */
+    padding: 1vh 0;
   }
 
   #artists-link {
@@ -1102,6 +1106,10 @@ footer {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  #admin-buttons {
+    display: none;
   }
 
   #divider {
@@ -1178,6 +1186,14 @@ footer {
 @media screen and
 (max-device-width: 767px) and
 (orientation: landscape) {
+  .date-wrapper {
+    width: 52%;
+  }
+
+  #show-card-contents {
+    width: 98%;
+  }
+
   .rsvp-container {
     margin-bottom: 3vh;
   }
@@ -1195,5 +1211,4 @@ footer {
   .wrapperOptions {
     padding-top: 40vh;
   }
-
 }
