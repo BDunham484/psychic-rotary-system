@@ -11,7 +11,7 @@ import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
-import ShowsByVenue from './components/ShowsByVenue';
+import ShowsByVenue from './components/ShowsByVenue/ShowsByVenue';
 
 
 // const SERVER_URL = 
