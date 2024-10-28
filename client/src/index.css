@@ -77,13 +77,13 @@ a {
   background-color: var(--dark);
   width: 10px;
   border-radius: 0 10px 10px 0;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .styled-scrollbars::-webkit-scrollbar-thumb {
   background-color: var(--darker);
   border-radius: 0 10px 10px 0;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .page-wrapper {
@@ -344,6 +344,15 @@ main {
   color: grey;
 }
 
+/* SPINNER STYLES */
+.spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
 /* SHOWCARD COMPONENT && SHOW PAGE STYLES START */
 .back-button-wrapper {
   width: 90vw;
@@ -403,8 +412,21 @@ main {
 }
 
 #show-card-data {
-  padding: 3vh 0;
+  text-align: center;
+  padding: 3vh 2vw;
   font-size: 20px;
+}
+
+#show-card-venue-list-data {
+  width: 30vw;
+  text-align: center;
+  padding: 3vh 2vw;
+  font-size: 20px;
+}
+
+#venue-show-list-data {
+  width: 80vw;
+  padding: 3vh 2vw;
 }
 
 .show-header-wrapper {
@@ -468,6 +490,7 @@ main {
 #artists-link {
   font-size: 22px;
   font-weight: bold;
+  /* padding: 3vh 0; */
 }
 
 #address2 {
@@ -493,7 +516,7 @@ main {
 
 .rsvp-yes {
   width: 50px;
-  color:#386472
+  color: #386472
 }
 
 .rsvp-yes:hover {
@@ -598,6 +621,7 @@ main {
 .login-signup-button:hover {
   cursor: pointer;
 }
+
 /* .form-card-button {
   margin: 4vh 0;
   padding: 3px 0;
@@ -786,6 +810,7 @@ main {
   padding: 5px 0 5px 5px;
   margin-top: 4vh;
 }
+
 /* .profile-friends-card form div input {
   width: 100%;
   border-radius: 8px;
@@ -810,6 +835,7 @@ main {
 .form-request-button:hover {
   cursor: pointer;
 }
+
 /* .profile-friends-card form div button {
   width: 100%;
   margin: 4vh 0;
@@ -903,7 +929,7 @@ main {
 }
 
 .friend-search-button:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .blocked-list {
@@ -1023,7 +1049,8 @@ main {
   top: 90vh;
   right: 5vh;
   border: 2px solid var(--main-text);
-  border-radius: 50%;;
+  border-radius: 50%;
+  ;
 }
 
 .top-o-page:hover {
@@ -1048,9 +1075,8 @@ footer {
 /* MEDIA QUERIES START */
 
 /* PORTRAIT MODE MOBILE DEVICES START */
-@media screen and
-(max-device-width: 767px) and
-(orientation: portrait) {
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+
   /* HEADER STYLES START */
   .title-wrapper {
     width: 125px;
@@ -1183,9 +1209,7 @@ footer {
 }
 
 /* LANDSCAPE MODE DEVICES START */
-@media screen and
-(max-device-width: 767px) and
-(orientation: landscape) {
+@media screen and (max-device-width: 767px) and (orientation: landscape) {
   .date-wrapper {
     width: 52%;
   }
@@ -1207,9 +1231,7 @@ footer {
   }
 }
 
-@media screen and 
-(max-device-width: 914px) and
-(orientation: landscape) {
+@media screen and (max-device-width: 914px) and (orientation: landscape) {
   .wrapperOptions {
     padding-top: 40vh;
   }
