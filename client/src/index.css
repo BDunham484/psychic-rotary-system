@@ -1203,6 +1203,10 @@ footer {
     width: 90%;
   }
 
+  #show-card-venue-list-data {
+    width: 85vw;
+  }
+
   /* .friend-list-container {
     margin-bottom: 3vh;
   } */
@@ -1216,6 +1220,10 @@ footer {
 
   #show-card-contents {
     width: 98%;
+  }
+
+  #show-card-venue-list-data {
+    width: 85vw;
   }
 
   .rsvp-container {
