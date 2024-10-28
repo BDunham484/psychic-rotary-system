@@ -74,8 +74,8 @@ const resolvers = {
 
             return concerts
         },
-        //get all concerts in database
-        concertsSortByVenue: async (parent, { date }) => {
+        // Get concerts sorted by venue asc
+        concertsSortByVenueAsc: async (parent, { date }) => {
             console.log('🥷🥷🥷🥷 date: ', date);
             const concerts = await Concert.find({
                 date: date
@@ -88,11 +88,37 @@ const resolvers = {
 
             return concerts
         },
-        concertsSortByArtists: async (parent, { date }) => {
+        // Get concerts sorted by venue desc
+        concertsSortByVenueDesc: async (parent, { date }) => {
+            console.log('🥷🥷🥷🥷 date: ', date);
+            const concerts = await Concert.find({
+                date: date
+            })
+                .sort({ venue: 'desc' })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe')
+                .exec();
+
+            return concerts
+        },
+        concertsSortByArtistsAsc: async (parent, { date }) => {
             const concerts = await Concert.find({
                 date: date
             })
                 .sort({ artists: 'asc' })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe')
+                .exec();
+
+            return concerts
+        },
+        concertsSortByArtistsDesc: async (parent, { date }) => {
+            const concerts = await Concert.find({
+                date: date
+            })
+                .sort({ artists: 'desc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')

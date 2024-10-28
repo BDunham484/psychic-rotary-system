@@ -9,7 +9,7 @@ const VenueList = ({ venues }) => {
             {venues &&
                 venues.map((venue, index) => (
                     <ShowCard key={index}>
-                        <div id="show-card-data">
+                        <div id="show-card-venue-list-data">
                             <Link to={`/venue/${venue}}`} state={{ venueName: venue }}>
                                 <span className="venue-name">{venue}</span>
                             </Link>
@@ -18,7 +18,7 @@ const VenueList = ({ venues }) => {
                 ))
             }
         </div>
-    )
-}
+    );
+};
 
 export default VenueList;

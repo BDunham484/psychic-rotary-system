@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_CONCERTS_BY_VENUE } from "../../utils/queries";
-import VenueShowList from "../VenueShowList";
+import VenueShowList from "../VenueShowList/VenueShowList";
 import Spinner from "../shared/Spinner";
 import { useLocation } from "react-router-dom";
 import ScrollButton from '../shared/ScrollButton'
@@ -19,7 +19,9 @@ const ShowsByVenue = () => {
     return (
         <div>
             {loading ? (
-                <Spinner />
+                <div className='spinner-wrapper'>
+                    <Spinner />
+                </div>
             ) : (
                 <>
                     <VenueShowList concerts={concerts} />
