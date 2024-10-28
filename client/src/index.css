@@ -1184,7 +1184,10 @@ footer {
 
 /* LANDSCAPE MODE DEVICES START */
 @media screen and
-(max-device-width: 767px) and
+/* // changelog-start */
+(max-device-width: 920px) and
+/* (max-device-width: 767px) and */
+/* // changelog-end */
 (orientation: landscape) {
   .date-wrapper {
     width: 52%;
