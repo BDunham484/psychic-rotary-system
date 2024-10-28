@@ -35,9 +35,9 @@ export const GET_CONCERTS_BY_DATE = gql`
         }
     }
 `;
-export const GET_CONCERTS_SORTED_BY_VENUE = gql`
-    query concertsSortByVenue($date: String!) {
-        concertsSortByVenue(date: $date) {
+export const GET_CONCERTS_SORTED_BY_VENUE_ASC = gql`
+    query concertsSortByVenueAsc($date: String!) {
+        concertsSortByVenueAsc(date: $date) {
             _id
             artists
             customId
@@ -53,9 +53,45 @@ export const GET_CONCERTS_SORTED_BY_VENUE = gql`
         }
     }
 `;
-export const GET_CONCERTS_SORTED_BY_ARTISTS = gql`
-    query concertsSortByArtists($date: String!) {
-        concertsSortByArtists(date: $date) {
+export const GET_CONCERTS_SORTED_BY_VENUE_DESC = gql`
+    query concertsSortByVenueDesc($date: String!) {
+        concertsSortByVenueDesc(date: $date) {
+            _id
+            artists
+            customId
+            date
+            times
+            venue
+            address
+            address2
+            phone
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+export const GET_CONCERTS_SORTED_BY_ARTISTS_ASC = gql`
+    query concertsSortByArtistsAsc($date: String!) {
+        concertsSortByArtistsAsc(date: $date) {
+            _id
+            artists
+            customId
+            date
+            times
+            venue
+            address
+            address2
+            phone
+            website
+            email
+            ticketLink
+        }
+    }
+`;
+export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
+    query concertsSortByArtistsDesc($date: String!) {
+        concertsSortByArtistsDesc(date: $date) {
             _id
             artists
             customId

@@ -1,32 +1,37 @@
 import { useContext, useState } from "react";
-import ConcertsVenueAZ from '../components/ConcertsVenueAZ';
+import ConcertsVenueAZ from '../components/ConcertsVenueAZ/ConcertsVenueAZ';
 import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar/UtilityBar';
-import SortFilterBar from '../components/SortFilterBar';
-import VenueSearch from "../components/VenueSearch";
+import SortFilterBar from '../components/SortFilterBar/SortFilterBar';
+import VenueSearch from "../components/VenueSearch/VenueSearch";
 
 
 const Home = () => {
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [isAsc, setIsAsc] = useState(true);
+
   const { date, sortOrSearch, setSortOrSearch  } = useContext(ConcertContext);
 
-  const [optionsOpen, setOptionsOpen] = useState(false);
+  // changelog-start
+  console.log('👁️👁️👁️👁️ isAsc: ', isAsc);
+  // changelog-end
 
   return (
     <div id='home-wrapper'>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
       {optionsOpen &&
-        <SortFilterBar setSortOrSearch={setSortOrSearch} />
+        <SortFilterBar setSortOrSearch={setSortOrSearch} setIsAsc={setIsAsc} isAsc={isAsc}/>
       }
       <div className={optionsOpen ? 'wrapperOptions' : 'wrapper'}>
         <div className={`home-page-wrapper`}>
           
             <div>
               {sortOrSearch === 'venue' &&
-                <ConcertsVenueAZ date={date} />
+                <ConcertsVenueAZ date={date} isAsc={isAsc} />
               }
               {sortOrSearch === 'artist' &&
-                <ConcertsArtistsAZ date={date} />
+                <ConcertsArtistsAZ date={date} isAsc={isAsc} />
               }
               {sortOrSearch === 'search' &&
                 <VenueSearch />
