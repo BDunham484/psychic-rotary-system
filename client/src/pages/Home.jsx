@@ -13,10 +13,6 @@ const Home = () => {
 
   const { date, sortOrSearch, setSortOrSearch  } = useContext(ConcertContext);
 
-  // changelog-start
-  console.log('👁️👁️👁️👁️ isAsc: ', isAsc);
-  // changelog-end
-
   return (
     <div id='home-wrapper'>
       <UtilityBar optionsOpen={optionsOpen} setOptionsOpen={setOptionsOpen} />
