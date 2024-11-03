@@ -1,0 +1,106 @@
+/* Tabs.module.css */
+.tabsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs {
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    height: 10vh;
+    color: antiquewhite;
+    border-bottom: 2px solid var(--darker);
+    position: relative;
+}
+
+.tabButton {
+    width: 50%;
+    border: none;
+    cursor: pointer;
+    color: var(--darker);
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: none;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.tabButton:hover {
+    color: var(--dark);
+}
+
+.active {
+    color: var(--main-text);
+    font-weight: bold;
+}
+
+/* Slider underline for active tab */
+.slider {
+    position: absolute;
+    bottom: -2px; /* Position the underline at the bottom */
+    height: 2px;
+    background-color: var(--main-text);
+    transition: left 0.5s ease, width 0.5s ease;
+    z-index: 0; /* Place slider below buttons */
+}
+
+.tabContent {
+    /* margin-top: 5vh; */
+    /* padding: 20px; */
+    padding: 3vh;
+    /* border: 1px solid #ccc; */
+    /* border-top: none; */
+    font-size: 16px;
+    color: var(--main-text);
+    width: 100%;
+    /* background-color: var(--darker); */
+    /* text-align: center; */
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.fadeIn {
+    opacity: 1;
+}
+
+.fadeOut {
+    opacity: 0;
+}
+
+/* Slide Animations */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+}
+
+.slideLeft {
+    animation: slideInFromRight 0.5s ease forwards;
+}
+
+.slideRight {
+    animation: slideInFromLeft 0.5s ease forwards;
+}
