@@ -29,7 +29,7 @@ const ShowsByVenue = () => {
                 </>
             )}
         </div>
-    )
-}
+    );
+};
 
 export default ShowsByVenue;
