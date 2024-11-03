@@ -39,6 +39,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 3vh;
 }
 
 .profileConcertsHeader {
@@ -49,13 +50,12 @@
     border-bottom: 2px solid var(--dark);
     letter-spacing: 2px;
     font-size: 25px;
-    width: 55vw;
+    width: 60vw;
 }
 
 #profileShowCardData {
     padding: 3vh 0 3vh 30px;
-    width: 60vw;
-    /* width: 90%; */
+    width: 50vw;
     font-size: 16px;
     display: flex;
     flex-direction: column;
@@ -92,9 +92,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vw;
+    gap: 3vh;
     width: 90vw;
-    margin: 2vw 0;
+    margin-bottom: 3vh;
     font-size: 20px;
 }
 
