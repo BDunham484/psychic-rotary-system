@@ -1,0 +1,162 @@
+/* PROFILE STYLES START */
+.profilePageWrapper {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background);
+}
+
+.profilePageHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 12vh;
+    padding-left: 12%;
+    width: 100%;
+    min-height: 10vh;
+    gap: 3vw;
+}
+
+.profileUserTitle {
+    font-size: 25px;
+}
+
+.concertFriendWrapper {
+    width: 100%;
+    min-height: 92vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.profileConcerts {
+    width: 60vw;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profileConcertsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 0 2vh 2vh;
+    border-bottom: 2px solid var(--dark);
+    letter-spacing: 2px;
+    font-size: 25px;
+    width: 55vw;
+}
+
+#profileShowCardData {
+    padding: 3vh 0 3vh 30px;
+    width: 60vw;
+    /* width: 90%; */
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#profileShowCardData button {
+    margin-top: 2vh;
+    width: 150px;
+    background-color: var(--button);
+    border: none;
+    border-radius: 10px;
+    color: var(--main-text);
+    font-family: var(--secondary-font);
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 16px;
+    padding: 3px;
+}
+
+#profileShowCardData button:hover {
+    cursor: pointer;
+}
+
+#artistsLink {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Skeleton Styles Start */
+#skeletonShowCardWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+    width: 90vw;
+    margin: 2vw 0;
+    font-size: 20px;
+}
+
+.skeletonShowCard {
+    width: 50vw;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--darker);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skeletonImage {
+    width: 100%;
+    height: 140px;
+    border-radius: 4px;
+    background-color: var(--dark);
+    animation: shimmer 2.5s infinite;
+}
+
+.skeletonTitle,
+.skeletonLine {
+    height: 16px;
+    background-color: var(--dark);
+    border-radius: 4px;
+    animation: shimmer 2.5s infinite;
+}
+
+.skeletonTitle {
+    width: 70%;
+    margin-top: 10px;
+}
+
+.skeletonLine {
+    width: 100%;
+}
+
+.skeletonLine:nth-child(4) {
+    width: 90%;
+}
+
+.skeletonLine:nth-child(5) {
+    width: 80%;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.skeletonShowCard>div {
+    background-image: linear-gradient(90deg,
+            var(--dark) 0%,
+            var(--darker) 50%,
+            var(--dark) 100%);
+    background-size: 200% 100%;
+}
