@@ -2,14 +2,20 @@
 import styles from './Profile.module.css';
 
 const SkeletonShowCard = () => {
+    const {
+        skeletonShowCard,
+        skeletonImage,
+        skeletonTitle,
+        skeletonLine,
+    } = styles;
     return (
         <div>
-            <div className={styles.skeletonShowCard}>
-                <div className={styles.skeletonImage}></div>
-                <div className={styles.skeletonTitle}></div>
-                <div className={styles.skeletonLine}></div>
-                <div className={styles.skeletonLine}></div>
-                <div className={styles.skeletonLine}></div>
+            <div className={skeletonShowCard}>
+                <div className={skeletonImage}></div>
+                <div className={skeletonTitle}></div>
+                <div className={skeletonLine}></div>
+                <div className={skeletonLine}></div>
+                <div className={skeletonLine}></div>
             </div>
         </div>
     );
