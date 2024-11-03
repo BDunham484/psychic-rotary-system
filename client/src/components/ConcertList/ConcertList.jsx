@@ -6,6 +6,8 @@ import AdminDelete from '../AdminUtil/AdminDelete';
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import PlusMinus from '../shared/PlusMinus/PlusMinus';
 import ShowCard from '../ShowCard/ShowCard';
+// @ts-ignore
+import styles from './ConcertList.module.css';
 
 const ConcertList = ({ concerts }) => {
     const [concertList, setConcertList] = useState(null);
@@ -31,7 +33,7 @@ const ConcertList = ({ concerts }) => {
     const loggedIn = Auth.loggedIn();
 
     return (
-        <>
+        <div id={styles.concertListWrapper}>
             {concertList &&
                 concertList.map((concert) => (
                     <ShowCard id='concert-list-show-card' key={concert._id}>
@@ -68,7 +70,7 @@ const ConcertList = ({ concerts }) => {
                     </ShowCard>
                 ))
             }
-        </>
+        </div>
     )
 };
 
