@@ -19,23 +19,20 @@ const Profile = () => {
         concertFriendWrapper
     } = styles;
 
-    // Query that checks param value then conditionally runs query based on result
     const { loading, data, startPolling, stopPolling } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
         variables: { username: userParam }
     });
 
     useEffect(() => {
-        // Runs the query every second
         startPolling(1000);
         return () => {
             stopPolling()
         };
     });
 
-    // User declaration set up to handle each type of response from above useQuery
     const user = useMemo(() => data?.me || data?.user || {}, [data?.me, data?.user]);
 
-    // Navigate to personal profile page if username is the logged-in user's
+    // Navigate to personal profile page if username === loggedInUser
     // @ts-ignore
     if (Auth.loggedIn() && Auth.getProfile()?.data.username === userParam) {
         return <Navigate to='/profile' />;
@@ -88,7 +85,7 @@ const Profile = () => {
                 <Tabs tabs={tabData} />
             )}
         </div>
-    )
-}
+    );
+};
 
 export default Profile;
