@@ -308,6 +308,7 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
+  gap: 2vh;
 }
 
 /* HOME STYLES START */
@@ -376,7 +377,7 @@ main {
 
 .show-card {
   background-color: var(--darkest);
-  margin-bottom: 4vh;
+  /* margin-bottom: 4vh; */
   border-radius: 10px;
   border: 1px solid #386472;
   display: flex;
@@ -487,11 +488,10 @@ main {
 }
 
 
-#artists-link {
+/* #artists-link {
   font-size: 22px;
   font-weight: bold;
-  /* padding: 3vh 0; */
-}
+} */
 
 #address2 {
   margin-top: -2vh;
@@ -675,14 +675,14 @@ main {
 }
 
 /* PROFILE STYLES START */
-.profile-page-header {
+/* .profile-page-header {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 12vh;
   width: 100%;
   min-height: 10vh;
-}
+} */
 
 /* .profile-page-wrapper {
   width: 100vw;
@@ -731,7 +731,7 @@ main {
   display: none;
 }
 
-#profile-showcard-data {
+/* #profile-showcard-data {
   padding: 3vh 0 3vh 30px;
   width: 90%;
   font-size: 16px;
@@ -758,7 +758,7 @@ main {
 
 #profile-showcard-data button:hover {
   cursor: pointer;
-}
+} */
 
 /* FRIEND STYLES START */
 .profile-friends-card {
@@ -1112,14 +1112,13 @@ footer {
     padding: 1vh 0;
   }
 
-  #artists-link {
+  /* #artists-link {
     display: block;
-    /* width: 200px; */
     width: 70vw;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+  } */
 
   #at-venue {
     display: none;

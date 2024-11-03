@@ -5,13 +5,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Show from './pages/Show';
-import Profile from './pages/Profile';
+import Profile from './components/Profile/Profile';
 import NoMatch from './pages/NoMatch';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
 import ShowsByVenue from './components/ShowsByVenue/ShowsByVenue';
+import TestProfile from './components/Profile/Profile';
 
 
 // const SERVER_URL = 
