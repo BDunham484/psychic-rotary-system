@@ -8,7 +8,9 @@
 
 #friendsWrapper {
     width: 100%;
-    min-height: 92vh;
+    /* // changelog-start */
+    /* min-height: 92vh; */
+    /* // changelog-end */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -65,12 +67,24 @@
 }
 
 .friendListIcons {
-    width: 16px;
+    width: 1.75rem;
+    /* width: 25px; */
     height: auto;
     color: var(--cancel);
 }
 
 .friendListIcons:hover {
+    cursor: pointer;
+}
+
+.friendListDeleteIcon {
+    width: 2.5vw;
+    /* width: 35px; */
+    height: auto;
+    color: var(--cancel);
+}
+
+.friendListDeleteIcon:hover {
     cursor: pointer;
 }
 
@@ -82,16 +96,21 @@
     flex-direction: column;
 }
 
-.friendList {
+.friendListScroll {
     overflow-y: scroll;
     scrollbar-width: thin;
-    max-height: 26vh;
+    max-height: 48vh;
 }
 
 /* FriendSearch Styles Start */
 .friendSearchInputWrapper {
     width: 100%;
-    margin-bottom: 4vh;
+    margin-bottom: 6vh;
+    border-radius: 10px;
+}
+
+.foundWrapper {
+    width: 100%;
     border-radius: 10px;
 }
 
@@ -132,7 +151,27 @@
     cursor: pointer;
 }
 
-/* // changelog-start */
+/* // changelog */
+.friendSearchResults {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--darkest);
+    height: 6vh;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.clearResult {
+    width: 30px;
+    color: var(--dark);
+}
+
+.clearResult:hover {
+    cursor: pointer;
+}
+
 .friendListOptionsWrapper {
     display: flex;
     align-items: center;
@@ -146,6 +185,19 @@
     font-size: 18px;
 }
 
+.friendSearchResultOptionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    height: 6vh;
+    width: 100%;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin-bottom: 1vh;
+}
+
 #friendListOptions {
     display: flex;
     justify-content: space-around;
@@ -155,6 +207,8 @@
 
 .optionsWrapper {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
     height: inherit;
     gap: 6px;
@@ -171,6 +225,7 @@
     height: 6vh;
 }
 
+/* // changelog */
 .names {
     display: flex;
     align-items: center;
