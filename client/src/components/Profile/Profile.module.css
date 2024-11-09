@@ -1,7 +1,7 @@
 /* PROFILE STYLES START */
 .profilePageWrapper {
     width: 100vw;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,15 @@
     font-size: 25px;
 }
 
-.concertFriendWrapper {
+.profileFriendWrapper {
+    width: 100%;
+    /* min-height: 92vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileConcertsWrapper {
     width: 100%;
     min-height: 92vh;
     display: flex;
