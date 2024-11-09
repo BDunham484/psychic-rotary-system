@@ -1,0 +1,42 @@
+/* #friendListWrapper {
+    width: 25vw;
+}
+
+.profileFriendsSubHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vh 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--dark)
+}
+
+.friendsSubTitles {
+    font-size: 22px;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+.friendCount {
+    padding-right: 2vh;
+}
+
+.friendListIcons {
+    width: 16px;
+    color: var(--main-text);
+    margin-right: 2vh;
+} */
+
+.friendListContainer {
+    background-color: var(--darker);
+    /* margin: 2vh 0; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.friendList {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    max-height: 26vh;
+}
