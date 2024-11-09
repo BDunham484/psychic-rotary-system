@@ -10,7 +10,7 @@ const FriendList = ({ user }) => {
     const [friendSwitchId, setFriendSwitchId] = useState(null);
     const {
         friendListContainer,
-        friendList,
+        friendListScroll,
         styledScrollbars,
         names,
         friendListOptionsWrapper,
@@ -36,7 +36,7 @@ const FriendList = ({ user }) => {
     return (
         <div>
             <div className={friendListContainer}>
-                <div className={user.friendCount > 5 ? `${friendList} ${styledScrollbars}` : ''}>
+                <div className={user.friendCount > 8 ? `${friendListScroll} ${styledScrollbars}` : ''}>
                     {usersFriends.map(friend => (
                         <>
                             <div key={friend._id} className={names}>
