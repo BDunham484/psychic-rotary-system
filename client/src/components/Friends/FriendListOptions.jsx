@@ -5,12 +5,12 @@ import {
     REMOVE_FRIEND,
     BLOCK_USER
 } from '../../utils/mutations';
-import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
-import { UserMinus } from '@styled-icons/icomoon/UserMinus'
-
+import { Delete } from '@styled-icons/fluentui-system-filled/Delete';
+import { Blocked } from '@styled-icons/icomoon/Blocked';
 
 const FriendListOptions = ({ friendId }) => {
     const {
+        friendListDeleteIcon,
         friendListIcons,
         friendListOptions,
         optionsWrapper,
@@ -55,30 +55,22 @@ const FriendListOptions = ({ friendId }) => {
         };
     };
 
-    // changelog-start
     return (
         <div id={friendListOptions}>
             <div className={optionsWrapper}>
                 <p>
                     Block
                 </p>
-                <OctagonFill className={friendListIcons} onClick={() => handleBlock(friendId)} />
+                <Blocked className={friendListIcons} onClick={() => handleBlock(friendId)} />
             </div>
             <div className={optionsWrapper}>
                 <p>
                     Delete
                 </p>
-                <UserMinus className={friendListIcons} onClick={() => handleRemove(friendId)} />
+                <Delete className={friendListDeleteIcon} onClick={() => handleRemove(friendId)} />
             </div>
         </div>
     )
-    // return (
-    //     <div>
-    //         <OctagonFill className={friendListIcons} onClick={() => handleBlock(friendId)} />
-    //         <UserMinus className={friendListIcons} onClick={() => handleRemove(friendId)} />
-    //     </div>
-    // )
-    // changelog-end
 }
 
 export default FriendListOptions
