@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
-import Friends from '../Friends/Friends';
+import ProfileFriends from '../Friends/ProfileFriends';
 import ProfileConcerts from './ProfileConcerts';
 import BackButton from '../shared/BackButton';
 // @ts-ignore
@@ -16,7 +16,8 @@ const Profile = () => {
         profilePageWrapper,
         profilePageHeader,
         profileUserTitle,
-        concertFriendWrapper
+        profileFriendWrapper,
+        profileConcertsWrapper,
     } = styles;
 
     const { loading, data, startPolling, stopPolling } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -54,15 +55,15 @@ const Profile = () => {
         {
             label: 'Concerts',
             content:
-                <div className={concertFriendWrapper}>
+                <div className={profileConcertsWrapper}>
                     <ProfileConcerts userParam={userParam} user={user} />
                 </div>
         },
         {
             label: 'Friends',
             content:
-                <div className={concertFriendWrapper}>
-                    <Friends userParam={userParam} user={user} />
+                <div className={profileFriendWrapper}>
+                    <ProfileFriends userParam={userParam} user={user} />
                 </div>
         },
     ];
@@ -78,7 +79,7 @@ const Profile = () => {
                 </div>
             </div>
             {userParam ? (
-                <div className={concertFriendWrapper}>
+                <div className={profileConcertsWrapper}>
                     <ProfileConcerts userParam={userParam} user={user} />
                 </div>
             ) : (
