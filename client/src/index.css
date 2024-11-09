@@ -761,18 +761,18 @@ main {
 } */
 
 /* FRIEND STYLES START */
-.profile-friends-card {
+/* .profile-friends-card {
   width: 30vw;
   min-height: 80vh;
-}
+} */
 
-.profile-friends-card-header {
+/* .profile-friends-card-header {
   padding: 2vh 0 2vh 2vh;
   margin-bottom: 2vh;
   border-bottom: 2px solid var(--dark);
   letter-spacing: 2px;
   font-size: 20px;
-}
+} */
 
 /* .profile-friends-card-header {
   display: flex;
@@ -784,13 +784,13 @@ main {
   color: var(--darkest);
 }
 
-.profile-friends-card form {
+/* .profile-friends-card form {
   margin-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* .profile-friends-card form div {
   width: 65%;
@@ -850,17 +850,16 @@ main {
   font-size: 20px;
 } */
 
-.profile-friends-sub-header {
+/* .profile-friends-sub-header {
   display: flex;
   justify-content: space-around;
-  /* justify-content: space-between; */
   align-items: center;
   margin: 2vh 0;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--dark)
-}
+} */
 
-.friends-sub-titles {
+/* .friends-sub-titles {
   font-size: 22px;
   font-weight: 100;
   letter-spacing: 2px;
@@ -868,7 +867,7 @@ main {
 
 .totals {
   padding-right: 2vh;
-}
+} */
 
 .chevron {
   width: 25px;
@@ -905,13 +904,13 @@ main {
   border-bottom: 1px solid var(--darkest);
 }
 
-.friend-search-input-wrapper {
+/* .friend-search-input-wrapper {
   width: 100%;
   margin-bottom: 4vh;
   border-radius: 10px;
-}
+} */
 
-.friend-search-input {
+/* .friend-search-input {
   border: none;
   width: 75%;
   border-radius: 10px 0 0 10px;
@@ -930,7 +929,7 @@ main {
 
 .friend-search-button:hover {
   cursor: pointer;
-}
+} */
 
 .blocked-list {
   overflow-y: scroll;
@@ -939,19 +938,18 @@ main {
 
 
 
-.names {
+/* .names {
   margin: 1vh 2vh 1vh 2vh;
   padding: 1vh 0 1vh 2vh;
-  /* background-color: var(--darkest); */
   border-bottom: 1px solid var(--darkest);
 }
 
 .name {
   letter-spacing: 2px;
   font-size: 18px;
-}
+} */
 
-.friend-list-icons {
+/* .friend-list-icons {
   width: 16px;
   color: var(--main-text);
   margin-right: 2vh;
@@ -959,7 +957,7 @@ main {
 
 .friend-list-icons:hover {
   cursor: pointer;
-}
+} */
 
 .cancel {
   width: 25px;
