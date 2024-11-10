@@ -6,6 +6,7 @@ import Auth from '../../utils/auth';
 import ProfileFriends from '../Friends/ProfileFriends';
 import ProfileConcerts from './ProfileConcerts';
 import BackButton from '../shared/BackButton';
+import { User } from '@styled-icons/fa-solid/User';
 // @ts-ignore
 import styles from './Profile.module.css';
 import Tabs from '../shared/Tabs/Tabs';
@@ -13,6 +14,8 @@ import Tabs from '../shared/Tabs/Tabs';
 const Profile = () => {
     const { username: userParam } = useParams();
     const {
+        friendsLabelWrapper,
+        friendsLabelUserIcon,
         profilePageWrapper,
         profilePageHeader,
         profileUserTitle,
@@ -32,6 +35,14 @@ const Profile = () => {
     });
 
     const user = useMemo(() => data?.me || data?.user || {}, [data?.me, data?.user]);
+
+    const friendsLabel = useMemo(() => (
+        <div className={friendsLabelWrapper}>
+            <User className={friendsLabelUserIcon} />
+            <p>Friends</p>
+            {user?.friendCount}
+        </div>
+    ), [user, User]);
 
     // Navigate to personal profile page if username === loggedInUser
     // @ts-ignore
@@ -53,14 +64,14 @@ const Profile = () => {
 
     const tabData = [
         {
-            label: 'Concerts',
+            label: `Concerts ${user?.concertCount > 0 ? user?.concertCount : ''}`,
             content:
                 <div className={profileConcertsWrapper}>
                     <ProfileConcerts userParam={userParam} user={user} />
                 </div>
         },
         {
-            label: 'Friends',
+            label: `Friends ${user?.friendCount > 0 ? user?.friendCount : ''}`,
             content:
                 <div className={profileFriendWrapper}>
                     <ProfileFriends userParam={userParam} user={user} />
