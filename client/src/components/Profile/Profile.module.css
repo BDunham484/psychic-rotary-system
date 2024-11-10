@@ -32,6 +32,20 @@
     align-items: center;
 }
 
+.friendsLabelWrapper {
+    display: flex;
+    justify-content: center;
+    /* align-items: end; */
+    width: 100%;
+    gap: 10px;
+    /* background-color: rgba(123,123,321,0.4); */
+}
+
+.friendsLabelUserIcon {
+    width: 20px;
+    color: var(--main-text);
+}
+
 .profileConcertsWrapper {
     width: 100%;
     min-height: 92vh;
