@@ -1,14 +1,20 @@
+// @ts-ignore
+import styles from './styles/Friends.module.css';
 import { useMutation } from '@apollo/client';
-import { 
+import {
     REMOVE_FRIEND,
     BLOCK_USER
 } from '../../utils/mutations';
-import { OctagonFill } from '@styled-icons/bootstrap/OctagonFill'
-import { UserMinus } from '@styled-icons/icomoon/UserMinus'
-
+import { Delete } from '@styled-icons/fluentui-system-filled/Delete';
+import { Blocked } from '@styled-icons/icomoon/Blocked';
 
 const FriendListOptions = ({ friendId }) => {
-
+    const {
+        friendListDeleteIcon,
+        friendListIcons,
+        friendListOptions,
+        optionsWrapper,
+    } = styles;
     const [removeFriend] = useMutation(REMOVE_FRIEND);
     const [blockUser] = useMutation(BLOCK_USER);
 
@@ -50,9 +56,19 @@ const FriendListOptions = ({ friendId }) => {
     };
 
     return (
-        <div>
-            <OctagonFill className='friend-list-icons' onClick={() => handleBlock(friendId)} />
-            <UserMinus className="friend-list-icons" onClick={() => handleRemove(friendId)} />
+        <div id={friendListOptions}>
+            <div className={optionsWrapper}>
+                <p>
+                    Block
+                </p>
+                <Blocked className={friendListIcons} onClick={() => handleBlock(friendId)} />
+            </div>
+            <div className={optionsWrapper}>
+                <p>
+                    Delete
+                </p>
+                <Delete className={friendListDeleteIcon} onClick={() => handleRemove(friendId)} />
+            </div>
         </div>
     )
 }

@@ -1,0 +1,6 @@
+#concertListWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    margin-bottom: 3vh;
+}

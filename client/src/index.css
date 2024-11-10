@@ -308,6 +308,7 @@ header nav ul li a {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
+  gap: 2vh;
 }
 
 /* HOME STYLES START */
@@ -376,7 +377,7 @@ main {
 
 .show-card {
   background-color: var(--darkest);
-  margin-bottom: 4vh;
+  /* margin-bottom: 4vh; */
   border-radius: 10px;
   border: 1px solid #386472;
   display: flex;
@@ -487,11 +488,10 @@ main {
 }
 
 
-#artists-link {
+/* #artists-link {
   font-size: 22px;
   font-weight: bold;
-  /* padding: 3vh 0; */
-}
+} */
 
 #address2 {
   margin-top: -2vh;
@@ -675,14 +675,14 @@ main {
 }
 
 /* PROFILE STYLES START */
-.profile-page-header {
+/* .profile-page-header {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 12vh;
   width: 100%;
   min-height: 10vh;
-}
+} */
 
 /* .profile-page-wrapper {
   width: 100vw;
@@ -731,7 +731,7 @@ main {
   display: none;
 }
 
-#profile-showcard-data {
+/* #profile-showcard-data {
   padding: 3vh 0 3vh 30px;
   width: 90%;
   font-size: 16px;
@@ -758,21 +758,21 @@ main {
 
 #profile-showcard-data button:hover {
   cursor: pointer;
-}
+} */
 
 /* FRIEND STYLES START */
-.profile-friends-card {
+/* .profile-friends-card {
   width: 30vw;
   min-height: 80vh;
-}
+} */
 
-.profile-friends-card-header {
+/* .profile-friends-card-header {
   padding: 2vh 0 2vh 2vh;
   margin-bottom: 2vh;
   border-bottom: 2px solid var(--dark);
   letter-spacing: 2px;
   font-size: 20px;
-}
+} */
 
 /* .profile-friends-card-header {
   display: flex;
@@ -784,13 +784,13 @@ main {
   color: var(--darkest);
 }
 
-.profile-friends-card form {
+/* .profile-friends-card form {
   margin-top: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* .profile-friends-card form div {
   width: 65%;
@@ -850,17 +850,16 @@ main {
   font-size: 20px;
 } */
 
-.profile-friends-sub-header {
+/* .profile-friends-sub-header {
   display: flex;
   justify-content: space-around;
-  /* justify-content: space-between; */
   align-items: center;
   margin: 2vh 0;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--dark)
-}
+} */
 
-.friends-sub-titles {
+/* .friends-sub-titles {
   font-size: 22px;
   font-weight: 100;
   letter-spacing: 2px;
@@ -868,7 +867,7 @@ main {
 
 .totals {
   padding-right: 2vh;
-}
+} */
 
 .chevron {
   width: 25px;
@@ -905,13 +904,13 @@ main {
   border-bottom: 1px solid var(--darkest);
 }
 
-.friend-search-input-wrapper {
+/* .friend-search-input-wrapper {
   width: 100%;
   margin-bottom: 4vh;
   border-radius: 10px;
-}
+} */
 
-.friend-search-input {
+/* .friend-search-input {
   border: none;
   width: 75%;
   border-radius: 10px 0 0 10px;
@@ -930,7 +929,7 @@ main {
 
 .friend-search-button:hover {
   cursor: pointer;
-}
+} */
 
 .blocked-list {
   overflow-y: scroll;
@@ -939,19 +938,18 @@ main {
 
 
 
-.names {
+/* .names {
   margin: 1vh 2vh 1vh 2vh;
   padding: 1vh 0 1vh 2vh;
-  /* background-color: var(--darkest); */
   border-bottom: 1px solid var(--darkest);
 }
 
 .name {
   letter-spacing: 2px;
   font-size: 18px;
-}
+} */
 
-.friend-list-icons {
+/* .friend-list-icons {
   width: 16px;
   color: var(--main-text);
   margin-right: 2vh;
@@ -959,7 +957,7 @@ main {
 
 .friend-list-icons:hover {
   cursor: pointer;
-}
+} */
 
 .cancel {
   width: 25px;
@@ -1057,10 +1055,6 @@ main {
   cursor: pointer;
 }
 
-
-
-
-
 /* FOOTER STYLES START */
 footer {
   height: 8vh;
@@ -1069,8 +1063,6 @@ footer {
   justify-content: center;
   align-items: center;
 }
-
-
 
 /* MEDIA QUERIES START */
 
@@ -1112,14 +1104,13 @@ footer {
     padding: 1vh 0;
   }
 
-  #artists-link {
+  /* #artists-link {
     display: block;
-    /* width: 200px; */
     width: 70vw;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+  } */
 
   #at-venue {
     display: none;

@@ -1,0 +1,397 @@
+/* .profileFriendsCardHeader {
+    padding: 2vh 0 2vh 2vh;
+    margin-bottom: 2vh;
+    border-bottom: 2px solid var(--dark);
+    letter-spacing: 2px;
+    font-size: 20px;
+} */
+
+#friendsWrapper {
+    width: 75%;
+    /* // changelog-start */
+    /* min-height: 92vh; */
+    /* // changelog-end */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#friendsWrapper form {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+}
+
+/* Custom Tab Styles Start */
+.tabButton {
+    width: 20vw;
+    border: none;
+    cursor: pointer;
+    color: var(--darker);
+    /* letter-spacing: 2px; */
+    /* font-size: 20px; */
+    background: none;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1;
+    /* margin-top: -3vh !important; */
+}
+
+.tabButton:hover {
+    color: var(--dark);
+}
+
+.activeListTab {
+    color: var(--main-text);
+}
+
+.activeRequestTab {
+    color: var(--button);
+}
+
+.activeBlockTab {
+    color: var(--cancel);
+    padding-top: -3vh;
+}
+
+.tabWrapper {
+    display: none;
+}
+
+#requestBlockWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FriendList Styles Start */
+#friendListWrapper {
+    width: 100%;
+}
+
+.profileFriendsSubHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* // changelog-start */
+    margin-bottom: 2vh;
+    /* margin: 2vh 0; */
+    /* // changelog-end */
+    padding-bottom: 2.2vh;
+    border-bottom: 1px solid var(--dark)
+}
+
+.friendsSubTitles {
+    font-size: 22px;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+
+.friendCount {
+    padding-right: 2vh;
+}
+
+.friendSearchIcon {
+    width: 16px;
+    color: var(--main-text);
+    margin-right: 2vh;
+}
+
+.friendListIcons {
+    width: 1.75rem;
+    /* width: 25px; */
+    height: auto;
+    color: var(--cancel);
+}
+
+.friendListIcons:hover {
+    cursor: pointer;
+}
+
+.friendListDeleteIcon {
+    width: 2.5vw;
+    /* width: 35px; */
+    height: auto;
+    color: var(--cancel);
+}
+
+.friendListDeleteIcon:hover {
+    cursor: pointer;
+}
+
+.friendListContainer {
+    background-color: var(--darker);
+    /* margin: 2vh 0; */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.friendListScroll {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    max-height: 48vh;
+}
+
+/* FriendSearch Styles Start */
+.friendSearchInputWrapper {
+    width: 100%;
+    margin-bottom: 6vh;
+    border-radius: 10px;
+}
+
+.foundWrapper {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#friendInputLabel {
+    display: flex;
+    width: 100%;
+    height: 4vh;
+    background-color: var(--darker);
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.friendSearchInput {
+    border: none;
+    width: 75%;
+    padding: 5px 0 5px 5px;
+    font-family: var(--primary-font);
+    background-color: inherit;
+    color: var(--main-text);
+}
+
+.friendSearchInput:focus {
+    border: none;
+    outline: none;
+}
+
+.friendSearchButton {
+    width: 25%;
+    color: var(--main-text);
+    font-family: var(--primary-font);
+    background-color: var(--button);
+    padding: 5px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+}
+
+.friendSearchButton:hover {
+    cursor: pointer;
+}
+
+/* // changelog */
+.friendSearchResults {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--darkest);
+    height: 6vh;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.clearResult {
+    width: 30px;
+    color: var(--dark);
+}
+
+.clearResult:hover {
+    cursor: pointer;
+}
+
+.friendListOptionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--darkest);
+    background-color: var(--background);
+    height: 6vh;
+    width: 100%;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.friendSearchResultOptionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    height: 6vh;
+    width: 100%;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin-bottom: 1vh;
+}
+
+#friendListOptions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.optionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    gap: 6px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--dark);
+}
+
+.namesOptions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--darkest);
+    height: 6vh;
+}
+
+/* // changelog */
+.names {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--darkest);
+    height: 6vh;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.names:hover {
+    background-color: var(--darkest);
+}
+
+/* .names {
+    margin: 1vh 2vh 1vh 2vh;
+    padding: 1vh 0 1vh 2vh;
+    border-bottom: 1px solid var(--darkest);
+} */
+/* // changelog-end */
+
+.name {
+    padding-left: 5%;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+/* RequestBlock Styles Start */
+#pendingRequestsWrapper {
+    width: 25vw;
+}
+
+#blockedFriendsWrapper {
+    width: 25vw;
+}
+
+/* SCROLLBAR STYLES START */
+.styledScrollbars {
+    scrollbar-color: var(--darker) var(--dark)
+}
+
+.styledScrollbars::-webkit-scrollbar {
+    background-color: var(--dark);
+    width: 10px;
+    border-radius: 0 10px 10px 0;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.styledScrollbars::-webkit-scrollbar-thumb {
+    background-color: var(--darker);
+    border-radius: 0 10px 10px 0;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.skeletonShowCard {
+    width: 25vw;
+    border-bottom: 1px solid var(--darkest);
+    height: 6vh;
+    border-radius: 8px;
+    background-color: var(--darker);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.skeletonLine {
+    height: 60%;
+    width: 95%;
+    background-color: var(--dark);
+    border-radius: 4px;
+    animation: shimmer 2.5s infinite;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.skeletonShowCard>div {
+    background-image: linear-gradient(90deg,
+            var(--dark) 0%,
+            var(--darker) 50%,
+            var(--dark) 100%);
+    background-size: 200% 100%;
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    .tabWrapper {
+        display: flex;
+        margin-top: -3vh;
+    }
+
+    #friendsWrapper {
+        display: none;
+    }
+
+    .tabContent {
+        padding: 0;
+    }
+
+    .tabContent:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .tabContent:nth-child(2) {
+        padding: 3vh 0;
+        width: 90vw;
+    }
+
+    .friendListIcons {
+        width: 8vw;
+    }
+
+    .friendListDeleteIcon {
+        width: 11vw;
+    }
+
+    .skeletonShowCard {
+        width: 90vw;
+    }
+}

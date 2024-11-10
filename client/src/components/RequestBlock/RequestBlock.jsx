@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { ADD_FRIEND } from "../../utils/mutations";
-import RequestBlockHeader from "../RequestBlockHeader";
+import RequestBlockHeader from "../RequestBlockHeader/RequestBlockHeader";
 import RequestBlockForm from "../RequestBlockForm";
 
 const RequestBlock = ({ userParam, user, inputSwitched, setInputSwitched }) => {
