@@ -25,6 +25,42 @@
     width: 25vw;
 }
 
+/* Custom Tab Styles Start */
+.tabButton {
+    width: 20vw;
+    border: none;
+    cursor: pointer;
+    color: var(--darker);
+    /* letter-spacing: 2px; */
+    /* font-size: 20px; */
+    background: none;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1;
+    /* margin-top: -3vh !important; */
+}
+
+.tabButton:hover {
+    color: var(--dark);
+}
+
+.activeListTab {
+    color: var(--main-text);
+}
+
+.activeRequestTab {
+    color: var(--button);
+}
+
+.activeBlockTab {
+    color: var(--cancel);
+    padding-top: -3vh;
+}
+
+.tabWrapper {
+    display: none;
+}
+
 #requestBlockWrapper {
     display: flex;
     flex-direction: column;
@@ -34,7 +70,7 @@
 
 /* FriendList Styles Start */
 #friendListWrapper {
-    width: 25vw;
+    width: 100%;
 }
 
 .profileFriendsSubHeader {
@@ -209,7 +245,7 @@
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: inherit;
+    height: 100%;
     gap: 6px;
     font-size: 16px;
     letter-spacing: 2px;
@@ -282,11 +318,8 @@
 
 .skeletonShowCard {
     width: 25vw;
-    /* // changelog-start */
     border-bottom: 1px solid var(--darkest);
     height: 6vh;
-    /* padding: 20px; */
-    /* // changelog-end */
     border-radius: 8px;
     background-color: var(--darker);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -322,4 +355,43 @@
             var(--darker) 50%,
             var(--dark) 100%);
     background-size: 200% 100%;
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    .tabWrapper {
+        display: flex;
+        margin-top: -3vh;
+    }
+
+    #friendsWrapper {
+        display: none;
+    }
+
+    .tabContent {
+        padding: 0;
+    }
+
+    .tabContent:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .tabContent:nth-child(2) {
+        padding: 3vh 0;
+        width: 90vw;
+    }
+
+    .friendListIcons {
+        width: 8vw;
+    }
+
+    .friendListDeleteIcon {
+        width: 11vw;
+    }
+
+    .skeletonShowCard {
+        width: 90vw;
+    }
 }

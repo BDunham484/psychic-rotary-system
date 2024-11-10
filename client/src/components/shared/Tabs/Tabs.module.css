@@ -49,6 +49,7 @@
     background-color: var(--main-text);
     transition: left 0.5s ease, width 0.5s ease;
     z-index: 0; /* Place slider below buttons */
+    /* width: auto; */
 }
 
 .tabContent {
@@ -103,4 +104,19 @@
 
 .slideRight {
     animation: slideInFromLeft 0.5s ease forwards;
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    .tabs {
+        width: 100vw;
+        justify-content: space-around;
+    }
+
+    .tabs h2 {
+        font-size: 25px;
+    }
+
+    .tabContent {
+        padding: 3vh 0 0 0;
+    }
 }
