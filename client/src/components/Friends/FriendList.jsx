@@ -25,12 +25,21 @@ const FriendList = ({ user }) => {
         }
     }, [user?.friendCount]);
 
-    const subArray = new Array(arrayLength);
+    const subArray = [];
+    // const subArray = new Array(arrayLength);
+
+    if (arrayLength > 0) {
+        for (let i = 0; i < arrayLength; i++) {
+            subArray.push({ 'skeleton': i});
+        }
+    }
 
     let usersFriends = [
         ...user.friends,
         ...subArray,
     ];
+
+    console.log('✅✅✅✅ usersFriends: ', usersFriends);
 
     // Sort 
     usersFriends.sort(function (a, b) {
