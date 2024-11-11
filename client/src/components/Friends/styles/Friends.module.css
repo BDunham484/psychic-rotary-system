@@ -45,16 +45,16 @@
 }
 
 .activeListTab {
-    color: var(--main-text);
+    color: var(--main-text) !important;
 }
 
 .activeRequestTab {
-    color: var(--button);
+    color: var(--button) !important;
 }
 
 .activeBlockTab {
-    color: var(--cancel);
-    padding-top: -3vh;
+    color: var(--cancel) !important;
+    /* padding-top: -3vh; */
 }
 
 .tabWrapper {
