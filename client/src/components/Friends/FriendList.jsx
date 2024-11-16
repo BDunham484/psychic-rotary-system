@@ -61,8 +61,8 @@ const FriendList = ({ user }) => {
                     {usersFriends.map((friend, index) => {
                         if (!!friend?._id) {
                             return (
-                                <>
-                                    <div key={friend._id} className={names}>
+                                <div key={friend._id}>
+                                    <div className={names}>
                                         <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
                                         <Switch
                                             onChange={() => handleFriendSwitch(friend._id)}
@@ -82,7 +82,7 @@ const FriendList = ({ user }) => {
                                             <FriendListOptions friendId={friend._id} />
                                         </div>
                                     }
-                                </>
+                                </div>
                             )
                         } else {
                             return (
