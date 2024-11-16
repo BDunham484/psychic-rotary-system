@@ -109,6 +109,38 @@
     font-weight: bold;
 }
 
+/* Tab Styles Start */
+.tabButton {
+    width: 50%;
+    border: none;
+    cursor: pointer;
+    color: var(--darker);
+    letter-spacing: 2px;
+    font-size: 20px;
+    background: none;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.tabButton:hover {
+    color: var(--dark);
+}
+
+.activeProfileTab {
+    color: var(--main-text) !important;
+    font-weight: bold;
+}
+
+.tabContent {
+    /* margin-top: 5vh; */
+    padding: 3vh 0;
+    font-size: 16px;
+    color: var(--main-text);
+    width: 100%;
+    position: relative;
+}
+
 /* Skeleton Styles Start */
 #skeletonShowCardWrapper {
     display: flex;
@@ -186,6 +218,11 @@
 @media screen and (max-device-width: 767px) and (orientation: portrait) {
     .profilePageHeader {
         padding-left: 3%;
+        min-height: 7vh;
+    }
+
+    .profileUserTitle {
+        font-size: 20px;
     }
 
     .profileConcerts {

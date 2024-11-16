@@ -27,6 +27,7 @@ const ProfileFriends = ({ userParam, user }) => {
 
     const customTabStyles = useMemo(() => {
         return {
+            parentId: 'ProfileFriends',
             customTabButton: tabButton,
             activeListTab: activeListTab,
             activeRequestTab: activeRequestTab,
@@ -37,7 +38,7 @@ const ProfileFriends = ({ userParam, user }) => {
 
     const tabData = [
         {
-            label: <User />,
+            label: <User style={{ width: '5vw' }}/>,
             content:
                 <div>
                     {/* <Friends user={user} customStyles={}/> */}
@@ -45,7 +46,7 @@ const ProfileFriends = ({ userParam, user }) => {
                 </div>
         },
         {
-            label: <UserPlus />,
+            label: <UserPlus style={{ width: '7vw' }}/>,
             content:
                 <div>
                     <RequestBlockForm userParam={userParam} inputSwitched={true} user={user} />
@@ -53,7 +54,7 @@ const ProfileFriends = ({ userParam, user }) => {
                 </div>
         },
         {
-            label: <UserXmark />,
+            label: <UserXmark style={{ width: '7vw' }} />,
             content:
                 <div>
                     <RequestBlockForm userParam={userParam} inputSwitched={false} user={user} />

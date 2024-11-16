@@ -1,46 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // @ts-ignore
 import styles from './Tabs.module.css';
 
 const Tabs = ({
     tabs,
-    customStyles = {
-        customTabButton: undefined,
-        activeListTab: undefined,
-        activeRequestTab: undefined,
-        activeBlockTab: undefined,
-        customTabContent: undefined,
-    },
+    customStyles,
 }) => {
-    // const [activeTab, setActiveTab] = useState(1);
     const [activeTab, setActiveTab] = useState(0);
     const [fade, setFade] = useState(false);
     const [slideDirection, setSlideDirection] = useState('');
     const [sliderStyle, setSliderStyle] = useState({});
-    const tabRefs = useRef([]); // Store references to each tab button
+    // Store references to each tab button
+    const tabRefs = useRef([]);
     const {
         tabsContainer,
         tabs: tabsStyles,
         active,
-        tabButton,
         slider,
-        tabContent,
         fadeOut,
         fadeIn,
     } = styles;
-    const [tabContentStyles, setTabContentStyles] = useState(tabContent);
-    const [buttonStyles, setButtonStyles] = useState(tabButton);
-    // const [activeTabState, setActiveTabState] = useState(0);
+    const [tabContentStyles, setTabContentStyles] = useState(undefined);
+    const [buttonStyles, setButtonStyles] = useState(undefined);
     const {
+        parentId,
         customTabButton,
+        activeProfileTab,
         activeListTab,
         activeRequestTab,
         activeBlockTab,
         customTabContent,
     } = customStyles;
 
-    useEffect(() => {
-        // Position the slider based on the active tab
+    const updateSlider = useCallback((activeTab) => {
         if (tabRefs.current[activeTab]) {
             const { offsetLeft, offsetWidth } = tabRefs.current[activeTab];
             setSliderStyle({
@@ -48,8 +40,18 @@ const Tabs = ({
                 width: offsetWidth,
             });
         }
+    }, []);
+
+    // Delay updateSlider() call to give DOM time to "settle"
+    // If not, the initial offset values returned are incorrect
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            updateSlider(activeTab);
+        }, 50);
+        return () => clearTimeout(timer);
     }, [activeTab]);
 
+    // Set component specific custom styles
     useEffect(() => {
         if (customTabButton) {
             setButtonStyles(customTabButton);
@@ -58,54 +60,55 @@ const Tabs = ({
         if (customTabContent) {
             setTabContentStyles(customTabContent);
         }
-
-        // if ((tabs.label?.includes('Friends'))) {
-        //     console.log('👾👾👾👾 activeTab: ', activeTab);
-        //     console.log('👾👾👾👾 (tabs.label.includes(Friends)): ', (tabs.label.includes('Friends')));
-        //     console.log(' ');
-        //     setTabContentStyles(customTabContent)
-        // }
     }, [customTabButton, customTabContent]);
 
-    const handleTabClick = (index) => {
+    const handleTabClick = useCallback((index) => {
         if (index !== activeTab) {
-            setFade(true); // Start fade out
-            setSlideDirection(index > activeTab ? 'slideRight' : 'slideLeft'); // Set direction based on tab index
-            setFade(false); // Start fade in
+            // Start fade out
+            setFade(true);
+            // Set direction based on tab index
+            setSlideDirection(index > activeTab ? 'slideRight' : 'slideLeft');
+            // Start fade in
+            setFade(false);
             setTimeout(() => {
-                setActiveTab(index); // Change tab after slide transition
+                // Change tab after slide transition
+                setActiveTab(index);
             }, 300);
         }
-    };
+    }, [activeTab]);
+
+    const activeTabStyle = useMemo(() => {
+        let testStyles = active;
+        if (parentId === 'ProfileFriends') {
+            if (activeListTab && (activeTab === 0)) {
+                testStyles = activeListTab;
+            } else if (activeRequestTab && (activeTab === 1)) {
+                testStyles = activeRequestTab;
+            }
+            if (activeBlockTab && (activeTab === 2)) {
+                testStyles = activeBlockTab;
+            }
+        } else if (parentId === 'Profile') {
+            testStyles = activeProfileTab;
+        }
+
+        return testStyles;
+    }, [parentId, activeTab]);
 
     return (
         <div className={tabsContainer}>
             <div className={tabsStyles}>
-                {tabs.map((tab, index) => {
-                    let testStyles = active;
-                    if (activeListTab && (activeTab === 0)) {
-                        testStyles = activeListTab;
-                    } else if (activeRequestTab && (activeTab === 1)) {
-                        testStyles = activeRequestTab;
-                    }
-                    if (activeBlockTab && (activeTab === 2)) {
-                        testStyles = activeBlockTab;
-                    }
-
-                    return (
-                        <button
-                            key={index}
-                            ref={(el) => (tabRefs.current[index] = el)} // Assign ref to each tab button
-                            // changelog-start
-                            className={`${buttonStyles} ${activeTab === index ? testStyles : ''}`}
-                            // className={`${styles.tabButton} ${activeTab === index ? styles.active : ''}`}
-                            // changelog-end
-                            onClick={() => handleTabClick(index)}
-                        >
-                            <h2>{tab.label}</h2>
-                        </button>
-                    )
-                })}
+                {tabs.map((tab, index) => (
+                    <button
+                        key={index}
+                        // Assign ref to each tab button
+                        ref={(el) => (tabRefs.current[index] = el)}
+                        className={`${buttonStyles} ${activeTab === index ? activeTabStyle : ''}`}
+                        onClick={() => handleTabClick(index)}
+                    >
+                        <h2>{tab.label}</h2>
+                    </button>
+                ))}
                 <div className={slider} style={sliderStyle}></div>
             </div>
             <div className={`
@@ -113,7 +116,8 @@ const Tabs = ({
                 ${fade ? fadeOut : fadeIn}
                 ${styles[slideDirection]}
                 `}
-                onAnimationEnd={() => setSlideDirection('')} // Reset slide direction after animation
+                // Reset slide direction after animation
+                onAnimationEnd={() => setSlideDirection('')}
             >
                 {tabs[activeTab].content}
             </div>

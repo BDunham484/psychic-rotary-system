@@ -19,28 +19,6 @@
     position: relative;
 }
 
-.tabButton {
-    width: 50%;
-    border: none;
-    cursor: pointer;
-    color: var(--darker);
-    letter-spacing: 2px;
-    font-size: 20px;
-    background: none;
-    padding: 10px 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.tabButton:hover {
-    color: var(--dark);
-}
-
-.active {
-    color: var(--main-text);
-    font-weight: bold;
-}
-
 /* Slider underline for active tab */
 .slider {
     position: absolute;
@@ -49,22 +27,15 @@
     background-color: var(--main-text);
     transition: left 0.5s ease, width 0.5s ease;
     z-index: 0; /* Place slider below buttons */
-    /* width: auto; */
+    width: 25%;
 }
 
 .tabContent {
-    /* margin-top: 5vh; */
-    /* padding: 20px; */
     padding: 3vh;
-    /* border: 1px solid #ccc; */
-    /* border-top: none; */
     font-size: 16px;
     color: var(--main-text);
     width: 100%;
-    /* background-color: var(--darker); */
-    /* text-align: center; */
     position: relative;
-    /* overflow: hidden; */
 }
 
 .fadeIn {
@@ -110,6 +81,7 @@
     .tabs {
         width: 100vw;
         justify-content: space-around;
+        height: 8vh;
     }
 
     .tabs h2 {

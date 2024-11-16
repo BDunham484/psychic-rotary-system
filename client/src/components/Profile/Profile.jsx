@@ -21,6 +21,9 @@ const Profile = () => {
         profileUserTitle,
         profileFriendWrapper,
         profileConcertsWrapper,
+        tabButton,
+        activeProfileTab,
+        tabContent,
     } = styles;
 
     const { loading, data, startPolling, stopPolling } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -35,6 +38,15 @@ const Profile = () => {
     });
 
     const user = useMemo(() => data?.me || data?.user || {}, [data?.me, data?.user]);
+
+    const customTabStyles = useMemo(() => {
+        return {
+            parentId: 'Profile',
+            customTabButton: tabButton,
+            activeProfileTab: activeProfileTab,
+            customTabContent: tabContent,
+        }
+    }, [tabButton, activeProfileTab, tabContent]);
 
     const friendsLabel = useMemo(() => (
         <div className={friendsLabelWrapper}>
@@ -94,7 +106,7 @@ const Profile = () => {
                     <ProfileConcerts userParam={userParam} user={user} />
                 </div>
             ) : (
-                <Tabs tabs={tabData} />
+                <Tabs tabs={tabData} customStyles={customTabStyles}/>
             )}
         </div>
     );
