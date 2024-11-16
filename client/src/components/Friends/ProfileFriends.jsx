@@ -41,7 +41,6 @@ const ProfileFriends = ({ userParam, user }) => {
             label: <User style={{ width: '5vw' }}/>,
             content:
                 <div>
-                    {/* <Friends user={user} customStyles={}/> */}
                     <Friends user={user} />
                 </div>
         },
