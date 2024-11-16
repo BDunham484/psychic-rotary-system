@@ -10,7 +10,6 @@ const SentReceived = ({ user }) => {
         requestSwitch ? setRequestSwitch(false) : setRequestSwitch(true)
     }
 
-
     return (
         <div>
             {/* if the sent request count is > 0 and the received count is equal to zero, display SentRequests only */}

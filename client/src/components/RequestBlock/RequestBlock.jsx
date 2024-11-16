@@ -1,10 +1,14 @@
+// @ts-ignore
+import styles from './RequestBlock.module.css';
 import { useMutation } from "@apollo/client";
 import { ADD_FRIEND } from "../../utils/mutations";
-import RequestBlockHeader from "../RequestBlockHeader/RequestBlockHeader";
-import RequestBlockForm from "../RequestBlockForm";
+import RequestBlockHeader from "./RequestBlockHeader";
+import RequestBlockForm from "./RequestBlockForm";
 
 const RequestBlock = ({ userParam, user, inputSwitched, setInputSwitched }) => {
-
+    const {
+        requestBlockWrapper,
+    } = styles;
     const [addFriend] = useMutation(ADD_FRIEND);
 
     //onClick handler for add friend
@@ -19,7 +23,7 @@ const RequestBlock = ({ userParam, user, inputSwitched, setInputSwitched }) => {
     };
 
     return (
-        <div>
+        <div className={requestBlockWrapper}>
             <RequestBlockHeader inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />
             {userParam &&
                 <button onClick={handleClick}>

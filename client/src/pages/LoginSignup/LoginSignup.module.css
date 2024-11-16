@@ -1,0 +1,63 @@
+.loginSignupWrapper {
+    width: 100vw;
+    min-height: 92vh;
+    padding-top: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background);
+}
+
+.loginSignupForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginSignupHeader {
+    margin-top: 4vh;
+    font-family: var(--primary-font);
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+.formDiv {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2vh 8vh 0 8vh;
+    font-family: var(--secondary-font);
+}
+
+.loginSignupFormLabel {
+    font-family: var(--secondary-font);
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.loginSignupInput {
+    width: 100%;
+    border-radius: 8px;
+    padding: 5px 0 5px 5px;
+}
+
+.loginSignupButton {
+    margin: 4vh 0;
+    padding: 3px 0;
+    width: 75%;
+    background-color: var(--button);
+    border: none;
+    border-radius: 10px;
+    color: var(--main-text);
+    font-family: var(--secondary-font);
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+
+.loginSignupButton:hover {
+    cursor: pointer;
+}

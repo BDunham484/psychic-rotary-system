@@ -2,14 +2,14 @@
 import styles from './styles/Friends.module.css';
 import { useMemo, useState } from "react";
 import RequestBlock from "../RequestBlock/RequestBlock";
-import PendingRequests from "./PendingRequests";
+import PendingRequests from "../RequestBlock/PendingRequests";
 import Friends from './Friends';
 import BlockedFriends from "./BlockedFriends";
 import Tabs from '../shared/Tabs/Tabs';
 import { User } from '@styled-icons/fa-solid/User';
 import { UserPlus } from '@styled-icons/fa-solid/UserPlus';
 import { UserXmark } from '@styled-icons/fa-solid/UserXmark';
-import RequestBlockForm from '../RequestBlockForm';
+import RequestBlockForm from '../RequestBlock/RequestBlockForm';
 
 
 const ProfileFriends = ({ userParam, user }) => {
@@ -68,7 +68,6 @@ const ProfileFriends = ({ userParam, user }) => {
                 <Tabs tabs={tabData} customStyles={customTabStyles} />
             </div>
             <div id={friendsWrapper}>
-                {/* <Tabs tabs={tabData} customStyles={customTabStyles}/> */}
                 <Friends user={user} />
                 <div id={requestBlockWrapper}>
                     <RequestBlock userParam={userParam} user={user} inputSwitched={inputSwitched} setInputSwitched={setInputSwitched} />

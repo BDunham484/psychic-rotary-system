@@ -35,6 +35,7 @@ const FriendSearch = ({ user }) => {
         friendSearchResultOptionsWrapper,
         name,
         friendSearchIcon,
+        friendSearchForm,
     } = styles;
 
     //handler for friend search text input
@@ -92,7 +93,11 @@ const FriendSearch = ({ user }) => {
 
     return (
         <div>
-            <form onSubmit={handleSearch} className={showResult ? foundWrapper : friendSearchInputWrapper}>
+            <form
+                onSubmit={handleSearch}
+                className={showResult ? foundWrapper : friendSearchInputWrapper}
+                id={friendSearchForm}
+                >
                 <label id={friendInputLabel}>
                     <Search className={friendSearchIcon} />
                     <input
@@ -115,14 +120,14 @@ const FriendSearch = ({ user }) => {
                                 <Switch
                                     onChange={() => handleFriendSwitch(friendId)}
                                     checked={!friendSwitch && friendSwitchId === friendId}
-                                    offColor={'#525050'}
-                                    onColor={'#525050'}
-                                    offHandleColor={'#383737'}
-                                    onHandleColor={'#383737'}
+                                    offColor='#525050'
+                                    onColor='#525050'
+                                    offHandleColor='#383737'
+                                    onHandleColor='#383737'
                                     uncheckedIcon={false}
                                     checkedIcon={false}
-                                    boxShadow={'#eee3d0'}
-                                    activeBoxShadow={'#eee3d0'}
+                                    boxShadow='#eee3d0'
+                                    activeBoxShadow='#eee3d0'
                                 />
                             </div>
                             {(!friendSwitch && friendSwitchId === friendId) &&

@@ -16,7 +16,16 @@
     align-items: flex-start;
 }
 
-#friendsWrapper form {
+/* #friendsWrapper form {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+} */
+
+#friendSearchForm {
     margin-top: 2vh;
     display: flex;
     flex-direction: column;
@@ -70,27 +79,24 @@
     width: 100%;
 }
 
-.profileFriendsSubHeader {
+/* .profileFriendsSubHeader {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* // changelog-start */
     margin-bottom: 2vh;
-    /* margin: 2vh 0; */
-    /* // changelog-end */
     padding-bottom: 2.2vh;
     border-bottom: 1px solid var(--dark)
-}
+} */
 
-.friendsSubTitles {
+/* .friendsSubTitles {
     font-size: 22px;
     font-weight: 100;
     letter-spacing: 2px;
-}
+} */
 
-.friendCount {
+/* .friendCount {
     padding-right: 2vh;
-}
+} */
 
 .friendSearchIcon {
     width: 16px;
@@ -287,9 +293,9 @@
 }
 
 /* RequestBlock Styles Start */
-#pendingRequestsWrapper {
+/* #pendingRequestsWrapper {
     width: 25vw;
-}
+} */
 
 #blockedFriendsWrapper {
     width: 25vw;
@@ -362,6 +368,10 @@
 
     #friendsWrapper {
         display: none;
+    }
+
+    #friendSearchForm {
+        width: 90vw;
     }
 
     .tabContent {

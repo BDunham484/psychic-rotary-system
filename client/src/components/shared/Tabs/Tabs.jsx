@@ -49,7 +49,7 @@ const Tabs = ({
             updateSlider(activeTab);
         }, 50);
         return () => clearTimeout(timer);
-    }, [activeTab]);
+    }, [activeTab, updateSlider]);
 
     // Set component specific custom styles
     useEffect(() => {
@@ -93,7 +93,7 @@ const Tabs = ({
         }
 
         return testStyles;
-    }, [parentId, activeTab]);
+    }, [parentId, activeTab, active, activeBlockTab, activeListTab, activeProfileTab, activeRequestTab]);
 
     return (
         <div className={tabsContainer}>

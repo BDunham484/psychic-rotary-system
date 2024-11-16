@@ -543,7 +543,7 @@ main {
 }
 
 /* LOGIN STYLES START */
-.container {
+/* .container {
   width: 100vw;
   min-height: 92vh;
   padding-top: 12vh;
@@ -552,7 +552,7 @@ main {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
-}
+} */
 
 .form-card {
   background-color: var(--darkest);
@@ -560,19 +560,19 @@ main {
   border: 1px solid #386472;
 }
 
-.form-card form {
+/* .form-card form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.form-card p {
+/* .form-card p {
   margin-top: 4vh;
   font-family: var(--primary-font);
   font-size: 25px;
   letter-spacing: 5px;
-}
+} */
 
 /* .form-card div {
   width: 75%;
@@ -583,28 +583,28 @@ main {
   font-family: var(--secondary-font);
 } */
 
-.form-div {
+/* .form-div {
   width: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2vh 8vh 0 8vh;
   font-family: var(--secondary-font);
-}
+} */
 
-.form-card label {
+/* .form-card label {
   font-family: var(--secondary-font);
   letter-spacing: 3px;
   font-weight: bold;
-}
+} */
 
-.form-card input {
+/* .form-card input {
   width: 100%;
   border-radius: 8px;
   padding: 5px 0 5px 5px;
-}
+} */
 
-.login-signup-button {
+/* .login-signup-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 75%;
@@ -620,7 +620,7 @@ main {
 
 .login-signup-button:hover {
   cursor: pointer;
-}
+} */
 
 /* .form-card-button {
   margin: 4vh 0;
@@ -640,7 +640,7 @@ main {
   cursor: pointer;
 } */
 
-#form-block-button {
+/* #form-block-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 100%;
@@ -656,9 +656,9 @@ main {
 
 #form-block-button:hover {
   cursor: pointer;
-}
+} */
 
-.already-sent-blocked-button {
+/* .already-sent-blocked-button {
   margin: 4vh 0;
   padding: 3px 0;
   width: 100%;
@@ -672,7 +672,7 @@ main {
   font-size: 20px;
   display: flex;
   justify-content: center;
-}
+} */
 
 /* PROFILE STYLES START */
 /* .profile-page-header {
@@ -798,18 +798,18 @@ main {
   justify-content: center;
 } */
 
-.form-input-wrapper {
+/* .form-input-wrapper {
   width: 75%;
   display: flex;
   justify-content: center;
-}
+} */
 
-.profile-friends-card-input {
+/* .profile-friends-card-input {
   width: 100%;
   border-radius: 8px;
   padding: 5px 0 5px 5px;
   margin-top: 4vh;
-}
+} */
 
 /* .profile-friends-card form div input {
   width: 100%;
@@ -818,7 +818,7 @@ main {
   margin-top: 4vh;
 } */
 
-.form-request-button {
+/* .form-request-button {
   width: 100%;
   margin: 4vh 0;
   padding: 3px 0;
@@ -834,7 +834,7 @@ main {
 
 .form-request-button:hover {
   cursor: pointer;
-}
+} */
 
 /* .profile-friends-card form div button {
   width: 100%;

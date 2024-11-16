@@ -1,3 +1,5 @@
+// @ts-ignore
+import styles from './RequestBlock.module.css';
 import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { BLOCK_USER } from "../../utils/mutations";
@@ -13,8 +15,12 @@ const BlockButtons = (
     setText 
     }
 ) => {
-
     const [blockUser] = useMutation(BLOCK_USER);
+    const {
+        formDiv,
+        alreadySentBlockedButton,
+        formBlockButton,
+    } = styles;
 
     const userId = user._id;
     const meBlockedArr = user?.blockedUsers || [];
@@ -70,12 +76,12 @@ const BlockButtons = (
     return (
         <>
             {alreadyBlocked ? (
-                <div className="form-div">
-                    <div className='already-sent-blocked-button'>Blocked</div>
+                <div className={formDiv}>
+                    <div className={alreadySentBlockedButton}>Blocked</div>
                 </div>
             ) : (
-                <div className="form-div">
-                    <button id="form-block-button" type="button" disabled={btnDisabled} onClick={() => {
+                <div className={formDiv}>
+                    <button id={formBlockButton} type="button" disabled={btnDisabled} onClick={() => {
                         handleBlockSubmit(friendId, friendName, userId)
                     }} >Block User</button>
                 </div>

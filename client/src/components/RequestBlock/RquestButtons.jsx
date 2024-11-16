@@ -1,25 +1,32 @@
+// @ts-ignore
+import styles from './RequestBlock.module.css';
 import { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { SEND_FRIEND_REQUEST } from "../../utils/mutations";
 
 const RequestButtons = (
-    { 
-    user,
-    inputData,
-    friendName, 
-    friendId, 
-    btnDisabled, 
-    setBtnDisabled, 
-    setFriend, 
-    setText 
+    {
+        user,
+        inputData,
+        friendName,
+        friendId,
+        btnDisabled,
+        setBtnDisabled,
+        setFriend,
+        setText
     }
 ) => {
-
     const [sendRequest] = useMutation(SEND_FRIEND_REQUEST);
 
     const userId = user._id
     const sentFriendRequestsArr = user?.sentRequests || [];
     const userBlockedArr = inputData?.user?.blockedUsers || [];
+
+    const {
+        formDiv,
+        alreadySentBlockedButton,
+        formRequestButton,
+    } = styles;
 
     //onSubmit handler to add a friend by user input
     const handleRequestSubmit = async (friendId, friendName, userBlockedArr, userId) => {
@@ -74,12 +81,19 @@ const RequestButtons = (
     return (
         <>
             {stillPending ? (
-                <div className="form-div">
-                    <div className="already-sent-blocked-button">Already Sent</div>
+                <div className={formDiv}>
+                    <div className={alreadySentBlockedButton}>Already Sent</div>
                 </div>
             ) : (
-                <div className="form-div">
-                    <button className="form-request-button" type="button" disabled={btnDisabled} onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }} >Send Request</button>
+                <div className={formDiv}>
+                    <button
+                        className={formRequestButton}
+                        type="button"
+                        disabled={btnDisabled}
+                        onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }}
+                    >
+                        Send Request
+                    </button>
                 </div>
             )}
         </>
