@@ -1,8 +1,8 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
 import { useCallback, useMemo, useState } from "react";
-import SentReceived from "./SentReceived";
-import Expander from "../shared/Expander";
+// import SentReceived from "./SentReceived";
+// import Expander from "../shared/Expander";
 import SkeletonFriendListItem from '../Friends/SkeletonFriendListItem';
 import Switch from 'react-switch';
 import { Send } from '@styled-icons/bootstrap/Send';
@@ -18,8 +18,7 @@ import { Check } from '@styled-icons/fa-solid/Check';
 import { Xmark } from '@styled-icons/fa-solid/Xmark';
 
 const PendingRequests = ({ user }) => {
-    const [expand, setExpand] = useState(false);
-    const [isSent, setIsSent] = useState(true);
+    // const [expand, setExpand] = useState(false);
     const [requestSwitch, setRequestSwitch] = useState(true);
     const [requestSwitchId, setRequestSwitchId] = useState(null);
     const {
