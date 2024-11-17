@@ -1,4 +1,4 @@
-import ApproveDeny from "../ApproveDeny";
+import ApproveDeny from "../ApproveDeny/ApproveDeny";
 
 const ReceivedRequests = ({ user }) => {
     console.log(user.receivedCount);

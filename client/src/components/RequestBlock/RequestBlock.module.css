@@ -102,7 +102,7 @@
 
 /* RequestBlock Styles Start */
 #pendingRequestsWrapper {
-    /* width: 25vw; */
+    width: 25vw;
     background-color: var(--darker);
     /* margin: 2vh 0; */
     border-radius: 10px;
@@ -196,6 +196,7 @@
     padding: 0 5%;
     letter-spacing: 2px;
     font-size: 18px;
+    width: 100%;
 }
 
 .names:hover {
@@ -213,4 +214,55 @@
     padding-left: 5%;
     letter-spacing: 2px;
     font-size: 18px;
+}
+
+.requestListOptionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--darkest);
+    background-color: var(--background);
+    height: 6vh;
+    width: 100%;
+    padding: 0 5%;
+    letter-spacing: 2px;
+    font-size: 16px;
+    color: var(--dark);
+}
+
+.requestStartWrapper {
+    display: flex;
+}
+
+.cancelIcon {
+    width: 2rem;
+    /* width: 25px; */
+    height: auto;
+    color: var(--cancel);
+}
+
+.cancelIcon:hover {
+    cursor: pointer;
+}
+
+.approveIcon {
+    width: 1.75rem;
+    height: auto;
+    color: var(--button)
+}
+
+.approveIcon:hover {
+    cursor: pointer;
+}
+
+.denyIcon {
+    width: 1.5rem;
+    height: auto;
+    color: var(--cancel);
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    #pendingRequestsWrapper {
+        width: 90vw;
+    }
 }

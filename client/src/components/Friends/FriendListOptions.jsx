@@ -18,7 +18,7 @@ const FriendListOptions = ({ friendId }) => {
     const [removeFriend] = useMutation(REMOVE_FRIEND);
     const [blockUser] = useMutation(BLOCK_USER);
 
-    //handler to remove friend from friend list
+    // Handler to remove friend from friend list
     const handleRemove = async (friendId) => {
         console.log('handleRemove Clicked: ' + friendId);
         try {

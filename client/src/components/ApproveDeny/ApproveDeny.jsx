@@ -4,7 +4,7 @@ import {
     DECLINE_FRIEND_REQUEST
 } from '../../utils/mutations';
 import { UserCheck } from '@styled-icons/icomoon/UserCheck';
-import { UserMinus } from '@styled-icons/icomoon/UserMinus'
+import { UserMinus } from '@styled-icons/icomoon/UserMinus';
 
 const ApproveDeny = ({ senderId, senderName }) => {
     

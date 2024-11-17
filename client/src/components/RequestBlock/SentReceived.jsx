@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SentRequests from "../SentRequests";
-import ReceivedRequests from "../ReceivedRequests";
+import SentRequests from "./SentRequest";
+import ReceivedRequests from "./ReceivedRequests";
 import Switch from 'react-switch';
 
 const SentReceived = ({ user }) => {
