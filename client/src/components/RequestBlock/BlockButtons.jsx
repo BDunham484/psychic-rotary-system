@@ -26,7 +26,6 @@ const BlockButtons = (
     const meBlockedArr = user?.blockedUsers || [];
 
     const handleBlockSubmit = async (friendId, friendName, userId) => {
-        console.log('handleBlockSubmit clicked: ' + friendId + ' | ' + userId);
         // event.preventDefault();
         const blockedBoolArr = meBlockedArr.map((blockedUser) => {
             if (friendId === blockedUser._id) {
@@ -39,7 +38,6 @@ const BlockButtons = (
             console.log('Already Blocked');
         } else if (!friendName) {
             console.log('user not found');
-            //setFriend to true display conditional messaging
             setFriend(true);
         } else {
             try {
@@ -52,7 +50,6 @@ const BlockButtons = (
                 console.error(e);
             };
         };
-        //reset input
         setText('');
     };
 

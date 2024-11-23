@@ -3,8 +3,9 @@ import styles from './styles/Friends.module.css';
 import { Link } from "react-router-dom";
 import FriendListOptions from "./FriendListOptions";
 import Switch from 'react-switch';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import SkeletonFriendListItem from './SkeletonFriendListItem';
+import { getSkeletonArray } from '../../utils/helpers';
 
 const FriendList = ({ user }) => {
     const [friendSwitch, setFriendSwitch] = useState(true);
@@ -17,28 +18,13 @@ const FriendList = ({ user }) => {
         friendListOptionsWrapper,
     } = styles;
 
-    const arrayLength = useMemo(() => {
-        if (user?.friendCount < 8) {
-            return 8 - user?.friendCount
-        } else {
-            return 0;
-        }
-    }, [user?.friendCount]);
-
-    const subArray = [];
-
-    if (arrayLength > 0) {
-        for (let i = 0; i < arrayLength; i++) {
-            subArray.push({ 'skeleton': i});
-        }
-    }
+    const skeletons = getSkeletonArray(user?.friendCount, 8);
 
     let usersFriends = [
         ...user.friends,
-        ...subArray,
+        ...skeletons,
     ];
 
-    // Sort 
     usersFriends.sort(function (a, b) {
         if (a.username < b.username) {
             return -1;

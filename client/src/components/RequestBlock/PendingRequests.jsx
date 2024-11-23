@@ -1,8 +1,6 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useCallback, useMemo, useState } from "react";
-// import SentReceived from "./SentReceived";
-// import Expander from "../shared/Expander";
+import { useCallback, useState } from "react";
 import SkeletonFriendListItem from '../Friends/SkeletonFriendListItem';
 import Switch from 'react-switch';
 import { Send } from '@styled-icons/bootstrap/Send';
@@ -16,16 +14,13 @@ import {
 import { Cancel } from '@styled-icons/material-outlined/Cancel';
 import { Check } from '@styled-icons/fa-solid/Check';
 import { Xmark } from '@styled-icons/fa-solid/Xmark';
+import { getSkeletonArray } from '../../utils/helpers';
 
 const PendingRequests = ({ user }) => {
-    // const [expand, setExpand] = useState(false);
     const [requestSwitch, setRequestSwitch] = useState(true);
     const [requestSwitchId, setRequestSwitchId] = useState(null);
     const {
-        pendingRequestsWrapper,
-        pendingRequestHeader,
-        subTitle,
-        requestCount,
+        listWrapper,
         requestListScroll,
         styledScrollbars,
         names,
@@ -41,26 +36,12 @@ const PendingRequests = ({ user }) => {
     const [acceptRequest] = useMutation(ACCEPT_FRIEND_REQUEST);
     const [declineRequest] = useMutation(DECLINE_FRIEND_REQUEST);
 
-    const arrayLength = useMemo(() => {
-        if (user?.requestCount <= 5) {
-            return 5 - user?.requestCount
-        } else {
-            return 0;
-        }
-    }, [user?.friendCount]);
-
-    const subArray = [];
-
-    if (arrayLength > 0) {
-        for (let i = 0; i < arrayLength; i++) {
-            subArray.push({ 'skeleton': i });
-        };
-    }
+    const skeletons = getSkeletonArray(user?.requestCount, 5);
 
     let usersRequests = [
         ...user?.sentRequests,
         ...user?.receivedRequests,
-        ...subArray,
+        ...skeletons,
     ];
 
     const handleFriendSwitch = useCallback((requestId) => {
@@ -77,7 +58,6 @@ const PendingRequests = ({ user }) => {
     }, [user?.sentRequests, user?.receivedRequests]);
 
     const handleCancel = async (friendId, friendName) => {
-        console.log('handleCancel Clicked: ' + friendId + ' | ' + friendName);
         try {
             await cancelRequest({
                 variables: {
@@ -91,7 +71,6 @@ const PendingRequests = ({ user }) => {
     };
 
     const handleDeny = async (senderId, senderName) => {
-        console.log('handleDeny: ' + senderId + ' | ' + senderName);
         try {
             await declineRequest({
                 variables: { 
@@ -102,10 +81,9 @@ const PendingRequests = ({ user }) => {
         } catch (err) {
             console.error(err);
         }
-    }
+    };
 
     const handleApprove = async (senderId, senderName) => {
-        console.log('handleApprove: ' + senderId + ' | ' + senderName);
         try {
             await acceptRequest({
                 variables: {
@@ -119,8 +97,7 @@ const PendingRequests = ({ user }) => {
     }
 
     return (
-        <div id={pendingRequestsWrapper}>
-            {/* // changelog-start */}
+        <div className={listWrapper}>
             <div className={user.requestCount > 5 ? `${requestListScroll} ${styledScrollbars}` : ''}>
                 {usersRequests.map((request, index) => {
                     if (!!request?._id) {
@@ -183,21 +160,6 @@ const PendingRequests = ({ user }) => {
                     }
                 })}
             </div>
-            {/* {user.requestCount > 0 &&
-                <>
-                    <div className={pendingRequestHeader}>
-                        <Expander expand={expand} setExpand={setExpand} />
-                        <div className="display-flex">
-                            <h2 className={subTitle}>Requests</h2>
-                            <div className={`${subTitle} ${requestCount}`}>{user.requestCount}</div>
-                        </div>
-                    </div>
-                    {expand &&
-                        <SentReceived user={user} />
-                    }
-                </>
-            } */}
-            {/* // changelog-end */}
         </div>
     )
 }

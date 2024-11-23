@@ -101,7 +101,7 @@
 }
 
 /* RequestBlock Styles Start */
-#pendingRequestsWrapper {
+.listWrapper {
     width: 25vw;
     background-color: var(--darker);
     /* margin: 2vh 0; */
@@ -111,24 +111,24 @@
     margin-top: 6vh;
 }
 
-.pendingRequestHeader {
+/* .pendingRequestHeader {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 2vh;
     padding-bottom: 2.2vh;
     border-bottom: 1px solid var(--dark)
-}
+} */
 
-.subTitle {
+/* .subTitle {
     font-size: 22px;
     font-weight: 100;
     letter-spacing: 2px;
-}
+} */
 
-.requestCount {
+/* .requestCount {
     padding-right: 2vh;
-}
+} */
 
 /* Block Styles STart */
 .alreadySentBlockedButton {
@@ -261,23 +261,9 @@
     color: var(--cancel);
 }
 
-#blockedFriendsWrapper {
-    width: 25vw;
-}
-
-.blockedListIcons {
-    width: 1.75rem;
-    /* width: 25px; */
-    height: auto;
-    color: var(--cancel);
-}
-
-.blockedListIcons:hover {
-    cursor: pointer;
-}
-
+/* Media Queries Start */
 @media screen and (max-device-width: 767px) and (orientation: portrait) {
-    #pendingRequestsWrapper {
+    .listWrapper {
         width: 90vw;
     }
 }

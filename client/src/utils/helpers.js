@@ -12,3 +12,20 @@ export const getTodaysDate = () => {
     return date;
 }
 
+export const getSkeletonArray = (count, total) => {
+    const subArray = [];
+    let arrayLength = 0;
+
+    if (count <= total) {
+        arrayLength = total - count;
+    }
+
+    if (arrayLength > 0) {
+        for (let i = 0; i < arrayLength; i++) {
+            subArray.push({ 'skeleton': i });
+        };
+    }
+
+    return subArray;
+};
+
