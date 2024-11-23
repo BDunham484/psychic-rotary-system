@@ -261,6 +261,21 @@
     color: var(--cancel);
 }
 
+#blockedFriendsWrapper {
+    width: 25vw;
+}
+
+.blockedListIcons {
+    width: 1.75rem;
+    /* width: 25px; */
+    height: auto;
+    color: var(--cancel);
+}
+
+.blockedListIcons:hover {
+    cursor: pointer;
+}
+
 @media screen and (max-device-width: 767px) and (orientation: portrait) {
     #pendingRequestsWrapper {
         width: 90vw;

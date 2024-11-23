@@ -54,7 +54,7 @@ const PendingRequests = ({ user }) => {
     if (arrayLength > 0) {
         for (let i = 0; i < arrayLength; i++) {
             subArray.push({ 'skeleton': i });
-        }
+        };
     }
 
     let usersRequests = [

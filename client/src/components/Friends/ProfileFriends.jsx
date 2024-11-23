@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import RequestBlock from "../RequestBlock/RequestBlock";
 import PendingRequests from "../RequestBlock/PendingRequests";
 import Friends from './Friends';
-import BlockedFriends from "./BlockedFriends";
+import BlockedFriends from "../RequestBlock/BlockedFriends";
 import Tabs from '../shared/Tabs/Tabs';
 import { User } from '@styled-icons/fa-solid/User';
 import { UserPlus } from '@styled-icons/fa-solid/UserPlus';
