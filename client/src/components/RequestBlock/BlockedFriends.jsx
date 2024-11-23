@@ -77,7 +77,7 @@ const BlockedFriends = ({ user }) => {
                         return (
                             <div key={block._id}>
                                 <div className={names}>
-                                    <p>**********</p>
+                                    <p>{block?.username}</p>
                                     <Switch
                                         onChange={() => handleBlockSwitch(block._id)}
                                         checked={!blockSwitch && blockSwitchId === block._id}
@@ -96,7 +96,7 @@ const BlockedFriends = ({ user }) => {
                                         {(user?.blockedUsers.some(x => x._id === block._id)) &&
                                             <div className={requestListOptionsWrapper}>
                                                 <p>
-                                                    Unblock: {block?.username}
+                                                    Unblock 
                                                 </p>
                                                 <Check className={approveIcon} onClick={() => handleUnblock(block._id)} />
                                             </div>
