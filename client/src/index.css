@@ -418,12 +418,12 @@ main {
   font-size: 20px;
 }
 
-#show-card-venue-list-data {
+/* #show-card-venue-list-data {
   width: 30vw;
   text-align: center;
   padding: 3vh 2vw;
   font-size: 20px;
-}
+} */
 
 #venue-show-list-data {
   width: 80vw;
@@ -900,9 +900,9 @@ main {
   padding: 20px;
 }
 
-.border-bottom {
+/* .border-bottom {
   border-bottom: 1px solid var(--darkest);
-}
+} */
 
 /* .friend-search-input-wrapper {
   width: 100%;
@@ -989,13 +989,13 @@ main {
 }
 
 /* VENUE LIST STYLES START */
-.venue-list-wrapper {
+/* .venue-list-wrapper {
   padding: 20px;
-}
+} */
 
-.venue-name:hover {
+/* .venue-name:hover {
   cursor: pointer;
-}
+} */
 
 .venue-list-dates {
   font-family: var(--primary-font);
@@ -1194,9 +1194,9 @@ footer {
     width: 90%;
   }
 
-  #show-card-venue-list-data {
+  /* #show-card-venue-list-data {
     width: 85vw;
-  }
+  } */
 
   /* .friend-list-container {
     margin-bottom: 3vh;
@@ -1218,9 +1218,9 @@ footer {
     width: 98%;
   }
 
-  #show-card-venue-list-data {
+  /* #show-card-venue-list-data {
     width: 85vw;
-  }
+  } */
 
   .rsvp-container {
     margin-bottom: 3vh;

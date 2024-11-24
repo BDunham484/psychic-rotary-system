@@ -1,0 +1,79 @@
+.venueListWrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+#venueLinkWrapper {
+    width: 30vw;
+    text-align: center;
+    padding: 3vh 2vw;
+    font-size: 20px;
+}
+
+.venueName:hover {
+    cursor: pointer;
+}
+
+.venueSearchForm {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.venueSearchInputWrapper {
+    width: 100%;
+    margin-bottom: 2vh;
+    border-radius: 10px;
+}
+
+.venueSearchInput {
+    border: none;
+    width: 75%;
+    border-radius: 10px 0 0 10px;
+    padding: 5px 0 5px 5px;
+    font-family: var(--primary-font);
+}
+
+.venueSearchButton {
+    width: 25%;
+    color: var(--main-text);
+    font-family: var(--primary-font);
+    background-color: var(--button);
+    border-radius: 0 10px 10px 0;
+    padding: 5px;
+}
+
+.venueSearchListItems {
+    padding: 1vh 0;
+}
+
+.names {
+    margin: 1vh 2vh 1vh 2vh;
+    padding: 1vh 0 1vh 2vh;
+    border-bottom: 1px solid var(--darkest);
+}
+
+.borderBottom {
+    border-bottom: 1px solid var(--dark);
+}
+
+/* Media Queries Start */
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    #venueLinkWrapper {
+        width: 85vw;
+    }
+}
+
+@media screen and
+/* // changelog-start */
+(max-device-width: 920px) and
+/* (max-device-width: 767px) and */
+/* // changelog-end */
+(orientation: landscape) {
+    #venueLinkWrapper {
+        width: 85vw;
+    }
+}

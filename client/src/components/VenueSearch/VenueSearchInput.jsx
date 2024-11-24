@@ -1,3 +1,5 @@
+// @ts-ignore
+import styles from './VenueSearch.module.css';
 import { useState } from "react";
 import ShowCard from "../ShowCard/ShowCard";
 import { Link } from "react-router-dom";
@@ -14,6 +16,16 @@ const VenueSearchInput = ({ venues }) => {
     // set state for the result of the search
     const [result, setResult] = useState('');
     const [matches, setMatches] = useState([]);
+    const {
+        venueName,
+        venueSearchForm,
+        venueSearchInputWrapper,
+        venueSearchInput,
+        venueSearchButton,
+        venueSearchListItems,
+        names,
+        borderBottom,
+    } = styles;
 
     //handler for friend search text input
     const handleTextChange = (e) => {
@@ -25,7 +37,6 @@ const VenueSearchInput = ({ venues }) => {
             setFound(false)
         } else {
             setBtnDisabled(false)
-
             setShowResult(true)
             setFound(true)
             setResult(text)
@@ -41,7 +52,7 @@ const VenueSearchInput = ({ venues }) => {
 
         setMatches([results[0], results[1]])
 
-        let noMatch = 'No matches';
+        let noMatch = ['No matches'];
 
         if (results[0] === undefined && results[1] === undefined) {
             setShowResult(false)
@@ -70,16 +81,16 @@ const VenueSearchInput = ({ venues }) => {
 
     return (
         <div>
-            <form className={'venue-search-form'} onSubmit={handleSearch}>
-                <div className="friend-search-input-wrapper">
+            <form className={venueSearchForm} onSubmit={handleSearch}>
+                <div className={venueSearchInputWrapper}>
                     <input
                         onChange={handleTextChange}
                         type="text"
                         placeholder="Venue Name"
                         value={text}
-                        className="friend-search-input"
+                        className={venueSearchInput}
                     />
-                    <button disabled={btnDisabled} className="friend-search-button" type="submit" >Search</button>
+                    <button disabled={btnDisabled} className={venueSearchButton} type="submit" >Search</button>
                 </div>
                 {showResult &&
                     <>
@@ -87,21 +98,21 @@ const VenueSearchInput = ({ venues }) => {
                             matches.map((match, index) => (
                                 match &&
                                 <ShowCard key={index}>
-                                    <div id="show-card-data">
+                                    <div className={venueSearchListItems}>
                                         {match === 'No matches' ? (
-                                            <span className="venue-name">{match}</span>
+                                            <span className={venueName}>{match}</span>
                                         ) : (
                                             <Link to={`/venue/${match}}`} state={{ venueName: match }}>
-                                                <span className="venue-name" >{match}</span>
+                                                <span className={venueName} >{match}</span>
                                             </Link>
                                         )}
                                     </div>
                                 </ShowCard>
                             ))
                         ) : (
-                            <div className="names">{result}</div>
+                            <div className={names}>{result}</div>
                         )}
-                        <div className="border-bottom"></div>
+                        <div className={borderBottom}></div>
                     </>
                 }
             </form>
