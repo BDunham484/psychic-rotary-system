@@ -29,12 +29,34 @@
     border-radius: 10px;
 }
 
+.venueSearchInputLabel {
+    display: flex;
+    width: 100%;
+    height: 4vh;
+    background-color: var(--darker);
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.searchIcon {
+    width: 16px;
+    color: var(--main-text);
+    margin-right: 2vh;
+}
+
 .venueSearchInput {
     border: none;
     width: 75%;
-    border-radius: 10px 0 0 10px;
+    border-radius: 5px 0 0 5px;
     padding: 5px 0 5px 5px;
     font-family: var(--primary-font);
+    color: var(--main-text);
+    background-color: var(--darker);
+}
+
+.venueSearchInput:focus {
+    border: none;
+    outline: none;
 }
 
 .venueSearchButton {
@@ -42,8 +64,13 @@
     color: var(--main-text);
     font-family: var(--primary-font);
     background-color: var(--button);
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 5px 5px 0;
     padding: 5px;
+    border: none;
+}
+
+.venueSearchButton:hover {
+    cursor: pointer;
 }
 
 .venueSearchListItems {

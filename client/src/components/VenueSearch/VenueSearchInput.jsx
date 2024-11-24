@@ -3,6 +3,7 @@ import styles from './VenueSearch.module.css';
 import { useState } from "react";
 import ShowCard from "../ShowCard/ShowCard";
 import { Link } from "react-router-dom";
+import { Search } from "@styled-icons/bootstrap/Search";
 
 const VenueSearchInput = ({ venues }) => {
     // set state for input text
@@ -20,6 +21,8 @@ const VenueSearchInput = ({ venues }) => {
         venueName,
         venueSearchForm,
         venueSearchInputWrapper,
+        venueSearchInputLabel,
+        searchIcon,
         venueSearchInput,
         venueSearchButton,
         venueSearchListItems,
@@ -50,7 +53,7 @@ const VenueSearchInput = ({ venues }) => {
             return venue.toLowerCase().includes(e.target.value.toLowerCase())
         })
 
-        setMatches([results[0], results[1]])
+        setMatches([results[0], results[1], results[2]])
 
         let noMatch = ['No matches'];
 
@@ -83,14 +86,22 @@ const VenueSearchInput = ({ venues }) => {
         <div>
             <form className={venueSearchForm} onSubmit={handleSearch}>
                 <div className={venueSearchInputWrapper}>
+                    <label className={venueSearchInputLabel}>
+                    <Search className={searchIcon} />
                     <input
                         onChange={handleTextChange}
                         type="text"
-                        placeholder="Venue Name"
+                        placeholder="Venue"
                         value={text}
                         className={venueSearchInput}
                     />
-                    <button disabled={btnDisabled} className={venueSearchButton} type="submit" >Search</button>
+                    <button
+                        disabled={btnDisabled}
+                        className={venueSearchButton}
+                        type="submit" >
+                            Search
+                    </button>
+                    </label>
                 </div>
                 {showResult &&
                     <>
