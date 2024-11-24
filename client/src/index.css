@@ -503,6 +503,7 @@ main {
   width: 90%;
   display: flex;
   justify-content: space-around;
+  margin-top: 4vh;
 }
 
 .rsvp-wrapper {
@@ -543,7 +544,7 @@ main {
 }
 
 /* LOGIN STYLES START */
-/* .container {
+.container {
   width: 100vw;
   min-height: 92vh;
   padding-top: 12vh;
@@ -552,7 +553,7 @@ main {
   align-items: center;
   flex-direction: column;
   background-color: var(--background);
-} */
+}
 
 .form-card {
   background-color: var(--darkest);
