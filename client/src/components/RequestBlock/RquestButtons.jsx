@@ -12,7 +12,7 @@ const RequestButtons = (
         friendId,
         btnDisabled,
         setBtnDisabled,
-        setFriend,
+        setNoDice,
         setText
     }
 ) => {
@@ -24,7 +24,7 @@ const RequestButtons = (
 
     const {
         formDiv,
-        alreadySentBlockedButton,
+        alreadyDidTheThing,
         formRequestButton,
     } = styles;
 
@@ -43,8 +43,8 @@ const RequestButtons = (
             console.log('blocked');
         } else if (!friendName) {
             console.log('user not found');
-            //setFriend to true display conditional messaging
-            setFriend(true);
+            //setNoDice to true display conditional messaging
+            setNoDice(true);
         } else {
             try {
                 await sendRequest({
@@ -82,7 +82,7 @@ const RequestButtons = (
         <>
             {stillPending ? (
                 <div className={formDiv}>
-                    <div className={alreadySentBlockedButton}>Already Sent</div>
+                    <div className={alreadyDidTheThing}>Already Sent</div>
                 </div>
             ) : (
                 <div className={formDiv}>

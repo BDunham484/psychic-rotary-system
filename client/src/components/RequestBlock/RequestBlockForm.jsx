@@ -12,7 +12,7 @@ import { Blocked } from '@styled-icons/icomoon/Blocked';
 const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
     const [text, setText] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(true);
-    const [friend, setFriend] = useState(false);
+    const [noDice, setNoDice] = useState(false);
     const {
         requestBlockForm,
         formInputWrapper,
@@ -27,16 +27,13 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
     });
 
     useEffect(() => {
-        if (loading) {
-            console.log('Loading user query...');
-        } else {
-            //runs the query every second
+        if (!loading) {
             startPolling(1000);
             return () => {
                 stopPolling()
             };
         }
-    })
+    }, [loading]);
 
     //handler for friend request text input
     const handleTextChange = (e) => {
@@ -44,7 +41,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
 
         if (text === '') {
             setBtnDisabled(true)
-            setFriend(false)
+            setNoDice(false)
         } else {
             setBtnDisabled(false)
         };
@@ -72,8 +69,8 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                                 className={profileFriendsCardInput}
                             />
                         </label>
-                        {friend &&
-                            <div>USER NOT FOUND</div>
+                        {noDice &&
+                            <div>No Dice</div>
                         }
                         {inputSwitched ?
                             <RequestButtons
@@ -83,7 +80,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                                 friendId={friendId}
                                 btnDisabled={btnDisabled}
                                 setBtnDisabled={setBtnDisabled}
-                                setFriend={setFriend}
+                                setNoDice={setNoDice}
                                 setText={setText}
                             />
                             :
@@ -93,7 +90,7 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                                 friendId={friendId}
                                 btnDisabled={btnDisabled}
                                 setBtnDisabled={setBtnDisabled}
-                                setFriend={setFriend}
+                                setNoDice={setNoDice}
                                 setText={setText}
                             />
                         }

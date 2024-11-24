@@ -1,44 +1,30 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { useMutation } from "@apollo/client";
 import { BLOCK_USER } from "../../utils/mutations";
 
 const BlockButtons = (
-    { 
-    user, 
-    friendName, 
-    friendId, 
-    btnDisabled, 
-    setBtnDisabled, 
-    setFriend, 
-    setText 
+    {
+        user,
+        friendName,
+        friendId,
+        btnDisabled,
+        setBtnDisabled,
+        setNoDice,
+        setText,
     }
 ) => {
     const [blockUser] = useMutation(BLOCK_USER);
     const {
         formDiv,
-        alreadySentBlockedButton,
+        alreadyDidTheThing,
         formBlockButton,
     } = styles;
 
-    const userId = user._id;
-    const meBlockedArr = user?.blockedUsers || [];
-
-    const handleBlockSubmit = async (friendId, friendName, userId) => {
-        // event.preventDefault();
-        const blockedBoolArr = meBlockedArr.map((blockedUser) => {
-            if (friendId === blockedUser._id) {
-                return true;
-            };
-            return false
-        });
-        const isBlocked = blockedBoolArr.some(block => block === true);
-        if (isBlocked) {
-            console.log('Already Blocked');
-        } else if (!friendName) {
-            console.log('user not found');
-            setFriend(true);
+    const handleBlockSubmit = async (friendId, friendName) => {        
+        if (!friendName) {
+            setNoDice(true);
         } else {
             try {
                 await blockUser({
@@ -46,41 +32,37 @@ const BlockButtons = (
                         blockedId: friendId
                     }
                 })
-            } catch (e) {
-                console.error(e);
+            } catch (err) {
+                console.log(err);
             };
         };
         setText('');
     };
 
-    //array of boolean responses based off whether the name entered into the block user input is already in the user's blockedUsers field
-    const blockBoolArr = meBlockedArr.map((blocked) => {
-        if (friendId === blocked._id) {
-            return true
-        };
-        return false
-    });
+    const alreadyBlocked = user?.blockedUsers.find(user => user._id === friendId);
 
-    //if there is a true response in blockBoolArr save to variable alreadyBlocked.  Use alreadyBlocked to conditionally display content
-    const alreadyBlocked = blockBoolArr.some(block => block === true)
-
-    useEffect(() => {
-        if (alreadyBlocked) {
-            setBtnDisabled(alreadyBlocked);
+    useMemo(() => {
+        if (!!alreadyBlocked) {
+            setBtnDisabled(true);
         }
-    })
+    }, [alreadyBlocked]);
 
     return (
         <>
             {alreadyBlocked ? (
                 <div className={formDiv}>
-                    <div className={alreadySentBlockedButton}>Blocked</div>
+                    <div className={alreadyDidTheThing}>Already Blocked</div>
                 </div>
             ) : (
                 <div className={formDiv}>
-                    <button id={formBlockButton} type="button" disabled={btnDisabled} onClick={() => {
-                        handleBlockSubmit(friendId, friendName, userId)
-                    }} >Block User</button>
+                    <button
+                        id={formBlockButton}
+                        type="button"
+                        disabled={btnDisabled}
+                        onClick={() => {handleBlockSubmit(friendId, friendName)}}
+                    >
+                        Block User
+                    </button>
                 </div>
             )}
         </>
