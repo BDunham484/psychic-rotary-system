@@ -49,13 +49,15 @@ const ConcertList = ({ concerts }) => {
                                     <Link to={`/show/${concert.customId}`} state={{ concert: concert }}>
                                         <span id='artists-link'>{concert.artists} </span>
                                     </Link>
-                                    <span>
-                                        <span id='at-venue'> at </span>
-                                        <span id='venue'>{concert.venue}</span>
-                                        {concert.times &&
-                                            <span id='divider'>{` | ${concert.times}`}</span>
-                                        }
-                                    </span>
+                                    {concert?.venue &&
+                                        <span>
+                                            <span id='at-venue'> at </span>
+                                            <span id='venue'>{concert.venue}</span>
+                                        </span>
+                                    }
+                                    {concert.times &&
+                                        <span id='divider'>{` | ${concert.times}`}</span>
+                                    }
                                 </p>
                             </div>
                             <div id='admin-delete'>
