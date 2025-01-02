@@ -1,26 +1,33 @@
-import { useEffect, useState } from 'react';
+// @ts-ignore
+import styles from './VenueShowList.module.css';
+import { useMemo } from 'react';
 import Auth from '../../utils/auth';
-import { Link } from "react-router-dom";
-import ShowCard from "../ShowCard/ShowCard";
-import Spinner from '../shared/Spinner';
-import PlusMinus from "../shared/PlusMinus/PlusMinus";
+import { Link } from 'react-router-dom';
+import ShowCard from '../ShowCard/ShowCard';
+import PlusMinus from '../shared/PlusMinus/PlusMinus';
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import BackButton from '../shared/BackButton'
 
 const VenueShowList = ({ concerts }) => {
-    const [loading, setLoading] = useState(true);
+    const {
+        venueShowListPageWrapper,
+        venueHeadingWrapper,
+        venueHeading,
+        name,
+        spacer,
+        venueShowListWrapper,
+        venueShowWrapper,
+        venueListDates,
+        showCardContents,
+        plusSignLoggedOut,
+        venueShowListData,
+        artistsLink,
+        divider,
+    } = styles;
 
-    useEffect(() => {
-        const loadData = () => {
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000)
-        };
-
-        loadData();
-    }, [])
-
-    const venue = concerts[0]?.venue
+    const venueName = useMemo(() => concerts[0]?.venue, [concerts]);
+    const venueAddress = useMemo(() => concerts[0]?.address, [concerts]);
+    const venueAddressTwo = useMemo(() => concerts[0]?.address2, [concerts]);
 
     if (!concerts.length) {
         return <h3>No concerts at this time.</h3>;
@@ -28,85 +35,50 @@ const VenueShowList = ({ concerts }) => {
 
     const loggedIn = Auth.loggedIn();
 
-    // changelog-start
     return (
-
-        <div className='venue-show-list-wrapper'>
-            <div className="venue-heading-wrapper">
+        <div className={venueShowListPageWrapper}>
+            <div className={venueHeadingWrapper}>
                 <BackButton />
-                <h2 className='venue-heading'>{venue}</h2>
-                <div className='spacer'></div>
+                <div className={venueHeading}>
+                    <h2 className={name}>{venueName}</h2>
+                    {venueAddress &&
+                        <p>{venueAddress}</p>
+                    }
+                    {venueAddressTwo &&
+                        <p>{venueAddressTwo}</p>
+                    }
+                </div>
+                <div className={spacer}></div>
             </div>
-            {concerts &&
-                concerts.map((concert, index) => (
-                    <div key={concert._id}>
-                        <div className='venue-list-dates'>{concert.date}</div>
-                        <ShowCard>
-                            <div id="show-card-contents">
-                                <div>
-                                    {loggedIn
-                                        ? <PlusMinus concertId={concert._id} />
-                                        : <SquaredPlus id="plus-sign-logged-out" />
-                                    }
+            <div className={venueShowListWrapper}>
+                {concerts &&
+                    concerts.map((concert) => (
+                        <div key={concert._id} className={venueShowWrapper}>
+                            <div className={venueListDates}>{concert.date}</div>
+                            <ShowCard>
+                                <div className={showCardContents}>
+                                    <div>
+                                        {loggedIn
+                                            ? <PlusMinus concertId={concert._id} />
+                                            : <SquaredPlus className={plusSignLoggedOut} />
+                                        }
+                                    </div>
+                                    <div id={venueShowListData}>
+                                        <Link to={`/show/${concert.customId}`} state={{ concert: concert }} >
+                                            <span id={artistsLink}>{concert.artists} </span>
+                                        </Link>
+                                        {concert.times &&
+                                            <span id={divider}>| {concert.times}</span>
+                                        }
+                                    </div>
                                 </div>
-                                <div id="venue-show-list-data">
-                                    <Link to={`/show/${concert.customId}`} state={{ concert: concert }} >
-                                        <span id="artists-link">{concert.artists} </span>
-                                    </Link>
-                                    <span id="at-venue">at</span> <span id="venue">{concert.venue}</span> {concert.times &&
-                                        <span id="divider">| {concert.times}</span>
-                                    }
-                                </div>
-                            </div>
-                        </ShowCard>
-                    </div>
-                ))
-            }
+                            </ShowCard>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
-    // return (
-    //     <>
-    //         {loading ? (
-    //             <div className="page-wrapper">
-    //                 <Spinner />
-    //             </div>
-    //         ) : (
-    //             <div className='venue-show-list-wrapper'>
-    //                 <div className="venue-heading-wrapper">
-    //                     <BackButton />
-    //                     <h2 className='venue-heading'>{venue}</h2>
-    //                     <div className='spacer'></div>
-    //                 </div>
-    //                 {concerts &&
-    //                     concerts.map((concert, index) => (
-    //                         <div key={concert._id}>
-    //                             <div className='venue-list-dates'>{concert.date}</div>
-    //                             <ShowCard>
-    //                                 <div id="show-card-contents">
-    //                                     <div>
-    //                                         {loggedIn
-    //                                             ? <PlusMinus concertId={concert._id} />
-    //                                             : <SquaredPlus id="plus-sign-logged-out" />
-    //                                         }
-    //                                     </div>
-    //                                     <div id="venue-show-list-data">
-    //                                         <Link to={`/show/${concert.customId}`} state={{ concert: concert }} >
-    //                                             <span id="artists-link">{concert.artists} </span>
-    //                                         </Link>
-    //                                         <span id="at-venue">at</span> <span id="venue">{concert.venue}</span> {concert.times &&
-    //                                                 <span id="divider">| {concert.times}</span> 
-    //                                             }
-    //                                     </div>
-    //                                 </div>
-    //                             </ShowCard>
-    //                         </div>
-    //                     ))
-    //                 }
-    //             </div>
-    //         )}
-    //     </>
-    // );
-    // changelog-end
 }
 
 export default VenueShowList;
