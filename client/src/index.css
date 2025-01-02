@@ -377,7 +377,6 @@ main {
 
 .show-card {
   background-color: var(--darkest);
-  /* margin-bottom: 4vh; */
   border-radius: 10px;
   border: 1px solid #386472;
   display: flex;
@@ -413,8 +412,7 @@ main {
 }
 
 #show-card-data {
-  /* text-align: center; */
-  padding: 3vh 2vw;
+  padding: 3vh 2vw 3vh 0;
   font-size: 20px;
 }
 
