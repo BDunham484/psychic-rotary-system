@@ -384,7 +384,7 @@ main {
   justify-content: center;
 }
 
-#show-card-contents {
+.show-card-contents {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -423,10 +423,10 @@ main {
   font-size: 20px;
 } */
 
-#venue-show-list-data {
+/* #venue-show-list-data {
   width: 80vw;
   padding: 3vh 2vw;
-}
+} */
 
 .show-header-wrapper {
   width: 90vw;
@@ -479,7 +479,7 @@ main {
   cursor: pointer;
 }
 
-#plus-sign-logged-out {
+.plus-sign-logged-out {
   width: 50px;
   color: var(--darker);
   margin-left: 2vw;
@@ -996,7 +996,7 @@ main {
   cursor: pointer;
 } */
 
-.venue-list-dates {
+/* .venue-list-dates {
   font-family: var(--primary-font);
   letter-spacing: 3px;
   font-weight: 700;
@@ -1004,9 +1004,9 @@ main {
   color: var(--main-text);
   padding-bottom: 5px;
   text-align: center;
-}
+} */
 
-.venue-show-list-wrapper {
+/* .venue-show-list-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1014,9 +1014,9 @@ main {
   background-color: var(--background);
   padding-top: 18vh;
   min-height: 100vh;
-}
+} */
 
-.venue-heading {
+/* .venue-heading {
   font-family: 'Kodchasan', sans-serif;
   letter-spacing: 5px;
   font-weight: 100;
@@ -1024,19 +1024,19 @@ main {
   padding: 5px;
   border-radius: 8px;
   text-align: center;
-}
+} */
 
-.venue-heading-wrapper {
+/* .venue-heading-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90vw;
   margin-bottom: 5vh;
-}
+} */
 
-.spacer {
+/* .spacer {
   width: 50px;
-}
+} */
 
 .top-o-page {
   width: 50px;
