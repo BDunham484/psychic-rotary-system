@@ -1,3 +1,5 @@
+// @ts-ignore
+import styles from './ConcertList.module.css';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ConcertContext } from '../../utils/GlobalState';
@@ -6,13 +8,13 @@ import AdminDelete from '../AdminUtil/AdminDelete';
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import PlusMinus from '../shared/PlusMinus/PlusMinus';
 import ShowCard from '../ShowCard/ShowCard';
-// @ts-ignore
-import styles from './ConcertList.module.css';
 
 const ConcertList = ({ concerts }) => {
     const [concertList, setConcertList] = useState(null);
 
     const { user } = useContext(ConcertContext);
+
+    const { concertListWrapper } = styles;
 
     const isAdmin = useMemo(() => user?.me?.isAdmin === true, [user?.me?.isAdmin]);
 
@@ -22,9 +24,7 @@ const ConcertList = ({ concerts }) => {
         }
     }, [concerts]);
 
-    const filterList = (concertId) => {
-        setConcertList(concertList.filter((x) => x._id !== concertId));
-    };
+    const filterList = (concertId) => setConcertList(concertList.filter((x) => x._id !== concertId));
 
     if (!concerts.length) {
         return <h3>No shows, yo. Try again later.</h3>;
@@ -33,16 +33,16 @@ const ConcertList = ({ concerts }) => {
     const loggedIn = Auth.loggedIn();
 
     return (
-        <div id={styles.concertListWrapper}>
+        <div id={concertListWrapper}>
             {concertList &&
                 concertList.map((concert) => (
                     <ShowCard id='concert-list-show-card' key={concert._id}>
-                        <div id='show-card-contents'>
+                        <div className='show-card-contents'>
                             <div id='show-card-left-contents'>
                                 <div>
                                     {loggedIn
                                         ? <PlusMinus concertId={concert._id} />
-                                        : <SquaredPlus id='plus-sign-logged-out' />
+                                        : <SquaredPlus className='plus-sign-logged-out' />
                                     }
                                 </div>
                                 <p id='show-card-data'>
