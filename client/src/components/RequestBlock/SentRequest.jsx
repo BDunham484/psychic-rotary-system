@@ -23,22 +23,22 @@ const SentRequests = ({ user }) => {
 
     return (
         <div>
-            <div className="friend-list-container">
+            <div className='friend-list-container'>
                 {user.sentCount <= 5 ? (
                     <div>
                         {user.sentRequests.map((request, index) => (
-                            <div key={index} className="names display-flex">
+                            <div key={index} className='names display-flex'>
                                 <div className='name'>{request.username}</div>
-                                <Cancel className="cancel" onClick={() => handleCancel(request._id, request.username)} />
+                                <Cancel className='cancel' onClick={() => handleCancel(request._id, request.username)} />
                             </div>
                         ))}
                     </div>
                 ) : (
                     <div className='friend-list styled-scrollbars'>
                         {user.sentRequests.map((request, index) => (
-                            <div key={index} className="names display-flex">
+                            <div key={index} className='names display-flex'>
                                 <div className='name'>{request.username}</div>
-                                <Cancel className="cancel" onClick={() => handleCancel(request._id, request.username)} />
+                                <Cancel className='cancel' onClick={() => handleCancel(request._id, request.username)} />
                             </div>
                         ))}
                     </div>

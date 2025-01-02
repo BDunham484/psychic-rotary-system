@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client';
 import { ConcertContext } from '../../../utils/GlobalState';
 import {
     DELETE_CONCERT_FROM_USER,
     RSVP_NO,
     CANCEL_RSVP_YES
-} from "../../../utils/mutations";
+} from '../../../utils/mutations';
 import { SquaredMinus } from '@styled-icons/entypo/SquaredMinus';
 
 const MinusButton = ({ concertId }) => {
@@ -42,7 +42,7 @@ const MinusButton = ({ concertId }) => {
 
     return (
         <div>
-            <SquaredMinus className="minus-sign" onClick={() => handleClick(concertId, userId)} />
+            <SquaredMinus className='minus-sign' onClick={() => handleClick(concertId, userId)} />
         </div>
     );
 };

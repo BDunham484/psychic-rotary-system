@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 import ConcertsVenueAZ from '../components/ConcertsVenueAZ/ConcertsVenueAZ';
 import ConcertsArtistsAZ from '../components/ConcertsArtistsAZ/ConcertsArtistsAZ';
 import { ConcertContext } from '../utils/GlobalState'
 import UtilityBar from '../components/UtilityBar/UtilityBar';
 import SortFilterBar from '../components/SortFilterBar/SortFilterBar';
-import VenueSearch from "../components/VenueSearch/VenueSearch";
+import VenueSearch from '../components/VenueSearch/VenueSearch';
 
 
 const Home = () => {

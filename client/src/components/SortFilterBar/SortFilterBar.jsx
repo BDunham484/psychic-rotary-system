@@ -19,7 +19,7 @@ const SortFilterBar = ({ setSortOrSearch, setIsAsc, isAsc }) => {
     };
 
     return (
-        <div className="sortFilterContainer">
+        <div className='sortFilterContainer'>
             <button className={'venue-az sort-buttons'} onClick={venueAZClickHandler}>
                 Venue {isAsc ? <TextSortAscending className='sortIcon' /> : <TextSortDescending className='sortIcon' />}
             </button>

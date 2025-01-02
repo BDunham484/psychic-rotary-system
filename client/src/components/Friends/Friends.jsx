@@ -1,9 +1,9 @@
 // @ts-ignore
 import styles from './styles/Friends.module.css';
-import { useState, useEffect } from "react";
-import FriendList from "./FriendList";
-import FriendSearch from "./FriendSearch";
-// import Expander from "../shared/Expander";
+import { useState, useEffect } from 'react';
+import FriendList from './FriendList';
+import FriendSearch from './FriendSearch';
+// import Expander from '../shared/Expander';
 import Switch from 'react-switch';
 
 const Friends = ({ user }) => {

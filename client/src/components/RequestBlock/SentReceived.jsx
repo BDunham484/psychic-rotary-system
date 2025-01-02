@@ -1,6 +1,6 @@
-import { useState } from "react";
-import SentRequests from "./SentRequest";
-import ReceivedRequests from "./ReceivedRequests";
+import { useState } from 'react';
+import SentRequests from './SentRequest';
+import ReceivedRequests from './ReceivedRequests';
 import Switch from 'react-switch';
 
 const SentReceived = ({ user }) => {
@@ -22,7 +22,7 @@ const SentReceived = ({ user }) => {
             {/* if the received request count is > 0 and the sent count is equal to zero, display ReceivedRequest only */}
             {(user.sentCount === 0 && user.receivedCount > 0) &&
                 <>
-                    <div className="sent-received">RECEIVED</div>
+                    <div className='sent-received'>RECEIVED</div>
                     <ReceivedRequests user={user} />
                 </>
             }
@@ -32,7 +32,7 @@ const SentReceived = ({ user }) => {
             ) : (
                 requestSwitch ? (
                     <>
-                        <div className="profile-friends-sub-header">
+                        <div className='profile-friends-sub-header'>
                             <div className='friends-sub-titles'>Sent</div>
                             <Switch
                                 onChange={handleRequestSwitch}
@@ -46,13 +46,13 @@ const SentReceived = ({ user }) => {
                                 boxShadow={'#eee3d0'}
                                 activeBoxShadow={'#eee3d0'}
                             />
-                            <div className="unSwitched">Received</div>
+                            <div className='unSwitched'>Received</div>
                         </div>
                         <SentRequests user={user} />
                     </>
                 ) : (
                     <>
-                        <div className="profile-friends-sub-header">
+                        <div className='profile-friends-sub-header'>
                             <div className='unSwitched'>Sent</div>
                             <Switch
                                 onChange={handleRequestSwitch}
@@ -66,7 +66,7 @@ const SentReceived = ({ user }) => {
                                 boxShadow={'#eee3d0'}
                                 activeBoxShadow={'#eee3d0'}
                             />
-                            <div className="friends-sub-titles">Received</div>
+                            <div className='friends-sub-titles'>Received</div>
                         </div>
                         <ReceivedRequests user={user} />
                     </>

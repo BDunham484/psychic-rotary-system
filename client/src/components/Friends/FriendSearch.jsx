@@ -1,9 +1,9 @@
 // @ts-ignore
 import styles from './styles/Friends.module.css';
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import FriendListOptions from "./FriendListOptions";
-import { Search } from "@styled-icons/bootstrap/Search";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import FriendListOptions from './FriendListOptions';
+import { Search } from '@styled-icons/bootstrap/Search';
 import Switch from 'react-switch';
 import { Delete } from '@styled-icons/typicons/Delete';
 
@@ -102,12 +102,12 @@ const FriendSearch = ({ user }) => {
                     <Search className={friendSearchIcon} />
                     <input
                         onChange={handleTextChange}
-                        type="text"
-                        placeholder="Username"
+                        type='text'
+                        placeholder='Username'
                         value={text}
                         className={friendSearchInput}
                     />
-                    <button className={friendSearchButton} type="submit" >Search</button>
+                    <button className={friendSearchButton} type='submit' >Search</button>
                 </label>
             </form>
             {showResult &&

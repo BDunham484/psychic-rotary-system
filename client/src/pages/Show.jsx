@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import Auth from '../utils/auth';
 import ShowCard from '../components/ShowCard/ShowCard';
-import PlusMinus from "../components/shared/PlusMinus/PlusMinus";
-import ConcertRSVP from "../components/shared/ConcertRSVP";
-import BackButton from "../components/shared/BackButton";
+import PlusMinus from '../components/shared/PlusMinus/PlusMinus';
+import ConcertRSVP from '../components/shared/ConcertRSVP';
+import BackButton from '../components/shared/BackButton';
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
-import DisabledConcertRSVP from "../components/DisabledConcertRSVP";
+import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 
 const Show = () => {
     const location = useLocation();
@@ -21,10 +21,10 @@ const Show = () => {
 
     return (
         <div className='container'>
-            <div className="back-button-wrapper">
+            <div className='back-button-wrapper'>
                 <BackButton />
             </div>
-            <div className="show-header-wrapper">
+            <div className='show-header-wrapper'>
                 <h2>{concert.date}</h2>
                 {loggedIn ?
                     <PlusMinus concertId={concert._id} />
@@ -33,7 +33,7 @@ const Show = () => {
                 }
             </div>
             <ShowCard>
-                <div className="show-wrapper">
+                <div className='show-wrapper'>
                     <h2>
                         {concert?.artists}
                     </h2>
@@ -42,7 +42,7 @@ const Show = () => {
                             at <a href={concert.website}> {concert.venue}</a>
                         </h3>
                     }
-                    <ul className="show-links">
+                    <ul className='show-links'>
                         {concert?.times &&
                             <li>
                                 {concert.times}
@@ -54,7 +54,7 @@ const Show = () => {
                             </li>
                         }
                         {concert?.address2 &&
-                            <li id="address2">
+                            <li id='address2'>
                                 {concert.address2}
                             </li>
                         }
@@ -75,7 +75,7 @@ const Show = () => {
                         }
                         {concert?.email &&
                             <li>
-                                <a href={"mailto:" + concert.email}>{concert.email}</a>
+                                <a href={'mailto:' + concert.email}>{concert.email}</a>
                             </li>
                         }
                         {concert?.ticketLink &&

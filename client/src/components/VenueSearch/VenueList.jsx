@@ -1,7 +1,7 @@
 // @ts-ignore
 import styles from './VenueSearch.module.css';
-import ShowCard from "../ShowCard/ShowCard";
-import { Link } from "react-router-dom";
+import ShowCard from '../ShowCard/ShowCard';
+import { Link } from 'react-router-dom';
 
 const VenueList = ({ venues }) => {
     const {

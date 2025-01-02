@@ -1,9 +1,9 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useMutation } from "@apollo/client";
-import { ADD_FRIEND } from "../../utils/mutations";
-import RequestBlockHeader from "./RequestBlockHeader";
-import RequestBlockForm from "./RequestBlockForm";
+import { useMutation } from '@apollo/client';
+import { ADD_FRIEND } from '../../utils/mutations';
+import RequestBlockHeader from './RequestBlockHeader';
+import RequestBlockForm from './RequestBlockForm';
 
 const RequestBlock = ({ userParam, user, inputSwitched, setInputSwitched }) => {
     const {

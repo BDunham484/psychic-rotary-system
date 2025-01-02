@@ -1,9 +1,9 @@
 // @ts-ignore
 import styles from './VenueSearch.module.css';
-import { useState } from "react";
-import ShowCard from "../ShowCard/ShowCard";
-import { Link } from "react-router-dom";
-import { Search } from "@styled-icons/bootstrap/Search";
+import { useState } from 'react';
+import ShowCard from '../ShowCard/ShowCard';
+import { Link } from 'react-router-dom';
+import { Search } from '@styled-icons/bootstrap/Search';
 
 const VenueSearchInput = ({ venues }) => {
     // set state for input text
@@ -90,15 +90,15 @@ const VenueSearchInput = ({ venues }) => {
                     <Search className={searchIcon} />
                     <input
                         onChange={handleTextChange}
-                        type="text"
-                        placeholder="Venue"
+                        type='text'
+                        placeholder='Venue'
                         value={text}
                         className={venueSearchInput}
                     />
                     <button
                         disabled={btnDisabled}
                         className={venueSearchButton}
-                        type="submit" >
+                        type='submit' >
                             Search
                     </button>
                     </label>

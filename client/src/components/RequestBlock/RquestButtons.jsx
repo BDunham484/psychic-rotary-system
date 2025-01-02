@@ -1,8 +1,8 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useEffect } from "react";
-import { useMutation } from "@apollo/client";
-import { SEND_FRIEND_REQUEST } from "../../utils/mutations";
+import { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+import { SEND_FRIEND_REQUEST } from '../../utils/mutations';
 
 const RequestButtons = (
     {
@@ -88,7 +88,7 @@ const RequestButtons = (
                 <div className={formDiv}>
                     <button
                         className={formRequestButton}
-                        type="button"
+                        type='button'
                         disabled={btnDisabled}
                         onClick={() => { handleRequestSubmit(friendId, friendName, userBlockedArr, userId) }}
                     >

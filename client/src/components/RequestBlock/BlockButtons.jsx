@@ -1,8 +1,8 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useMemo } from "react";
-import { useMutation } from "@apollo/client";
-import { BLOCK_USER } from "../../utils/mutations";
+import { useMemo } from 'react';
+import { useMutation } from '@apollo/client';
+import { BLOCK_USER } from '../../utils/mutations';
 
 const BlockButtons = (
     {
@@ -57,7 +57,7 @@ const BlockButtons = (
                 <div className={formDiv}>
                     <button
                         id={formBlockButton}
-                        type="button"
+                        type='button'
                         disabled={btnDisabled}
                         onClick={() => {handleBlockSubmit(friendId, friendName)}}
                     >

@@ -1,10 +1,10 @@
 // @ts-ignore
 import styles from './LoginSignup.module.css';
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../../utils/mutations";
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
-import FormCard from "../../components/shared/FormCard/FormCard";
+import FormCard from '../../components/shared/FormCard/FormCard';
 
 const Login = () => {
     const [formState, setFormState] = useState({ email: '', password: '' });
@@ -58,7 +58,7 @@ const Login = () => {
                     </h2>
                     <div className={formDiv}>
                         <label
-                            htmlFor="email"
+                            htmlFor='email'
                             className={loginSignupFormLabel}
                         >
                             Email
@@ -75,7 +75,7 @@ const Login = () => {
                     </div>
                     <div className={formDiv}>
                         <label
-                            htmlFor="password"
+                            htmlFor='password'
                             className={loginSignupFormLabel}
                         >
                             Password

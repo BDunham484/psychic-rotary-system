@@ -1,11 +1,11 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../../utils/queries";
-import RequestButtons from "./RquestButtons";
-import BlockButtons from "./BlockButtons";
-import FormCard from "../shared/FormCard/FormCard";
+import { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
+import RequestButtons from './RquestButtons';
+import BlockButtons from './BlockButtons';
+import FormCard from '../shared/FormCard/FormCard';
 import { Send } from '@styled-icons/bootstrap/Send';
 import { Blocked } from '@styled-icons/icomoon/Blocked';
 
@@ -63,8 +63,8 @@ const RequestBlockForm = ({ userParam, inputSwitched, user }) => {
                             }
                             <input
                                 onChange={handleTextChange}
-                                type="text"
-                                placeholder="Username"
+                                type='text'
+                                placeholder='Username'
                                 value={text}
                                 className={profileFriendsCardInput}
                             />

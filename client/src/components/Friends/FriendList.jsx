@@ -1,7 +1,7 @@
 // @ts-ignore
 import styles from './styles/Friends.module.css';
-import { Link } from "react-router-dom";
-import FriendListOptions from "./FriendListOptions";
+import { Link } from 'react-router-dom';
+import FriendListOptions from './FriendListOptions';
 import Switch from 'react-switch';
 import { useState } from 'react';
 import SkeletonFriendListItem from './SkeletonFriendListItem';

@@ -42,7 +42,7 @@ const Tabs = ({
         }
     }, []);
 
-    // Delay updateSlider() call to give DOM time to "settle"
+    // Delay updateSlider() call to give DOM time to 'settle'
     // If not, the initial offset values returned are incorrect
     useEffect(() => {
         const timer = setTimeout(() => {

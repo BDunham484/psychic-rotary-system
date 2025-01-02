@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { GET_ALL_VENUES } from "../../utils/queries";
-import VenueList from "./VenueList";
-import VenueSearchInput from "./VenueSearchInput";
-import Spinner from "../shared/Spinner";
-import ScrollButton from "../shared/ScrollButton";
+import { useQuery } from '@apollo/client';
+import { GET_ALL_VENUES } from '../../utils/queries';
+import VenueList from './VenueList';
+import VenueSearchInput from './VenueSearchInput';
+import Spinner from '../shared/Spinner';
+import ScrollButton from '../shared/ScrollButton';
 
 const VenueSearch = () => {
     const { loading, data } = useQuery(GET_ALL_VENUES);

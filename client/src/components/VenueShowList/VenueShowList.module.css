@@ -1,0 +1,100 @@
+.venueShowListPageWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background);
+    padding-top: 18vh;
+    min-height: 100vh;
+    gap: 5vh;
+}
+
+.venueHeadingWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+}
+
+.venueHeading {
+    font-family: 'Kodchasan', sans-serif;
+    font-weight: 100;
+    background-color: var(--darkest);
+    padding: 5px 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.name {
+    letter-spacing: 5px;
+}
+
+.spacer {
+    width: 50px;
+}
+
+.venueShowListWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    margin-bottom: 3vh;
+}
+
+.venueShowWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.venueListDates {
+    font-family: var(--primary-font);
+    letter-spacing: 3px;
+    font-weight: 700;
+    font-size: 1.17em;
+    color: var(--main-text);
+    text-align: center;
+}
+
+.showCardContents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+}
+
+.plusSignLoggedOut {
+    width: 50px;
+    color: var(--darker);
+    margin-left: 2vw;
+}
+
+#venueShowListData {
+    width: 80vw;
+    padding: 3vh 2vw;
+    font-size: 22px;
+}
+
+#artistsLink {
+    font-weight: bold;
+}
+
+/* MEDIA QUERIES START */
+
+/* PORTRAIT MODE MOBILE DEVICES START */
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    #divider {
+        display: none;
+    }
+}
+
+/* LANDSCAPE MODE DEVICES START */
+@media screen and
+/* // changelog-start */
+(max-device-width: 920px) and
+/* (max-device-width: 767px) and */
+/* // changelog-end */
+(orientation: landscape) {
+    .showCardContents {
+        width: 98%;
+    }
+}

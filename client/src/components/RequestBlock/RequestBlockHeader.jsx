@@ -7,7 +7,7 @@ const RequestBlockHeader = ({ inputSwitched, setInputSwitched }) => {
     };
 
     return (
-        <div className="display-flex">
+        <div className='display-flex'>
             {inputSwitched ? (
                 <>
                     <h3 className='friends-sub-titles'>Request</h3>
@@ -25,11 +25,11 @@ const RequestBlockHeader = ({ inputSwitched, setInputSwitched }) => {
                             activeBoxShadow={'#eee3d0'}
                         />
                     </label>
-                    <h3 className="unSwitched">Block</h3>
+                    <h3 className='unSwitched'>Block</h3>
                 </>
             ) : (
                 <>
-                    <h3 className="unSwitched">Request</h3>
+                    <h3 className='unSwitched'>Request</h3>
                     <label>
                         <Switch
                             onChange={handleInputSwitch}

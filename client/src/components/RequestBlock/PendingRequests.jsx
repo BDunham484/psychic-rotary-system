@@ -1,6 +1,6 @@
 // @ts-ignore
 import styles from './RequestBlock.module.css';
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 import SkeletonFriendListItem from '../Friends/SkeletonFriendListItem';
 import Switch from 'react-switch';
 import { Send } from '@styled-icons/bootstrap/Send';
