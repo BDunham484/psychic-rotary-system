@@ -371,9 +371,9 @@ main {
   cursor: pointer;
 }
 
-#concert-list-show-card {
+/* #concert-list-show-card {
   width: 90vw;
-}
+} */
 
 .show-card {
   background-color: var(--darkest);
@@ -384,22 +384,22 @@ main {
   justify-content: center;
 }
 
-.show-card-contents {
+/* .show-card-contents {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 95%;
-}
+} */
 
-#show-card-left-contents {
+/* #show-card-left-contents {
   display: flex;
   align-items: center;
   gap: 2vw;
-}
+} */
 
-#admin-delete:hover {
+/* #admin-delete:hover {
   cursor: pointer;
-}
+} */
 
 #admin-buttons {
   display: flex;
@@ -411,10 +411,10 @@ main {
   background-color: var(--main-text);
 }
 
-#show-card-data {
+/* #show-card-data {
   padding: 3vh 2vw 3vh 0;
   font-size: 20px;
-}
+} */
 
 /* #show-card-venue-list-data {
   width: 30vw;
@@ -479,11 +479,11 @@ main {
   cursor: pointer;
 }
 
-.plus-sign-logged-out {
+/* .plus-sign-logged-out {
   width: 50px;
   color: var(--darker);
   margin-left: 2vw;
-}
+} */
 
 
 /* #artists-link {
@@ -1115,22 +1115,21 @@ footer {
     display: none;
   }
 
-  #venue {
+  /* #venue {
     display: block;
-    /* width: 200px; */
     width: 70vw;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
+  } */
 
   #admin-buttons {
     display: none;
   }
 
-  #divider {
+  /* #divider {
     display: none;
-  }
+  } */
 
   /* RSVP STYLES START */
   .rsvp-wrapper {
@@ -1213,9 +1212,9 @@ footer {
     width: 52%;
   }
 
-  #show-card-contents {
+  /* #show-card-contents {
     width: 98%;
-  }
+  } */
 
   /* #show-card-venue-list-data {
     width: 85vw;
