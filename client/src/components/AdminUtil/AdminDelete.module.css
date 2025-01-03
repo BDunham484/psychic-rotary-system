@@ -1,0 +1,19 @@
+#adminButtons {
+    display: flex;
+    height: auto;
+    width: 100%;
+}
+
+#redo {
+    width: 50px;
+}
+
+#deleteCancel {
+    width: 50px;
+    color: var(--cancel);
+}
+
+#deleteDark {
+    width: 50px;
+    color: var(--dark);
+}
