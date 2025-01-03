@@ -1,3 +1,5 @@
+// @ts-ignore
+import styles from './AdminDelete.module.css';
 import { Delete } from '@styled-icons/fluentui-system-filled/Delete'
 import { Redo } from '@styled-icons/boxicons-regular/Redo'
 import { useState } from 'react';
@@ -7,10 +9,17 @@ import { useMutation } from '@apollo/client';
 const AdminDelete = ({ concertId, filterList }) => {
     const [isDeleteToggled, setIsDeleteToggled] = useState(false);
 
+    const {
+        adminButtons,
+        redo,
+        deleteCancel,
+        deleteDark,
+    } = styles;
+
     const [deleteConcert] = useMutation(DELETE_CONCERTS);
 
     const handleDeleteClick = async () => {
-        setIsDeleteToggled((prev) => !prev)
+        setIsDeleteToggled((prev) => !prev);
 
         if (isDeleteToggled) {
             try {
@@ -30,17 +39,17 @@ const AdminDelete = ({ concertId, filterList }) => {
     };
 
     return (
-        <div id='admin-buttons'>
+        <div id={adminButtons}>
             {isDeleteToggled &&
                 <div onClick={() => setIsDeleteToggled(prev => !prev)}>
-                    <Redo style={{ width: '50px' }} />
+                    <Redo id={redo} />
                 </div>
             }
             <div onClick={handleDeleteClick}>
-                <Delete style={{ width: '50px', color: isDeleteToggled ? 'var(--cancel)' : 'var(--dark)' }} />
+                <Delete id={isDeleteToggled ? deleteCancel : deleteDark} />
             </div>
         </div>
     );
-}
+};
 
 export default AdminDelete;
