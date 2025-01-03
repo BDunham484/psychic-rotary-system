@@ -41,7 +41,7 @@ const ProfileConcerts = ({ userParam, user }) => {
                             <div id={profileShowCardData}>
                                 <div>{concert.date}</div>
                                 <Link to={`/show/${concert.customId}`} state={{ concert }}>
-                                    <span id={artistsLink}>{concert.artists}</span>
+                                    <span className={artistsLink}>{concert.artists}</span>
                                 </Link>
                                 {concert.venue}
                                 {!userParam &&
