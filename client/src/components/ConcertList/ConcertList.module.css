@@ -4,3 +4,77 @@
     gap: 3vh;
     margin-bottom: 3vh;
 }
+
+#concertListShowCard {
+    width: 90vw;
+}
+
+.showCardContents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+}
+
+#showCardLeftContents {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+
+.plusSignLoggedOut {
+    width: 50px;
+    color: var(--darker);
+    margin-left: 2vw;
+}
+
+#showCardData {
+    padding: 3vh 2vw 3vh 0;
+    font-size: 20px;
+}
+
+.artistsLink {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#adminDelete:hover {
+    cursor: pointer;
+}
+
+/* MEDIA QUERIES START */
+
+/* PORTRAIT MODE MOBILE DEVICES START */
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    #showCardData {
+        padding: 1vh 0;
+    }
+
+    #atVenue {
+        display: none;
+    }
+
+    #venue {
+        display: block;
+        width: 70vw;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    #divider {
+        display: none;
+    }
+}
+
+/* LANDSCAPE MODE DEVICES START */
+@media screen and
+/* // changelog-start */
+(max-device-width: 920px) and
+/* (max-device-width: 767px) and */
+/* // changelog-end */
+(orientation: landscape) {
+    .showCardContents {
+        width: 98%;
+    }
+}
