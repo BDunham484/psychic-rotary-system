@@ -65,7 +65,7 @@ const VenueShowList = ({ concerts }) => {
                                     </div>
                                     <div id={venueShowListData}>
                                         <Link to={`/show/${concert.customId}`} state={{ concert: concert }} >
-                                            <span id={artistsLink}>{concert.artists} </span>
+                                            <span className={artistsLink}>{concert.artists} </span>
                                         </Link>
                                         {concert.times &&
                                             <span id={divider}>| {concert.times}</span>
