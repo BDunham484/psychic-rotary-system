@@ -14,7 +14,19 @@ const ConcertList = ({ concerts }) => {
 
     const { user } = useContext(ConcertContext);
 
-    const { concertListWrapper } = styles;
+    const {
+        concertListWrapper,
+        concertListShowCard,
+        showCardContents,
+        showCardLeftContents,
+        plusSignLoggedOut,
+        showCardData,
+        artistsLink,
+        atVenue,
+        venue,
+        divider,
+        adminDelete,
+    } = styles;
 
     const isAdmin = useMemo(() => user?.me?.isAdmin === true, [user?.me?.isAdmin]);
 
@@ -36,31 +48,31 @@ const ConcertList = ({ concerts }) => {
         <div id={concertListWrapper}>
             {concertList &&
                 concertList.map((concert) => (
-                    <ShowCard id='concert-list-show-card' key={concert._id}>
-                        <div className='show-card-contents'>
-                            <div id='show-card-left-contents'>
+                    <ShowCard id={concertListShowCard} key={concert._id}>
+                            <div className={showCardContents}>
+                            <div id={showCardLeftContents}>
                                 <div>
                                     {loggedIn
                                         ? <PlusMinus concertId={concert._id} />
-                                        : <SquaredPlus className='plus-sign-logged-out' />
+                                            : <SquaredPlus className={plusSignLoggedOut}/>
                                     }
                                 </div>
-                                <p id='show-card-data'>
+                                <p id={showCardData}>
                                     <Link to={`/show/${concert.customId}`} state={{ concert: concert }}>
-                                        <span id='artists-link'>{concert.artists} </span>
+                                        <span className={artistsLink}>{concert.artists} </span>
                                     </Link>
                                     {concert?.venue &&
                                         <span>
-                                            <span id='at-venue'> at </span>
-                                            <span id='venue'>{concert.venue}</span>
+                                            <span id={atVenue}> at </span>
+                                            <span id={venue}>{concert.venue}</span>
                                         </span>
                                     }
                                     {concert.times &&
-                                        <span id='divider'>{` | ${concert.times}`}</span>
+                                        <span id={divider}>{` | ${concert.times}`}</span>
                                     }
                                 </p>
                             </div>
-                            <div id='admin-delete'>
+                            <div id={adminDelete}>
                                 {isAdmin &&
                                     <AdminDelete
                                         concertId={concert._id}
