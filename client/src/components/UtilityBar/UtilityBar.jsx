@@ -24,8 +24,9 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
 
     const handleDateSelect = (datePick) => {
         setStartDate(datePick);
-        const convertDate = datePick.toDateString();
-        setDate(convertDate)
+        const d = new Date(datePick);
+        d.setHours(0, 0, 0, 0);
+        setDate(d.toISOString());
     }
 
     const yesterday = new Date();
@@ -41,23 +42,23 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
     const nextDayButton = (date) => {
         const next = new Date(date);
         next.setDate(next.getDate() + 1);
-        const theNextDay = next.toDateString();
-        setDate(theNextDay);
+        next.setHours(0, 0, 0, 0);
+        setDate(next.toISOString());
         setStartDate(next);
     }
     //function that gets the previous day
     const dayBeforeButton = (date) => {
         const before = new Date(date);
         before.setDate(before.getDate() - 1);
-        const theLastDay = before.toDateString();
-        setDate(theLastDay);
+        before.setHours(0, 0, 0, 0);
+        setDate(before.toISOString());
         setStartDate(before);
     }
 
     return (
         <div className='utility-bar'>
             <span className='display-flex date-wrapper'>
-                {yesterday.toDateString() === date ? (
+                {new Date(date).toDateString() === yesterday.toDateString() ? (
                     <LeftArrow className='disabled-arrows' />
                 ) : (
                     <LeftArrow className='arrows' onClick={() => dayBeforeButton(date)} />
@@ -82,7 +83,7 @@ const UtilityBar = ({ optionsOpen, setOptionsOpen }) => {
                     showDisabledMonthNavigation
                 />
                 <Options className='options' onClick={handleOptionsClick} />
-                {endOfDays.toDateString() === date ? (
+                {new Date(date).toDateString() === endOfDays.toDateString() ? (
                     <RightArrow className='disabled-arrows' />
                 ) : (
                     <RightArrow className='arrows' onClick={() => nextDayButton(date)} />

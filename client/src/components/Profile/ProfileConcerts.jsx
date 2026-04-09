@@ -5,6 +5,7 @@ import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
 import ShowCard from '../ShowCard/ShowCard';
 import { Link } from 'react-router-dom';
 import SkeletonShowCard from './SkeletonShowCard';
+import { formatConcertDate } from '../../utils/helpers';
 
 const ProfileConcerts = ({ userParam, user }) => {
     const {
@@ -39,7 +40,7 @@ const ProfileConcerts = ({ userParam, user }) => {
                     user.concerts.map((concert) => (
                         <ShowCard key={concert._id}>
                             <div id={profileShowCardData}>
-                                <div>{concert.date}</div>
+                                <div>{formatConcertDate(concert.date)}</div>
                                 <Link to={`/show/${concert.customId}`} state={{ concert }}>
                                     <span id={artistsLink}>{concert.artists}</span>
                                 </Link>

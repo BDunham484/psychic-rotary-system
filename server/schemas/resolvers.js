@@ -63,8 +63,12 @@ const resolvers = {
         },
         // get all concerts in database
         concertsFromDb: async (parent, { date }) => {
+            const start = new Date(date);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(date);
+            end.setHours(23, 59, 59, 999);
             const concerts = await Concert.find({
-                date: date
+                date: { $gte: start, $lte: end }
             })
                 .sort({ venue: 'asc' })
                 .populate('yes')
@@ -76,9 +80,12 @@ const resolvers = {
         },
         // Get concerts sorted by venue asc
         concertsSortByVenueAsc: async (parent, { date }) => {
-            console.log('🥷🥷🥷🥷 date: ', date);
+            const start = new Date(date);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(date);
+            end.setHours(23, 59, 59, 999);
             const concerts = await Concert.find({
-                date: date
+                date: { $gte: start, $lte: end }
             })
                 .sort({ venue: 'asc' })
                 .populate('yes')
@@ -90,9 +97,12 @@ const resolvers = {
         },
         // Get concerts sorted by venue desc
         concertsSortByVenueDesc: async (parent, { date }) => {
-            console.log('🥷🥷🥷🥷 date: ', date);
+            const start = new Date(date);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(date);
+            end.setHours(23, 59, 59, 999);
             const concerts = await Concert.find({
-                date: date
+                date: { $gte: start, $lte: end }
             })
                 .sort({ venue: 'desc' })
                 .populate('yes')
@@ -103,8 +113,12 @@ const resolvers = {
             return concerts
         },
         concertsSortByArtistsAsc: async (parent, { date }) => {
+            const start = new Date(date);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(date);
+            end.setHours(23, 59, 59, 999);
             const concerts = await Concert.find({
-                date: date
+                date: { $gte: start, $lte: end }
             })
                 .sort({ artists: 'asc' })
                 .populate('yes')
@@ -115,8 +129,12 @@ const resolvers = {
             return concerts
         },
         concertsSortByArtistsDesc: async (parent, { date }) => {
+            const start = new Date(date);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(date);
+            end.setHours(23, 59, 59, 999);
             const concerts = await Concert.find({
-                date: date
+                date: { $gte: start, $lte: end }
             })
                 .sort({ artists: 'desc' })
                 .populate('yes')
@@ -228,7 +246,13 @@ const resolvers = {
                 .populate('no')
                 .populate('maybe');
 
-            console.log(concerts);
+            // changelog-start
+            console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+            console.log('🔥🔥🔥🔥 concerts: ', concerts);
+            console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+            console.log(' ');
+            // changelog-end
+
             return concerts;
         },
         //scrape one day at a time
@@ -945,6 +969,13 @@ const resolvers = {
             };
             throw new AuthenticationError('You need to be logged in!');
         }
-    }
+    },
+    Concert: {
+        date: (parent) => {
+            if (!parent.date) return null;
+            const d = new Date(parent.date);
+            return isNaN(d.getTime()) ? String(parent.date) : d.toISOString();
+        }
+    },
 };
 module.exports = resolvers;

@@ -4,6 +4,7 @@ import ShowCard from '../components/ShowCard/ShowCard';
 import PlusMinus from "../components/shared/PlusMinus/PlusMinus";
 import ConcertRSVP from "../components/shared/ConcertRSVP";
 import BackButton from "../components/shared/BackButton";
+import { formatConcertDate } from '../utils/helpers';
 import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
 import DisabledConcertRSVP from "../components/DisabledConcertRSVP";
 
@@ -25,7 +26,7 @@ const Show = () => {
                 <BackButton />
             </div>
             <div className="show-header-wrapper">
-                <h2>{concert.date}</h2>
+                <h2>{formatConcertDate(concert.date)}</h2>
                 {loggedIn ?
                     <PlusMinus concertId={concert._id} />
                     :

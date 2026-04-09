@@ -2,8 +2,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import {
 QUERY_ME_BASIC } from './queries';
-import { getTodaysDate } from './helpers';
-
 const ConcertContext = createContext();
 const { Provider } = ConcertContext;
 
@@ -27,8 +25,10 @@ const ConcertProvider = ({ children }) => {
         }
     }, [loading, userData, user, startPolling, stopPolling])
 
-    //get today's date with imported helper function
-    var today = getTodaysDate();
+    //get today's date as midnight UTC ISO string
+    const _today = new Date();
+    _today.setHours(0, 0, 0, 0);
+    const today = _today.toISOString();
 
     //set initial state using today's date
     const [date, setDate] = useState(today);

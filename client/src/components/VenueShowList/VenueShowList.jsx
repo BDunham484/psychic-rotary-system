@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Auth from '../../utils/auth';
 import { Link } from "react-router-dom";
+import { formatConcertDate } from '../../utils/helpers';
 import ShowCard from "../ShowCard/ShowCard";
 import Spinner from '../shared/Spinner';
 import PlusMinus from "../shared/PlusMinus/PlusMinus";
@@ -40,7 +41,7 @@ const VenueShowList = ({ concerts }) => {
             {concerts &&
                 concerts.map((concert, index) => (
                     <div key={concert._id}>
-                        <div className='venue-list-dates'>{concert.date}</div>
+                        <div className='venue-list-dates'>{formatConcertDate(concert.date)}</div>
                         <ShowCard>
                             <div id="show-card-contents">
                                 <div>
