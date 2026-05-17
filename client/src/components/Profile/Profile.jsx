@@ -1,115 +1,86 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
-import ProfileFriends from '../Friends/ProfileFriends';
-import ProfileConcerts from './ProfileConcerts';
+import { deriveFriendship } from '../../utils/helpers';
 import BackButton from '../shared/BackButton';
-import { User } from '@styled-icons/fa-solid/User';
-// @ts-ignore
+import ProfileHero from './ProfileHero';
+import ConcertsList from './ConcertsList';
+import FriendsTab from '../Friends/FriendsTab';
 import styles from './Profile.module.css';
-import Tabs from '../shared/Tabs/Tabs';
 
 const Profile = () => {
-    const { username: userParam } = useParams();
-    const {
-        friendsLabelWrapper,
-        friendsLabelUserIcon,
-        profilePageWrapper,
-        profilePageHeader,
-        profileUserTitle,
-        profileFriendWrapper,
-        profileConcertsWrapper,
-        tabButton,
-        activeProfileTab,
-        tabContent,
-    } = styles;
+  const { username: userParam } = useParams();
+  const [tab, setTab] = useState('concerts');
 
-    const { loading, data, startPolling, stopPolling } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-        variables: { username: userParam }
-    });
+  const { loading, data, startPolling, stopPolling } = useQuery(
+    userParam ? QUERY_USER : QUERY_ME,
+    { variables: { username: userParam } }
+  );
 
-    useEffect(() => {
-        startPolling(1000);
-        return () => {
-            stopPolling()
-        };
-    });
+  const { data: meData } = useQuery(QUERY_ME, {
+    skip: !userParam || !Auth.loggedIn(),
+  });
 
-    const user = useMemo(() => data?.me || data?.user || {}, [data?.me, data?.user]);
+  useEffect(() => {
+    startPolling(1000);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
 
-    const customTabStyles = useMemo(() => {
-        return {
-            parentId: 'Profile',
-            customTabButton: tabButton,
-            activeProfileTab: activeProfileTab,
-            customTabContent: tabContent,
-        }
-    }, [tabButton, activeProfileTab, tabContent]);
+  const user = useMemo(() => data?.me || data?.user || {}, [data]);
+  const me   = useMemo(() => meData?.me || null, [meData]);
+  const isSelf = !userParam;
 
-    const friendsLabel = useMemo(() => (
-        <div className={friendsLabelWrapper}>
-            <User className={friendsLabelUserIcon} />
-            <p>Friends</p>
-            {user?.friendCount}
+  const friendship = useMemo(
+    () => deriveFriendship(me, user._id),
+    [me, user._id]
+  );
+
+  if (Auth.loggedIn() && Auth.getProfile()?.data.username === userParam) {
+    return <Navigate to='/profile' />;
+  }
+  if (loading) return <div>Loading…</div>;
+  if (!user?._id) return <h4>You need to be logged in to see this page.</h4>;
+
+  return (
+    <main className={styles.main}>
+      <div className={`${styles.page} fade-up`}>
+        <div className={styles.backBar}>
+          <BackButton />
         </div>
-    ), [user, User]);
 
-    // Navigate to personal profile page if username === loggedInUser
-    // @ts-ignore
-    if (Auth.loggedIn() && Auth.getProfile()?.data.username === userParam) {
-        return <Navigate to='/profile' />;
-    }
+        <ProfileHero user={user} isSelf={isSelf} friendship={friendship} />
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
-    if (!user?._id) {
-        return (
-            <h4>
-                You need to be logged in to see this page. Login or Sign Up above!
-            </h4>
-        );
-    }
-
-    const tabData = [
-        {
-            label: `Concerts ${user?.concertCount > 0 ? user?.concertCount : ''}`,
-            content:
-                <div className={profileConcertsWrapper}>
-                    <ProfileConcerts userParam={userParam} user={user} />
-                </div>
-        },
-        {
-            label: `Friends ${user?.friendCount > 0 ? user?.friendCount : ''}`,
-            content:
-                <div className={profileFriendWrapper}>
-                    <ProfileFriends userParam={userParam} user={user} />
-                </div>
-        },
-    ];
-
-    return (
-        <div className={profilePageWrapper}>
-            <div className={profilePageHeader}>
-                <div className='back-button'>
-                    <BackButton />
-                </div>
-                <div className={profileUserTitle}>
-                    <h2>{user.username}</h2>
-                </div>
+        {isSelf ? (
+          <>
+            <div className={styles.tabs}>
+              <button
+                className={`${styles.tab} ${tab === 'concerts' ? styles.tabActive : ''}`}
+                onClick={() => setTab('concerts')}
+              >
+                Concerts <span className={styles.tabCount}>{user.concertCount || 0}</span>
+              </button>
+              <button
+                className={`${styles.tab} ${tab === 'friends' ? styles.tabActive : ''}`}
+                onClick={() => setTab('friends')}
+              >
+                Friends <span className={styles.tabCount}>{user.friendCount || 0}</span>
+              </button>
             </div>
-            {userParam ? (
-                <div className={profileConcertsWrapper}>
-                    <ProfileConcerts userParam={userParam} user={user} />
-                </div>
-            ) : (
-                <Tabs tabs={tabData} customStyles={customTabStyles}/>
-            )}
-        </div>
-    );
+            <div className={styles.tabContent}>
+              {tab === 'concerts' && <ConcertsList user={user} isSelf={true} />}
+              {tab === 'friends'  && <FriendsTab  user={user} />}
+            </div>
+          </>
+        ) : (
+          <div className={styles.tabContent}>
+            <ConcertsList user={user} isSelf={false} />
+          </div>
+        )}
+      </div>
+    </main>
+  );
 };
 
 export default Profile;

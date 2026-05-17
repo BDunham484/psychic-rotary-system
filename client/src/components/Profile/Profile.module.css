@@ -1,243 +1,68 @@
-/* PROFILE STYLES START */
-.profilePageWrapper {
-    width: 100vw;
-    /* min-height: 100vh; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: var(--background);
+.main {
+  position: relative; z-index: 1;
+  padding-top: var(--header-height);
+  min-height: 100vh;
+}
+.page {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 3.2rem 4rem 8rem;
+}
+.backBar {
+  display: flex; align-items: center;
+  padding: 0.8rem 0 2.4rem;
 }
 
-.profilePageHeader {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 12vh;
-    padding-left: 12%;
-    width: 100%;
-    min-height: 10vh;
-    gap: 3vw;
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  padding: 2.4rem 0 0;
+  border-bottom: 1px solid var(--border-dim);
 }
-
-.profileUserTitle {
-    font-size: 25px;
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.6rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
 }
-
-.profileFriendWrapper {
-    width: 100%;
-    /* min-height: 92vh; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.tab:hover { color: var(--text-primary); }
+.tabActive {
+  color: var(--accent-hi);
+  border-bottom-color: var(--accent);
 }
-
-.friendsLabelWrapper {
-    display: flex;
-    justify-content: center;
-    /* align-items: end; */
-    width: 100%;
-    gap: 10px;
-    /* background-color: rgba(123,123,321,0.4); */
+.tabCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  color: var(--text-muted);
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  min-width: 2rem;
+  font-variant-numeric: tabular-nums;
 }
-
-.friendsLabelUserIcon {
-    width: 20px;
-    color: var(--main-text);
+.tabActive .tabCount {
+  background: var(--accent-dim);
+  border-color: var(--accent-mid);
+  color: var(--accent-hi);
 }
+.tabContent { padding: 3.2rem 0; }
 
-.profileConcertsWrapper {
-    width: 100%;
-    min-height: 92vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-}
-
-.profileConcerts {
-    width: 60vw;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3vh;
-}
-
-.profileConcertsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2vh 0 2vh 2vh;
-    border-bottom: 2px solid var(--dark);
-    letter-spacing: 2px;
-    font-size: 25px;
-    width: 60vw;
-}
-
-#profileShowCardData {
-    padding: 3vh 0 3vh 30px;
-    width: 50vw;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-
-#profileShowCardData button {
-    margin-top: 2vh;
-    width: 150px;
-    background-color: var(--button);
-    border: none;
-    border-radius: 10px;
-    color: var(--main-text);
-    font-family: var(--secondary-font);
-    font-weight: bold;
-    letter-spacing: 3px;
-    font-size: 16px;
-    padding: 3px;
-}
-
-#profileShowCardData button:hover {
-    cursor: pointer;
-}
-
-#artistsLink {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-/* Tab Styles Start */
-.tabButton {
-    width: 50%;
-    border: none;
-    cursor: pointer;
-    color: var(--darker);
-    letter-spacing: 2px;
-    font-size: 20px;
-    background: none;
-    padding: 10px 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.tabButton:hover {
-    color: var(--dark);
-}
-
-.activeProfileTab {
-    color: var(--main-text) !important;
-    font-weight: bold;
-}
-
-.tabContent {
-    /* margin-top: 5vh; */
-    padding: 3vh 0;
-    font-size: 16px;
-    color: var(--main-text);
-    width: 100%;
-    position: relative;
-}
-
-/* Skeleton Styles Start */
-#skeletonShowCardWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3vh;
-    width: 90vw;
-    margin-bottom: 3vh;
-    font-size: 20px;
-}
-
-.skeletonShowCard {
-    width: 50vw;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: var(--darker);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.skeletonImage {
-    width: 100%;
-    height: 140px;
-    border-radius: 4px;
-    background-color: var(--dark);
-    animation: shimmer 2.5s infinite;
-}
-
-.skeletonTitle,
-.skeletonLine {
-    height: 16px;
-    background-color: var(--dark);
-    border-radius: 4px;
-    animation: shimmer 2.5s infinite;
-}
-
-.skeletonTitle {
-    width: 70%;
-    margin-top: 10px;
-}
-
-.skeletonLine {
-    width: 100%;
-}
-
-.skeletonLine:nth-child(4) {
-    width: 90%;
-}
-
-.skeletonLine:nth-child(5) {
-    width: 80%;
-}
-
-/* Shimmer Animation */
-@keyframes shimmer {
-    0% {
-        background-position: -200px 0;
-    }
-
-    100% {
-        background-position: 200px 0;
-    }
-}
-
-.skeletonShowCard>div {
-    background-image: linear-gradient(90deg,
-            var(--dark) 0%,
-            var(--darker) 50%,
-            var(--dark) 100%);
-    background-size: 200% 100%;
-}
-
-@media screen and (max-device-width: 767px) and (orientation: portrait) {
-    .profilePageHeader {
-        padding-left: 3%;
-        min-height: 7vh;
-    }
-
-    .profileUserTitle {
-        font-size: 20px;
-    }
-
-    .profileConcerts {
-        width: 95vw;
-    }
-
-    #profileShowCardData {
-        width: 95vw;
-    }
-
-    #skeletonShowCardWrapper {
-        font-size: 16px;
-    }
-
-    .skeletonShowCard {
-        width: 95vw;
-    }
+@media (max-width: 720px) {
+  .page { padding: 2rem 1.6rem 6rem; }
 }
