@@ -10,6 +10,7 @@ import { Mail } from '@styled-icons/feather/Mail';
 import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
 import { Navigation as NavIcon } from '@styled-icons/feather/Navigation';
 import ConcertRSVP from '../components/shared/ConcertRSVP';
+import FriendsGoing from '../components/shared/FriendsGoing';
 import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 import styles from './Show.module.css';
 
@@ -149,7 +150,10 @@ const Show = () => {
             {loggedIn ? 'Your friends will see your response' : 'Log in to RSVP and see your friends'}
           </div>
           {loggedIn ? (
-            <ConcertRSVP concertId={concert._id} />
+            <>
+              <ConcertRSVP concertId={concert._id} />
+              <FriendsGoing concertId={concert._id} />
+            </>
           ) : (
             <DisabledConcertRSVP concertId={concert._id} />
           )}
