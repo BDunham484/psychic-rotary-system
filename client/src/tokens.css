@@ -31,9 +31,10 @@
   --rsvp-maybe-dim:  oklch(75% 0.10 85 / 0.14);
 
   /* Typography */
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-mono:    'Space Mono', monospace;
-  --font-body:    'DM Sans', sans-serif;
+  --font-display:   'Space Grotesk', sans-serif;
+  --font-mono:      'Space Mono', monospace;
+  --font-body:      'DM Sans', sans-serif;
+  --font-wordmark:  'Pirata One', cursive;
 
   /* Layout */
   --header-height: 7rem;

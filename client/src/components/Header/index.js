@@ -31,7 +31,7 @@ const Header = () => {
       <header className={styles.header}>
         <Link to="/" onClick={() => { goHome(); closeMenu(); }} className={styles.brand}>
           <div className={styles.brandCube}><CubeAlt /></div>
-          <span className={styles.brandName}>NOISEBX</span>
+          <span className={styles.brandName}>NOISEBOX</span>
           <span className={styles.brandNameMobile}>NBX</span>
         </Link>
 
