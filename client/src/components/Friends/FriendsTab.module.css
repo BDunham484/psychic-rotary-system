@@ -17,7 +17,7 @@
 }
 .searchForm:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px oklch(62% 0.16 275 / 0.12);
+  box-shadow: 0 0 0 3px var(--accent-dim);
 }
 .searchIcon { color: var(--text-muted); width: 1.6rem; height: 1.6rem; }
 .searchInput {
