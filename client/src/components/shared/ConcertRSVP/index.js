@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { Check } from '@styled-icons/feather/Check';
 import { X } from '@styled-icons/feather/X';
-import { HelpCircle } from '@styled-icons/feather/HelpCircle';
 import { ConcertContext } from '../../../utils/GlobalState';
 import { GET_CONCERT_BY_ID } from '../../../utils/queries';
 import {
@@ -60,7 +59,7 @@ const ConcertRSVP = ({ concertId }) => {
       />
       <RSVPOption
         type="maybe"
-        icon={<HelpCircle />}
+        icon={<span className={styles.textIcon}>?</span>}
         label="Maybe"
         count={maybe.length}
         active={myRSVP === 'maybe'}
