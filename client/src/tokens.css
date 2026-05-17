@@ -1,4 +1,4 @@
-:root {
+:root, [data-theme="dark"] {
   /* Surfaces */
   --bg-void:    #0a0a0e;
   --bg-base:    #11111a;
@@ -39,4 +39,43 @@
   /* Layout */
   --header-height: 7rem;
   --max-content:   84rem;
+
+  /* Dot grid + glow + cube helpers */
+  --grid-dot:    rgba(160,150,255,0.025);
+  --glow-color:  oklch(62% 0.16 275 / 0.10);
+  --cube-bg:     oklch(62% 0.16 275 / 0.12);
+  --cube-border: oklch(62% 0.16 275 / 0.5);
+}
+
+[data-theme="light"] {
+  --bg-void:    #f4f1ea;
+  --bg-base:    #ece8df;
+  --bg-surface: #ffffff;
+  --bg-raised:  #f9f6ee;
+  --bg-overlay: #e6e2d6;
+
+  --border-dim: rgba(40,30,90,0.07);
+  --border-mid: rgba(40,30,90,0.14);
+  --border-hi:  rgba(40,30,90,0.22);
+
+  --text-primary:   #18141e;
+  --text-secondary: #5a5470;
+  --text-muted:     #94909c;
+
+  --accent:       oklch(48% 0.18 275);
+  --accent-hi:    oklch(40% 0.20 275);
+  --accent-dim:   oklch(48% 0.18 275 / 0.10);
+  --accent-mid:   oklch(48% 0.18 275 / 0.20);
+
+  --rsvp-yes:        oklch(48% 0.18 145);
+  --rsvp-yes-dim:    oklch(48% 0.18 145 / 0.10);
+  --rsvp-no:         oklch(50% 0.18 22);
+  --rsvp-no-dim:     oklch(50% 0.18 22 / 0.10);
+  --rsvp-maybe:      oklch(60% 0.16 80);
+  --rsvp-maybe-dim:  oklch(60% 0.16 80 / 0.14);
+
+  --grid-dot:    rgba(40,30,90,0.04);
+  --glow-color:  oklch(48% 0.18 275 / 0.08);
+  --cube-bg:     oklch(48% 0.18 275 / 0.10);
+  --cube-border: oklch(48% 0.18 275 / 0.45);
 }
