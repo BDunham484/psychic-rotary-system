@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
 import ShowsByVenue from './components/ShowsByVenue/ShowsByVenue';
+import VenueSearch from './components/VenueSearch/VenueSearch';
 import TestProfile from './components/Profile/Profile';
 
 
@@ -72,6 +73,7 @@ function App() {
                   </Route>
                   <Route path="/show/:artists" element={<Show />} />
                   <Route path="/venue/:venueName" element={<ShowsByVenue />} />
+                  <Route path="/venues" element={<VenueSearch />} />
                   <Route
                     path="*"
                     element={<NoMatch />}

@@ -1,73 +1,206 @@
-.searchWrap {
-  position: relative;
-  margin-bottom: 2rem;
+.main {
+  position: relative; z-index: 1;
+  padding-top: var(--header-height);
+  min-height: 100vh;
+}
+.page {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 3.2rem 4rem 8rem;
 }
 
-.searchLabel {
+.spinnerWrap {
+  min-height: 60vh;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Hero */
+.hero {
+  padding: 1.6rem 0 3.2rem;
+  border-bottom: 1px solid var(--border-dim);
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 6vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 1.4rem;
+}
+.sub {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 56rem;
+}
+
+/* Search */
+.searchRow { padding: 2.8rem 0 2rem; }
+.searchForm {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
+  padding: 0.4rem 0.4rem 0.4rem 1.8rem;
   background: var(--bg-surface);
   border: 1px solid var(--border-mid);
-  border-radius: 1.2rem;
-  padding: 0 1.6rem;
-  height: 5.2rem;
-  transition: border-color 0.15s;
+  border-radius: 1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-.searchLabel:focus-within {
-  border-color: var(--border-hi);
+.searchForm:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px oklch(62% 0.16 275 / 0.12);
 }
-
-.searchIcon {
-  width: 1.8rem;
-  height: 1.8rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.venueSearchInput {
+.searchIcon { color: var(--text-muted); width: 1.8rem; height: 1.8rem; }
+.searchInput {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
-  font-family: var(--font-body);
-  font-size: 1.5rem;
   color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  padding: 1.1rem 0;
+  line-height: 1.2;
 }
-.venueSearchInput::placeholder { color: var(--text-muted); }
+.searchInput::placeholder { color: var(--text-muted); }
+.searchClear {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  width: 3.4rem; height: 3.4rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.searchClear:hover { color: var(--text-primary); background: var(--bg-raised); }
+.searchClear svg { width: 1.6rem; height: 1.6rem; }
 
-.venueSearchButton { display: none; }
+/* Result count */
+.count {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.6rem;
+}
+.count strong {
+  color: var(--accent-hi);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
 
-.matchList {
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  gap: 1.2rem;
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  background: var(--bg-raised);
+  border-color: var(--border-hi);
+  transform: translateY(-1px);
+}
+.card::before {
+  content: '';
   position: absolute;
-  top: calc(100% + 0.6rem);
-  left: 0; right: 0;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.card:hover::before { opacity: 1; }
+
+.cardGlyph {
+  width: 4.4rem; height: 4.4rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, oklch(62% 0.16 275 / 0.18), oklch(72% 0.16 320 / 0.18));
+  border: 1px solid var(--accent-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-hi);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.cardName {
+  flex: 1; min-width: 0;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  line-height: 1.2;
+  transition: color 0.15s;
+}
+.card:hover .cardName { color: var(--accent-hi); }
+
+.cardArrow {
+  width: 2.4rem; height: 2.4rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  transition: transform 0.15s, color 0.15s;
+}
+.card:hover .cardArrow { color: var(--accent-hi); transform: translateX(3px); }
+.cardArrow svg { width: 1.6rem; height: 1.6rem; }
+
+.match { color: var(--accent-hi); }
+
+/* Empty state */
+.empty {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 1.2rem;
+}
+.emptyIcon {
+  width: 5rem; height: 5rem;
+  margin: 0 auto 1.6rem;
+  border-radius: 50%;
   background: var(--bg-raised);
   border: 1px solid var(--border-mid);
-  border-radius: 1rem;
-  overflow: hidden;
-  z-index: 50;
-}
-
-.matchItem {
-  display: block;
-  padding: 1.2rem 1.8rem;
-  font-family: var(--font-body);
-  font-size: 1.4rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: background 0.12s, color 0.12s;
-  border-bottom: 1px solid var(--border-dim);
-}
-.matchItem:last-child { border-bottom: none; }
-.matchItem:hover { background: var(--bg-overlay); color: var(--text-primary); }
-
-.noMatch {
-  padding: 1.2rem 1.8rem;
-  font-family: var(--font-mono);
-  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
   color: var(--text-muted);
+  font-size: 2rem;
 }
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.emptySub { font-size: 1.5rem; color: var(--text-muted); }
 
-/* VenueList — hidden, no longer used in home search mode */
-.venueListWrapper { display: none; }
+@media (max-width: 720px) {
+  .page { padding: 2rem 1.6rem 6rem; }
+  .title { font-size: clamp(2.8rem, 8vw, 3.6rem); }
+  .grid { grid-template-columns: 1fr; }
+}

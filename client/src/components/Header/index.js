@@ -65,12 +65,13 @@ const Header = () => {
             </Link>
           )}
 
-          <button
-            className={styles.drawerItem}
-            onClick={() => { setSortOrSearch('search'); closeMenu(); }}
+          <Link
+            to="/venues"
+            onClick={closeMenu}
+            className={`${styles.drawerItem} ${location.pathname === '/venues' ? styles.drawerItemActive : ''}`}
           >
             Venue search
-          </button>
+          </Link>
 
           <div className={styles.drawerSep} />
 
