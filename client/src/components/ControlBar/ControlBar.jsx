@@ -1,5 +1,5 @@
-import { TextSortAscending } from '@styled-icons/fluentui-system-filled/TextSortAscending';
-import { TextSortDescending } from '@styled-icons/fluentui-system-filled/TextSortDescending';
+import { ArrowUp } from '@styled-icons/fluentui-system-filled/ArrowUp';
+import { ArrowDown } from '@styled-icons/fluentui-system-filled/ArrowDown';
 import { Search } from '@styled-icons/bootstrap/Search';
 import styles from './ControlBar.module.css';
 
@@ -12,8 +12,8 @@ const ControlBar = ({ mode, isAsc, onSort, count }) => {
       {label}
       {mode === key && (
         isAsc
-          ? <TextSortAscending className={styles.sortIcon} />
-          : <TextSortDescending className={styles.sortIcon} />
+          ? <ArrowUp className={styles.sortIcon} />
+          : <ArrowDown className={styles.sortIcon} />
       )}
     </button>
   );
