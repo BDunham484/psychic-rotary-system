@@ -37,6 +37,18 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>NOISEBOX</title>
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('noisebox-theme');
+        if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+        var preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.setAttribute('data-theme', preferLight ? 'light' : 'dark');
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 
 <body>
