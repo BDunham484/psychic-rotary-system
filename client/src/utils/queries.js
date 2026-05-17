@@ -50,6 +50,8 @@ export const GET_CONCERTS_SORTED_BY_VENUE_ASC = gql`
             website
             email
             ticketLink
+            yes { _id }
+            maybe { _id }
         }
     }
 `;
@@ -68,6 +70,8 @@ export const GET_CONCERTS_SORTED_BY_VENUE_DESC = gql`
             website
             email
             ticketLink
+            yes { _id }
+            maybe { _id }
         }
     }
 `;
@@ -86,6 +90,8 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_ASC = gql`
             website
             email
             ticketLink
+            yes { _id }
+            maybe { _id }
         }
     }
 `;
@@ -104,6 +110,8 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
             website
             email
             ticketLink
+            yes { _id }
+            maybe { _id }
         }
     }
 `;
