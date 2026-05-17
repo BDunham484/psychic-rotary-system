@@ -1,35 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowUpCircleFill } from '@styled-icons/bootstrap/ArrowUpCircleFill';
+import styles from './ScrollButton.module.css';
 
 const ScrollButton = () => {
-    const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
-    const toggleVisible = () => {
-        const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300) {
-            setVisible(true)
-        }
-        else if (scrolled <= 300) {
-            setVisible(false)
-        }
-    };
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-            /* you can also use 'auto' behaviour
-               in place of 'smooth' */
-        });
-    };
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    window.addEventListener('scroll', toggleVisible)
+  return (
+    <button
+      className={`${styles.scrollTop} ${visible ? styles.visible : ''}`}
+      onClick={scrollTop}
+      aria-label="Scroll to top"
+      title="Back to top"
+    >
+      <ArrowUpCircleFill />
+    </button>
+  );
+};
 
-
-    return (
-            <ArrowUpCircleFill className="top-o-page" onClick={scrollToTop} 
-            style={{display: visible ? 'inline' : 'none'}}/>
-    )
-}
-
-export default ScrollButton
+export default ScrollButton;
