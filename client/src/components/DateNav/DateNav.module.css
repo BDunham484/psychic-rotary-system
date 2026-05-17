@@ -1,0 +1,72 @@
+.dateNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.4rem 0 3.2rem;
+}
+
+.arrow {
+  width: 5rem; height: 5rem;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 1.2rem;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+}
+.arrow svg { width: 2.2rem; height: 2.2rem; }
+.arrow:hover:not(.disabled) {
+  color: var(--accent-hi);
+  border-color: var(--border-hi);
+  transform: translateY(-1px);
+}
+.disabled { opacity: 0.3; pointer-events: none; }
+
+.display {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+.dayLabel {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+.fullDate {
+  font-family: var(--font-display);
+  font-size: 4.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+.display:hover .fullDate { color: var(--accent-hi); }
+.meta {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.hiddenPicker {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  height: 0; width: 0;
+}
+
+@media (max-width: 720px) {
+  .fullDate { font-size: 3.2rem; }
+  .dateNav { gap: 1rem; }
+  .arrow { width: 4.2rem; height: 4.2rem; }
+}

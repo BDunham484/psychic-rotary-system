@@ -1,0 +1,88 @@
+import { useRef } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import addMonths from 'date-fns/addMonths';
+import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
+import styles from './DateNav.module.css';
+
+const MONTHS = [
+  'January','February','March','April','May','June',
+  'July','August','September','October','November','December'
+];
+
+const DateNav = ({ date, setDate, total }) => {
+  const pickerRef = useRef(null);
+
+  const today     = new Date(); today.setHours(0,0,0,0);
+  const tomorrow  = new Date(today); tomorrow.setDate(today.getDate() + 1);
+  const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+  const min       = yesterday;
+  const max       = new Date(today); max.setDate(today.getDate() + 89);
+
+  const current = new Date(date);
+  const sameDay = (a, b) => a.toDateString() === b.toDateString();
+
+  const dayLabel = sameDay(current, today)     ? 'TODAY'
+                 : sameDay(current, tomorrow)  ? 'TOMORROW'
+                 : sameDay(current, yesterday) ? 'YESTERDAY'
+                 : current.toLocaleDateString(undefined, { weekday: 'long' }).toUpperCase();
+
+  const fullDate = `${MONTHS[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`;
+
+  const setDateFromDate = (d) => {
+    d.setHours(0, 0, 0, 0);
+    setDate(d.toISOString());
+  };
+
+  const canPrev = current > min;
+  const canNext = current < max;
+
+  const prevDay = () => {
+    if (!canPrev) return;
+    const d = new Date(current); d.setDate(d.getDate() - 1); setDateFromDate(d);
+  };
+  const nextDay = () => {
+    if (!canNext) return;
+    const d = new Date(current); d.setDate(d.getDate() + 1); setDateFromDate(d);
+  };
+
+  return (
+    <div className={styles.dateNav}>
+      <button
+        className={`${styles.arrow} ${!canPrev ? styles.disabled : ''}`}
+        onClick={prevDay}
+        aria-label="Previous day"
+      >
+        <LeftArrow />
+      </button>
+
+      <div className={styles.display} onClick={() => pickerRef.current?.setOpen(true)}>
+        <div className={styles.dayLabel}>{dayLabel}</div>
+        <div className={styles.fullDate}>{fullDate}</div>
+        <div className={styles.meta}>{total} {total === 1 ? 'show' : 'shows'} · click to open calendar</div>
+      </div>
+
+      <button
+        className={`${styles.arrow} ${!canNext ? styles.disabled : ''}`}
+        onClick={nextDay}
+        aria-label="Next day"
+      >
+        <RightArrow />
+      </button>
+
+      <div className={styles.hiddenPicker}>
+        <DatePicker
+          ref={pickerRef}
+          selected={current}
+          onChange={(d) => setDateFromDate(d)}
+          minDate={today}
+          maxDate={addMonths(new Date(), 3)}
+          calendarClassName="calendar"
+          showDisabledMonthNavigation
+        />
+      </div>
+    </div>
+  );
+};
+
+export default DateNav;
