@@ -55,19 +55,15 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles.page}>
-        <DateNav date={date} setDate={setDate} total={isSearchMode ? 0 : concerts.length} />
+        <DateNav date={date} setDate={setDate} total={concerts.length} />
+        {isSearchMode && <VenueSearch />}
         <ControlBar
           mode={sortOrSearch}
           isAsc={isAsc}
           onSort={handleSort}
-          count={isSearchMode ? 0 : concerts.length}
+          count={concerts.length}
         />
-        {isSearchMode
-          ? <VenueSearch />
-          : loading
-            ? null
-            : <ConcertList concerts={concerts} />
-        }
+        {loading ? null : <ConcertList concerts={concerts} />}
         <ScrollButton />
       </div>
     </main>

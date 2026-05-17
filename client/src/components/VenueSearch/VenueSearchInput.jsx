@@ -1,134 +1,68 @@
-// @ts-ignore
 import styles from './VenueSearch.module.css';
-import { useState } from "react";
-import ShowCard from "../ShowCard/ShowCard";
-import { Link } from "react-router-dom";
-import { Search } from "@styled-icons/bootstrap/Search";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Search } from '@styled-icons/bootstrap/Search';
 
 const VenueSearchInput = ({ venues }) => {
-    // set state for input text
-    const [text, setText] = useState('');
-    // set state for search button 
-    const [btnDisabled, setBtnDisabled] = useState(true);
-    // set state for showing results of search after form submission
-    const [showResult, setShowResult] = useState(false);
-    // set state on whether the search input is found in the user's friends list
-    const [found, setFound] = useState(false);
-    // set state for the result of the search
-    const [result, setResult] = useState('');
-    const [matches, setMatches] = useState([]);
-    const {
-        venueName,
-        venueSearchForm,
-        venueSearchInputWrapper,
-        venueSearchInputLabel,
-        searchIcon,
-        venueSearchInput,
-        venueSearchButton,
-        venueSearchListItems,
-        names,
-        borderBottom,
-    } = styles;
+  const [text, setText] = useState('');
+  const [matches, setMatches] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
-    //handler for friend search text input
-    const handleTextChange = (e) => {
-        setText(e.target.value)
-
-        if (e.target.value === '') {
-            setBtnDisabled(true)
-            setShowResult(false)
-            setFound(false)
-        } else {
-            setBtnDisabled(false)
-            setShowResult(true)
-            setFound(true)
-            setResult(text)
-        };
-
-        const results = venues.filter(venue => {
-            if (e.target.value === '') {
-                return venues
-            }
-
-            return venue.toLowerCase().includes(e.target.value.toLowerCase())
-        })
-
-        setMatches([results[0], results[1], results[2]])
-
-        let noMatch = ['No matches'];
-
-        if (results[0] === undefined && results[1] === undefined) {
-            setShowResult(false)
-            setMatches(noMatch)
-        }
-    };
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-
-        let lowerCaseVenues = venues.map((venue) => venue.toLowerCase())
-        let lowerCaseText = text.toLowerCase().trim();
-
-        if (lowerCaseVenues.includes(lowerCaseText)) {
-            let index = lowerCaseVenues.indexOf(lowerCaseText)
-            setResult(venues[index]);
-            setFound(true);
-        } else {
-            setResult('Venue Not Found');
-            setFound(false);
-        }
-
-        setText('')
-        setShowResult(true);
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setText(val);
+    if (!val.trim()) {
+      setMatches([]);
+      setShowResults(false);
+      return;
     }
+    const filtered = venues
+      .filter(v => v.toLowerCase().includes(val.toLowerCase()))
+      .slice(0, 5);
+    setMatches(filtered);
+    setShowResults(true);
+  };
 
-    return (
-        <div>
-            <form className={venueSearchForm} onSubmit={handleSearch}>
-                <div className={venueSearchInputWrapper}>
-                    <label className={venueSearchInputLabel}>
-                    <Search className={searchIcon} />
-                    <input
-                        onChange={handleTextChange}
-                        type="text"
-                        placeholder="Venue"
-                        value={text}
-                        className={venueSearchInput}
-                    />
-                    <button
-                        disabled={btnDisabled}
-                        className={venueSearchButton}
-                        type="submit" >
-                            Search
-                    </button>
-                    </label>
-                </div>
-                {showResult &&
-                    <>
-                        {found ? (
-                            matches.map((match, index) => (
-                                match &&
-                                <ShowCard key={index}>
-                                    <div className={venueSearchListItems}>
-                                        {match === 'No matches' ? (
-                                            <span className={venueName}>{match}</span>
-                                        ) : (
-                                            <Link to={`/venue/${match}}`} state={{ venueName: match }}>
-                                                <span className={venueName} >{match}</span>
-                                            </Link>
-                                        )}
-                                    </div>
-                                </ShowCard>
-                            ))
-                        ) : (
-                            <div className={names}>{result}</div>
-                        )}
-                        <div className={borderBottom}></div>
-                    </>
-                }
-            </form>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className={styles.searchWrap}>
+      <form onSubmit={handleSubmit}>
+        <label className={styles.searchLabel}>
+          <Search className={styles.searchIcon} />
+          <input
+            className={styles.venueSearchInput}
+            type="text"
+            placeholder="Search venues..."
+            value={text}
+            onChange={handleChange}
+            autoFocus
+          />
+        </label>
+      </form>
+
+      {showResults && (
+        <div className={styles.matchList}>
+          {matches.length > 0 ? (
+            matches.map((venue, i) => (
+              <Link
+                key={i}
+                to={`/venue/${encodeURIComponent(venue)}`}
+                state={{ venueName: venue }}
+                className={styles.matchItem}
+              >
+                {venue}
+              </Link>
+            ))
+          ) : (
+            <div className={styles.noMatch}>No matching venues</div>
+          )}
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
 export default VenueSearchInput;
