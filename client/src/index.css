@@ -357,12 +357,6 @@ a {
   background-color: var(--background);
 }
 
-.form-card {
-  background-color: var(--darkest);
-  border-radius: 10px;
-  border: 1px solid #386472;
-}
-
 /* .form-card form {
   display: flex;
   flex-direction: column;
