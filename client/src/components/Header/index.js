@@ -1,63 +1,92 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { CubeAlt } from '@styled-icons/boxicons-regular';
-import { ConcertContext } from '../../utils/GlobalState'
-
+import { ConcertContext } from '../../utils/GlobalState';
+import styles from './Header.module.css';
 
 const Header = () => {
   const { today, setDate, setSortOrSearch } = useContext(ConcertContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const loggedIn = Auth.loggedIn();
 
-  const logout = event => {
-    event.preventDefault();
-    Auth.logout();
+  const goHome = () => {
+    setDate(today);
+    setSortOrSearch('venue');
   };
 
-  const clickHandler = () => {
-    setDate(today);
-    setSortOrSearch('venue')
-  }
+  const closeMenu = () => setMenuOpen(false);
+
+  const logout = (e) => {
+    e.preventDefault();
+    Auth.logout();
+    closeMenu();
+  };
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <>
-      <header>
+      <header className={styles.header}>
+        <Link to="/" onClick={() => { goHome(); closeMenu(); }} className={styles.brand}>
+          <div className={styles.brandCube}><CubeAlt /></div>
+          <span className={styles.brandName}>NOISEBX</span>
+          <span className={styles.brandNameMobile}>NBX</span>
+        </Link>
 
-        <div className="display-flex title-wrapper">
-          <Link to="/">
-            <h1 onClick={clickHandler} id="title">NOISEBX</h1>
-            <h1 onClick={clickHandler} id="title-mobile">NBX</h1>
+        <button
+          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span /><span /><span />
+        </button>
+      </header>
+
+      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
+        <nav className={styles.drawerInner}>
+          <Link
+            to="/"
+            onClick={() => { goHome(); closeMenu(); }}
+            className={`${styles.drawerItem} ${isActive('/') ? styles.drawerItemActive : ''}`}
+          >
+            Shows
           </Link>
-          <CubeAlt id="cube-icon" />
 
-        </div>
-
-        <nav id="navigation">
-          {Auth.loggedIn() ? (
-            <ul>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-              <li>
-                <Link to="/" onClick={logout}>
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            <ul>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">Signup</Link>
-              </li>
-            </ul>
+          {loggedIn && (
+            <Link
+              to="/profile"
+              onClick={closeMenu}
+              className={`${styles.drawerItem} ${location.pathname.startsWith('/profile') ? styles.drawerItemActive : ''}`}
+            >
+              Profile
+            </Link>
           )}
 
-        </nav>
-      </header>
-    </>
+          <button
+            className={styles.drawerItem}
+            onClick={() => { setSortOrSearch('search'); closeMenu(); }}
+          >
+            Venue search
+          </button>
 
+          <div className={styles.drawerSep} />
+
+          {loggedIn ? (
+            <button className={styles.drawerBtn} onClick={logout}>Logout</button>
+          ) : (
+            <>
+              <Link to="/login" onClick={closeMenu} className={styles.drawerBtn}>Login</Link>
+              <Link to="/signup" onClick={closeMenu} className={`${styles.drawerBtn} ${styles.drawerBtnPrimary}`}>Sign up</Link>
+            </>
+          )}
+        </nav>
+      </div>
+
+      {menuOpen && <div className={styles.backdrop} onClick={closeMenu} />}
+    </>
   );
 };
 

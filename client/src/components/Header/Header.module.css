@@ -1,0 +1,150 @@
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-height);
+  background: rgba(10,10,14,0.82);
+  backdrop-filter: blur(16px) saturate(140%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
+  z-index: 100;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, oklch(62% 0.16 275 / 0.5) 25%, oklch(62% 0.16 275 / 0.5) 75%, transparent 100%);
+}
+
+.brand {
+  display: flex; align-items: center; gap: 1.4rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.brandCube {
+  width: 3.2rem; height: 3.2rem;
+  border: 1px solid oklch(62% 0.16 275 / 0.5);
+  border-radius: 0.6rem;
+  background: oklch(62% 0.16 275 / 0.12);
+  box-shadow: 0 0 18px 4px oklch(62% 0.16 275 / 0.22), inset 0 1px 0 oklch(62% 0.16 275 / 0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: oklch(72% 0.16 275);
+}
+.brandCube svg { width: 1.8rem; height: 1.8rem; }
+.brandName {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+.brandNameMobile { display: none; }
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 4rem; height: 4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+.hamburger:hover { border-color: var(--border-hi); background: var(--bg-raised); }
+.hamburger span {
+  display: block;
+  width: 1.7rem; height: 1.5px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s, background 0.15s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(0.65rem) rotate(45deg); background: var(--accent-hi); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-0.65rem) rotate(-45deg); background: var(--accent-hi); }
+
+.drawer {
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  width: 30rem;
+  max-width: 90vw;
+  background: rgba(15,15,22,0.96);
+  backdrop-filter: blur(20px) saturate(140%);
+  border-left: 1px solid var(--border-mid);
+  border-bottom: 1px solid var(--border-mid);
+  border-bottom-left-radius: 1.4rem;
+  z-index: 101;
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  overflow: hidden;
+}
+.drawerOpen { transform: translateY(0); opacity: 1; pointer-events: all; }
+
+.drawerInner { padding: 1.2rem 0; display: flex; flex-direction: column; }
+
+.drawerItem {
+  display: block;
+  padding: 1.4rem 2.4rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-secondary);
+  cursor: pointer; text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  border-left: 2px solid transparent;
+  background: none; border-top: none; border-right: none; border-bottom: none;
+  width: 100%; text-align: left;
+}
+.drawerItem:hover { color: var(--text-primary); background: rgba(160,150,255,0.04); }
+.drawerItemActive {
+  color: var(--accent-hi);
+  border-left-color: var(--accent);
+  background: oklch(62% 0.16 275 / 0.06);
+}
+
+.drawerSep { height: 1px; background: var(--border-dim); margin: 0.8rem 0; }
+
+.drawerBtn {
+  display: block;
+  margin: 0.4rem 2rem;
+  padding: 1rem 1.6rem;
+  background: none;
+  border: 1px solid var(--border-mid);
+  border-radius: 0.8rem;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 1.25rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-align: left; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  width: calc(100% - 4rem);
+  text-decoration: none;
+}
+.drawerBtn:hover { color: var(--text-primary); border-color: var(--border-hi); }
+.drawerBtnPrimary {
+  background: var(--accent); color: var(--bg-void);
+  border-color: var(--accent); text-align: center;
+  margin-bottom: 1.2rem;
+}
+.drawerBtnPrimary:hover { background: var(--accent-hi); border-color: var(--accent-hi); color: var(--bg-void); }
+
+.backdrop {
+  position: fixed; inset: 0;
+  z-index: 99; background: transparent;
+}
+
+@media (max-width: 720px) {
+  .header { padding: 0 1.6rem; }
+  .brandName { display: none; }
+  .brandNameMobile {
+    display: block; font-size: 1.8rem;
+    font-family: var(--font-display); font-weight: 700; letter-spacing: 0.2em;
+  }
+}
