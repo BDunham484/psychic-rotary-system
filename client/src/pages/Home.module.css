@@ -1,0 +1,14 @@
+.main {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--header-height);
+  min-height: 100vh;
+}
+.page {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 4rem 4rem 8rem;
+}
+@media (max-width: 720px) {
+  .page { padding: 2rem 1.6rem 6rem; }
+}
