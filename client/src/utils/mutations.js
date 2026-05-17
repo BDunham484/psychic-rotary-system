@@ -236,3 +236,17 @@ export const UNBLOCK_USER = gql`
         }
     }
 `;
+
+export const ADD_FRIEND_BY_USERNAME = gql`
+    mutation addFriendByUsername($username: String!) {
+        addFriendByUsername(username: $username) {
+            _id
+            username
+            friendCount
+            friends {
+                _id
+                username
+            }
+        }
+    }
+`;
