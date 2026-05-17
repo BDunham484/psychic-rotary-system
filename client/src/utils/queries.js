@@ -163,6 +163,7 @@ export const QUERY_USER = gql`
             isAdmin
             concerts {
                 _id
+                customId
                 artists
                 artistsLink
                 description
@@ -179,6 +180,7 @@ export const QUERY_USER = gql`
             friends {
                 _id
                 username
+                concertCount
             }
             receivedRequests {
                 _id
@@ -191,6 +193,7 @@ export const QUERY_USER = gql`
             }
             blockedUsers {
                 _id
+                username
             }
         }
     }
@@ -206,6 +209,7 @@ export const QUERY_ME = gql`
             isAdmin
             concerts {
                 _id
+                customId
                 artists
                 artistsLink
                 description
@@ -223,6 +227,7 @@ export const QUERY_ME = gql`
             friends {
                 _id
                 username
+                concertCount
             }
             receivedCount
             receivedRequests {
