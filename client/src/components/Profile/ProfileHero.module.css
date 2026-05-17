@@ -1,0 +1,107 @@
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+  padding: 2rem 0 4rem;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.avatar {
+  width: 11rem; height: 11rem;
+  border-radius: 2.4rem;
+  background: linear-gradient(135deg, oklch(62% 0.16 275 / 0.25), oklch(72% 0.16 305 / 0.25));
+  border: 1px solid var(--accent-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 4.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--accent-hi);
+  flex-shrink: 0;
+  box-shadow:
+    0 0 32px oklch(62% 0.16 275 / 0.2),
+    inset 0 1px 0 oklch(72% 0.16 275 / 0.2);
+}
+
+.info { flex: 1; min-width: 0; }
+
+.username {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 1.4rem;
+  word-break: break-word;
+}
+
+.stats { display: flex; gap: 2.4rem; align-items: center; }
+.stat {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+.statVal {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-hi);
+  font-variant-numeric: tabular-nums;
+}
+.statLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.actions { display: flex; gap: 0.8rem; flex-shrink: 0; }
+.action {
+  display: inline-flex;
+  align-items: center; gap: 0.7rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg-void);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.action:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+.actionSecondary {
+  background: var(--bg-surface);
+  border-color: var(--border-mid);
+  color: var(--text-secondary);
+}
+.actionSecondary:hover {
+  background: var(--bg-raised);
+  border-color: var(--border-hi);
+  color: var(--text-primary);
+}
+.actionDanger {
+  background: var(--bg-surface);
+  border-color: var(--border-mid);
+  color: var(--rsvp-no);
+}
+.actionDanger:hover {
+  background: var(--rsvp-no-dim);
+  border-color: var(--rsvp-no);
+}
+.actionPending {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent-hi);
+}
+
+@media (max-width: 720px) {
+  .hero { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .avatar { width: 8rem; height: 8rem; font-size: 3.2rem; }
+  .actions { width: 100%; }
+  .action { flex: 1; justify-content: center; }
+}
