@@ -11,6 +11,7 @@ import Signup from './pages/LoginSignup/Signup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ConcertProvider } from './utils/GlobalState';
+import { ThemeProvider } from './utils/ThemeContext';
 import ShowsByVenue from './components/ShowsByVenue/ShowsByVenue';
 import VenueSearch from './components/VenueSearch/VenueSearch';
 import TestProfile from './components/Profile/Profile';
@@ -48,6 +49,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
+      <ThemeProvider>
       <ConcertProvider>
         <Router>
           <div>
@@ -85,6 +87,7 @@ function App() {
           </div>
         </Router>
       </ConcertProvider>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
