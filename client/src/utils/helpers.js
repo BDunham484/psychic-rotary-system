@@ -39,3 +39,11 @@ export const getSkeletonArray = (count, total) => {
     return subArray;
 };
 
+export const deriveFriendship = (me, targetId) => {
+    if (!me || !targetId) return 'none';
+    if (me.blockedUsers?.some(u => u._id === targetId)) return 'blocked';
+    if (me.friends?.some(u => u._id === targetId))      return 'friend';
+    if (me.sentRequests?.some(u => u._id === targetId)) return 'requested';
+    return 'none';
+};
+
