@@ -173,9 +173,9 @@ Props: `user`
 **Side panel (sticky):**
 - Three `SideCard` components: Received / Sent / Blocked
 - Each card shows count badge; empty state if count is 0
-- **Received:** Accept (Check icon) + Decline (X icon) per item — calls `ACCEPT_FRIEND_REQUEST({ senderId, senderName })` / `DECLINE_FRIEND_REQUEST({ senderId, senderName })`
-- **Sent:** Cancel (X icon) per item — calls `CANCEL_FRIEND_REQUEST({ friendId, friendName })`
-- **Blocked:** "Unblock" text button per item — calls `UNBLOCK_USER({ blockedId })`
+- **Received:** Accept (Check icon) + Decline (X icon) per item — action callbacks defined in `FriendsTab` pass `r._id` and `r.username` as `senderId`/`senderName` to `ACCEPT_FRIEND_REQUEST` / `DECLINE_FRIEND_REQUEST`
+- **Sent:** Cancel (X icon) per item — callback passes `r._id` and `r.username` as `friendId`/`friendName` to `CANCEL_FRIEND_REQUEST`
+- **Blocked:** "Unblock" text button per item — callback passes `b._id` as `blockedId` to `UNBLOCK_USER`
 - Reads `user.blockedUsers` (not `user.blocked`)
 
 ---
