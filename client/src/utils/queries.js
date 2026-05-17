@@ -300,6 +300,7 @@ export const GET_CONCERT_BY_ID = gql`
             ticketLink
             yes {
                 _id
+                username
             }
             no {
                 _id
