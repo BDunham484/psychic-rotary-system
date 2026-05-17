@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import addMonths from 'date-fns/addMonths';
-import { LeftArrow, RightArrow } from '@styled-icons/boxicons-regular';
+import { ArrowLeft } from '@styled-icons/fluentui-system-filled/ArrowLeft';
+import { ArrowRight } from '@styled-icons/fluentui-system-filled/ArrowRight';
 import styles from './DateNav.module.css';
 
 const MONTHS = [
@@ -53,7 +54,7 @@ const DateNav = ({ date, setDate, total }) => {
         onClick={prevDay}
         aria-label="Previous day"
       >
-        <LeftArrow />
+        <ArrowLeft />
       </button>
 
       <div className={styles.display} onClick={() => pickerRef.current?.setOpen(true)}>
@@ -67,7 +68,7 @@ const DateNav = ({ date, setDate, total }) => {
         onClick={nextDay}
         aria-label="Next day"
       >
-        <RightArrow />
+        <ArrowRight />
       </button>
 
       <div className={styles.hiddenPicker}>
