@@ -33,7 +33,6 @@ const Header = () => {
         <Link to="/" onClick={() => { goHome(); closeMenu(); }} className={styles.brand}>
           <div className={styles.brandCube}><CubeAlt /></div>
           <span className={styles.brandName}>NOISEBOX</span>
-          <span className={styles.brandNameMobile}>NBX</span>
         </Link>
 
         <button
