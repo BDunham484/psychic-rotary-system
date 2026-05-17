@@ -18,32 +18,21 @@
 }
 
 .brand {
-  display: flex; align-items: center; gap: 1.4rem;
+  display: flex; align-items: center; gap: 0.8rem;
   color: var(--text-primary);
   text-decoration: none;
 }
 .brandCube {
   width: 3.2rem; height: 3.2rem;
-  border: 1px solid oklch(62% 0.16 275 / 0.5);
-  border-radius: 0.6rem;
-  background: oklch(62% 0.16 275 / 0.12);
   display: flex; align-items: center; justify-content: center;
   color: oklch(72% 0.16 275);
   animation: cube-pulse 2.4s ease-in-out infinite;
 }
-.brandCube svg { width: 1.8rem; height: 1.8rem; }
+.brandCube svg { width: 3.2rem; height: 3.2rem; }
 
 @keyframes cube-pulse {
-  0%, 100% {
-    box-shadow:
-      0 0 14px 2px oklch(62% 0.16 275 / 0.35),
-      inset 0 1px 0 oklch(72% 0.16 275 / 0.3);
-  }
-  50% {
-    box-shadow:
-      0 0 26px 6px oklch(62% 0.16 275 / 0.6),
-      inset 0 1px 0 oklch(82% 0.16 275 / 0.4);
-  }
+  0%, 100% { filter: drop-shadow(0 0 4px oklch(62% 0.16 275 / 0.5)); }
+  50%       { filter: drop-shadow(0 0 10px oklch(62% 0.16 275 / 0.9)); }
 }
 
 .brandName {
