@@ -1,100 +1,174 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
-import ShowCard from '../components/ShowCard/ShowCard';
-import PlusMinus from "../components/shared/PlusMinus/PlusMinus";
-import ConcertRSVP from "../components/shared/ConcertRSVP";
-import BackButton from "../components/shared/BackButton";
 import { formatConcertDate } from '../utils/helpers';
-import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
-import DisabledConcertRSVP from "../components/DisabledConcertRSVP";
+import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
+import { ExternalLink } from '@styled-icons/feather/ExternalLink';
+import { Clock } from '@styled-icons/feather/Clock';
+import { MapPin } from '@styled-icons/feather/MapPin';
+import { Phone } from '@styled-icons/feather/Phone';
+import { Mail } from '@styled-icons/feather/Mail';
+import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
+import { Navigation as NavIcon } from '@styled-icons/feather/Navigation';
+import ConcertRSVP from '../components/shared/ConcertRSVP';
+import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
+import styles from './Show.module.css';
+
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 const Show = () => {
-    const location = useLocation();
-    const { concert } = location.state
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { concert } = location.state || {};
+  const loggedIn = Auth.loggedIn();
 
-    const googleMaps = `https://www.google.com/maps/search/?api=1&query=${concert?.venue}`
-
-    const wazeMaps = `https://waze.com/ul?q=${concert?.venue}&navigate=yes`;
-
-    const phoneNumber = `tel:${concert?.phone}`;
-
-    const loggedIn = Auth.loggedIn();
-
+  if (!concert) {
     return (
-        <div className='container'>
-            <div className="back-button-wrapper">
-                <BackButton />
-            </div>
-            <div className="show-header-wrapper">
-                <h2>{formatConcertDate(concert.date)}</h2>
-                {loggedIn ?
-                    <PlusMinus concertId={concert._id} />
-                    :
-                    <SquaredPlus className={'disabled-icons'} />
-                }
-            </div>
-            <ShowCard>
-                <div className="show-wrapper">
-                    <h2>
-                        {concert?.artists}
-                    </h2>
-                    {concert?.venue &&
-                        <h3>
-                            at <a href={concert.website}> {concert.venue}</a>
-                        </h3>
-                    }
-                    <ul className="show-links">
-                        {concert?.times &&
-                            <li>
-                                {concert.times}
-                            </li>
-                        }
-                        {concert?.address &&
-                            <li>
-                                {concert.address}
-                            </li>
-                        }
-                        {concert?.address2 &&
-                            <li id="address2">
-                                {concert.address2}
-                            </li>
-                        }
-                        {concert?.phone &&
-                            <li>
-                                <a href={phoneNumber}>{concert.phone}</a>
-                            </li>
-                        }
-                        {concert?.venue &&
-                            <>
-                                <li>
-                                    <a href={googleMaps}>Open in Google Maps</a>
-                                </li>
-                                <li>
-                                    <a href={wazeMaps}>Open in Waze</a>
-                                </li>
-                            </>
-                        }
-                        {concert?.email &&
-                            <li>
-                                <a href={"mailto:" + concert.email}>{concert.email}</a>
-                            </li>
-                        }
-                        {concert?.ticketLink &&
-                            <li>
-                                <a href={concert.ticketLink}>Get Tickets</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </ShowCard>
-            {loggedIn ?
-                (
-                    <ConcertRSVP concertId={concert._id} />
-                ) : (
-                    <DisabledConcertRSVP concertId={concert._id} />
-                )}
+      <main className={styles.main}>
+        <div className={styles.page}>
+          <div className={styles.empty}>Show not found.</div>
         </div>
+      </main>
     );
+  }
+
+  const googleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(concert.venue + ' ' + (concert.address || ''))}`;
+  const wazeMaps   = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
+
+  const d = new Date(concert.date);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+  const sameDay = (a, b) => a.toDateString() === b.toDateString();
+  const dayLabel = sameDay(d, today) ? 'Today'
+                 : sameDay(d, tomorrow) ? 'Tomorrow'
+                 : DAYS[d.getDay()];
+
+  return (
+    <main className={styles.main}>
+      <div className={`${styles.page} fade-up`}>
+
+        <div className={styles.backBar}>
+          <button className={styles.backBtn} onClick={() => navigate(-1)}>
+            <ArrowLeft /> Back
+          </button>
+          <span className={styles.datePill}>
+            <span className={styles.dateDot} />
+            {dayLabel}
+          </span>
+        </div>
+
+        <section className={styles.hero}>
+          <div className={styles.heroDate}>
+            <strong>{dayLabel}</strong> · {formatConcertDate(concert.date)}
+          </div>
+          <h1 className={styles.heroArtists}>{concert.artists}</h1>
+          {concert.venue && (
+            <div className={styles.heroVenue}>
+              <span className={styles.heroVenueAt}>at</span>
+              {concert.website ? (
+                <a
+                  href={concert.website}
+                  className={styles.heroVenueName}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {concert.venue}
+                  <ExternalLink className={styles.heroVenueExt} />
+                </a>
+              ) : (
+                <span className={styles.heroVenueName}>{concert.venue}</span>
+              )}
+            </div>
+          )}
+        </section>
+
+        <section className={styles.details}>
+          <div className={styles.detailCol}>
+            {concert.times && (
+              <>
+                <div className={styles.sectionLabel}>When</div>
+                <DetailRow icon={<Clock />} label="Showtime">{concert.times}</DetailRow>
+              </>
+            )}
+            {concert.address && (
+              <>
+                <div className={styles.sectionLabel} style={{ marginTop: '1.2rem' }}>Where</div>
+                <DetailRow icon={<MapPin />} label="Address" sub={concert.address2}>
+                  {concert.address}
+                </DetailRow>
+              </>
+            )}
+          </div>
+          <div className={styles.detailCol}>
+            {(concert.phone || concert.email) && (
+              <div className={styles.sectionLabel}>Contact</div>
+            )}
+            {concert.phone && (
+              <DetailRow icon={<Phone />} label="Phone">
+                <a href={`tel:${concert.phone}`}>{concert.phone}</a>
+              </DetailRow>
+            )}
+            {concert.email && (
+              <DetailRow icon={<Mail />} label="Email">
+                <a href={`mailto:${concert.email}`}>{concert.email}</a>
+              </DetailRow>
+            )}
+          </div>
+        </section>
+
+        <section className={styles.actions}>
+          <div className={styles.sectionLabel} style={{ marginBottom: '1.4rem' }}>Get there</div>
+          <div className={styles.actionsRow}>
+            {concert.ticketLink && (
+              <a href={concert.ticketLink} className={`${styles.action} ${styles.actionPrimary}`} target="_blank" rel="noopener noreferrer">
+                <TicketIcon /> Get Tickets
+              </a>
+            )}
+            {concert.venue && (
+              <>
+                <a href={googleMaps} className={styles.action} target="_blank" rel="noopener noreferrer">
+                  <MapPin /> Google Maps
+                </a>
+                <a href={wazeMaps} className={styles.action} target="_blank" rel="noopener noreferrer">
+                  <NavIcon /> Waze
+                </a>
+              </>
+            )}
+            {concert.phone && (
+              <a href={`tel:${concert.phone}`} className={styles.action}>
+                <Phone /> Call venue
+              </a>
+            )}
+          </div>
+        </section>
+
+        <section className={styles.rsvpBlock}>
+          <h2 className={styles.rsvpHeading}>
+            {loggedIn ? 'Are you going?' : "Who's going"}
+          </h2>
+          <div className={styles.rsvpSub}>
+            {loggedIn ? 'Your friends will see your response' : 'Log in to RSVP and see your friends'}
+          </div>
+          {loggedIn ? (
+            <ConcertRSVP concertId={concert._id} />
+          ) : (
+            <DisabledConcertRSVP concertId={concert._id} />
+          )}
+        </section>
+
+      </div>
+    </main>
+  );
 };
+
+const DetailRow = ({ icon, label, children, sub }) => (
+  <div className={styles.detailRow}>
+    <div className={styles.detailRowIcon}>{icon}</div>
+    <div className={styles.detailRowBody}>
+      <div className={styles.detailRowLabel}>{label}</div>
+      <div className={styles.detailRowValue}>{children}</div>
+      {sub && <div className={styles.detailRowSub}>{sub}</div>}
+    </div>
+  </div>
+);
 
 export default Show;
