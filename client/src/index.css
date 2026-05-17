@@ -255,24 +255,42 @@ a {
 }
 
 .plus-sign {
-  width: 50px;
-  color: var(--button);
-  visibility: visible;
-}
-
-.plus-sign:hover {
+  width: 4.4rem;
+  height: 4.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
   cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  padding: 0;
 }
+.plus-sign svg { width: 2rem; height: 2rem; }
+.plus-sign:hover:not(:disabled) {
+  border-color: var(--accent-mid);
+  color: var(--accent-hi);
+}
+.plus-sign:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .minus-sign {
-  width: 50px;
-  color: var(--cancel);
-  /* visibility: hidden; */
-}
-
-.minus-sign:hover {
+  width: 4.4rem;
+  height: 4.4rem;
+  background: var(--rsvp-yes-dim);
+  border: 1px solid var(--rsvp-yes);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rsvp-yes);
   cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  padding: 0;
 }
+.minus-sign svg { width: 2rem; height: 2rem; }
+.minus-sign:hover { opacity: 0.8; }
 
 /* #artists-link — replaced by ConcertList.module.css */
 

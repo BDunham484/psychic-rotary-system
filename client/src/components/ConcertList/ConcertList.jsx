@@ -4,7 +4,7 @@ import { ConcertContext } from '../../utils/GlobalState';
 import Auth from '../../utils/auth';
 import AdminDelete from '../AdminUtil/AdminDelete';
 import PlusMinus from '../shared/PlusMinus/PlusMinus';
-import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import { Plus } from '@styled-icons/bootstrap/Plus';
 import styles from './ConcertList.module.css';
 
 const ConcertList = ({ concerts }) => {
@@ -54,7 +54,7 @@ const ConcertRow = ({ concert, loggedIn, isAdmin, onDelete }) => {
       <div className={styles.rsvp}>
         {loggedIn
           ? <PlusMinus concertId={concert._id} />
-          : <SquaredPlus style={{ opacity: 0.4, width: '4.4rem', height: '4.4rem', color: 'var(--text-muted)' }} />
+          : <button className="plus-sign" disabled><Plus /></button>
         }
       </div>
 

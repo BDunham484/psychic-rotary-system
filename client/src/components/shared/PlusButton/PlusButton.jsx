@@ -5,37 +5,28 @@ import {
     ADD_CONCERT_TO_USER,
     RSVP_MAYBE,
 } from "../../../utils/mutations";
-import { SquaredPlus } from '@styled-icons/entypo/SquaredPlus';
+import { Plus } from '@styled-icons/bootstrap/Plus';
 
 const PlusButton = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
     const userId = user?.me?._id || {};
-    // Mutation calls
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
     const [rsvpMaybe] = useMutation(RSVP_MAYBE);
 
     const handleClick = async (id, userId) => {
-        console.log(id + ' has been added to user profile');
         try {
-            await addConcertToUser({
-                variables: { concertId: id }
-            })
-            await rsvpMaybe({
-                variables: {
-                    concertId: id,
-                    userId: userId
-                }
-            })
+            await addConcertToUser({ variables: { concertId: id } });
+            await rsvpMaybe({ variables: { concertId: id, userId: userId } });
         } catch (err) {
-            console.error(err)
-        };
+            console.error(err);
+        }
     };
 
     return (
-        <>
-            <SquaredPlus className="plus-sign" onClick={() => handleClick(concertId, userId)} />
-        </>
-    )
-}
+        <button className="plus-sign" onClick={() => handleClick(concertId, userId)}>
+            <Plus />
+        </button>
+    );
+};
 
-export default PlusButton
+export default PlusButton;
