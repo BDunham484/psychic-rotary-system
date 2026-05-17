@@ -1,44 +1,31 @@
-import { useQuery } from "@apollo/client";
-import { GET_CONCERT_BY_ID } from "../../utils/queries";
-import { CheckCircleFill } from '@styled-icons/bootstrap/CheckCircleFill';
-import { XCircleFill } from '@styled-icons/bootstrap/XCircleFill';
-import { QuestionCircleFill } from '@styled-icons/bootstrap/QuestionCircleFill';
-import RsvpCount from "../shared/RsvpCount";
+import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { GET_CONCERT_BY_ID } from '../../utils/queries';
+import styles from './DisabledConcertRSVP.module.css';
 
 const DisabledConcertRSVP = ({ concertId }) => {
-    //query concert data based on selected concerts ID
-    const { data } = useQuery(GET_CONCERT_BY_ID, {
-        variables: { concertId: concertId }
-    });
+  const { data } = useQuery(GET_CONCERT_BY_ID, { variables: { concertId } });
+  const yesCount   = data?.concert?.yes?.length   || 0;
+  const noCount    = data?.concert?.no?.length    || 0;
+  const maybeCount = data?.concert?.maybe?.length || 0;
 
-    //save all userId in the queried concerts 'yes' field to yesData
-    const yesData = data?.concert?.yes || [];
-    //save all userId in the queried concerts 'no' field to noData
-    const noData = data?.concert?.no || [];
-    //save all userId in the queried concerts 'maybe' field to maybeData
-    const maybeData = data?.concert?.maybe || [];
-    //get the lengtrhs of rsvp fields from Concert model and save to variables
-    const yesCount = yesData.length;
-    const noCount = noData.length;
-    const maybeCount = maybeData.length;
+  return (
+    <div className={styles.wrap}>
+      <div className={styles.counts}>
+        <Count val={yesCount}   label="Yes" />
+        <Count val={maybeCount} label="Maybe" />
+        <Count val={noCount}    label="No" />
+      </div>
+      <Link to="/login" className={styles.cta}>Log in to RSVP</Link>
+    </div>
+  );
+};
 
-
-    return (
-        <div className="rsvp-container">
-            <div className="rsvp-wrapper">
-                <CheckCircleFill className="disabled-icons" />
-                <RsvpCount count={yesCount} />
-            </div>
-            <div className="rsvp-wrapper">
-                <XCircleFill className="disabled-icons" />
-                <RsvpCount count={noCount} />
-            </div>
-            <div className="rsvp-wrapper">
-                <QuestionCircleFill className="disabled-icons" />
-                <RsvpCount count={maybeCount} />
-            </div>
-        </div>
-    )
-}
+const Count = ({ val, label }) => (
+  <div className={styles.count}>
+    <div className={styles.countVal}>{val}</div>
+    <div className={styles.countLabel}>{label}</div>
+  </div>
+);
 
 export default DisabledConcertRSVP;
