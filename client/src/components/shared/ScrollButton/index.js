@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpCircleFill } from '@styled-icons/bootstrap/ArrowUpCircleFill';
+import { ArrowUpShort } from '@styled-icons/bootstrap/ArrowUpShort';
 import styles from './ScrollButton.module.css';
 
 const ScrollButton = () => {
@@ -21,7 +21,7 @@ const ScrollButton = () => {
       aria-label="Scroll to top"
       title="Back to top"
     >
-      <ArrowUpCircleFill />
+      <ArrowUpShort />
     </button>
   );
 };
