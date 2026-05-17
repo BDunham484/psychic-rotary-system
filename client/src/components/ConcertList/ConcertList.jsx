@@ -84,13 +84,13 @@ const ConcertRow = ({ concert, loggedIn, isAdmin, onDelete }) => {
           {yesCount !== null && (
             <span className={styles.pill}>
               <span className={`${styles.dot} ${styles.dotYes}`} />
-              <span className={styles.attCount}>{yesCount}</span>
+              <span className={styles.attCount}>{yesCount || '-'}</span>
             </span>
           )}
           {maybeCount !== null && (
             <span className={styles.pill}>
               <span className={`${styles.dot} ${styles.dotMaybe}`} />
-              <span className={styles.attCount}>{maybeCount}</span>
+              <span className={styles.attCount}>{maybeCount || '-'}</span>
             </span>
           )}
         </div>

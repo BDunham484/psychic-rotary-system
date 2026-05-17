@@ -10,7 +10,7 @@ import {
 import DateNav from '../components/DateNav/DateNav';
 import ControlBar from '../components/ControlBar/ControlBar';
 import ConcertList from '../components/ConcertList/ConcertList';
-import VenueSearch from '../components/VenueSearch/VenueSearch';
+import ConcertFilter from '../components/ConcertFilter/ConcertFilter';
 import ScrollButton from '../components/shared/ScrollButton';
 import styles from './Home.module.css';
 
@@ -24,17 +24,19 @@ const queryMap = {
 const Home = () => {
   const { date, setDate, sortOrSearch, setSortOrSearch } = useContext(ConcertContext);
   const [isAsc, setIsAsc] = useState(true);
+  const [filterText, setFilterText] = useState('');
 
   const isSearchMode = sortOrSearch === 'search';
   const key = `${sortOrSearch}-${isAsc ? 'asc' : 'desc'}`;
-  const activeQuery = queryMap[key] || GET_CONCERTS_SORTED_BY_VENUE_ASC;
+  const activeQuery = isSearchMode
+    ? GET_CONCERTS_SORTED_BY_VENUE_ASC
+    : (queryMap[key] || GET_CONCERTS_SORTED_BY_VENUE_ASC);
 
   const { loading, data } = useQuery(activeQuery, {
     variables: { date },
-    skip: isSearchMode,
   });
 
-  const concerts = useMemo(() => {
+  const allConcerts = useMemo(() => {
     if (!data) return [];
     return data.concertsSortByVenueAsc
         || data.concertsSortByVenueDesc
@@ -43,27 +45,39 @@ const Home = () => {
         || [];
   }, [data]);
 
+  const filteredConcerts = useMemo(() => {
+    if (!isSearchMode || !filterText.trim()) return allConcerts;
+    const q = filterText.toLowerCase();
+    return allConcerts.filter(c =>
+      c.venue?.toLowerCase().includes(q) ||
+      c.artists?.toLowerCase().includes(q)
+    );
+  }, [isSearchMode, allConcerts, filterText]);
+
   const handleSort = (mode) => {
     if (mode === sortOrSearch) {
       setIsAsc(prev => !prev);
     } else {
       setSortOrSearch(mode);
       setIsAsc(true);
+      setFilterText('');
     }
   };
 
   return (
     <main className={styles.main}>
       <div className={styles.page}>
-        <DateNav date={date} setDate={setDate} total={concerts.length} />
-        {isSearchMode && <VenueSearch />}
+        <DateNav date={date} setDate={setDate} total={filteredConcerts.length} />
+        {isSearchMode && (
+          <ConcertFilter value={filterText} onChange={setFilterText} />
+        )}
         <ControlBar
           mode={sortOrSearch}
           isAsc={isAsc}
           onSort={handleSort}
-          count={concerts.length}
+          count={filteredConcerts.length}
         />
-        {loading ? null : <ConcertList concerts={concerts} />}
+        {loading ? null : <ConcertList concerts={filteredConcerts} />}
         <ScrollButton />
       </div>
     </main>
