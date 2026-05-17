@@ -1,0 +1,96 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.option {
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.option:hover {
+  border-color: var(--border-hi);
+  transform: translateY(-1px);
+}
+
+.optionIcon {
+  width: 5.6rem; height: 5.6rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-mid);
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+.optionIcon svg { width: 2.6rem; height: 2.6rem; stroke-width: 2.4; }
+
+.optionBody {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+}
+.optionLabel {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+.optionCount {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Active states */
+.active_yes {
+  background: var(--rsvp-yes-dim);
+  border-color: var(--rsvp-yes);
+}
+.active_yes .optionIcon {
+  background: var(--rsvp-yes-dim);
+  border-color: var(--rsvp-yes);
+  color: var(--rsvp-yes);
+}
+.active_yes .optionLabel { color: var(--rsvp-yes); }
+
+.active_no {
+  background: var(--rsvp-no-dim);
+  border-color: var(--rsvp-no);
+}
+.active_no .optionIcon {
+  background: var(--rsvp-no-dim);
+  border-color: var(--rsvp-no);
+  color: var(--rsvp-no);
+}
+.active_no .optionLabel { color: var(--rsvp-no); }
+
+.active_maybe {
+  background: var(--rsvp-maybe-dim);
+  border-color: var(--rsvp-maybe);
+}
+.active_maybe .optionIcon {
+  background: var(--rsvp-maybe-dim);
+  border-color: var(--rsvp-maybe);
+  color: var(--rsvp-maybe);
+}
+.active_maybe .optionLabel { color: var(--rsvp-maybe); }
+
+@media (max-width: 720px) {
+  .row { grid-template-columns: 1fr; }
+  .option { flex-direction: row; padding: 1.4rem; }
+  .optionIcon { width: 4.4rem; height: 4.4rem; }
+  .optionIcon svg { width: 2rem; height: 2rem; }
+  .optionBody { align-items: flex-start; flex: 1; }
+}
