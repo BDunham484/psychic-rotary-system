@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 36rem;
   gap: 3.2rem;
 }
+.layout > * { min-width: 0; }
 
 .searchForm {
   display: flex;
@@ -22,6 +23,7 @@
 .searchIcon { color: var(--text-muted); width: 1.6rem; height: 1.6rem; }
 .searchInput {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
