@@ -752,7 +752,7 @@ const resolvers = {
                 );
                 await Concert.findByIdAndUpdate(
                     { _id: concertId },
-                    { $pull: { rsvpYes: userId } },
+                    { $pull: { yes: userId } },
                     { new: true }
                 )
                 await Concert.findByIdAndUpdate(
