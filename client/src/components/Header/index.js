@@ -4,6 +4,7 @@ import Auth from '../../utils/auth';
 import { CubeAlt } from '@styled-icons/boxicons-regular';
 import { ConcertContext } from '../../utils/GlobalState';
 import styles from './Header.module.css';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const { today, setDate, setSortOrSearch } = useContext(ConcertContext);
@@ -73,6 +74,8 @@ const Header = () => {
             Venue search
           </Link>
 
+          <div className={styles.drawerSep} />
+          <ThemeToggle />
           <div className={styles.drawerSep} />
 
           {loggedIn ? (
