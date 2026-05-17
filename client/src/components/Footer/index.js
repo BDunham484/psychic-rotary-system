@@ -1,8 +1,9 @@
-const Footer = () => {
+import styles from './Footer.module.css';
 
+const Footer = () => {
     return (
-        <footer>
-            <div>&copy; 2022 noiseBX</div>
+        <footer className={styles.footer}>
+            <span className={styles.copy}>&copy; 2022 noisebox</span>
         </footer>
     );
 }
