@@ -18,7 +18,7 @@ Full visual redesign of the noisebox home page. Replaces the existing flat-nav h
 The handoff treats `tokens.css` as a pre-existing file. It does not exist yet. **Create it as a new standalone file** at `client/src/tokens.css`, imported at the top of `client/src/index.css`. Contains the full token set from handoff section 1 (surfaces, borders, text, accent, RSVP semantics, typography, layout variables).
 
 ### 2. Venue search — stays inline
-The handoff mentions a dedicated `/venues` route. No such route exists. The Search button in ControlBar and the "Venue search" drawer link both keep the **existing inline behavior**: selecting `mode === 'search'` renders the existing `VenueSearch` component in place of the concert list. No new route needed.
+The handoff mentions a dedicated `/venues` route. No such route exists. The Search button in ControlBar and the "Venue search" drawer link both keep the **existing inline behavior**: selecting `mode === 'search'` renders the existing `VenueSearch` component in place of the concert list. No new route needed. The drawer "Venue search" item is a `<button>` (not a `<Link>`) that calls `setSortOrSearch('search')` and `closeMenu()`.
 
 ### 3. PlusMinus — restyled, logic unchanged
 The handoff's `RSVPCluster` (tri-state cycle: + → ✓ → ? → ✕) is **deferred** to a follow-up. For this handoff, the existing `PlusMinus` component keeps its current add/remove logic and mutations (`ADD_CONCERT_TO_USER` / `DELETE_CONCERT_FROM_USER`). The button is restyled to match the new square shape and dimensions from the handoff CSS.
