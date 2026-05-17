@@ -22,31 +22,18 @@
 
 /* 2. GLOBAL */
 
-:root {
-  --background: #000;
-  --dark: #525050;
-  --darker: #383737;
-  --darkest: #202020;
-  --main-text: #EEE3D0;
-  --button: #386472;
-  --cancel: #a23e25;
-  --primary-font: 'Kodchasan', sans-serif;
-  --secondary-font: 'Bungee Hairline', cursive;
-}
-
 html,
 body {
   min-height: 100%;
   overflow-x: hidden;
-  background-color: var(--background);
+  background-color: var(--bg-base);
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: #525050; */
-  color: var(--main-text);
+  color: var(--text-primary);
 }
 
 body::before {
@@ -73,7 +60,7 @@ code {
 }
 
 a {
-  color: var(--main-text);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
@@ -81,11 +68,6 @@ a {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-#home-wrapper {
-  display: flex;
-  justify-content: center;
 }
 
 /* SCROLLBAR STYLES START */
@@ -115,93 +97,7 @@ a {
   background-color: var(--background);
 }
 
-/* HEADER / NAVBAR STYLES START */
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1vh 0 1vh 10vw;
-  font-family: 'Montserrat', sans-serif;
-  z-index: 9999;
-  position: fixed;
-  width: 100vw;
-  height: 12vh;
-  opacity: .90;
-  background-color: var(--darkest);
-}
-
-.title-wrapper {
-  width: 217px;
-}
-
-#title-mobile {
-  display: none;
-}
-
-header h1 {
-  /* font-family: 'Zen Dots', cursive; */
-  /* font-family: 'Orbitron', sans-serif; */
-  /* font-family: 'Audiowide', cursive; */
-  /* font-family: 'Krona One', sans-serif; */
-  font-family: 'Kodchasan', sans-serif;
-  letter-spacing: 5px;
-  font-weight: 100;
-}
-
-#cube-icon {
-  width: 40px;
-}
-
-header nav ul {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-items: center;
-  list-style: none;
-  width: 50vw;
-  padding: 2vh 9vw 2vh 0;
-}
-
-header nav ul li a {
-  font-family: 'Bungee Hairline', cursive;
-  letter-spacing: 3px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* HEADER / NAV STYLES END */
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--background);
-  padding-top: 24vh;
-}
-
-.wrapperOptions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--background);
-  padding-top: 35vh;
-}
-
-.utility-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 12vh;
-  margin-top: 12vh;
-  z-index: 9999;
-  position: fixed;
-  opacity: .90;
-  background-color: var(--background);
-}
+/* HEADER / NAVBAR STYLES — replaced by Header.module.css */
 
 .datePicker {
   background-color: var(--darkest);
@@ -268,102 +164,9 @@ header nav ul li a {
   color: var(--main-text);
 }
 
-.options {
-  margin-right: .5vw;
-  width: 50px;
-  height: auto;
-}
+/* Sort/utility bar — replaced by ControlBar.module.css */
 
-.options:hover {
-  cursor: pointer;
-}
-
-.sortFilterContainer {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100vw;
-  /* height: 6vh; */
-  margin-top: 24vh;
-  position: fixed;
-  opacity: .90;
-  background-color: var(--background);
-  border-top: 1px solid var(--darkest);
-  border-bottom: 1px solid var(--darkest);
-}
-
-.sort-buttons {
-  flex: 0 0 30%;
-  margin: 10px 0;
-  /* padding: 3px 10px; */
-  padding: 10px 0;
-  border-radius: 8px;
-  background-color: var(--darkest);
-  border: none;
-  color: var(--main-text);
-  /* font-family: var(--secondary-font); */
-  letter-spacing: 3px;
-  /* font-weight: bolder; */
-  font-size: 1.17em;
-}
-
-.sort-buttons:hover {
-  cursor: pointer;
-}
-
-.sortIcon {
-  width: 20px;
-  height: auto;
-}
-
-/* .venue-az {
-  
-} */
-
-.home-page-wrapper {
-  width: 100vw;
-  min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--background);
-  gap: 2vh;
-}
-
-/* HOME STYLES START */
-main {
-  width: 100vw;
-  min-height: 100vh;
-}
-
-.events {
-  margin-bottom: 2vh;
-}
-
-.date-wrapper {
-  width: 26%;
-  font-family: var(--primary-font);
-}
-
-#date {
-  font-family: var(--primary-font);
-  letter-spacing: 3px;
-  font-weight: 700;
-}
-
-.arrows {
-  width: 50px;
-}
-
-.arrows:hover {
-  cursor: pointer;
-}
-
-.disabled-arrows {
-  width: 50px;
-  color: grey;
-}
+/* HOME STYLES — replaced by Home.module.css / DateNav.module.css */
 
 /* SPINNER STYLES */
 .spinner-wrapper {
@@ -391,31 +194,7 @@ main {
   cursor: pointer;
 }
 
-#concert-list-show-card {
-  width: 90vw;
-}
-
-.show-card {
-  background-color: var(--darkest);
-  border-radius: 10px;
-  border: 1px solid #386472;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#show-card-contents {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 95%;
-}
-
-#show-card-left-contents {
-  display: flex;
-  align-items: center;
-  gap: 2vw;
-}
+/* ShowCard — replaced by ConcertList.module.css */
 
 #admin-delete:hover {
   cursor: pointer;
@@ -431,10 +210,6 @@ main {
   background-color: var(--main-text);
 }
 
-#show-card-data {
-  padding: 3vh 2vw 3vh 0;
-  font-size: 20px;
-}
 
 /* #show-card-venue-list-data {
   width: 30vw;
@@ -499,17 +274,7 @@ main {
   cursor: pointer;
 }
 
-#plus-sign-logged-out {
-  width: 50px;
-  color: var(--darker);
-  margin-left: 2vw;
-}
-
-
-/* #artists-link {
-  font-size: 22px;
-  font-weight: bold;
-} */
+/* #artists-link — replaced by ConcertList.module.css */
 
 #address2 {
   margin-top: -2vh;
@@ -1058,21 +823,7 @@ main {
   width: 50px;
 }
 
-.top-o-page {
-  width: 50px;
-  color: var(--dark);
-  background-color: var(--main-text);
-  position: fixed;
-  top: 90vh;
-  right: 5vh;
-  border: 2px solid var(--main-text);
-  border-radius: 50%;
-  ;
-}
-
-.top-o-page:hover {
-  cursor: pointer;
-}
+/* .top-o-page — replaced by ScrollButton.module.css */
 
 /* FOOTER STYLES START */
 footer {
@@ -1088,71 +839,7 @@ footer {
 /* PORTRAIT MODE MOBILE DEVICES START */
 @media screen and (max-device-width: 767px) and (orientation: portrait) {
 
-  /* HEADER STYLES START */
-  .title-wrapper {
-    width: 125px;
-  }
-
-  #title {
-    display: none;
-  }
-
-  #title-mobile {
-    display: block;
-  }
-
-  .utility-bar {
-    width: 90vw;
-  }
-
-  /* DATE STYLES START */
-  .date-wrapper {
-    width: 100%;
-  }
-
-  #date {
-    font-size: 14px;
-  }
-
-  .options {
-    margin-right: 0;
-  }
-
-  /* SHOWCARD DATA STYLES START */
-  #show-card-data {
-    padding: 1vh 0;
-  }
-
-  /* #artists-link {
-    display: block;
-    width: 70vw;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  } */
-
-  #at-venue {
-    display: none;
-  }
-
-  #venue {
-    display: block;
-    /* width: 200px; */
-    width: 70vw;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  #admin-buttons {
-    display: none;
-  }
-
-  #divider {
-    display: none;
-  }
-
-  /* RSVP STYLES START */
+  /* RSVP STYLES */
   .rsvp-wrapper {
     flex-direction: column;
   }
@@ -1162,13 +849,7 @@ footer {
     padding-top: 2vh;
   }
 
-  /* PROFILE STYLES START */
-
-  /* .profile-page-header h2 {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  } */
+  /* PROFILE STYLES */
 
   #expander {
     display: block;
@@ -1178,30 +859,15 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    /* padding-top: 15vh; */
   }
 
   .profile-concerts-card {
     width: 90vw;
     min-height: 10vh;
-    /* min-height: 30vh; */
   }
-
-  /* .profile-concerts-card-header h2 {
-    font-size: 16px;
-  } */
 
   .profile-concerts-card-header p {
     font-size: 14px;
-  }
-
-  #profile-showcard-data {
-    /* padding: 3vh 0; */
-    /* align-items: center; */
-  }
-
-  #profile-showcard-data button {
-    /* width: 85vw; */
   }
 
   .profile-friends-card {
@@ -1212,50 +878,15 @@ footer {
   .profile-friends-card form div {
     width: 90%;
   }
-
-  /* #show-card-venue-list-data {
-    width: 85vw;
-  } */
-
-  /* .friend-list-container {
-    margin-bottom: 3vh;
-  } */
 }
 
-/* LANDSCAPE MODE DEVICES START */
-@media screen and 
-/* // changelog-start */
-(max-device-width: 920px) and
-/* (max-device-width: 767px) and */
-/* // changelog-end */
-(orientation: landscape) {
-  .date-wrapper {
-    width: 52%;
-  }
-
-  #show-card-contents {
-    width: 98%;
-  }
-
-  /* #show-card-venue-list-data {
-    width: 85vw;
-  } */
-
+/* LANDSCAPE MODE DEVICES */
+@media screen and (max-device-width: 920px) and (orientation: landscape) {
   .rsvp-container {
     margin-bottom: 3vh;
   }
 
   footer {
     min-height: 16vh;
-  }
-
-  .top-o-page {
-    top: 85vh;
-  }
-}
-
-@media screen and (max-device-width: 914px) and (orientation: landscape) {
-  .wrapperOptions {
-    padding-top: 40vh;
   }
 }
