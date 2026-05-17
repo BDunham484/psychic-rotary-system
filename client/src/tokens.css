@@ -1,0 +1,41 @@
+:root {
+  /* Surfaces */
+  --bg-void:    #0a0a0e;
+  --bg-base:    #11111a;
+  --bg-surface: #181822;
+  --bg-raised:  #20202c;
+  --bg-overlay: #2a2a38;
+
+  /* Borders */
+  --border-dim: rgba(160,150,255,0.07);
+  --border-mid: rgba(160,150,255,0.13);
+  --border-hi:  rgba(160,150,255,0.22);
+
+  /* Text */
+  --text-primary:   #eeebf7;
+  --text-secondary: #9c97b8;
+  --text-muted:     #5c5670;
+
+  /* Accent */
+  --accent:       oklch(62% 0.16 275);
+  --accent-hi:    oklch(72% 0.16 275);
+  --accent-dim:   oklch(62% 0.16 275 / 0.12);
+  --accent-mid:   oklch(62% 0.16 275 / 0.28);
+
+  /* RSVP semantic tokens */
+  --rsvp-yes:        oklch(62% 0.14 145);
+  --rsvp-yes-dim:    oklch(62% 0.14 145 / 0.12);
+  --rsvp-no:         oklch(58% 0.14 22);
+  --rsvp-no-dim:     oklch(58% 0.14 22 / 0.12);
+  --rsvp-maybe:      oklch(75% 0.10 85);
+  --rsvp-maybe-dim:  oklch(75% 0.10 85 / 0.14);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Layout */
+  --header-height: 7rem;
+  --max-content:   84rem;
+}

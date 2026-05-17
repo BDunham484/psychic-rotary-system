@@ -1,4 +1,6 @@
-/* Table of Contents: 
+@import './tokens.css';
+
+/* Table of Contents:
   1. UNIVERSAL
   2. GLOBAL
   3. SCROLLBARS
@@ -46,6 +48,24 @@ body {
   /* background: #525050; */
   color: var(--main-text);
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(160,150,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,150,255,0.025) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.3s ease both; }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
