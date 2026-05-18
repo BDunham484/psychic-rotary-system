@@ -28,7 +28,7 @@ const DateNav = ({ date, setDate, total }) => {
                  : sameDay(current, yesterday) ? 'YESTERDAY'
                  : current.toLocaleDateString(undefined, { weekday: 'long' }).toUpperCase();
 
-  const fullDate = `${MONTHS[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`;
+  const fullDate = `${MONTHS[current.getMonth()]} ${current.getDate()}`;
 
   const setDateFromDate = (d) => {
     d.setHours(0, 0, 0, 0);
@@ -60,7 +60,10 @@ const DateNav = ({ date, setDate, total }) => {
       <div className={styles.display} onClick={() => pickerRef.current?.setOpen(true)}>
         <div className={styles.dayLabel}>{dayLabel}</div>
         <div className={styles.fullDate}>{fullDate}</div>
-        <div className={styles.meta}>{total} {total === 1 ? 'show' : 'shows'} · click to open calendar</div>
+        <div className={styles.meta}>
+          <span>{total} {total === 1 ? 'show' : 'shows'}</span>
+          <span>click to open calendar</span>
+        </div>
       </div>
 
       <button

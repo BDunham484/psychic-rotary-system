@@ -9,16 +9,7 @@
   border-bottom: 1px solid var(--border-dim);
 }
 
-.group { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
-
-.label {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-right: 0.6rem;
-}
+.group { display: flex; align-items: center; gap: 0.4rem; flex-wrap: nowrap; }
 
 .sortBtn {
   display: inline-flex; align-items: center; gap: 0.6rem;
@@ -41,6 +32,7 @@
   border-color: var(--accent-mid);
 }
 .sortIcon { width: 1.4rem; height: 1.4rem; }
+.sortIconDim { opacity: 0.3; }
 
 .count {
   font-family: var(--font-mono);
@@ -57,5 +49,5 @@
 
 @media (max-width: 720px) {
   .bar { flex-direction: column; align-items: stretch; gap: 1rem; }
-  .group { justify-content: center; }
+  .sortBtn { flex: 1; justify-content: center; padding: 0.5rem 0.4rem; font-size: 1rem; }
 }

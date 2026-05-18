@@ -276,6 +276,13 @@ a {
 }
 .plus-sign:disabled { opacity: 0.4; cursor: not-allowed; }
 
+@media (max-width: 720px) {
+  .plus-sign  { width: 3.2rem; height: 3.2rem; }
+  .minus-sign { width: 3.2rem; height: 3.2rem; }
+  .plus-sign svg  { width: 1.6rem; height: 1.6rem; }
+  .minus-sign svg { width: 1.6rem; height: 1.6rem; }
+}
+
 .minus-sign {
   width: 4.4rem;
   height: 4.4rem;
