@@ -4,6 +4,7 @@
   justify-content: space-between;
   gap: 2rem;
   padding: 2.4rem 0 3.2rem;
+  position: relative;
 }
 
 .arrow {
@@ -31,6 +32,7 @@
   text-align: center;
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
 .dayLabel {
   font-family: var(--font-mono);
@@ -66,9 +68,13 @@
 
 .hiddenPicker {
   position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   visibility: hidden;
   pointer-events: none;
-  height: 0; width: 0;
+  height: 0;
+  width: 0;
 }
 
 @media (max-width: 720px) {

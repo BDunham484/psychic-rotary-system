@@ -73,6 +73,20 @@ const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
           <span>{total} {total === 1 ? 'show' : 'shows'}</span>
           <Calendar className={styles.calIcon} />
         </div>
+        <div className={styles.hiddenPicker}>
+          <DatePicker
+            ref={pickerRef}
+            selected={current}
+            onChange={(d) => setDateFromDate(d)}
+            minDate={today}
+            maxDate={max}
+            calendarClassName="calendar"
+            dayClassName={getDayClass}
+            showDisabledMonthNavigation
+            portalId="date-picker-portal"
+            popperPlacement="bottom"
+          />
+        </div>
       </div>
 
       <button
@@ -82,20 +96,6 @@ const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
       >
         <ArrowRight />
       </button>
-
-      <div className={styles.hiddenPicker}>
-        <DatePicker
-          ref={pickerRef}
-          selected={current}
-          onChange={(d) => setDateFromDate(d)}
-          minDate={today}
-          maxDate={max}
-          calendarClassName="calendar"
-          dayClassName={getDayClass}
-          showDisabledMonthNavigation
-          portalId="date-picker-portal"
-        />
-      </div>
     </div>
   );
 };
