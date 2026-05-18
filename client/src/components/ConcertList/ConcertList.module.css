@@ -21,7 +21,7 @@
   position: absolute;
   top: -1px; left: 1.6rem; right: 1.6rem;
   height: 1px;
-  background: var(--border-dim);
+  background: var(--border-mid);
   pointer-events: none;
 }
 

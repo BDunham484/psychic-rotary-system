@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import addMonths from 'date-fns/addMonths';
+import addDays from 'date-fns/addDays';
 import { ArrowLeft } from '@styled-icons/fluentui-system-filled/ArrowLeft';
 import { ArrowRight } from '@styled-icons/fluentui-system-filled/ArrowRight';
 import { Calendar } from '@styled-icons/bootstrap/Calendar';
@@ -12,14 +12,14 @@ const MONTHS = [
   'July','August','September','October','November','December'
 ];
 
-const DateNav = ({ date, setDate, total }) => {
+const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
   const pickerRef = useRef(null);
 
   const today     = new Date(); today.setHours(0,0,0,0);
   const tomorrow  = new Date(today); tomorrow.setDate(today.getDate() + 1);
   const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
   const min       = yesterday;
-  const max       = new Date(today); max.setDate(today.getDate() + 89);
+  const max       = lastConcertDate ? new Date(lastConcertDate) : addDays(today, 90);
 
   const current = new Date(date);
   const sameDay = (a, b) => a.toDateString() === b.toDateString();
@@ -35,6 +35,14 @@ const DateNav = ({ date, setDate, total }) => {
     d.setHours(0, 0, 0, 0);
     setDate(d.toISOString());
   };
+
+  const concertDateSet = new Set(
+    (concertDates || []).map(d => {
+      const utc = new Date(d);
+      return new Date(utc.getUTCFullYear(), utc.getUTCMonth(), utc.getUTCDate()).toDateString();
+    })
+  );
+  const getDayClass = (d) => concertDateSet.has(d.toDateString()) ? 'has-concert' : undefined;
 
   const canPrev = current > min;
   const canNext = current < max;
@@ -81,9 +89,11 @@ const DateNav = ({ date, setDate, total }) => {
           selected={current}
           onChange={(d) => setDateFromDate(d)}
           minDate={today}
-          maxDate={addMonths(new Date(), 3)}
+          maxDate={max}
           calendarClassName="calendar"
+          dayClassName={getDayClass}
           showDisabledMonthNavigation
+          portalId="date-picker-portal"
         />
       </div>
     </div>

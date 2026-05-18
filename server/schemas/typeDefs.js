@@ -58,6 +58,8 @@ const typeDefs = gql`
         getYesterdaysConcerts(date: String!): [Concert]
         allVenues: [String]
         concertsByVenue(venue: String!): [Concert]
+        lastConcertDate: String
+        concertDates(startDate: String!, endDate: String!): [String]
     }
 
     type Mutation {

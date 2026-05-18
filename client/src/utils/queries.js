@@ -317,6 +317,18 @@ export const GET_CONCERT_BY_ID = gql`
     }
 `;
 
+export const GET_LAST_CONCERT_DATE = gql`
+    query {
+        lastConcertDate
+    }
+`;
+
+export const GET_CONCERT_DATES = gql`
+    query concertDates($startDate: String!, $endDate: String!) {
+        concertDates(startDate: $startDate, endDate: $endDate)
+    }
+`;
+
 export const GET_ALL_VENUES = gql`
 query Query {
     allVenues

@@ -237,6 +237,24 @@ const resolvers = {
             console.log(venues);
             return venues;
         },
+        lastConcertDate: async () => {
+            const concert = await Concert.findOne()
+                .sort({ date: -1 })
+                .select('date');
+            return concert ? concert.date.toISOString() : null;
+        },
+        concertDates: async (parent, { startDate, endDate }) => {
+            const start = new Date(startDate); start.setUTCHours(0, 0, 0, 0);
+            const end   = new Date(endDate);   end.setUTCHours(23, 59, 59, 999);
+            const concerts = await Concert.find({
+                date: { $gte: start, $lte: end }
+            }).select('date');
+            const unique = [...new Set(concerts.map(c => {
+                const d = new Date(c.date); d.setUTCHours(0, 0, 0, 0);
+                return d.toISOString();
+            }))];
+            return unique;
+        },
         concertsByVenue: async (parent, { venue }) => {
             const concerts = await Concert.find({
                 venue: venue

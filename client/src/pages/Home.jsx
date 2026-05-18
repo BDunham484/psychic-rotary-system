@@ -6,6 +6,8 @@ import {
   GET_CONCERTS_SORTED_BY_VENUE_DESC,
   GET_CONCERTS_SORTED_BY_ARTISTS_ASC,
   GET_CONCERTS_SORTED_BY_ARTISTS_DESC,
+  GET_LAST_CONCERT_DATE,
+  GET_CONCERT_DATES,
 } from '../utils/queries';
 import DateNav from '../components/DateNav/DateNav';
 import ControlBar from '../components/ControlBar/ControlBar';
@@ -34,6 +36,15 @@ const Home = () => {
 
   const { loading, data } = useQuery(activeQuery, {
     variables: { date },
+  });
+
+  const { data: lastDateData } = useQuery(GET_LAST_CONCERT_DATE);
+  const lastConcertDate = lastDateData?.lastConcertDate;
+
+  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
+  const { data: concertDatesData } = useQuery(GET_CONCERT_DATES, {
+    variables: { startDate: today.toISOString(), endDate: lastConcertDate },
+    skip: !lastConcertDate,
   });
 
   const allConcerts = useMemo(() => {
@@ -67,7 +78,13 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles.page}>
-        <DateNav date={date} setDate={setDate} total={filteredConcerts.length} />
+        <DateNav
+          date={date}
+          setDate={setDate}
+          total={filteredConcerts.length}
+          lastConcertDate={lastConcertDate}
+          concertDates={concertDatesData?.concertDates}
+        />
         {isSearchMode && (
           <ConcertFilter value={filterText} onChange={setFilterText} />
         )}
