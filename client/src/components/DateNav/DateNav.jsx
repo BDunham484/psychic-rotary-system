@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import addMonths from 'date-fns/addMonths';
 import { ArrowLeft } from '@styled-icons/fluentui-system-filled/ArrowLeft';
 import { ArrowRight } from '@styled-icons/fluentui-system-filled/ArrowRight';
+import { Calendar } from '@styled-icons/bootstrap/Calendar';
 import styles from './DateNav.module.css';
 
 const MONTHS = [
@@ -62,7 +63,7 @@ const DateNav = ({ date, setDate, total }) => {
         <div className={styles.fullDate}>{fullDate}</div>
         <div className={styles.meta}>
           <span>{total} {total === 1 ? 'show' : 'shows'}</span>
-          <span>click to open calendar</span>
+          <Calendar className={styles.calIcon} />
         </div>
       </div>
 
