@@ -36,12 +36,12 @@ const Show = () => {
   const wazeMaps   = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
 
   const d = new Date(concert.date);
-  const today = new Date(); today.setHours(0,0,0,0);
-  const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
-  const sameDay = (a, b) => a.toDateString() === b.toDateString();
-  const dayLabel = sameDay(d, today) ? 'Today'
-                 : sameDay(d, tomorrow) ? 'Tomorrow'
-                 : DAYS[d.getDay()];
+  const now = new Date();
+  const utcKey = (dt) => `${dt.getUTCFullYear()}-${dt.getUTCMonth()}-${dt.getUTCDate()}`;
+  const tmrw = new Date(); tmrw.setUTCDate(now.getUTCDate() + 1);
+  const dayLabel = utcKey(d) === utcKey(now)  ? 'Today'
+                 : utcKey(d) === utcKey(tmrw) ? 'Tomorrow'
+                 : DAYS[d.getUTCDay()];
 
   return (
     <main className={styles.main}>
