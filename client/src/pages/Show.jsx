@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
-import { formatConcertDate } from '../utils/helpers';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ExternalLink } from '@styled-icons/feather/ExternalLink';
 import { Clock } from '@styled-icons/feather/Clock';
@@ -14,7 +13,8 @@ import FriendsGoing from '../components/shared/FriendsGoing';
 import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 import styles from './Show.module.css';
 
-const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const Show = () => {
   const location = useLocation();
@@ -51,15 +51,11 @@ const Show = () => {
           <button className={styles.backBtn} onClick={() => navigate(-1)}>
             <ArrowLeft /> Back
           </button>
-          <span className={styles.datePill}>
-            <span className={styles.dateDot} />
-            {dayLabel}
-          </span>
         </div>
 
         <section className={styles.hero}>
           <div className={styles.heroDate}>
-            <strong>{dayLabel}</strong> · {formatConcertDate(concert.date)}
+            <strong>{dayLabel}</strong> · {MONTHS[d.getUTCMonth()]} {d.getUTCDate()}
           </div>
           <h1 className={styles.heroArtists}>{concert.artists}</h1>
           {concert.venue && (
