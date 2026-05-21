@@ -42,6 +42,9 @@ const Show = () => {
   const dayLabel = utcKey(d) === utcKey(now)  ? 'Today'
                  : utcKey(d) === utcKey(tmrw) ? 'Tomorrow'
                  : DAYS[d.getUTCDay()];
+  const dayLabelShort = (dayLabel === 'Today' || dayLabel === 'Tomorrow')
+                      ? dayLabel
+                      : dayLabel.slice(0, 3);
 
   return (
     <main className={styles.main}>
@@ -55,7 +58,10 @@ const Show = () => {
 
         <section className={styles.hero}>
           <div className={styles.heroDate}>
-            <strong>{dayLabel}</strong> · {MONTHS[d.getUTCMonth()]} {d.getUTCDate()}
+            <strong>
+            <span className={styles.dayFull}>{dayLabel}</span>
+            <span className={styles.dayShort}>{dayLabelShort}</span>
+          </strong> · {MONTHS[d.getUTCMonth()]} {d.getUTCDate()}
           </div>
           <h1 className={styles.heroArtists}>{concert.artists}</h1>
           {concert.venue && (
