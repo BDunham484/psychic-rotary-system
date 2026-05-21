@@ -5,6 +5,7 @@ import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ArrowRight } from '@styled-icons/feather/ArrowRight';
 import Spinner from '../shared/Spinner';
 import ScrollButton from '../shared/ScrollButton';
+import { toLocalMidnight } from '../../utils/helpers';
 import styles from './ShowsByVenue.module.css';
 
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -69,7 +70,7 @@ const ShowsByVenue = () => {
         ) : (
           <div className={styles.list}>
             {concerts.map(c => {
-              const d = new Date(c.date);
+              const d = toLocalMidnight(c.date);
               return (
                 <a
                   key={c._id}

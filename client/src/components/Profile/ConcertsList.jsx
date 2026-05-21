@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
 import { Trash2 } from '@styled-icons/feather/Trash2';
+import { toLocalMidnight } from '../../utils/helpers';
 import styles from './ConcertsList.module.css';
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -44,7 +45,7 @@ const ConcertsList = ({ user, isSelf }) => {
 };
 
 const ConcertRow = ({ concert, isSelf, onRemove }) => {
-  const d = new Date(concert.date);
+  const d = toLocalMidnight(concert.date);
   return (
     <Link
       to={`/show/${concert.customId}`}

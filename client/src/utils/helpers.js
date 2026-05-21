@@ -7,6 +7,11 @@ export function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+export const toLocalMidnight = (isoString) => {
+    const d = new Date(isoString);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+};
+
 export const getTodaysDate = () => {
     const date = new Date().toDateString();
     return date;

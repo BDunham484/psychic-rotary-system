@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toLocalMidnight } from '../utils/helpers';
 import Auth from '../utils/auth';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ExternalLink } from '@styled-icons/feather/ExternalLink';
@@ -35,7 +36,7 @@ const Show = () => {
   const googleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(concert.venue + ' ' + (concert.address || ''))}`;
   const wazeMaps   = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
 
-  const d = new Date(concert.date);
+  const d = toLocalMidnight(concert.date);
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const tmrw  = new Date(today); tmrw.setDate(today.getDate() + 1);
   const sameDay = (a, b) => a.toDateString() === b.toDateString();
