@@ -54,6 +54,10 @@ const Show = () => {
           <button className={styles.backBtn} onClick={() => navigate(-1)}>
             <ArrowLeft /> Back
           </button>
+          <div className={styles.backBarDate}>
+            <span className={styles.backBarDay}>{dayLabelShort}</span>
+            <span className={styles.backBarMonthDay}>{MONTHS[d.getUTCMonth()]} {d.getUTCDate()}</span>
+          </div>
         </div>
 
         <section className={styles.hero}>
