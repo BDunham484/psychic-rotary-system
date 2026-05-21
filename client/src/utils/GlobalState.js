@@ -27,7 +27,7 @@ const ConcertProvider = ({ children }) => {
 
     //get today's date as midnight UTC ISO string
     const _today = new Date();
-    _today.setUTCHours(0, 0, 0, 0);
+    _today.setHours(0, 0, 0, 0);
     const today = _today.toISOString();
 
     //set initial state using today's date

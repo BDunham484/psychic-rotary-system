@@ -36,12 +36,12 @@ const Show = () => {
   const wazeMaps   = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
 
   const d = new Date(concert.date);
-  const now = new Date();
-  const utcKey = (dt) => `${dt.getUTCFullYear()}-${dt.getUTCMonth()}-${dt.getUTCDate()}`;
-  const tmrw = new Date(); tmrw.setUTCDate(now.getUTCDate() + 1);
-  const dayLabel = utcKey(d) === utcKey(now)  ? 'Today'
-                 : utcKey(d) === utcKey(tmrw) ? 'Tomorrow'
-                 : DAYS[d.getUTCDay()];
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const tmrw  = new Date(today); tmrw.setDate(today.getDate() + 1);
+  const sameDay = (a, b) => a.toDateString() === b.toDateString();
+  const dayLabel = sameDay(d, today) ? 'Today'
+                 : sameDay(d, tmrw)  ? 'Tomorrow'
+                 : DAYS[d.getDay()];
   const dayLabelShort = (dayLabel === 'Today' || dayLabel === 'Tomorrow')
                       ? dayLabel
                       : dayLabel.slice(0, 3);
@@ -56,7 +56,7 @@ const Show = () => {
           </button>
           <div className={styles.backBarDate}>
             <span className={styles.backBarDay}>{dayLabelShort}</span>
-            <span className={styles.backBarMonthDay}>{MONTHS[d.getUTCMonth()]} {d.getUTCDate()}</span>
+            <span className={styles.backBarMonthDay}>{MONTHS[d.getMonth()]} {d.getDate()}</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ const Show = () => {
             <strong>
             <span className={styles.dayFull}>{dayLabel}</span>
             <span className={styles.dayShort}>{dayLabelShort}</span>
-          </strong> · {MONTHS[d.getUTCMonth()]} {d.getUTCDate()}
+          </strong> · {MONTHS[d.getMonth()]} {d.getDate()}
           </div>
           <h1 className={styles.heroArtists}>{concert.artists}</h1>
           {concert.venue && (
