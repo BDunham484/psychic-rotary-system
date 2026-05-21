@@ -64,11 +64,10 @@ const resolvers = {
         // get all concerts in database
         concertsFromDb: async (parent, { date }) => {
             const start = new Date(date);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(date);
-            end.setHours(23, 59, 59, 999);
+            const end = new Date(+start + 24 * 60 * 60 * 1000);
+            console.log(`[concertsFromDb] range: ${start.toISOString()} → ${end.toISOString()}`);
             const concerts = await Concert.find({
-                date: { $gte: start, $lte: end }
+                date: { $gte: start, $lt: end }
             })
                 .sort({ venue: 'asc' })
                 .populate('yes')
@@ -81,11 +80,9 @@ const resolvers = {
         // Get concerts sorted by venue asc
         concertsSortByVenueAsc: async (parent, { date }) => {
             const start = new Date(date);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(date);
-            end.setHours(23, 59, 59, 999);
+            const end = new Date(+start + 24 * 60 * 60 * 1000);
             const concerts = await Concert.find({
-                date: { $gte: start, $lte: end }
+                date: { $gte: start, $lt: end }
             })
                 .sort({ venue: 'asc' })
                 .populate('yes')
@@ -98,11 +95,9 @@ const resolvers = {
         // Get concerts sorted by venue desc
         concertsSortByVenueDesc: async (parent, { date }) => {
             const start = new Date(date);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(date);
-            end.setHours(23, 59, 59, 999);
+            const end = new Date(+start + 24 * 60 * 60 * 1000);
             const concerts = await Concert.find({
-                date: { $gte: start, $lte: end }
+                date: { $gte: start, $lt: end }
             })
                 .sort({ venue: 'desc' })
                 .populate('yes')
@@ -114,11 +109,9 @@ const resolvers = {
         },
         concertsSortByArtistsAsc: async (parent, { date }) => {
             const start = new Date(date);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(date);
-            end.setHours(23, 59, 59, 999);
+            const end = new Date(+start + 24 * 60 * 60 * 1000);
             const concerts = await Concert.find({
-                date: { $gte: start, $lte: end }
+                date: { $gte: start, $lt: end }
             })
                 .sort({ artists: 'asc' })
                 .populate('yes')
@@ -130,11 +123,9 @@ const resolvers = {
         },
         concertsSortByArtistsDesc: async (parent, { date }) => {
             const start = new Date(date);
-            start.setHours(0, 0, 0, 0);
-            const end = new Date(date);
-            end.setHours(23, 59, 59, 999);
+            const end = new Date(+start + 24 * 60 * 60 * 1000);
             const concerts = await Concert.find({
-                date: { $gte: start, $lte: end }
+                date: { $gte: start, $lt: end }
             })
                 .sort({ artists: 'desc' })
                 .populate('yes')
