@@ -150,6 +150,8 @@
   .row { grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.2rem 0; }
   .attendance { grid-column: 2; }
   .artists { font-size: 1.5rem; }
+  .content { gap: 1rem; }
+  .meta { gap: 1rem; }
   .at { display: none; }
   .plusBtn { width: 3.2rem; height: 3.2rem; }
   .plusBtn svg { width: 1.6rem; height: 1.6rem; }
