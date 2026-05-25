@@ -36,9 +36,13 @@ const ShowsByVenue = () => {
     <main className={styles.main}>
       <div className={`${styles.page} fade-up`}>
         <div className={styles.backBar}>
-          <button className={styles.backBtn} onClick={() => navigate('/venues')}>
-            <ArrowLeft /> All venues
+          <button className={styles.backBtn} onClick={() => navigate(-1)}>
+            <ArrowLeft /> Back
           </button>
+          <div className={styles.backBarMeta}>
+            <span className={styles.backBarMetaTop}>Venue</span>
+            <span className={styles.backBarMetaBottom}>Austin, TX</span>
+          </div>
         </div>
 
         <div className={styles.hero}>

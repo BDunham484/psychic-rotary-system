@@ -9,7 +9,26 @@
   padding: 3.2rem 4rem 8rem;
 }
 
-.backBar { display: flex; align-items: center; padding: 0.8rem 0 2.4rem; }
+.backBar { display: flex; align-items: center; gap: 1.2rem; padding: 0.8rem 0 2.4rem; }
+
+.backBarMeta {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+}
+.backBarMetaTop {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+.backBarMetaBottom {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
 .backBtn {
   display: inline-flex; align-items: center; gap: 0.6rem;
   padding: 0.7rem 1.2rem 0.7rem 0.9rem;
@@ -221,6 +240,9 @@
 
 @media (max-width: 720px) {
   .page { padding: 2rem 1.6rem 6rem; }
+  .backBar { padding-bottom: 0; }
+  .backBarMeta { display: flex; }
+  .eyebrow { display: none; }
   .hero { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
   .glyph { width: 7rem; height: 7rem; font-size: 2.2rem; }
   .row { grid-template-columns: 6.4rem 1fr; gap: 1.2rem; padding: 1.2rem; }
