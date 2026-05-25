@@ -53,28 +53,29 @@
 
 /* Hero */
 .hero {
-  display: flex;
-  align-items: center;
-  gap: 2.4rem;
   padding: 1.6rem 0 3.2rem;
   border-bottom: 1px solid var(--border-dim);
 }
 .glyph {
-  width: 9rem; height: 9rem;
-  border-radius: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+  width: 3.6rem; height: 3.6rem;
+  border-radius: 0.6rem;
   background: linear-gradient(135deg, oklch(62% 0.16 275 / 0.22), oklch(72% 0.16 320 / 0.22));
   border: 1px solid var(--accent-mid);
-  display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display);
-  font-size: 2.8rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--accent-hi);
-  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
   box-shadow:
-    0 0 32px oklch(62% 0.16 275 / 0.18),
+    0 0 20px oklch(62% 0.16 275 / 0.14),
     inset 0 1px 0 oklch(72% 0.16 275 / 0.2);
 }
-.info { flex: 1; min-width: 0; }
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 1.1rem;
@@ -84,6 +85,9 @@
   margin-bottom: 0.8rem;
 }
 .name {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 5vw, 4.8rem);
   font-weight: 800;
@@ -110,18 +114,6 @@
   letter-spacing: 0.14em;
   color: var(--text-muted);
   font-size: 1.05rem;
-}
-
-.sectionBar {
-  display: flex; align-items: center; justify-content: space-between;
-  margin: 3.2rem 0 1.6rem;
-}
-.sectionTitle {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
 }
 
 /* Concert rows */
@@ -243,8 +235,7 @@
   .backBar { padding-bottom: 0; }
   .backBarMeta { display: flex; }
   .eyebrow { display: none; }
-  .hero { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
-  .glyph { width: 7rem; height: 7rem; font-size: 2.2rem; }
+  .glyph { width: 2.6rem; height: 2.6rem; font-size: 1rem; border-radius: 0.5rem; }
   .row { grid-template-columns: 6.4rem 1fr; gap: 1.2rem; padding: 1.2rem; }
   .dateNum { font-size: 2.4rem; }
   .arrow { opacity: 1; grid-column: 2; justify-self: flex-end; }

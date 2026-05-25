@@ -46,24 +46,20 @@ const ShowsByVenue = () => {
         </div>
 
         <div className={styles.hero}>
-          <div className={styles.glyph}>{venueInitials(venueName)}</div>
-          <div className={styles.info}>
-            <div className={styles.eyebrow}>Venue · Austin, TX</div>
-            <h1 className={styles.name}>{venueName}</h1>
-            <div className={styles.stats}>
-              <div>
-                <span className={styles.statVal}>{concerts.length}</span>
-                <span className={styles.statLabel}>Upcoming shows</span>
-              </div>
+          <div className={styles.eyebrow}>Venue · Austin, TX</div>
+          <h1 className={styles.name}>
+            <span className={styles.glyph}>{venueInitials(venueName)}</span>
+            {venueName}
+          </h1>
+          <div className={styles.stats}>
+            <div>
+              <span className={styles.statVal}>{concerts.length}</span>
+              <span className={styles.statLabel}>Upcoming shows</span>
             </div>
           </div>
         </div>
 
-        <div className={styles.sectionBar}>
-          <span className={styles.sectionTitle}>Upcoming at {venueName}</span>
-        </div>
-
-        {loading ? (
+{loading ? (
           <div className={styles.spinnerWrap}><Spinner /></div>
         ) : concerts.length === 0 ? (
           <div className={styles.empty}>
