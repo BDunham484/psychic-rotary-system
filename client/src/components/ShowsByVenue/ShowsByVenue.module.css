@@ -89,7 +89,7 @@
   align-items: center;
   gap: 0.8rem;
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  font-size: clamp(4rem, 8vw, 7.2rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -235,8 +235,12 @@
   .backBar { padding-bottom: 0; }
   .backBarMeta { display: flex; }
   .eyebrow { display: none; }
+  .name { font-size: clamp(2.4rem, 6vw, 3.2rem); }
+  .hero { padding-bottom: 1.6rem; }
   .glyph { width: 2.6rem; height: 2.6rem; font-size: 1rem; border-radius: 0.5rem; }
-  .row { grid-template-columns: 6.4rem 1fr; gap: 1.2rem; padding: 1.2rem; }
-  .dateNum { font-size: 2.4rem; }
+  .artists { font-size: 1.5rem; }
+  .row { grid-template-columns: 5rem 1fr; gap: 0.4rem 0.4rem; padding: 0.8rem 0; }
+  .list .row:not(:hover):not(:first-child)::before { left: 0; right: 0; }
+  .dateNum { font-size: 1.8rem; }
   .arrow { opacity: 1; grid-column: 2; justify-self: flex-end; }
 }
