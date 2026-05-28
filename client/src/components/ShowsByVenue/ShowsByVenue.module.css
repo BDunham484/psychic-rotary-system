@@ -120,18 +120,15 @@
 .list { display: flex; flex-direction: column; gap: 0.4rem; }
 .row {
   display: grid;
-  grid-template-columns: 9rem 1fr auto;
+  grid-template-columns: 4.4rem 1fr;
   align-items: center;
   gap: 1.8rem;
-  padding: 1.6rem;
+  padding: 1.8rem 1.6rem;
   border-radius: 1rem;
   background: transparent;
   border: 1px solid transparent;
   transition: background 0.18s, border-color 0.18s;
   position: relative;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
 }
 .row:hover { background: var(--bg-surface); border-color: var(--border-dim); }
 .list .row:not(:hover):not(:first-child)::before {
@@ -141,28 +138,44 @@
   height: 1px;
   background: var(--border-dim);
 }
-.date {
-  text-align: center;
-  border-right: 1px solid var(--border-dim);
-  padding-right: 1.8rem;
+
+.rsvp { display: flex; justify-content: center; }
+
+.plusBtn {
+  width: 4.4rem; height: 4.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  padding: 0;
 }
+.plusBtn:hover:not(.savedBtn) {
+  border-color: var(--accent-mid);
+  color: var(--accent-hi);
+  transform: translateY(-1px);
+}
+.plusBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.plusBtn svg { width: 2rem; height: 2rem; }
+
+.savedBtn {
+  background: var(--rsvp-yes-dim);
+  border-color: var(--rsvp-yes);
+  color: var(--rsvp-yes);
+}
+
+.content { min-width: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+
+.dateRow { display: flex; align-items: baseline; gap: 0.4rem; }
 .dateDay {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.dateNum {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin: 0.4rem 0;
-  font-variant-numeric: tabular-nums;
-}
-.row:hover .dateNum { color: var(--accent-hi); }
 .dateMonth {
   font-family: var(--font-mono);
   font-size: 1.1rem;
@@ -170,7 +183,15 @@
   text-transform: uppercase;
   color: var(--text-secondary);
 }
-.content { min-width: 0; }
+.dateNum {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.row:hover .dateNum { color: var(--accent-hi); }
+
 .artists {
   font-family: var(--font-display);
   font-size: 1.85rem;
@@ -182,23 +203,29 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   transition: color 0.15s;
+  text-decoration: none;
+  color: var(--text-primary);
 }
 .row:hover .artists { color: var(--accent-hi); }
-.meta {
-  font-family: var(--font-mono);
-  font-size: 1.2rem;
+.meta { display: flex; align-items: center; justify-content: space-between; }
+.time {
+  display: inline-flex; align-items: center;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.5rem;
   color: var(--text-secondary);
-  margin-top: 0.4rem;
-  letter-spacing: 0.02em;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
 }
 .arrow {
   width: 2.4rem; height: 2.4rem;
   display: flex; align-items: center; justify-content: center;
   color: var(--text-muted);
-  opacity: 0;
-  transition: opacity 0.15s, color 0.15s, transform 0.15s;
+  flex-shrink: 0;
+  transition: color 0.15s, transform 0.15s;
 }
-.row:hover .arrow { opacity: 1; color: var(--accent-hi); transform: translateX(3px); }
+.row:hover .arrow { color: var(--accent-hi); transform: translateX(3px); }
 .arrow svg { width: 1.5rem; height: 1.5rem; }
 
 .spinnerWrap {
@@ -239,8 +266,8 @@
   .hero { padding-bottom: 1.6rem; }
   .glyph { width: 2.6rem; height: 2.6rem; font-size: 1rem; border-radius: 0.5rem; }
   .artists { font-size: 1.5rem; }
-  .row { grid-template-columns: 5rem 1fr; gap: 0.4rem 0.4rem; padding: 0.8rem 0; }
+  .row { grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.2rem 0; }
   .list .row:not(:hover):not(:first-child)::before { left: 0; right: 0; }
-  .dateNum { font-size: 1.8rem; }
-  .arrow { opacity: 1; grid-column: 2; justify-self: flex-end; }
+  .plusBtn { width: 3.2rem; height: 3.2rem; }
+  .plusBtn svg { width: 1.6rem; height: 1.6rem; }
 }

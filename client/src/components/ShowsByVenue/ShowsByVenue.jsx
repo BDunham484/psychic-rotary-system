@@ -3,8 +3,11 @@ import { useQuery } from '@apollo/client';
 import { GET_CONCERTS_BY_VENUE } from '../../utils/queries';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ArrowRight } from '@styled-icons/feather/ArrowRight';
+import { Plus } from '@styled-icons/bootstrap/Plus';
 import Spinner from '../shared/Spinner';
 import ScrollButton from '../shared/ScrollButton';
+import PlusMinus from '../shared/PlusMinus/PlusMinus';
+import Auth from '../../utils/auth';
 import { toLocalMidnight } from '../../utils/helpers';
 import styles from './ShowsByVenue.module.css';
 
@@ -31,6 +34,7 @@ const ShowsByVenue = () => {
   });
 
   const concerts = data?.concertsByVenue || [];
+  const loggedIn = Auth.loggedIn();
 
   return (
     <main className={styles.main}>
@@ -72,23 +76,32 @@ const ShowsByVenue = () => {
             {concerts.map(c => {
               const d = toLocalMidnight(c.date);
               return (
-                <a
-                  key={c._id}
-                  className={styles.row}
-                  href={`/show/${c.customId}`}
-                  onClick={(e) => { e.preventDefault(); navigate(`/show/${c.customId}`, { state: { concert: c } }); }}
-                >
-                  <div className={styles.date}>
-                    <div className={styles.dateDay}>{DAYS_SHORT[d.getDay()]}</div>
-                    <div className={styles.dateNum}>{d.getDate()}</div>
-                    <div className={styles.dateMonth}>{MONTHS_SHORT[d.getMonth()]}</div>
+                <div key={c._id} className={styles.row}>
+                  <div className={styles.rsvp}>
+                    {loggedIn
+                      ? <PlusMinus concertId={c._id} />
+                      : <button className={styles.plusBtn} disabled><Plus /></button>
+                    }
                   </div>
                   <div className={styles.content}>
-                    <div className={styles.artists}>{c.artists}</div>
-                    {c.times && <div className={styles.meta}>{c.times}</div>}
+                    <div className={styles.dateRow}>
+                      <span className={styles.dateDay}>{DAYS_SHORT[d.getDay()]}</span>
+                      <span className={styles.dateMonth}>{MONTHS_SHORT[d.getMonth()]}</span>
+                      <span className={styles.dateNum}>{d.getDate()}</span>
+                    </div>
+                    <a
+                      className={styles.artists}
+                      href={`/show/${c.customId}`}
+                      onClick={(e) => { e.preventDefault(); navigate(`/show/${c.customId}`, { state: { concert: c } }); }}
+                    >
+                      {c.artists}
+                    </a>
+                    <div className={styles.meta}>
+                      {c.times && <span className={styles.time}>{c.times}</span>}
+                      <div className={styles.arrow}><ArrowRight /></div>
+                    </div>
                   </div>
-                  <div className={styles.arrow}><ArrowRight /></div>
-                </a>
+                </div>
               );
             })}
           </div>
