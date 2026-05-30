@@ -1,7 +1,8 @@
 import './App.css';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
 import Home from './pages/Home';
 import Login from './pages/LoginSignup/Login';
 import Show from './pages/Show';
@@ -43,6 +44,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 function App() {
 
 
@@ -52,6 +59,7 @@ function App() {
       <ThemeProvider>
       <ConcertProvider>
         <Router>
+          <ScrollToTop />
           <div>
             <div>
               <Header />

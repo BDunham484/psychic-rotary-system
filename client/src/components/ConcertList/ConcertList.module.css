@@ -155,4 +155,5 @@
   .at { display: none; }
   .plusBtn { width: 3.2rem; height: 3.2rem; }
   .plusBtn svg { width: 1.6rem; height: 1.6rem; }
+  .emptyState { padding: 3rem 2rem; }
 }
