@@ -22,7 +22,7 @@ test('shows empty state when no concerts', () => {
 
 test('renders artist name', () => {
   const concerts = [{
-    _id: '1', artists: 'Black Pumas', customId: 'bp-123',
+    _id: '1', artists: 'Black Pumas', customId: { headliner: 'Black Pumas', date: '20260601', venue: 'ACLLive' },
     venue: 'ACL Live', times: '8:00 PM', yes: [], maybe: []
   }];
   render(wrap(<ConcertList concerts={concerts} />));
@@ -31,7 +31,7 @@ test('renders artist name', () => {
 
 test('renders venue name', () => {
   const concerts = [{
-    _id: '1', artists: 'Wild Child', customId: 'wc-123',
+    _id: '1', artists: 'Wild Child', customId: { headliner: 'Wild Child', date: '20260601', venue: 'TheParish' },
     venue: 'The Parish', times: '7:30 PM', yes: [], maybe: []
   }];
   render(wrap(<ConcertList concerts={concerts} />));

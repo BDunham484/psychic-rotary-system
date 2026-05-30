@@ -81,6 +81,19 @@
   font-size: 1rem;
   letter-spacing: 0.18em;
 }
+.price {
+  display: inline-flex; align-items: flex-start; gap: 0.4rem;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-mid);
+  padding: 0.25rem 0.7rem;
+  border-radius: 0.5rem;
+  color: var(--accent-hi);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  max-width: 100%;
+  word-break: break-word;
+}
+.price svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; margin-top: 0.15rem; }
 
 .removeBtn {
   background: var(--bg-raised);

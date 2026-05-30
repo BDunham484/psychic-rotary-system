@@ -24,7 +24,7 @@ test('shows other empty state when no concerts and not isSelf', () => {
 
 test('renders concert artist name', () => {
   const concerts = [
-    { _id: 'c1', customId: 'show-1', artists: 'The Midnight', date: '2026-06-01T00:00:00.000Z', venue: "Stubb's" }
+    { _id: 'c1', customId: { headliner: 'The Midnight', date: '20260601', venue: "Stubbs" }, artists: 'The Midnight', date: '2026-06-01T00:00:00.000Z', venue: "Stubb's" }
   ];
   renderList({ username: 'alice', concerts }, true);
   expect(screen.getByText('The Midnight')).toBeInTheDocument();
@@ -32,7 +32,7 @@ test('renders concert artist name', () => {
 
 test('renders venue name', () => {
   const concerts = [
-    { _id: 'c1', customId: 'show-1', artists: 'The Midnight', date: '2026-06-01T00:00:00.000Z', venue: "Stubb's" }
+    { _id: 'c1', customId: { headliner: 'The Midnight', date: '20260601', venue: "Stubbs" }, artists: 'The Midnight', date: '2026-06-01T00:00:00.000Z', venue: "Stubb's" }
   ];
   renderList({ username: 'alice', concerts }, true);
   expect(screen.getByText("Stubb's")).toBeInTheDocument();

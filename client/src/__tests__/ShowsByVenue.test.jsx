@@ -7,7 +7,7 @@ import { GET_CONCERTS_BY_VENUE } from '../utils/queries';
 const MOCK_CONCERTS = [
   {
     _id: '1',
-    customId: 'emosshow1',
+    customId: { headliner: 'The Strokes', date: '20260615', venue: "Emos" },
     artists: 'The Strokes',
     date: '2026-06-15T00:00:00.000Z',
     times: '8:00 PM',
@@ -15,7 +15,7 @@ const MOCK_CONCERTS = [
   },
   {
     _id: '2',
-    customId: 'emosshow2',
+    customId: { headliner: 'Spoon', date: '20260704', venue: "Emos" },
     artists: 'Spoon',
     date: '2026-07-04T00:00:00.000Z',
     times: '9:00 PM',

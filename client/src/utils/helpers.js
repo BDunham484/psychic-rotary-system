@@ -44,6 +44,14 @@ export const getSkeletonArray = (count, total) => {
     return subArray;
 };
 
+export const concertSlug = (customId) => {
+    if (!customId || typeof customId === 'string') return customId || '';
+    return [customId.headliner, customId.date, customId.venue]
+        .join('')
+        .split(/[,.'"\s]+/)
+        .join('');
+};
+
 export const deriveFriendship = (me, targetId) => {
     if (!me || !targetId) return 'none';
     if (me.blockedUsers?.some(u => u._id === targetId)) return 'blocked';

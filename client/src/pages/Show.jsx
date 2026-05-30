@@ -120,6 +120,11 @@ const Show = () => {
                 <a href={`mailto:${concert.email}`}>{concert.email}</a>
               </DetailRow>
             )}
+            {concert.ticketPrice && (
+              <DetailRow icon={<TicketIcon />} label="Tickets">
+                {concert.ticketPrice}
+              </DetailRow>
+            )}
           </div>
         </section>
 

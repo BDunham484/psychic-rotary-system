@@ -2,9 +2,10 @@ import { useQuery } from '@apollo/client';
 import { Plus } from '@styled-icons/bootstrap/Plus';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ArrowRight } from '@styled-icons/feather/ArrowRight';
+import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Auth from '../../utils/auth';
-import { toLocalMidnight } from '../../utils/helpers';
+import { toLocalMidnight, concertSlug } from '../../utils/helpers';
 import { GET_CONCERTS_BY_VENUE } from '../../utils/queries';
 import PlusMinus from '../shared/PlusMinus/PlusMinus';
 import ScrollButton from '../shared/ScrollButton';
@@ -88,17 +89,22 @@ const ShowsByVenue = () => {
                       <span className={styles.dateDay}>{DAYS_SHORT[d.getDay()]}</span>
                       <span className={styles.dateMonth}>{MONTHS_SHORT[d.getMonth()]}</span>
                       <span className={styles.dateNum}>{d.getDate()}</span>
+                      <div className={styles.arrow}><ArrowRight /></div>
                     </div>
                     <a
                       className={styles.artists}
-                      href={`/show/${c.customId}`}
-                      onClick={(e) => { e.preventDefault(); navigate(`/show/${c.customId}`, { state: { concert: c } }); }}
+                      href={`/show/${concertSlug(c.customId)}`}
+                      onClick={(e) => { e.preventDefault(); navigate(`/show/${concertSlug(c.customId)}`, { state: { concert: c } }); }}
                     >
                       {c.artists}
                     </a>
                     <div className={styles.meta}>
                       {c.times && <span className={styles.time}>{c.times}</span>}
-                      <div className={styles.arrow}><ArrowRight /></div>
+                      {c.ticketPrice && (
+                        <span className={styles.price}>
+                          <TicketIcon /> {c.ticketPrice}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

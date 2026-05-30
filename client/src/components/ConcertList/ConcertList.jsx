@@ -2,9 +2,11 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ConcertContext } from '../../utils/GlobalState';
 import Auth from '../../utils/auth';
+import { concertSlug } from '../../utils/helpers';
 import AdminDelete from '../AdminUtil/AdminDelete';
 import PlusMinus from '../shared/PlusMinus/PlusMinus';
 import { Plus } from '@styled-icons/bootstrap/Plus';
+import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
 import styles from './ConcertList.module.css';
 
 const ConcertList = ({ concerts }) => {
@@ -60,7 +62,7 @@ const ConcertRow = ({ concert, loggedIn, isAdmin, onDelete }) => {
 
       <div className={styles.content}>
         <Link
-          to={`/show/${concert.customId}`}
+          to={`/show/${concertSlug(concert.customId)}`}
           state={{ concert }}
           className={styles.artists}
         >
@@ -76,6 +78,11 @@ const ConcertRow = ({ concert, loggedIn, isAdmin, onDelete }) => {
             </>
           )}
           {concert.times && <span className={styles.time}>{concert.times}</span>}
+          {concert.ticketPrice && (
+            <span className={styles.price}>
+              <TicketIcon /> {concert.ticketPrice}
+            </span>
+          )}
         </div>
       </div>
 

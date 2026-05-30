@@ -13,6 +13,7 @@ export const GET_TODAYS_CONCERTS = gql`
             website
             email
             ticketLink
+            ticketPrice
         }
     }
 `;
@@ -22,7 +23,11 @@ export const GET_CONCERTS_BY_DATE = gql`
         concertsFromDb(date: $date) {
             _id
             artists
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             date
             times
             venue
@@ -32,6 +37,7 @@ export const GET_CONCERTS_BY_DATE = gql`
             website
             email
             ticketLink
+            ticketPrice
         }
     }
 `;
@@ -40,7 +46,11 @@ export const GET_CONCERTS_SORTED_BY_VENUE_ASC = gql`
         concertsSortByVenueAsc(date: $date) {
             _id
             artists
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             date
             times
             venue
@@ -50,6 +60,7 @@ export const GET_CONCERTS_SORTED_BY_VENUE_ASC = gql`
             website
             email
             ticketLink
+            ticketPrice
             yes { _id }
             maybe { _id }
         }
@@ -60,7 +71,11 @@ export const GET_CONCERTS_SORTED_BY_VENUE_DESC = gql`
         concertsSortByVenueDesc(date: $date) {
             _id
             artists
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             date
             times
             venue
@@ -70,6 +85,7 @@ export const GET_CONCERTS_SORTED_BY_VENUE_DESC = gql`
             website
             email
             ticketLink
+            ticketPrice
             yes { _id }
             maybe { _id }
         }
@@ -80,7 +96,11 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_ASC = gql`
         concertsSortByArtistsAsc(date: $date) {
             _id
             artists
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             date
             times
             venue
@@ -90,6 +110,7 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_ASC = gql`
             website
             email
             ticketLink
+            ticketPrice
             yes { _id }
             maybe { _id }
         }
@@ -100,7 +121,11 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
         concertsSortByArtistsDesc(date: $date) {
             _id
             artists
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             date
             times
             venue
@@ -110,6 +135,7 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
             website
             email
             ticketLink
+            ticketPrice
             yes { _id }
             maybe { _id }
         }
@@ -119,7 +145,11 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
 export const AUSTIN_CONCERT_SCRAPER = gql`
     query austinConcertScraper($date: String) {
         austinConcertScraper(date: $date) {
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             artists
             date
             times
@@ -130,6 +160,7 @@ export const AUSTIN_CONCERT_SCRAPER = gql`
             website
             email
             ticketLink
+            ticketPrice
         }
     }
 `;
@@ -149,6 +180,7 @@ export const QUERY_USER_CONCERTS = gql`
             website
             email
             ticketLink
+            ticketPrice
         }
     }
 `;
@@ -163,7 +195,11 @@ export const QUERY_USER = gql`
             isAdmin
             concerts {
                 _id
-                customId
+                customId {
+                    headliner
+                    date
+                    venue
+                }
                 artists
                 artistsLink
                 description
@@ -175,6 +211,7 @@ export const QUERY_USER = gql`
                 website
                 email
                 ticketLink
+                ticketPrice
             }
             friendCount
             friends {
@@ -209,7 +246,11 @@ export const QUERY_ME = gql`
             isAdmin
             concerts {
                 _id
-                customId
+                customId {
+                    headliner
+                    date
+                    venue
+                }
                 artists
                 artistsLink
                 description
@@ -221,6 +262,7 @@ export const QUERY_ME = gql`
                 website
                 email
                 ticketLink
+                ticketPrice
             }
             requestCount
             friendCount
@@ -273,7 +315,11 @@ export const GET_YESTERDAYS_CONCERTS = gql`
     query getYesterdaysConcerts($date: String!) {
         getYesterdaysConcerts(date: $date) {
             _id
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             artists
             address
             phone
@@ -283,6 +329,7 @@ export const GET_YESTERDAYS_CONCERTS = gql`
             email
             website
             ticketLink
+            ticketPrice
             artistsLink
         }
     }
@@ -292,7 +339,11 @@ export const GET_CONCERT_BY_ID = gql`
     query concert($concertId: ID!) {
         concert(concertId: $concertId) {
             _id
-            customId
+            customId {
+                headliner
+                date
+                venue
+            }
             artists
             artistsLink
             date
@@ -303,6 +354,7 @@ export const GET_CONCERT_BY_ID = gql`
             website
             email
             ticketLink
+            ticketPrice
             yes {
                 _id
                 username
@@ -339,7 +391,11 @@ export const GET_CONCERTS_BY_VENUE = gql`
 query concertsByVenue($venue: String!) {
     concertsByVenue(venue: $venue) {
         _id
-        customId
+        customId {
+            headliner
+            date
+            venue
+        }
         artists
         artistsLink
         description
@@ -352,6 +408,7 @@ query concertsByVenue($venue: String!) {
         website
         email
         ticketLink
+        ticketPrice
         yes {
         _id
         }
