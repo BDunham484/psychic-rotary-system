@@ -1,14 +1,14 @@
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_CONCERTS_BY_VENUE } from '../../utils/queries';
+import { Plus } from '@styled-icons/bootstrap/Plus';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { ArrowRight } from '@styled-icons/feather/ArrowRight';
-import { Plus } from '@styled-icons/bootstrap/Plus';
-import Spinner from '../shared/Spinner';
-import ScrollButton from '../shared/ScrollButton';
-import PlusMinus from '../shared/PlusMinus/PlusMinus';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { toLocalMidnight } from '../../utils/helpers';
+import { GET_CONCERTS_BY_VENUE } from '../../utils/queries';
+import PlusMinus from '../shared/PlusMinus/PlusMinus';
+import ScrollButton from '../shared/ScrollButton';
+import Spinner from '../shared/Spinner';
 import styles from './ShowsByVenue.module.css';
 
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -101,6 +101,22 @@ const ShowsByVenue = () => {
                       <div className={styles.arrow}><ArrowRight /></div>
                     </div>
                   </div>
+                  {(c.yes != null || c.maybe != null) && (
+                    <div className={styles.attendance}>
+                      {c.yes != null && (
+                        <span className={styles.pill}>
+                          <span className={`${styles.dot} ${styles.dotYes}`} />
+                          <span className={styles.attCount}>{c.yes.length || '-'}</span>
+                        </span>
+                      )}
+                      {c.maybe != null && (
+                        <span className={styles.pill}>
+                          <span className={`${styles.dot} ${styles.dotMaybe}`} />
+                          <span className={styles.attCount}>{c.maybe.length || '-'}</span>
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}

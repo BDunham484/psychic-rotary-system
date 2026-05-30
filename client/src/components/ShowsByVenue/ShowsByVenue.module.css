@@ -86,7 +86,7 @@
 }
 .name {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.8rem;
   font-family: var(--font-display);
   font-size: clamp(4rem, 8vw, 7.2rem);
@@ -120,7 +120,7 @@
 .list { display: flex; flex-direction: column; gap: 0.4rem; }
 .row {
   display: grid;
-  grid-template-columns: 4.4rem 1fr;
+  grid-template-columns: 4.4rem 1fr auto;
   align-items: center;
   gap: 1.8rem;
   padding: 1.8rem 1.6rem;
@@ -219,15 +219,20 @@
   letter-spacing: 0.04em;
 }
 .arrow {
-  width: 2.4rem; height: 2.4rem;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  margin-left: auto;
-  transition: color 0.15s, transform 0.15s;
+  display: none;
 }
-.row:hover .arrow { color: var(--accent-hi); transform: translateX(3px); }
 .arrow svg { width: 1.5rem; height: 1.5rem; }
+
+.attendance {
+  display: flex; align-items: center; gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+}
+.pill { display: inline-flex; align-items: center; gap: 0.4rem; }
+.dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; }
+.dotYes { background: var(--rsvp-yes); }
+.dotMaybe { background: var(--rsvp-maybe); }
+.attCount { color: var(--text-secondary); font-weight: 700; font-variant-numeric: tabular-nums; }
 
 .spinnerWrap {
   padding: 6rem 0;
@@ -268,7 +273,13 @@
   .glyph { width: 2.6rem; height: 2.6rem; font-size: 1rem; border-radius: 0.5rem; }
   .artists { font-size: 1.5rem; }
   .row { grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.2rem 0; }
+  .attendance { grid-column: 2; }
   .list .row:not(:hover):not(:first-child)::before { left: 0; right: 0; }
   .plusBtn { width: 3.2rem; height: 3.2rem; }
   .plusBtn svg { width: 1.6rem; height: 1.6rem; }
+  .arrow { display: flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; color: var(--text-muted); flex-shrink: 0; margin-left: auto; }
+  .row:hover { background: transparent; border-color: transparent; }
+  .list .row:not(:hover):not(:first-child)::before { background: var(--border-dim); }
+  .row:hover .artists { color: var(--text-primary); }
+  .row:hover .dateNum { color: inherit; }
 }
