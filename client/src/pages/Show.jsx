@@ -1,21 +1,21 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toLocalMidnight } from '../utils/helpers';
-import Auth from '../utils/auth';
 import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
-import { ExternalLink } from '@styled-icons/feather/ExternalLink';
 import { Clock } from '@styled-icons/feather/Clock';
-import { MapPin } from '@styled-icons/feather/MapPin';
-import { Phone } from '@styled-icons/feather/Phone';
+import { ExternalLink } from '@styled-icons/feather/ExternalLink';
 import { Mail } from '@styled-icons/feather/Mail';
-import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
+import { MapPin } from '@styled-icons/feather/MapPin';
 import { Navigation as NavIcon } from '@styled-icons/feather/Navigation';
+import { Phone } from '@styled-icons/feather/Phone';
+import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 import ConcertRSVP from '../components/shared/ConcertRSVP';
 import FriendsGoing from '../components/shared/FriendsGoing';
-import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
+import Auth from '../utils/auth';
+import { toLocalMidnight } from '../utils/helpers';
 import styles from './Show.module.css';
 
-const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const Show = () => {
   const location = useLocation();
@@ -34,18 +34,18 @@ const Show = () => {
   }
 
   const googleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(concert.venue + ' ' + (concert.address || ''))}`;
-  const wazeMaps   = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
+  const wazeMaps = `https://waze.com/ul?q=${encodeURIComponent(concert.venue)}&navigate=yes`;
 
   const d = toLocalMidnight(concert.date);
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const tmrw  = new Date(today); tmrw.setDate(today.getDate() + 1);
+  const tmrw = new Date(today); tmrw.setDate(today.getDate() + 1);
   const sameDay = (a, b) => a.toDateString() === b.toDateString();
   const dayLabel = sameDay(d, today) ? 'Today'
-                 : sameDay(d, tmrw)  ? 'Tomorrow'
-                 : DAYS[d.getDay()];
+    : sameDay(d, tmrw) ? 'Tomorrow'
+      : DAYS[d.getDay()];
   const dayLabelShort = (dayLabel === 'Today' || dayLabel === 'Tomorrow')
-                      ? dayLabel
-                      : dayLabel.slice(0, 3);
+    ? dayLabel
+    : dayLabel.slice(0, 3);
 
   return (
     <main className={styles.main}>
@@ -64,9 +64,9 @@ const Show = () => {
         <section className={styles.hero}>
           <div className={styles.heroDate}>
             <strong>
-            <span className={styles.dayFull}>{dayLabel}</span>
-            <span className={styles.dayShort}>{dayLabelShort}</span>
-          </strong> · {MONTHS[d.getMonth()]} {d.getDate()}
+              <span className={styles.dayFull}>{dayLabel}</span>
+              <span className={styles.dayShort}>{dayLabelShort}</span>
+            </strong> · {MONTHS[d.getMonth()]} {d.getDate()}
           </div>
           <h1 className={styles.heroArtists}>{concert.artists}</h1>
           {concert.venue && (

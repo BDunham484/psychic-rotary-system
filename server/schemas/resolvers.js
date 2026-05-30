@@ -589,41 +589,45 @@ const resolvers = {
             return { token, user };
         },
         addConcert: async (parent, { ...data }) => {
-            await Concert.findOne({ 'customId': data.customId }, async (err, custom) => {
-                if (err) return handleError(err);
+            const payload = {
+                ...data,
+                date: data.date ? new Date(data.date) : null,
+            };
 
-                if (custom) {
-                    const savedConcertId = {
-                        _id: custom._id
-                    }
-                    const update = {
-                        artists: data.artists,
-                        venue: data.venue,
-                        date: data.date,
-                        times: data.times,
-                        address: data.address,
-                        address2: data.address2,
-                        phone: data.phone,
-                        website: data.website,
-                        email: data.email,
-                        ticketLink: data.ticketLink,
-                    }
-                    const updatedConcert = await Concert.findByIdAndUpdate(
-                        savedConcertId,
-                        update,
-                        { new: true }
-                    )
-                    console.log('UPDATEDCONCERT');
-                    console.log(updatedConcert.artists + ' has been updated');
-                    return updatedConcert;
-                } else {
-                    const concert = await Concert.create({ ...data })
-                    // .select(-__v);
-                    console.log('SAVEDCONCERT');
-                    console.log(concert.artists + ' has been added');
-                    return concert;
-                }
-            })
+            const existing = await Concert.findOne({
+                'customId.headliner': payload.customId.headliner,
+                'customId.date':      payload.customId.date,
+                'customId.venue':     payload.customId.venue,
+            });
+
+            if (!existing) {
+                return await Concert.create(payload);
+            }
+
+            return await Concert.findOneAndUpdate(
+                {
+                    'customId.headliner': payload.customId.headliner,
+                    'customId.date':      payload.customId.date,
+                    'customId.venue':     payload.customId.venue,
+                },
+                { $set: {
+                    artists:     payload.artists,
+                    venue:       payload.venue,
+                    date:        payload.date,
+                    times:       payload.times,
+                    address:     payload.address,
+                    address2:    payload.address2,
+                    phone:       payload.phone,
+                    website:     payload.website,
+                    email:       payload.email,
+                    ticketLink:  payload.ticketLink,
+                    ticketPrice: payload.ticketPrice,
+                    artistsLink: payload.artistsLink,
+                    description: payload.description,
+                    status:      payload.status,
+                } },
+                { new: true }
+            );
         },
         addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
@@ -681,38 +685,10 @@ const resolvers = {
             return concerts
         },
         deleteOldConcerts: async (parent, { date }) => {
-            //declare empty array for dates
-            const dateArr = [];
-            //function to get the previous date based on the date passed into it
-            const dayBefore = (date) => {
-                const before = new Date(date);
-                before.setDate(before.getDate() - 1);
-                const theLastDay = before.toDateString();
-                return theLastDay;
-            }
-            //save date to another variable for the for loop
-            let arrayDate = date;
-            //for loop that gets previous weeks worth of date and pushes the to array
-            for (let i = 0; i < 89; i++) {
-                let yesterday = dayBefore(arrayDate);
-                dateArr.push(yesterday);
-                arrayDate = yesterday;
-            }
-            const oldConcertsArr = []
-            //map through array of last weeks dates and delete any shows with that date
-            await Promise.all(dateArr.map(async (date) => {
-                const concerts = await Concert.find({ date: date })
-
-                await concerts.map((concert) => {
-                    oldConcertsArr.push(concert._id);
-                })
-            }));
-            const deletedConcerts = await Concert.deleteMany({
-                _id: { $in: oldConcertsArr }
+            const result = await Concert.deleteMany({
+                date: { $lt: new Date(date) }
             });
-            // returns array of deleted dates
-            return dateArr;
-            // return deletedConcerts;
+            return result.deletedCount;
         },
         rsvpYes: async (parent, { concertId, userId }, context) => {
             console.log('RSVPYES');

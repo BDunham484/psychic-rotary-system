@@ -21,9 +21,21 @@ const typeDefs = gql`
         blockedUsers: [User]
     }
 
+    type CustomId {
+        headliner: String
+        date: String
+        venue: String
+    }
+
+    input CustomIdInput {
+        headliner: String
+        date: String
+        venue: String
+    }
+
     type Concert {
         _id: ID
-        customId: String
+        customId: CustomId
         artists: String
         artistsLink: String
         description: String
@@ -36,6 +48,8 @@ const typeDefs = gql`
         website: String
         email: String
         ticketLink: String
+        ticketPrice: String
+        status: String
         yes: [User]
         no: [User]
         maybe: [User]
@@ -65,8 +79,8 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addConcert(customId: String, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, artistsLink: String): Concert
-        addConcertsToDatabase(customId: String, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, artistsLink: String): [Concert]
+        addConcert(customId: CustomIdInput, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, ticketPrice: String, artistsLink: String, description: String, status: String): Concert
+        addConcertsToDatabase(customId: CustomIdInput, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, artistsLink: String, status: String): [Concert]
         addFriend(friendId: ID!): User
         addFriendByUsername(username: String!): User
         addConcertToUser(concertId: ID!): User
@@ -74,7 +88,7 @@ const typeDefs = gql`
         deleteConcert(concertId: ID!): Concert
         deleteConcerts(concertId: [ID]): Concert
         deleteConcertFromUser(concertId: ID!): User
-        deleteOldConcerts(date: String!): [String]
+        deleteOldConcerts(date: String!): Int
         rsvpYes(concertId: ID!, userId: ID!): Concert
         cancelRsvpYes(concertId: ID!, userId: ID!): Concert
         rsvpNo(concertId: ID!, userId: ID!): Concert

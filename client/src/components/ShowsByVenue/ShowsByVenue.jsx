@@ -101,22 +101,6 @@ const ShowsByVenue = () => {
                       <div className={styles.arrow}><ArrowRight /></div>
                     </div>
                   </div>
-                  {(c.yes != null || c.maybe != null) && (
-                    <div className={styles.attendance}>
-                      {c.yes != null && (
-                        <span className={styles.pill}>
-                          <span className={`${styles.dot} ${styles.dotYes}`} />
-                          <span className={styles.attCount}>{c.yes.length || '-'}</span>
-                        </span>
-                      )}
-                      {c.maybe != null && (
-                        <span className={styles.pill}>
-                          <span className={`${styles.dot} ${styles.dotMaybe}`} />
-                          <span className={styles.attCount}>{c.maybe.length || '-'}</span>
-                        </span>
-                      )}
-                    </div>
-                  )}
                 </div>
               );
             })}
