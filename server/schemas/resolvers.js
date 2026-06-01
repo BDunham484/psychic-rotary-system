@@ -247,20 +247,19 @@ const resolvers = {
             return unique;
         },
         concertsByVenue: async (parent, { venue }) => {
+            // Only shows no older than yesterday (matches the "keep through yesterday" rule).
+            const floor = new Date();
+            floor.setUTCHours(0, 0, 0, 0);
+            floor.setUTCDate(floor.getUTCDate() - 1);
+
             const concerts = await Concert.find({
-                venue: venue
+                venue: venue,
+                date: { $gte: floor }
             })
-                // .sort({ date: 'asc'})
+                .sort({ date: 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe');
-
-            // changelog-start
-            console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
-            console.log('🔥🔥🔥🔥 concerts: ', concerts);
-            console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥');
-            console.log(' ');
-            // changelog-end
 
             return concerts;
         },
