@@ -69,7 +69,7 @@ const resolvers = {
             const concerts = await Concert.find({
                 date: { $gte: start, $lt: end }
             })
-                .sort({ venue: 'asc' })
+                .sort({ venue: 'asc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')
@@ -84,7 +84,7 @@ const resolvers = {
             const concerts = await Concert.find({
                 date: { $gte: start, $lt: end }
             })
-                .sort({ venue: 'asc' })
+                .sort({ venue: 'asc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')
@@ -99,7 +99,7 @@ const resolvers = {
             const concerts = await Concert.find({
                 date: { $gte: start, $lt: end }
             })
-                .sort({ venue: 'desc' })
+                .sort({ venue: 'desc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')
@@ -113,7 +113,7 @@ const resolvers = {
             const concerts = await Concert.find({
                 date: { $gte: start, $lt: end }
             })
-                .sort({ artists: 'asc' })
+                .sort({ artists: 'asc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')
@@ -127,7 +127,7 @@ const resolvers = {
             const concerts = await Concert.find({
                 date: { $gte: start, $lt: end }
             })
-                .sort({ artists: 'desc' })
+                .sort({ artists: 'desc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe')
@@ -256,7 +256,7 @@ const resolvers = {
                 venue: venue,
                 date: { $gte: floor }
             })
-                .sort({ date: 'asc' })
+                .sort({ date: 'asc', 'customId.times': 'asc' })
                 .populate('yes')
                 .populate('no')
                 .populate('maybe');

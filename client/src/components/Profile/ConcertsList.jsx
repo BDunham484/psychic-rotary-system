@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { DELETE_CONCERT_FROM_USER } from '../../utils/mutations';
@@ -17,7 +18,24 @@ const ConcertsList = ({ user, isSelf }) => {
     catch (e) { console.error(e); }
   };
 
-  if (!user.concerts || user.concerts.length === 0) {
+  // Always display by date asc, then showtime asc (customId.times is the "HHmm"
+  // key), regardless of the order concerts were added to the user.
+  const sortedConcerts = useMemo(() => {
+    const ms = (c) => {
+      const t = new Date(c.date).getTime();
+      return Number.isNaN(t) ? Infinity : t;
+    };
+    return [...(user.concerts || [])].sort((a, b) => {
+      const da = ms(a);
+      const db = ms(b);
+      if (da !== db) return da - db;
+      const ta = a.customId?.times || '';
+      const tb = b.customId?.times || '';
+      return ta < tb ? -1 : ta > tb ? 1 : 0;
+    });
+  }, [user.concerts]);
+
+  if (sortedConcerts.length === 0) {
     return (
       <div className={styles.empty}>
         <div className={styles.emptyIcon}>♪</div>
@@ -33,7 +51,7 @@ const ConcertsList = ({ user, isSelf }) => {
 
   return (
     <div className={styles.list}>
-      {user.concerts.map(c => (
+      {sortedConcerts.map(c => (
         <ConcertRow
           key={c._id}
           concert={c}

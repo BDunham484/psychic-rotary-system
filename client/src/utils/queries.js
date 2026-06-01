@@ -199,6 +199,7 @@ export const QUERY_USER = gql`
                     headliner
                     date
                     venue
+                    times
                 }
                 artists
                 artistsLink
@@ -250,6 +251,7 @@ export const QUERY_ME = gql`
                     headliner
                     date
                     venue
+                    times
                 }
                 artists
                 artistsLink
