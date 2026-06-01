@@ -25,10 +25,11 @@ const ConcertProvider = ({ children }) => {
         }
     }, [loading, userData, user, startPolling, stopPolling])
 
-    //get today's date as midnight UTC ISO string
+    //get today's date as midnight UTC of the user's local calendar day (matches the
+    //midnight-UTC contract concert dates are stored under, so day-bucketing lines up
+    //regardless of the viewer's timezone)
     const _today = new Date();
-    _today.setHours(0, 0, 0, 0);
-    const today = _today.toISOString();
+    const today = new Date(Date.UTC(_today.getFullYear(), _today.getMonth(), _today.getDate())).toISOString();
 
     //set initial state using today's date
     const [date, setDate] = useState(today);

@@ -15,25 +15,32 @@ const MONTHS = [
 const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
   const pickerRef = useRef(null);
 
-  const today     = new Date(); today.setHours(0,0,0,0);
-  const tomorrow  = new Date(today); tomorrow.setDate(today.getDate() + 1);
-  const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+  // The selected date is midnight UTC of a floating calendar day. Work in UTC-day space
+  // for all comparisons/labels; convert to local Dates only at the react-datepicker boundary.
+  const _now = new Date();
+  const today     = new Date(Date.UTC(_now.getFullYear(), _now.getMonth(), _now.getDate()));
+  const tomorrow  = new Date(today); tomorrow.setUTCDate(today.getUTCDate() + 1);
+  const yesterday = new Date(today); yesterday.setUTCDate(today.getUTCDate() - 1);
   const min       = yesterday;
   const max       = lastConcertDate ? new Date(lastConcertDate) : addDays(today, 90);
 
   const current = new Date(date);
-  const sameDay = (a, b) => a.toDateString() === b.toDateString();
+  const sameDay = (a, b) => a.getTime() === b.getTime();
 
   const dayLabel = sameDay(current, today)     ? 'TODAY'
                  : sameDay(current, tomorrow)  ? 'TOMORROW'
                  : sameDay(current, yesterday) ? 'YESTERDAY'
-                 : current.toLocaleDateString(undefined, { weekday: 'long' }).toUpperCase();
+                 : current.toLocaleDateString(undefined, { weekday: 'long', timeZone: 'UTC' }).toUpperCase();
 
-  const fullDate = `${MONTHS[current.getMonth()]} ${current.getDate()}`;
+  const fullDate = `${MONTHS[current.getUTCMonth()]} ${current.getUTCDate()}`;
 
+  // react-datepicker works in local time; represent a UTC calendar day as that day at local midnight.
+  const toLocalDay = (utcMidnight) =>
+    new Date(utcMidnight.getUTCFullYear(), utcMidnight.getUTCMonth(), utcMidnight.getUTCDate());
+
+  // picker hands back a local Date for the chosen calendar day → pin to midnight UTC of that day.
   const setDateFromDate = (d) => {
-    d.setHours(0, 0, 0, 0);
-    setDate(d.toISOString());
+    setDate(new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())).toISOString());
   };
 
   const concertDateSet = new Set(
@@ -49,11 +56,11 @@ const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
 
   const prevDay = () => {
     if (!canPrev) return;
-    const d = new Date(current); d.setDate(d.getDate() - 1); setDateFromDate(d);
+    const d = new Date(current); d.setUTCDate(d.getUTCDate() - 1); setDate(d.toISOString());
   };
   const nextDay = () => {
     if (!canNext) return;
-    const d = new Date(current); d.setDate(d.getDate() + 1); setDateFromDate(d);
+    const d = new Date(current); d.setUTCDate(d.getUTCDate() + 1); setDate(d.toISOString());
   };
 
   return (
@@ -76,10 +83,10 @@ const DateNav = ({ date, setDate, total, lastConcertDate, concertDates }) => {
         <div className={styles.hiddenPicker}>
           <DatePicker
             ref={pickerRef}
-            selected={current}
+            selected={toLocalDay(current)}
             onChange={(d) => setDateFromDate(d)}
-            minDate={today}
-            maxDate={max}
+            minDate={toLocalDay(today)}
+            maxDate={toLocalDay(max)}
             calendarClassName="calendar"
             dayClassName={getDayClass}
             showDisabledMonthNavigation
