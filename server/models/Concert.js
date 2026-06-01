@@ -7,7 +7,8 @@ const concertSchema = new Schema(
         customId: {
             headliner: { type: String },
             date: { type: String },
-            venue: { type: String }
+            venue: { type: String },
+            times: { type: String }
         },
         artists: {
             type: String
@@ -78,9 +79,10 @@ const concertSchema = new Schema(
     }
 );
 
-// compound unique index matching antecedent
+// compound unique index matching antecedent (four-field, includes times so same-day
+// shows at different start times are distinct records on the shared collection)
 concertSchema.index(
-    { 'customId.headliner': 1, 'customId.date': 1, 'customId.venue': 1 },
+    { 'customId.headliner': 1, 'customId.date': 1, 'customId.venue': 1, 'customId.times': 1 },
     { unique: true }
 );
 
