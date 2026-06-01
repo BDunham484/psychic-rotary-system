@@ -25,12 +25,14 @@ const typeDefs = gql`
         headliner: String
         date: String
         venue: String
+        times: String
     }
 
     input CustomIdInput {
         headliner: String
         date: String
         venue: String
+        times: String
     }
 
     type Concert {
