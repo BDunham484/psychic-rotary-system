@@ -7,9 +7,12 @@ export function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+// Concert dates are stored as midnight UTC of the venue's calendar day. Build the
+// local-midnight Date from the *UTC* Y/M/D so consumers' local getDate()/getMonth()
+// render the correct calendar day in any timezone (no off-by-one in UTC-negative zones).
 export const toLocalMidnight = (isoString) => {
     const d = new Date(isoString);
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
 };
 
 export const getTodaysDate = () => {
