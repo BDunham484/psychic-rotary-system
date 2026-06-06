@@ -213,6 +213,9 @@ export const QUERY_USER = gql`
                 email
                 ticketLink
                 ticketPrice
+                yes { _id }
+                no { _id }
+                maybe { _id }
             }
             friendCount
             friends {
@@ -265,6 +268,9 @@ export const QUERY_ME = gql`
                 email
                 ticketLink
                 ticketPrice
+                yes { _id }
+                no { _id }
+                maybe { _id }
             }
             requestCount
             friendCount

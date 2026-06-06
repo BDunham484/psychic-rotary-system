@@ -14,7 +14,7 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('concerts')
+                    .populate({ path: 'concerts', populate: [{ path: 'yes', select: '_id' }, { path: 'no', select: '_id' }, { path: 'maybe', select: '_id' }] })
                     .populate('friends')
                     .populate('receivedRequests')
                     .populate('sentRequests')
@@ -40,7 +40,7 @@ const resolvers = {
         user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select('-__v -password')
-                .populate('concerts')
+                .populate({ path: 'concerts', populate: [{ path: 'yes', select: '_id' }, { path: 'no', select: '_id' }, { path: 'maybe', select: '_id' }] })
                 .populate('friends')
                 .populate('sentRequests')
                 .populate('receivedRequests')
