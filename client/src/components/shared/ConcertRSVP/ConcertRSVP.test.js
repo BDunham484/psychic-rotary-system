@@ -4,9 +4,12 @@ import { MockedProvider } from '@apollo/client/testing';
 import { ConcertContext } from '../../../utils/GlobalState';
 import { GET_CONCERT_BY_ID } from '../../../utils/queries';
 import {
-  RSVP_YES, CANCEL_RSVP_YES,
+  RSVP_YES,
   RSVP_NO,
   RSVP_MAYBE,
+  CLEAR_RSVP,
+  ADD_CONCERT_TO_USER,
+  DELETE_CONCERT_FROM_USER,
 } from '../../../utils/mutations';
 import ConcertRSVP from './index';
 
@@ -35,6 +38,7 @@ const makeQueryMock = (yes = [], no = [], maybe = []) => ({
   result: { data: { concert: { ...concertBase, yes, no, maybe } } },
 });
 
+
 const renderComponent = (mocks) =>
   render(
     <MockedProvider mocks={mocks} addTypename={false}>
@@ -62,48 +66,66 @@ test('shows count for each option', async () => {
   expect(screen.getByText('0 people')).toBeInTheDocument();
 });
 
-test('calls RSVP_YES mutation when Yes card clicked and not already RSVPd', async () => {
-  let mutationCalled = false;
+test('calls RSVP_YES and adds concert to user when Yes clicked and not already RSVPd', async () => {
+  let rsvpCalled = false;
+  let addCalled = false;
   const mocks = [
     makeQueryMock(),
     {
       request: { query: RSVP_YES, variables: { concertId: CONCERT_ID, userId: USER_ID } },
-      result: () => { mutationCalled = true; return { data: { rsvpYes: { _id: CONCERT_ID, artists: 'Test Artist', yes: [{ _id: USER_ID }] } } }; },
+      result: () => { rsvpCalled = true; return { data: { rsvpYes: { _id: CONCERT_ID, artists: 'Test Artist', yes: [{ _id: USER_ID }] } } }; },
+    },
+    {
+      request: { query: ADD_CONCERT_TO_USER, variables: { concertId: CONCERT_ID } },
+      result: () => { addCalled = true; return { data: { addConcertToUser: { concerts: [{ _id: CONCERT_ID }] } } }; },
     },
   ];
   renderComponent(mocks);
   fireEvent.click(await screen.findByText('Yes'));
-  await waitFor(() => expect(mutationCalled).toBe(true));
+  await waitFor(() => expect(rsvpCalled).toBe(true));
+  await waitFor(() => expect(addCalled).toBe(true));
 });
 
-test('calls CANCEL_RSVP_YES when Yes card clicked and already RSVPd Yes', async () => {
-  let mutationCalled = false;
+test('clears RSVP and removes concert from user when active Yes clicked again', async () => {
+  let clearCalled = false;
+  let deleteCalled = false;
   const mocks = [
     makeQueryMock([{ _id: USER_ID }], [], []),
     {
-      request: { query: CANCEL_RSVP_YES, variables: { concertId: CONCERT_ID, userId: USER_ID } },
-      result: () => { mutationCalled = true; return { data: { cancelRsvpYes: { _id: CONCERT_ID, artists: 'Test Artist', yes: [] } } }; },
+      request: { query: CLEAR_RSVP, variables: { concertId: CONCERT_ID, userId: USER_ID } },
+      result: () => { clearCalled = true; return { data: { clearRsvp: { _id: CONCERT_ID, artists: 'Test Artist', yes: [], no: [], maybe: [] } } }; },
+    },
+    {
+      request: { query: DELETE_CONCERT_FROM_USER, variables: { concertId: CONCERT_ID } },
+      result: () => { deleteCalled = true; return { data: { deleteConcertFromUser: { _id: USER_ID, username: 'tester', email: 't@t.co', concertCount: 0, concerts: [] } } }; },
     },
   ];
   renderComponent(mocks);
   // Wait for query to resolve so myRSVP is 'yes' before clicking
   await screen.findByText('1 person');
   fireEvent.click(screen.getByText('Yes'));
-  await waitFor(() => expect(mutationCalled).toBe(true));
+  await waitFor(() => expect(clearCalled).toBe(true));
+  await waitFor(() => expect(deleteCalled).toBe(true));
 });
 
-test('calls RSVP_NO when switching from Yes to No', async () => {
-  let mutationCalled = false;
+test('calls RSVP_NO and adds concert to user when switching from Yes to No', async () => {
+  let rsvpCalled = false;
+  let addCalled = false;
   const mocks = [
     makeQueryMock([{ _id: USER_ID }], [], []),
     {
       request: { query: RSVP_NO, variables: { concertId: CONCERT_ID, userId: USER_ID } },
-      result: () => { mutationCalled = true; return { data: { rsvpNo: { _id: CONCERT_ID, artists: 'Test Artist', no: [{ _id: USER_ID }] } } }; },
+      result: () => { rsvpCalled = true; return { data: { rsvpNo: { _id: CONCERT_ID, artists: 'Test Artist', no: [{ _id: USER_ID }] } } }; },
+    },
+    {
+      request: { query: ADD_CONCERT_TO_USER, variables: { concertId: CONCERT_ID } },
+      result: () => { addCalled = true; return { data: { addConcertToUser: { concerts: [{ _id: CONCERT_ID }] } } }; },
     },
   ];
   renderComponent(mocks);
   // Wait for query to resolve before clicking
   await screen.findByText('1 person');
   fireEvent.click(screen.getByText('No'));
-  await waitFor(() => expect(mutationCalled).toBe(true));
+  await waitFor(() => expect(rsvpCalled).toBe(true));
+  await waitFor(() => expect(addCalled).toBe(true));
 });

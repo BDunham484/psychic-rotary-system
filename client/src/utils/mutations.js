@@ -174,6 +174,24 @@ export const CANCEL_RSVP_MAYBE = gql`
     }
 `;
 
+export const CLEAR_RSVP = gql`
+    mutation clearRsvp ($concertId: ID!, $userId: ID!) {
+        clearRsvp(concertId: $concertId, userId: $userId) {
+            _id
+            artists
+            yes {
+                _id
+            }
+            no {
+                _id
+            }
+            maybe {
+                _id
+            }
+        }
+    }
+`;
+
 export const SEND_FRIEND_REQUEST = gql`
     mutation sendRequest($friendId: ID!, $friendName: String!) {
         sendRequest(friendId: $friendId, friendName: $friendName) {

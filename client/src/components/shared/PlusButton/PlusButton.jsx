@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ConcertContext } from '../../../utils/GlobalState';
 import {
     ADD_CONCERT_TO_USER,
-    RSVP_MAYBE,
+    RSVP_YES,
 } from "../../../utils/mutations";
 import { Plus } from '@styled-icons/bootstrap/Plus';
 
@@ -11,12 +11,12 @@ const PlusButton = ({ concertId }) => {
     const { user } = useContext(ConcertContext);
     const userId = user?.me?._id || {};
     const [addConcertToUser] = useMutation(ADD_CONCERT_TO_USER);
-    const [rsvpMaybe] = useMutation(RSVP_MAYBE);
+    const [rsvpYes] = useMutation(RSVP_YES);
 
     const handleClick = async (id, userId) => {
         try {
             await addConcertToUser({ variables: { concertId: id } });
-            await rsvpMaybe({ variables: { concertId: id, userId: userId } });
+            await rsvpYes({ variables: { concertId: id, userId: userId } });
         } catch (err) {
             console.error(err);
         }

@@ -798,6 +798,19 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
+        clearRsvp: async (parent, { concertId, userId }, context) => {
+            console.log('CLEARRSVP');
+            console.log(concertId + ' and ' + userId);
+            if (context.user) {
+                const concert = await Concert.findByIdAndUpdate(
+                    { _id: concertId },
+                    { $pull: { yes: userId, no: userId, maybe: userId } },
+                    { new: true }
+                );
+                return concert
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
         sendRequest: async (parent, { friendId, friendName }, context) => {
             console.log('request sent: ' + friendId + ' | ' + friendName);
             if (context.user) {

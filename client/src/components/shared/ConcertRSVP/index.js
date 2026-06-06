@@ -5,9 +5,12 @@ import { X } from '@styled-icons/feather/X';
 import { ConcertContext } from '../../../utils/GlobalState';
 import { GET_CONCERT_BY_ID } from '../../../utils/queries';
 import {
-  RSVP_YES, CANCEL_RSVP_YES,
-  RSVP_NO,  CANCEL_RSVP_NO,
-  RSVP_MAYBE, CANCEL_RSVP_MAYBE,
+  RSVP_YES,
+  RSVP_NO,
+  RSVP_MAYBE,
+  CLEAR_RSVP,
+  ADD_CONCERT_TO_USER,
+  DELETE_CONCERT_FROM_USER,
 } from '../../../utils/mutations';
 import styles from './ConcertRSVP.module.css';
 
@@ -18,12 +21,12 @@ const ConcertRSVP = ({ concertId }) => {
   const { data, refetch } = useQuery(GET_CONCERT_BY_ID, { variables: { concertId } });
 
   const opts = { onCompleted: refetch };
-  const [rsvpYes]         = useMutation(RSVP_YES,          opts);
-  const [cancelRsvpYes]   = useMutation(CANCEL_RSVP_YES,   opts);
-  const [rsvpNo]          = useMutation(RSVP_NO,           opts);
-  const [cancelRsvpNo]    = useMutation(CANCEL_RSVP_NO,    opts);
-  const [rsvpMaybe]       = useMutation(RSVP_MAYBE,        opts);
-  const [cancelRsvpMaybe] = useMutation(CANCEL_RSVP_MAYBE, opts);
+  const [rsvpYes]              = useMutation(RSVP_YES,                 opts);
+  const [rsvpNo]               = useMutation(RSVP_NO,                  opts);
+  const [rsvpMaybe]            = useMutation(RSVP_MAYBE,               opts);
+  const [clearRsvp]            = useMutation(CLEAR_RSVP,               opts);
+  const [addConcertToUser]     = useMutation(ADD_CONCERT_TO_USER);
+  const [deleteConcertFromUser] = useMutation(DELETE_CONCERT_FROM_USER);
 
   const yes   = data?.concert?.yes   || [];
   const no    = data?.concert?.no    || [];
@@ -37,13 +40,15 @@ const ConcertRSVP = ({ concertId }) => {
   const handleClick = (type) => {
     const vars = { variables: { concertId, userId } };
     if (type === myRSVP) {
-      if (type === 'yes')   cancelRsvpYes(vars);
-      if (type === 'no')    cancelRsvpNo(vars);
-      if (type === 'maybe') cancelRsvpMaybe(vars);
+      // Cancelling the active RSVP also removes the show from the user's list.
+      clearRsvp(vars);
+      deleteConcertFromUser({ variables: { concertId } });
     } else {
+      // Any RSVP selection saves the show to the user's list.
       if (type === 'yes')   rsvpYes(vars);
       if (type === 'no')    rsvpNo(vars);
       if (type === 'maybe') rsvpMaybe(vars);
+      addConcertToUser({ variables: { concertId } });
     }
   };
 
