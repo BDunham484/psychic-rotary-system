@@ -229,7 +229,8 @@
 
   /* mirror ConcertList's mobile text scaling */
   .artists { font-size: 1.5rem; }
-  .meta { gap: 1rem; }
+  /* stack venue + ticket price so price drops to its own line */
+  .meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
   .at { display: none; }
 
   .removeBtn {            /* top-right corner, trimmed to the icon for max title width */
