@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { ArrowLeft } from '@styled-icons/feather/ArrowLeft';
 import { QUERY_USER, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import { deriveFriendship } from '../../utils/helpers';
-import BackButton from '../shared/BackButton';
 import ProfileHero from './ProfileHero';
 import ConcertsList from './ConcertsList';
 import FriendsTab from '../Friends/FriendsTab';
@@ -12,6 +12,7 @@ import styles from './Profile.module.css';
 
 const Profile = () => {
   const { username: userParam } = useParams();
+  const navigate = useNavigate();
   const [tab, setTab] = useState('concerts');
 
   const { loading, data, startPolling, stopPolling } = useQuery(
@@ -47,7 +48,9 @@ const Profile = () => {
     <main className={styles.main}>
       <div className={`${styles.page} fade-up`}>
         <div className={styles.backBar}>
-          <BackButton />
+          <button className={styles.backBtn} onClick={() => navigate(-1)}>
+            <ArrowLeft /> Back
+          </button>
         </div>
 
         <ProfileHero user={user} isSelf={isSelf} friendship={friendship} />

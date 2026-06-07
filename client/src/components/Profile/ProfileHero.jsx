@@ -41,43 +41,48 @@ const ProfileHero = ({ user, isSelf, friendship = 'none' }) => {
   };
 
   return (
-    <div className={styles.hero}>
-      <div className={styles.avatar}>{initials}</div>
-      <div className={styles.info}>
-        <div className={styles.username}>{user.username}</div>
-        <div className={styles.stats}>
-          <div className={styles.stat}>
-            <span className={styles.statVal}>{user.concertCount || 0}</span>
-            <span className={styles.statLabel}>
-              {user.concertCount === 1 ? 'Concert' : 'Concerts'}
-            </span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statVal}>{user.friendCount || 0}</span>
-            <span className={styles.statLabel}>
-              {user.friendCount === 1 ? 'Friend' : 'Friends'}
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className={`${styles.hero} ${isSelf ? styles.heroFlush : ''}`}>
+      <h1 className={styles.name}>
+        <span className={styles.glyph}>{initials}</span>
+        {user.username}
+      </h1>
 
+      {/* On other people's profiles there's no tab bar, so the counts aren't
+          redundant — keep them (plus the friend/block actions) here. */}
       {!isSelf && (
-        <div className={styles.actions}>
-          {status === 'none' && (
-            <button className={styles.action} onClick={handleAddFriend}>Add Friend</button>
-          )}
-          {status === 'requested' && (
-            <button className={`${styles.action} ${styles.actionPending}`} disabled>Request Sent</button>
-          )}
-          {status === 'friend' && (
-            <button className={`${styles.action} ${styles.actionSecondary}`} onClick={handleRemove}>Remove</button>
-          )}
-          <button
-            className={`${styles.action} ${styles.actionDanger}`}
-            onClick={status === 'blocked' ? handleUnblock : handleBlock}
-          >
-            {status === 'blocked' ? 'Unblock' : 'Block'}
-          </button>
+        <div className={styles.sub}>
+          <div className={styles.stats}>
+            <div className={styles.stat}>
+              <span className={styles.statVal}>{user.concertCount || 0}</span>
+              <span className={styles.statLabel}>
+                {user.concertCount === 1 ? 'Concert' : 'Concerts'}
+              </span>
+            </div>
+            <div className={styles.stat}>
+              <span className={styles.statVal}>{user.friendCount || 0}</span>
+              <span className={styles.statLabel}>
+                {user.friendCount === 1 ? 'Friend' : 'Friends'}
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.actions}>
+            {status === 'none' && (
+              <button className={styles.action} onClick={handleAddFriend}>Add Friend</button>
+            )}
+            {status === 'requested' && (
+              <button className={`${styles.action} ${styles.actionPending}`} disabled>Request Sent</button>
+            )}
+            {status === 'friend' && (
+              <button className={`${styles.action} ${styles.actionSecondary}`} onClick={handleRemove}>Remove</button>
+            )}
+            <button
+              className={`${styles.action} ${styles.actionDanger}`}
+              onClick={status === 'blocked' ? handleUnblock : handleBlock}
+            >
+              {status === 'blocked' ? 'Unblock' : 'Block'}
+            </button>
+          </div>
         </div>
       )}
     </div>

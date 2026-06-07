@@ -62,12 +62,13 @@
   justify-content: center;
   flex-shrink: 0;
   vertical-align: middle;
-  width: 3.6rem; height: 3.6rem;
-  border-radius: 0.6rem;
+  /* box tracks the name's font height: 2.5 × 0.4em = 1em of .name */
+  width: 2.5em; height: 2.5em;
+  border-radius: 0.45em;
   background: linear-gradient(135deg, oklch(62% 0.16 275 / 0.22), oklch(72% 0.16 320 / 0.22));
   border: 1px solid var(--accent-mid);
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 0.4em;
   font-weight: 800;
   color: var(--accent-hi);
   text-transform: uppercase;

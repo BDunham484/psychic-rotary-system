@@ -9,14 +9,35 @@
   padding: 3.2rem 4rem 8rem;
 }
 .backBar {
-  display: flex; align-items: center;
+  display: flex; align-items: center; gap: 1.2rem;
   padding: 0.8rem 0 2.4rem;
 }
+.backBtn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1.2rem 0.7rem 0.9rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 0.8rem;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.backBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hi);
+  transform: translateX(-2px);
+}
+.backBtn svg { width: 1.5rem; height: 1.5rem; }
 
 .tabs {
   display: flex;
   gap: 0.4rem;
-  padding: 2.4rem 0 0;
+  padding: 0;
   border-bottom: 1px solid var(--border-dim);
 }
 .tab {
@@ -65,6 +86,8 @@
 
 @media (max-width: 720px) {
   .page { padding: 2rem 1.6rem 6rem; }
+  /* match ShowsByVenue's mobile back-button → hero spacing */
+  .backBar { padding-bottom: 0; }
   /* split the width evenly so the tabs always fit the viewport */
   .tab {
     flex: 1;
