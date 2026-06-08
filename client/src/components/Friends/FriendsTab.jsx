@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import {
   ADD_FRIEND_BY_USERNAME,
@@ -10,16 +9,15 @@ import {
   DECLINE_FRIEND_REQUEST,
   CANCEL_FRIEND_REQUEST,
 } from '../../utils/mutations';
-import { Search }       from '@styled-icons/feather/Search';
-import { ExternalLink } from '@styled-icons/feather/ExternalLink';
-import { UserMinus }    from '@styled-icons/feather/UserMinus';
-import { UserX }        from '@styled-icons/feather/UserX';
-import { Check }        from '@styled-icons/feather/Check';
-import { X }            from '@styled-icons/feather/X';
+import { Search } from '@styled-icons/feather/Search';
+import { Check }  from '@styled-icons/feather/Check';
+import { X }      from '@styled-icons/feather/X';
+import FriendItem from './FriendItem';
 import styles from './FriendsTab.module.css';
 
 const FriendsTab = ({ user }) => {
   const [query, setQuery] = useState('');
+  const [openId, setOpenId] = useState(null);
   const [addFriendByUsername] = useMutation(ADD_FRIEND_BY_USERNAME);
   const [removeFriend]        = useMutation(REMOVE_FRIEND);
   const [blockUser]           = useMutation(BLOCK_USER);
@@ -85,6 +83,8 @@ const FriendsTab = ({ user }) => {
               <FriendItem
                 key={f._id}
                 friend={f}
+                open={openId === f._id}
+                setOpen={(v) => setOpenId(v ? f._id : null)}
                 onRemove={() => removeFriend({ variables: { friendId: f._id } })}
                 onBlock={() => blockUser({ variables: { blockedId: f._id } })}
               />
@@ -138,31 +138,7 @@ const FriendsTab = ({ user }) => {
   );
 };
 
-const FriendItem = ({ friend, onRemove, onBlock }) => {
-  const initials = (friend.username || '?').slice(0, 2).toUpperCase();
-  return (
-    <div className={styles.friendItem}>
-      <div className={styles.friendAvatar}>{initials}</div>
-      <div className={styles.friendInfo}>
-        <div className={styles.friendName}>{friend.username}</div>
-        <div className={styles.friendMeta}>{friend.concertCount || 0} concerts saved</div>
-      </div>
-      <div className={styles.friendActions}>
-        <Link to={`/profile/${friend.username}`} className={styles.iconBtn} title="View profile">
-          <ExternalLink />
-        </Link>
-        <button className={`${styles.iconBtn} ${styles.iconBtnDanger}`} title="Remove friend" onClick={onRemove}>
-          <UserMinus />
-        </button>
-        <button className={`${styles.iconBtn} ${styles.iconBtnDanger}`} title="Block" onClick={onBlock}>
-          <UserX />
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const SideCard = ({ title, count, emptyText, children }) => (
+const SideCard =({ title, count, emptyText, children }) => (
   <div className={styles.sideCard}>
     <div className={styles.sideCardHeader}>
       <span className={styles.sideCardTitle}>{title}</span>
