@@ -263,6 +263,17 @@ const resolvers = {
 
             return concerts;
         },
+        concertByCustomId: async (parent, { headliner, date, venue, times }) => {
+            return await Concert.findOne({
+                'customId.headliner': headliner,
+                'customId.date': date,
+                'customId.venue': venue,
+                'customId.times': times || '',
+            })
+                .populate('yes')
+                .populate('no')
+                .populate('maybe');
+        },
         //scrape one day at a time
         austinConcertScraper: async (parent, { date }) => {
             const concertData = [];

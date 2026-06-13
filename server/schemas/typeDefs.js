@@ -74,6 +74,7 @@ const typeDefs = gql`
         getYesterdaysConcerts(date: String!): [Concert]
         allVenues: [String]
         concertsByVenue(venue: String!): [Concert]
+        concertByCustomId(headliner: String!, date: String!, venue: String!, times: String): Concert
         lastConcertDate: String
         concertDates(startDate: String!, endDate: String!): [String]
     }
