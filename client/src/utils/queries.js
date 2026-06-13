@@ -27,6 +27,7 @@ export const GET_CONCERTS_BY_DATE = gql`
                 headliner
                 date
                 venue
+                times
             }
             date
             times
@@ -50,6 +51,7 @@ export const GET_CONCERTS_SORTED_BY_VENUE_ASC = gql`
                 headliner
                 date
                 venue
+                times
             }
             date
             times
@@ -75,6 +77,7 @@ export const GET_CONCERTS_SORTED_BY_VENUE_DESC = gql`
                 headliner
                 date
                 venue
+                times
             }
             date
             times
@@ -100,6 +103,7 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_ASC = gql`
                 headliner
                 date
                 venue
+                times
             }
             date
             times
@@ -125,6 +129,7 @@ export const GET_CONCERTS_SORTED_BY_ARTISTS_DESC = gql`
                 headliner
                 date
                 venue
+                times
             }
             date
             times
@@ -149,6 +154,7 @@ export const AUSTIN_CONCERT_SCRAPER = gql`
                 headliner
                 date
                 venue
+                times
             }
             artists
             date
@@ -327,6 +333,7 @@ export const GET_YESTERDAYS_CONCERTS = gql`
                 headliner
                 date
                 venue
+                times
             }
             artists
             address
@@ -351,6 +358,7 @@ export const GET_CONCERT_BY_ID = gql`
                 headliner
                 date
                 venue
+                times
             }
             artists
             artistsLink
@@ -403,6 +411,7 @@ query concertsByVenue($venue: String!) {
             headliner
             date
             venue
+            times
         }
         artists
         artistsLink
