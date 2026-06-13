@@ -49,10 +49,10 @@ export const getSkeletonArray = (count, total) => {
 
 export const concertSlug = (customId) => {
     if (!customId || typeof customId === 'string') return customId || '';
-    return [customId.headliner, customId.date, customId.venue]
-        .join('')
-        .split(/[,.'"\s]+/)
-        .join('');
+    const seg = (s) => encodeURIComponent(s ?? '');
+    const parts = [seg(customId.headliner), seg(customId.date), seg(customId.venue)];
+    if (customId.times) parts.push(seg(customId.times)); // omit the segment when there is no time
+    return parts.join('/');
 };
 
 export const deriveFriendship = (me, targetId) => {
