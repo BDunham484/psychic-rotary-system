@@ -492,9 +492,77 @@ git commit -m "test: verify shareable /show URL resolution end to end"
 
 ---
 
+## Task 7: Select `customId.times` in list queries (regression fix)
+
+Added after manual testing revealed the original tasks were insufficient: clicking a show produced
+a time-less `/show` URL because the list queries feeding `concertSlug` selected only
+`customId { headliner date venue }`. `concertSlug` therefore omitted the time segment for every
+show, and pasted/refreshed links resolved with `times: ''` → "Show not found." The DB, model, and
+`CustomId` GraphQL type all already carried `times`; only the client query selections were missing it.
+
+**Files:**
+- Create: `client/src/__tests__/queriesCustomIdTimes.test.js`
+- Modify: `client/src/utils/queries.js` (every `customId { ... }` selection)
+
+- [ ] **Step 1: Write the failing guard test**
+
+```js
+import * as queries from '../utils/queries';
+
+const customIdBlocks = (doc) =>
+  ((doc && doc.loc && doc.loc.source && doc.loc.source.body) || '').match(/customId\s*{[^}]*}/g) || [];
+
+const queryNames = Object.keys(queries).filter((k) => customIdBlocks(queries[k]).length > 0);
+
+describe('queries selecting customId also select times', () => {
+  test('there is at least one query with a customId selection to check', () => {
+    expect(queryNames.length).toBeGreaterThan(0);
+  });
+
+  test.each(queryNames)('%s requests customId.times', (name) => {
+    customIdBlocks(queries[name]).forEach((block) => {
+      expect(block).toMatch(/\btimes\b/);
+    });
+  });
+});
+```
+
+- [ ] **Step 2: Run it to verify it fails**
+
+Run: `cd client && CI=true npm test -- --watchAll=false src/__tests__/queriesCustomIdTimes.test.js`
+Expected: FAIL — 9 query selections omit `times`.
+
+- [ ] **Step 3: Add `times` to every `customId` selection in `client/src/utils/queries.js`**
+
+Inside each `customId { headliner date venue }` block, add a `times` line so it reads:
+
+```graphql
+            customId {
+                headliner
+                date
+                venue
+                times
+            }
+```
+
+- [ ] **Step 4: Run the guard test and the full suite**
+
+Run: `cd client && CI=true npm test -- --watchAll=false`
+Expected: PASS — guard test green (13) and all suites green.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add client/src/utils/queries.js client/src/__tests__/queriesCustomIdTimes.test.js
+git commit -m "fix: select customId.times in list queries so /show slugs include the time segment"
+```
+
+---
+
 ## Self-Review notes
 
-- **Spec coverage:** §1 backend query → Task 1; §2 slug rewrite → Task 2; the query document referenced by §4 → Task 3; §3 routes → Task 4; §4 `Show.jsx` fallback → Task 5; testing strategy → Tasks 2/5/6. All spec sections map to a task.
+- **Spec coverage:** §1 backend query → Task 1; §2 slug rewrite → Task 2; §2a list-query `times` selection → Task 7; the query document referenced by §4 → Task 3; §3 routes → Task 4; §4 `Show.jsx` fallback → Task 5; testing strategy → Tasks 2/5/6/7. All spec sections map to a task.
+- **Lesson (Task 7):** the slug builder, lookup query, and route were each correct in isolation, but the data feeding the slug (list-query `customId` selections) omitted `times`. The Task 5 unit test hand-fed a `customId` with `times`, so it never exercised the real list-query → slug path and the gap stayed invisible until manual browser testing. The §2a guard test now covers it.
 - **No server tests:** the spec's "backend resolver test (if server suite exists)" is satisfied by manual verification (Task 1 Step 3 + Task 6 Step 2), since no server jest harness exists; this plan does not introduce one.
 - **Type/name consistency:** the query field `concertByCustomId`, its four args (`headliner, date, venue, times`), the `CONCERT_BY_CUSTOM_ID` document, the `concertSlug` output shape, and the route param names (`:headliner/:date/:venue/:times`) are identical across Tasks 1–5. `params.times || ''` (client) and `times || ''` (resolver) both coerce the absent time to `''`.
 - **Fast path preserved:** `skip: !!stateConcert` guarantees no network call on in-app navigation (asserted by Task 5's first test using empty mocks).

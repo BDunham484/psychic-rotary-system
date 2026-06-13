@@ -136,6 +136,21 @@ export const concertSlug = (customId) => {
   `blackpumas/20260601/acllive` (no time). Consumers keep calling `` `/show/${concertSlug(...)}` ``
   unchanged — they now emit a multi-segment path automatically.
 
+### 2a. List queries must select `customId.times`
+
+`concertSlug` can only emit a `times` segment if the `concert.customId` object it receives
+actually contains `times`. Every GraphQL query whose results render a `/show` link — the daily
+list (`GET_CONCERTS_BY_DATE`, the four `GET_CONCERTS_SORTED_BY_*`), the by-venue list
+(`GET_CONCERTS_BY_VENUE`), and the profile lists (`QUERY_USER`, `QUERY_ME`) — must include
+`times` inside its `customId { ... }` selection. Several of these historically selected only
+`{ headliner date venue }`, which made `concertSlug` omit the time segment for **every** show and
+broke same-day disambiguation and shareable-link resolution (a build-time-invisible bug: the field
+is simply absent from the payload, no error). The lookup query (`CONCERT_BY_CUSTOM_ID`) and the
+detail route are correct in isolation but cannot compensate for a slug that never carried the time.
+
+This is enforced by a regression test asserting that every exported query containing a `customId`
+selection also selects `times` (see Testing strategy).
+
 ### 3. Routes (client `src/App.js`)
 
 Replace the single cosmetic param route with two arity-distinct routes, both rendering `<Show />`:
@@ -222,6 +237,9 @@ Refresh / shared / bookmarked / direct:
   - shows a loading state while the query is in flight with no state.
 - **Backend resolver test (if server suite exists):** `concertByCustomId` returns the correct single
   show for a four-field match, and distinguishes two same-day shows that differ only by `times`.
+- **Query-selection guard:** a test asserts that every exported query whose `customId` selection can
+  feed `concertSlug` also selects `times`. Prevents the time-less-slug regression (a query that omits
+  `times` produces no error — only a silently broken URL).
 - **Route test:** both the 4-segment and 3-segment paths resolve to `<Show />`; the 3-segment path
   yields `times` → `''`.
 
