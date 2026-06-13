@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { ConcertContext } from '../utils/GlobalState';
+import { CONCERT_BY_CUSTOM_ID } from '../utils/queries';
 
 jest.mock('../utils/auth', () => ({
   loggedIn: () => false,
@@ -15,51 +16,68 @@ const mockContext = { user: { me: { _id: 'user123' } } };
 const concert = {
   _id: 'c1',
   artists: 'Test Artist',
+  artistsLink: null,
   venue: 'Test Venue',
   date: '2026-05-17T00:00:00.000Z',
-  times: '8pm',
+  times: '8:00 PM',
   address: '123 Main St',
   address2: null,
   phone: null,
   email: null,
   website: null,
   ticketLink: null,
+  ticketPrice: null,
+  customId: { headliner: 'testartist', date: '20260517', venue: 'testvenue', times: '2000' },
+  yes: [],
+  no: [],
+  maybe: [],
 };
 
-const renderShow = (state = { concert }) =>
+// 4-segment path matching concert.customId; times="2000"
+const PATH = '/show/testartist/20260517/testvenue/2000';
+
+const customIdMock = (result) => ({
+  request: {
+    query: CONCERT_BY_CUSTOM_ID,
+    variables: { headliner: 'testartist', date: '20260517', venue: 'testvenue', times: '2000' },
+  },
+  result: { data: { concertByCustomId: result } },
+});
+
+const renderShow = ({ state = { concert }, mocks = [] } = {}) =>
   render(
-    <MockedProvider mocks={[]} addTypename={false}>
+    <MockedProvider mocks={mocks} addTypename={false}>
       <ConcertContext.Provider value={mockContext}>
-        <MemoryRouter initialEntries={[{ pathname: '/show/test', state }]}>
+        <MemoryRouter initialEntries={[{ pathname: PATH, state }]}>
           <Routes>
-            <Route path="/show/:artists" element={<Show />} />
+            <Route path="/show/:headliner/:date/:venue/:times" element={<Show />} />
+            <Route path="/show/:headliner/:date/:venue" element={<Show />} />
           </Routes>
         </MemoryRouter>
       </ConcertContext.Provider>
     </MockedProvider>
   );
 
-test('renders "Show not found" when no concert in state', () => {
-  renderShow(null);
-  expect(screen.getByText('Show not found.')).toBeInTheDocument();
-});
-
-test('renders artist name in hero', () => {
-  renderShow();
+test('renders from router state without firing the query', () => {
+  renderShow({ state: { concert }, mocks: [] }); // empty mocks: if a query fired, Apollo would warn/error
   expect(screen.getByRole('heading', { level: 1, name: /test artist/i })).toBeInTheDocument();
-});
-
-test('renders venue name', () => {
-  renderShow();
   expect(screen.getByText('Test Venue')).toBeInTheDocument();
-});
-
-test('renders Back button', () => {
-  renderShow();
+  expect(screen.getByText('123 Main St')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /back/i })).toBeInTheDocument();
 });
 
-test('renders address in details', () => {
-  renderShow();
-  expect(screen.getByText('123 Main St')).toBeInTheDocument();
+test('shows a loading state when there is no state and the query is in flight', () => {
+  renderShow({ state: null, mocks: [customIdMock(concert)] });
+  expect(screen.getByText(/loading show/i)).toBeInTheDocument();
+});
+
+test('renders from the concertByCustomId query when state is absent', async () => {
+  renderShow({ state: null, mocks: [customIdMock(concert)] });
+  expect(await screen.findByRole('heading', { level: 1, name: /test artist/i })).toBeInTheDocument();
+  expect(screen.getByText('Test Venue')).toBeInTheDocument();
+});
+
+test('renders "Show not found" when the query resolves null', async () => {
+  renderShow({ state: null, mocks: [customIdMock(null)] });
+  expect(await screen.findByText('Show not found.')).toBeInTheDocument();
 });

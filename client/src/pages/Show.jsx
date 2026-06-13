@@ -6,7 +6,9 @@ import { MapPin } from '@styled-icons/feather/MapPin';
 import { Navigation as NavIcon } from '@styled-icons/feather/Navigation';
 import { Phone } from '@styled-icons/feather/Phone';
 import { Tag as TicketIcon } from '@styled-icons/feather/Tag';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { CONCERT_BY_CUSTOM_ID } from '../utils/queries';
 import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 import ConcertRSVP from '../components/shared/ConcertRSVP';
 import FriendsGoing from '../components/shared/FriendsGoing';
@@ -20,8 +22,31 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const Show = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { concert } = location.state || {};
+  const params = useParams();
+  const { concert: stateConcert } = location.state || {};
   const loggedIn = Auth.loggedIn();
+
+  const { data, loading } = useQuery(CONCERT_BY_CUSTOM_ID, {
+    variables: {
+      headliner: params.headliner,
+      date: params.date,
+      venue: params.venue,
+      times: params.times || '',
+    },
+    skip: !!stateConcert,
+  });
+
+  const concert = stateConcert || data?.concertByCustomId;
+
+  if (!concert && loading) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.page}>
+          <div className={styles.empty}>Loading show…</div>
+        </div>
+      </main>
+    );
+  }
 
   if (!concert) {
     return (
