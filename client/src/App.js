@@ -81,7 +81,8 @@ function App() {
                     <Route path=":username" element={<Profile />} />
                     <Route path="" element={<Profile />} />
                   </Route>
-                  <Route path="/show/:artists" element={<Show />} />
+                  <Route path="/show/:headliner/:date/:venue/:times" element={<Show />} />
+                  <Route path="/show/:headliner/:date/:venue" element={<Show />} />
                   <Route path="/venue/:venueName" element={<ShowsByVenue />} />
                   <Route path="/venues" element={<VenueSearch />} />
                   <Route
