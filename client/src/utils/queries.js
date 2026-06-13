@@ -429,3 +429,32 @@ query concertsByVenue($venue: String!) {
     }
 }
 `;
+
+export const CONCERT_BY_CUSTOM_ID = gql`
+    query concertByCustomId($headliner: String!, $date: String!, $venue: String!, $times: String) {
+        concertByCustomId(headliner: $headliner, date: $date, venue: $venue, times: $times) {
+            _id
+            customId {
+                headliner
+                date
+                venue
+                times
+            }
+            artists
+            artistsLink
+            date
+            times
+            venue
+            address
+            address2
+            phone
+            website
+            email
+            ticketLink
+            ticketPrice
+            yes { _id }
+            no { _id }
+            maybe { _id }
+        }
+    }
+`;
