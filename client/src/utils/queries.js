@@ -451,6 +451,7 @@ export const CONCERT_BY_CUSTOM_ID = gql`
             }
             artists
             artistsLink
+            description
             date
             times
             venue

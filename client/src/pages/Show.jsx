@@ -12,6 +12,7 @@ import { CONCERT_BY_CUSTOM_ID } from '../utils/queries';
 import DisabledConcertRSVP from '../components/DisabledConcertRSVP';
 import ConcertRSVP from '../components/shared/ConcertRSVP';
 import FriendsGoing from '../components/shared/FriendsGoing';
+import ShowDescription from '../components/shared/ShowDescription';
 import Auth from '../utils/auth';
 import { toLocalMidnight } from '../utils/helpers';
 import styles from './Show.module.css';
@@ -113,6 +114,8 @@ const Show = () => {
             </div>
           )}
         </section>
+
+        <ShowDescription text={concert.description} />
 
         <section className={styles.details}>
           <div className={styles.detailCol}>

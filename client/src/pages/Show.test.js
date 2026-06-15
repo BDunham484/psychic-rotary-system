@@ -17,6 +17,7 @@ const concert = {
   _id: 'c1',
   artists: 'Test Artist',
   artistsLink: null,
+  description: 'An evening of loud guitars and questionable decisions.',
   venue: 'Test Venue',
   date: '2026-05-17T00:00:00.000Z',
   times: '8:00 PM',
@@ -64,6 +65,17 @@ test('renders from router state without firing the query', () => {
   expect(screen.getByText('Test Venue')).toBeInTheDocument();
   expect(screen.getByText('123 Main St')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /back/i })).toBeInTheDocument();
+});
+
+test('renders the description in an About section when present', () => {
+  renderShow({ state: { concert }, mocks: [] });
+  expect(screen.getByText('About')).toBeInTheDocument();
+  expect(screen.getByText(/questionable decisions/i)).toBeInTheDocument();
+});
+
+test('omits the About section when there is no description', () => {
+  renderShow({ state: { concert: { ...concert, description: null } }, mocks: [] });
+  expect(screen.queryByText('About')).not.toBeInTheDocument();
 });
 
 test('shows a loading state when there is no state and the query is in flight', () => {
