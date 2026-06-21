@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import {
-  ADD_FRIEND_BY_USERNAME,
+  SEND_FRIEND_REQUEST,
   REMOVE_FRIEND,
   BLOCK_USER,
   UNBLOCK_USER,
@@ -9,16 +9,22 @@ import {
   DECLINE_FRIEND_REQUEST,
   CANCEL_FRIEND_REQUEST,
 } from '../../utils/mutations';
+import { QUERY_USER } from '../../utils/queries';
 import { Search } from '@styled-icons/feather/Search';
 import { Check }  from '@styled-icons/feather/Check';
 import { X }      from '@styled-icons/feather/X';
 import FriendItem from './FriendItem';
+import SwipeRow from '../shared/SwipeRow/SwipeRow';
+import { useIsMobile } from '../../utils/useIsMobile';
 import styles from './FriendsTab.module.css';
 
 const FriendsTab = ({ user }) => {
   const [query, setQuery] = useState('');
   const [openId, setOpenId] = useState(null);
-  const [addFriendByUsername] = useMutation(ADD_FRIEND_BY_USERNAME);
+  const [notice, setNotice] = useState('');
+  // Look the typed username up to resolve its _id before sending the request.
+  const [lookupUser]          = useLazyQuery(QUERY_USER, { fetchPolicy: 'network-only' });
+  const [sendRequest]         = useMutation(SEND_FRIEND_REQUEST);
   const [removeFriend]        = useMutation(REMOVE_FRIEND);
   const [blockUser]           = useMutation(BLOCK_USER);
   const [unblockUser]         = useMutation(UNBLOCK_USER);
@@ -41,11 +47,40 @@ const FriendsTab = ({ user }) => {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    if (!query.trim() || isExistingFriend) return;
+    const name = query.trim();
+    if (!name || isExistingFriend) return;
+
+    const lower = name.toLowerCase();
+    if (lower === (user.username || '').toLowerCase()) {
+      setNotice("You can't send a request to yourself.");
+      return;
+    }
+    if (sent.some(s => s.username.toLowerCase() === lower)) {
+      setNotice('Request already sent.');
+      return;
+    }
+
     try {
-      await addFriendByUsername({ variables: { username: query.trim() } });
+      const { data } = await lookupUser({ variables: { username: name } });
+      const target = data?.user;
+      if (!target?._id) {
+        setNotice(`No user named “${name}”.`);
+        return;
+      }
+      await sendRequest({
+        variables: { friendId: target._id, friendName: target.username },
+      });
       setQuery('');
-    } catch (err) { console.error(err); }
+      setNotice('');
+    } catch (err) {
+      console.error(err);
+      setNotice('Could not send request. Please try again.');
+    }
+  };
+
+  const handleQueryChange = (e) => {
+    setQuery(e.target.value);
+    if (notice) setNotice('');
   };
 
   return (
@@ -56,9 +91,9 @@ const FriendsTab = ({ user }) => {
           <input
             className={styles.searchInput}
             type="text"
-            placeholder="Search friends or send a friend request…"
+            placeholder="Send a friend request"
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={handleQueryChange}
           />
           <button
             type="submit"
@@ -66,6 +101,8 @@ const FriendsTab = ({ user }) => {
             disabled={!query.trim() || isExistingFriend}
           >Add</button>
         </form>
+
+        {notice && <div className={styles.searchNotice}>{notice}</div>}
 
         <div className={styles.sectionHeader}>
           <span className={styles.sectionTitle}>Friends</span>
@@ -100,6 +137,8 @@ const FriendsTab = ({ user }) => {
               key={r._id}
               entry={r}
               sub="wants to be friends"
+              open={openId === r._id}
+              setOpen={(v) => setOpenId(v ? r._id : null)}
               actions={[
                 { kind: 'success', icon: <Check />, label: 'Accept',  onClick: () => acceptRequest({ variables: { senderId: r._id, senderName: r.username } }) },
                 { kind: 'danger',  icon: <X />,     label: 'Decline', onClick: () => declineRequest({ variables: { senderId: r._id, senderName: r.username } }) },
@@ -114,6 +153,8 @@ const FriendsTab = ({ user }) => {
               key={r._id}
               entry={r}
               sub="request pending"
+              open={openId === r._id}
+              setOpen={(v) => setOpenId(v ? r._id : null)}
               actions={[
                 { kind: 'danger', icon: <X />, label: 'Cancel', onClick: () => cancelRequest({ variables: { friendId: r._id, friendName: r.username } }) },
               ]}
@@ -127,6 +168,8 @@ const FriendsTab = ({ user }) => {
               key={b._id}
               entry={b}
               sub="blocked"
+              open={openId === b._id}
+              setOpen={(v) => setOpenId(v ? b._id : null)}
               actions={[
                 { kind: 'text', label: 'Unblock', onClick: () => unblockUser({ variables: { blockedId: b._id } }) },
               ]}
@@ -150,21 +193,37 @@ const SideCard =({ title, count, emptyText, children }) => (
   </div>
 );
 
-const CompactItem = ({ entry, sub, actions = [] }) => {
+const CompactItem = ({ entry, sub, actions = [], open, setOpen }) => {
+  const isMobile = useIsMobile();
   const initials = (entry.username || '?').slice(0, 2).toUpperCase();
-  return (
-    <div className={styles.compactItem}>
+
+  const body = (
+    <>
       <div className={styles.compactAvatar}>{initials}</div>
       <div className={styles.compactInfo}>
         <div className={styles.compactName}>{entry.username}</div>
         <div className={styles.compactSub}>{sub}</div>
       </div>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <SwipeRow actions={actions} open={open} setOpen={setOpen}>
+        {body}
+      </SwipeRow>
+    );
+  }
+
+  return (
+    <div className={styles.compactItem}>
+      {body}
       <div className={styles.compactActions}>
         {actions.map((a, i) => (
           <button
             key={i}
             className={`${styles.iconBtnSm} ${styles[`iconBtn_${a.kind}`] || ''}`}
-            title={a.label}
+            title={a.title || a.label}
             onClick={a.onClick}
           >
             {a.icon || a.label}
