@@ -5,20 +5,8 @@ import { UserMinus }    from '@styled-icons/feather/UserMinus';
 import { UserX }        from '@styled-icons/feather/UserX';
 import { ChevronLeft }  from '@styled-icons/feather/ChevronLeft';
 import { clampSwipe, shouldOpen, REVEAL } from '../../utils/swipe';
+import { useIsMobile } from '../../utils/useIsMobile';
 import styles from './FriendsTab.module.css';
-
-export function useIsMobile() {
-  const [m, setM] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches
-  );
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 720px)');
-    const fn = (e) => setM(e.matches);
-    mq.addEventListener('change', fn);
-    return () => mq.removeEventListener('change', fn);
-  }, []);
-  return m;
-}
 
 const initialsOf = (name) => (name || '?').slice(0, 2).toUpperCase();
 
