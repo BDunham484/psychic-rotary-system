@@ -34,10 +34,13 @@ const Show = () => {
       venue: params.venue,
       times: params.times || '',
     },
-    skip: !!stateConcert,
   });
 
-  const concert = stateConcert || data?.concertByCustomId;
+  // Always run the query, even when we arrived from a list card with router state. The list
+  // queries that produce stateConcert omit detail-only fields (description, RSVP yes/no/maybe),
+  // so trusting the partial object would drop the description on the show page. Use stateConcert
+  // for an instant first paint, then prefer the fully-hydrated query result once it resolves.
+  const concert = data?.concertByCustomId || stateConcert;
 
   if (!concert && loading) {
     return (
