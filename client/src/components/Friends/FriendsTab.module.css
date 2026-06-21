@@ -50,6 +50,15 @@
 .searchSubmit:hover { background: var(--accent-hi); }
 .searchSubmit:disabled { background: var(--bg-raised); color: var(--text-muted); cursor: not-allowed; }
 
+.searchNotice {
+  margin: -1.2rem 0 1.6rem;
+  padding: 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  color: var(--rsvp-no);
+}
+
 .sectionHeader {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 0.8rem;
@@ -252,51 +261,32 @@
 }
 /* ── Mobile (≤720px): swipe-to-reveal friend actions ── */
 @media (max-width: 720px) {
-  .friendSwipeWrap {
-    position: relative;
-    border-radius: 0.6rem;
-    overflow: hidden;
-  }
-  .friendSwipeActions {
-    position: absolute;
-    inset: 0 0 0 auto;
-    display: flex;
-    align-items: stretch;
-    gap: 0.5rem;
-    padding: 0.4rem 0.4rem 0.4rem 0;
-  }
-  .swipeAct {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    width: 7.2rem;
-    border-radius: 0.9rem;
-    border: 1px solid transparent;
+  /* full-bleed cards — mirror ConcertsList: break out of the page's 1.6rem side
+     padding so rows reach the viewport edge, drop the list's container chrome. */
+  .list {
+    gap: 1rem;
+    margin-left: -1.6rem;
+    margin-right: -1.6rem;
+    padding: 0;
     background: none;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
+    border: none;
+    border-radius: 0;
   }
-  .swipeAct svg { width: 1.8rem; height: 1.8rem; }
-  .swipeRemove { background: var(--rsvp-no-dim);    border-color: var(--rsvp-no);    color: var(--rsvp-no); }
-  .swipeBlock  { background: var(--rsvp-maybe-dim); border-color: var(--rsvp-maybe); color: var(--rsvp-maybe); }
 
-  .friendItemSwipe {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1rem 1.2rem;
-    background: var(--bg-surface);
-    border-radius: 0.6rem;
-    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform;
-    touch-action: pan-y;
+  /* the empty state + Received/Sent/Blocked cards span edge-to-edge too */
+  .empty,
+  .sideCard {
+    margin-left: -1.6rem;
+    margin-right: -1.6rem;
+    border-radius: 0;
   }
+  /* drop the body's side padding so each row's own 1rem padding sets the
+     wall-to-content gap — matching the Concerts rows (1rem from the edge). */
+  .sideCardBody { padding-left: 0; padding-right: 0; }
+  .sideCardHeader { padding-left: 1rem; padding-right: 1rem; }
+
+  /* the profile link inside a swipe row fills the card so the chevron sits right;
+     the swipe card/drawer/chevron themselves now live in SwipeRow.module.css. */
   .friendSwipeLink {
     flex: 1;
     min-width: 0;
@@ -305,11 +295,5 @@
     gap: 1.2rem;
     text-decoration: none;
     color: inherit;
-  }
-  .friendChevron {
-    width: 1.8rem;
-    height: 1.8rem;
-    color: var(--text-muted);
-    flex-shrink: 0;
   }
 }
