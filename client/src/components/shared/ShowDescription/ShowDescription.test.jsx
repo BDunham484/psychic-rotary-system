@@ -48,3 +48,16 @@ test('shows a Read more toggle when the clamped text overflows, and toggles it',
   userEvent.click(screen.getByRole('button', { name: /read less/i }));
   expect(screen.getByRole('button', { name: /read more/i })).toHaveAttribute('aria-expanded', 'false');
 });
+
+test('renders an inline link from a [text](url) token in the description', () => {
+  render(<ShowDescription text="Stay nearby. [Get a room.](https://example.com/book)" />);
+  const link = screen.getByRole('link', { name: 'Get a room.' });
+  expect(link).toHaveAttribute('href', 'https://example.com/book');
+  expect(link).toHaveAttribute('target', '_blank');
+  expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+});
+
+test('does not create a link for a non-whitelisted scheme token', () => {
+  render(<ShowDescription text="Nope [x](javascript:alert(1))" />);
+  expect(screen.queryByRole('link')).not.toBeInTheDocument();
+});
