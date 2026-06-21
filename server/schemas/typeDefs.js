@@ -85,7 +85,6 @@ const typeDefs = gql`
         addConcert(customId: CustomIdInput, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, ticketPrice: String, artistsLink: String, description: String, status: String): Concert
         addConcertsToDatabase(customId: CustomIdInput, artists: String, venue: String, date: String, times: String, address: String, address2: String, phone: String, website: String, email: String, ticketLink: String, artistsLink: String, status: String): [Concert]
         addFriend(friendId: ID!): User
-        addFriendByUsername(username: String!): User
         addConcertToUser(concertId: ID!): User
         deleteUser(userId: ID!): String
         deleteConcert(concertId: ID!): Concert
