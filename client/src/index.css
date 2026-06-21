@@ -49,6 +49,18 @@ body::before {
   z-index: 0;
 }
 
+/* Ambient radial glow — same recipe as antecedent's Home/Login glow, applied app-wide
+   behind all content (matches the dot grid's fixed/pointer-events/z-index layering so it
+   never shifts layout). Uses --glow-color, so it adapts to the light/dark theme. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(80rem 80rem at 50% 50%, var(--glow-color) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
